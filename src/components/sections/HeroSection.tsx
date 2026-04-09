@@ -5,6 +5,7 @@ type HeroSectionProps = {
   brandName: string;
   slogan: string;
   guideDescription: string;
+  chatbotTitle: string;
   tabs: GuideTab[];
   commonQuestions: string[];
   activeTabKey: TabKey;
@@ -19,6 +20,7 @@ export function HeroSection({
   brandName,
   slogan,
   guideDescription,
+  chatbotTitle,
   tabs,
   commonQuestions,
   activeTabKey,
@@ -82,7 +84,7 @@ export function HeroSection({
 
       <div className="hero-chatbot">
         <div className="hero-chatbot__header">
-          <h2 className="hero-chatbot__title">Start with a question</h2>
+          <h2 className="hero-chatbot__title">{chatbotTitle}</h2>
         </div>
 
         <div className="hero-common-questions" aria-label="Suggested questions">

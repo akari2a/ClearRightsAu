@@ -33,3 +33,27 @@ export type ScamActionCard = {
   items: string[];
   ordered?: boolean;
 };
+
+export type ScamActionCardCopy = {
+  signalsEyebrow: string;
+  signalsTitle: string;
+};
+
+export type ScamActionCardsCopy = {
+  unsure: ScamActionCardCopy;
+  affected: ScamActionCardCopy;
+  actionsEyebrow: string;
+  actionsTitle: string;
+  evidenceEyebrow: string;
+  evidenceTitle: string;
+  escalationEyebrow: string;
+  escalationTitle: string;
+};
+
+export type ScamPageContent = {
+  pageTitle: string;
+  caseEyebrow: string;
+  sections: DetailSectionMeta[];
+  journeys: ScamJourney[];
+  actionCards: ScamActionCardsCopy;
+};

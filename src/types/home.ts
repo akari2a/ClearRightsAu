@@ -24,3 +24,31 @@ export type LinkCard = {
   description: string;
   eyebrow?: string;
 };
+
+export type HomeSiteCopy = {
+  brandName: string;
+  slogan: string;
+  quickCheckDescription: string;
+  chatbotTitle: string;
+};
+
+export type ResourceGroupCopy = {
+  title: string;
+  description: string;
+};
+
+export type HomeResourcesCopy = {
+  eyebrow: string;
+  title: string;
+  caseGroup: ResourceGroupCopy;
+  guideGroup: ResourceGroupCopy;
+  caseCards: LinkCard[];
+  guideCards: LinkCard[];
+};
+
+export type HomePageContent = {
+  siteCopy: HomeSiteCopy;
+  guideTabs: GuideTab[];
+  commonQuestions: string[];
+  resources: HomeResourcesCopy;
+};

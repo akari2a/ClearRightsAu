@@ -1,21 +1,23 @@
 import { useEffect, useMemo, useState } from "react";
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { CASE_CARDS, GUIDE_CARDS, GUIDE_TABS, POPULAR_HELP, SITE_COPY } from "./content/homeContent";
+import { getHomePageContent } from "./content/homeContent";
 import { SiteHeader, type HeaderPrimaryNavKey } from "./components/layout/SiteHeader";
 import { SiteFooter } from "./components/layout/SiteFooter";
 import { ScamCheckPage } from "./components/pages/ScamCheckPage";
 import { HeroSection } from "./components/sections/HeroSection";
 import { ContentResourcesSection } from "./components/sections/ContentResourcesSection";
+import { DEFAULT_LOCALE } from "./i18n/config";
 import type { GuideTab, LinkCard, TabKey } from "./types/home";
 
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
+  const homePageContent = useMemo(() => getHomePageContent(DEFAULT_LOCALE), []);
   const [activeTab, setActiveTab] = useState<TabKey>("scam");
   const [fontSize, setFontSize] = useState<"small" | "default" | "large">("default");
   const selectedTab = useMemo(
-    () => GUIDE_TABS.find((tab) => tab.key === activeTab) ?? GUIDE_TABS[0],
-    [activeTab]
+    () => homePageContent.guideTabs.find((tab) => tab.key === activeTab) ?? homePageContent.guideTabs[0],
+    [activeTab, homePageContent]
   );
   const [promptPlaceholder, setPromptPlaceholder] = useState(selectedTab.prompt);
 
@@ -114,11 +116,12 @@ function App() {
             element={
               <>
                 <HeroSection
-                  brandName={SITE_COPY.brandName}
-                  slogan={SITE_COPY.slogan}
-                  guideDescription={SITE_COPY.quickCheckDescription}
-                  tabs={GUIDE_TABS}
-                  commonQuestions={POPULAR_HELP}
+                  brandName={homePageContent.siteCopy.brandName}
+                  slogan={homePageContent.siteCopy.slogan}
+                  guideDescription={homePageContent.siteCopy.quickCheckDescription}
+                  chatbotTitle={homePageContent.siteCopy.chatbotTitle}
+                  tabs={homePageContent.guideTabs}
+                  commonQuestions={homePageContent.commonQuestions}
                   activeTabKey={activeTab}
                   promptPlaceholder={promptPlaceholder}
                   onTabChange={handleTabChange}
@@ -128,8 +131,14 @@ function App() {
                 />
 
                 <ContentResourcesSection
-                  caseCards={CASE_CARDS}
-                  guideCards={GUIDE_CARDS}
+                  eyebrow={homePageContent.resources.eyebrow}
+                  title={homePageContent.resources.title}
+                  caseGroupTitle={homePageContent.resources.caseGroup.title}
+                  caseGroupDescription={homePageContent.resources.caseGroup.description}
+                  guideGroupTitle={homePageContent.resources.guideGroup.title}
+                  guideGroupDescription={homePageContent.resources.guideGroup.description}
+                  caseCards={homePageContent.resources.caseCards}
+                  guideCards={homePageContent.resources.guideCards}
                   onCaseClick={handleCaseClick}
                   onGuideClick={handleGuideClick}
                 />
