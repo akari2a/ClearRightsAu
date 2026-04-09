@@ -6,14 +6,13 @@ type HeroSectionProps = {
   slogan: string;
   guideDescription: string;
   tabs: GuideTab[];
+  commonQuestions: string[];
   activeTabKey: TabKey;
   promptPlaceholder: string;
-  inputValue: string;
   onTabChange: (tab: GuideTab) => void;
-  onQuickPillClick: (pill: string) => void;
-  onInputChange: (value: string) => void;
+  onCommonQuestionClick: (question: string, tab: GuideTab) => void;
   onQuickGuideClick?: (tab: GuideTab) => void;
-  onAskAiClick?: (value: string, tab: GuideTab) => void;
+  onOpenChatbot?: (initialQuestion: string | undefined, tab: GuideTab) => void;
 };
 
 export function HeroSection({
@@ -21,14 +20,13 @@ export function HeroSection({
   slogan,
   guideDescription,
   tabs,
+  commonQuestions,
   activeTabKey,
   promptPlaceholder,
-  inputValue,
   onTabChange,
-  onQuickPillClick,
-  onInputChange,
+  onCommonQuestionClick,
   onQuickGuideClick,
-  onAskAiClick
+  onOpenChatbot
 }: HeroSectionProps) {
   const activeTab = tabs.find((tab) => tab.key === activeTabKey) ?? tabs[0];
 
@@ -82,33 +80,43 @@ export function HeroSection({
         </button>
       </div>
 
-      <div className="quick-pill-row" aria-label="Suggested prompts">
-        {activeTab.quickPills.map((pill, index) => (
-          <button key={`${activeTab.key}-${index}`} className="quick-pill" type="button" onClick={() => onQuickPillClick(pill)}>
-            {pill}
-          </button>
-        ))}
-      </div>
+      <div className="hero-chatbot">
+        <div className="hero-chatbot__header">
+          <h2 className="hero-chatbot__title">Start with a question</h2>
+        </div>
 
-      <div className="prompt-shell">
-        <div className="prompt-field">
-          {!inputValue ? <span className="prompt-placeholder">{promptPlaceholder}</span> : null}
-          <input
-            className="prompt-input"
-            value={inputValue}
-            onChange={(event) => onInputChange(event.target.value)}
-            aria-label="Describe your consumer rights issue"
-          />
+        <div className="hero-common-questions" aria-label="Suggested questions">
+          <div className="popular-grid popular-grid--hero">
+            {commonQuestions.map((item) => (
+              <button
+                key={item}
+                className="popular-link popular-link--prompt"
+                type="button"
+                onClick={() => onCommonQuestionClick(item, activeTab)}
+              >
+                <span className="popular-link__quote" aria-hidden="true">
+                  “
+                </span>
+                <span>{item}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
         <button
-          className="ask-ai-button"
+          className="prompt-shell prompt-shell--button"
           type="button"
-          aria-label="Ask AI (not implemented)"
-          onClick={() => onAskAiClick?.(inputValue, activeTab)}
+          aria-label="Open chatbot"
+          onClick={() => onOpenChatbot?.(undefined, activeTab)}
         >
-          <StarIcon />
-          <span>Ask AI</span>
+          <div className="prompt-field">
+            <span className="prompt-placeholder prompt-placeholder--static">{promptPlaceholder}</span>
+          </div>
+
+          <span className="ask-ai-button" aria-hidden="true">
+            <StarIcon />
+            <span>Ask AI</span>
+          </span>
         </button>
       </div>
     </section>

@@ -5,7 +5,6 @@ import { SiteHeader, type HeaderPrimaryNavKey } from "./components/layout/SiteHe
 import { SiteFooter } from "./components/layout/SiteFooter";
 import { ScamCheckPage } from "./components/pages/ScamCheckPage";
 import { HeroSection } from "./components/sections/HeroSection";
-import { PopularHelpSection } from "./components/sections/PopularHelpSection";
 import { ContentResourcesSection } from "./components/sections/ContentResourcesSection";
 import type { GuideTab, LinkCard, TabKey } from "./types/home";
 
@@ -14,7 +13,6 @@ function App() {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState<TabKey>("scam");
   const [fontSize, setFontSize] = useState<"small" | "default" | "large">("default");
-  const [inputValue, setInputValue] = useState("");
   const selectedTab = useMemo(
     () => GUIDE_TABS.find((tab) => tab.key === activeTab) ?? GUIDE_TABS[0],
     [activeTab]
@@ -26,17 +24,12 @@ function App() {
     setPromptPlaceholder(tab.prompt);
   };
 
-  const handleQuickPillClick = (pill: string) => {
-    setPromptPlaceholder(`“${pill}”`);
+  const handlePopularHelpClick = (item: string, tab: GuideTab) => {
+    console.info("Suggested chatbot prompt clicked", { item, tab: tab.key });
   };
 
-  const handlePopularHelpClick = (item: string) => {
-    setPromptPlaceholder(`“${item}”`);
-    setInputValue("");
-  };
-
-  const handleAskAiClick = (value: string, tab: GuideTab) => {
-    console.info("Ask AI clicked", { value, tab: tab.key });
+  const handleOpenChatbot = (initialQuestion: string | undefined, tab: GuideTab) => {
+    console.info("Open chatbot clicked", { initialQuestion, tab: tab.key });
   };
 
   const handleQuickGuideClick = (tab: GuideTab) => {
@@ -125,17 +118,14 @@ function App() {
                   slogan={SITE_COPY.slogan}
                   guideDescription={SITE_COPY.quickCheckDescription}
                   tabs={GUIDE_TABS}
+                  commonQuestions={POPULAR_HELP}
                   activeTabKey={activeTab}
                   promptPlaceholder={promptPlaceholder}
-                  inputValue={inputValue}
                   onTabChange={handleTabChange}
-                  onQuickPillClick={handleQuickPillClick}
-                  onInputChange={setInputValue}
+                  onCommonQuestionClick={handlePopularHelpClick}
                   onQuickGuideClick={handleQuickGuideClick}
-                  onAskAiClick={handleAskAiClick}
+                  onOpenChatbot={handleOpenChatbot}
                 />
-
-                <PopularHelpSection items={POPULAR_HELP} onItemClick={handlePopularHelpClick} />
 
                 <ContentResourcesSection
                   caseCards={CASE_CARDS}
