@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HeaderDropdownNavItem } from "./header/HeaderDropdownNavItem";
 import { HeaderFontSizeControl } from "./header/HeaderFontSizeControl";
 import { HeaderLanguageButton } from "./header/HeaderLanguageButton";
@@ -56,10 +56,6 @@ export function SiteHeader({
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [isPastTop, setIsPastTop] = useState(false);
   const lastScrollYRef = useRef(0);
-  const hoveredSecondaryNavItems = useMemo(
-    () => (hoveredPrimaryNav ? SECONDARY_NAV[hoveredPrimaryNav] : null),
-    [hoveredPrimaryNav]
-  );
 
   useEffect(() => {
     const handleScroll = () => {

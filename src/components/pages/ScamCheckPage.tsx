@@ -3,7 +3,6 @@ import { SCAM_DETAIL_SECTIONS, SCAM_JOURNEYS, getScamActionCards, getScamSection
 import type { DetailSectionMeta, ScamActionCard, ScamJourney, ScamJourneyKey } from "../../types/scam";
 
 type ScamCheckPageProps = {
-  onBack: () => void;
   onJourneyChange?: (journey: ScamJourney) => void;
   onSectionNavigate?: (section: DetailSectionMeta) => void;
   onCaseClick?: (title: string, journey: ScamJourney) => void;
@@ -47,7 +46,7 @@ function ScamActionCardSection({ card }: { card: ScamActionCard }) {
   );
 }
 
-export function ScamCheckPage({ onBack, onJourneyChange, onSectionNavigate, onCaseClick }: ScamCheckPageProps) {
+export function ScamCheckPage({ onJourneyChange, onSectionNavigate, onCaseClick }: ScamCheckPageProps) {
   const [journeyKey, setJourneyKey] = useState<ScamJourneyKey>("unsure");
   const [readingProgress, setReadingProgress] = useState(0);
   const [activeSectionId, setActiveSectionId] = useState<string>(SCAM_DETAIL_SECTIONS[0].id);
@@ -115,10 +114,6 @@ export function ScamCheckPage({ onBack, onJourneyChange, onSectionNavigate, onCa
       <div className="detail-page__layout">
         <div className="detail-page__content">
           <div className="detail-page__hero">
-            <button className="back-link" type="button" onClick={onBack}>
-              ← Back to home
-            </button>
-
             <div className="detail-page__intro">
               <h1 className="detail-page__title">Check if this is a scam</h1>
               <p className="detail-page__summary">{selectedJourney.summary}</p>

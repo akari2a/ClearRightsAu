@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { CASE_CARDS, GUIDE_CARDS, GUIDE_TABS, POPULAR_HELP, SITE_COPY } from "./content/homeContent";
 import { SiteHeader, type HeaderPrimaryNavKey } from "./components/layout/SiteHeader";
 import { SiteFooter } from "./components/layout/SiteFooter";
@@ -9,7 +10,8 @@ import { ContentResourcesSection } from "./components/sections/ContentResourcesS
 import type { GuideTab, LinkCard, TabKey } from "./types/home";
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<"home" | "scam-check">("home");
+  const navigate = useNavigate();
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState<TabKey>("scam");
   const [fontSize, setFontSize] = useState<"small" | "default" | "large">("default");
   const [inputValue, setInputValue] = useState("");
@@ -39,7 +41,7 @@ function App() {
 
   const handleQuickGuideClick = (tab: GuideTab) => {
     if (tab.key === "scam") {
-      setCurrentPage("scam-check");
+      navigate("/scam-check");
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
@@ -48,6 +50,12 @@ function App() {
   };
 
   const handleNavigate = (destination: HeaderPrimaryNavKey) => {
+    if (destination === "home") {
+      navigate("/");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
     console.info("Navigation clicked", { destination });
   };
 
@@ -93,11 +101,13 @@ function App() {
     document.documentElement.style.setProperty("--font-scale-factor", String(fontScaleMap[fontSize]));
   }, [fontSize]);
 
+  const activePrimaryNav: HeaderPrimaryNavKey = location.pathname === "/" ? "home" : "home";
+
   return (
     <main className="page-shell">
       <div className="page-frame">
         <SiteHeader
-          activePrimaryNav="home"
+          activePrimaryNav={activePrimaryNav}
           activeFontSize={fontSize}
           onNavigate={handleNavigate}
           onSecondaryNavigate={handleSecondaryNavigate}
@@ -105,40 +115,49 @@ function App() {
           onLanguageSelect={handleLanguageSelect}
         />
 
-        {currentPage === "home" ? (
-          <>
-            <HeroSection
-              brandName={SITE_COPY.brandName}
-              slogan={SITE_COPY.slogan}
-              guideDescription={SITE_COPY.quickCheckDescription}
-              tabs={GUIDE_TABS}
-              activeTabKey={activeTab}
-              promptPlaceholder={promptPlaceholder}
-              inputValue={inputValue}
-              onTabChange={handleTabChange}
-              onQuickPillClick={handleQuickPillClick}
-              onInputChange={setInputValue}
-              onQuickGuideClick={handleQuickGuideClick}
-              onAskAiClick={handleAskAiClick}
-            />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <HeroSection
+                  brandName={SITE_COPY.brandName}
+                  slogan={SITE_COPY.slogan}
+                  guideDescription={SITE_COPY.quickCheckDescription}
+                  tabs={GUIDE_TABS}
+                  activeTabKey={activeTab}
+                  promptPlaceholder={promptPlaceholder}
+                  inputValue={inputValue}
+                  onTabChange={handleTabChange}
+                  onQuickPillClick={handleQuickPillClick}
+                  onInputChange={setInputValue}
+                  onQuickGuideClick={handleQuickGuideClick}
+                  onAskAiClick={handleAskAiClick}
+                />
 
-            <PopularHelpSection items={POPULAR_HELP} onItemClick={handlePopularHelpClick} />
+                <PopularHelpSection items={POPULAR_HELP} onItemClick={handlePopularHelpClick} />
 
-            <ContentResourcesSection
-              caseCards={CASE_CARDS}
-              guideCards={GUIDE_CARDS}
-              onCaseClick={handleCaseClick}
-              onGuideClick={handleGuideClick}
-            />
-          </>
-        ) : (
-          <ScamCheckPage
-            onBack={() => setCurrentPage("home")}
-            onJourneyChange={handleScamJourneyChange}
-            onSectionNavigate={handleScamSectionNavigate}
-            onCaseClick={handleScamCaseClick}
+                <ContentResourcesSection
+                  caseCards={CASE_CARDS}
+                  guideCards={GUIDE_CARDS}
+                  onCaseClick={handleCaseClick}
+                  onGuideClick={handleGuideClick}
+                />
+              </>
+            }
           />
-        )}
+          <Route
+            path="/scam-check"
+            element={
+              <ScamCheckPage
+                onJourneyChange={handleScamJourneyChange}
+                onSectionNavigate={handleScamSectionNavigate}
+                onCaseClick={handleScamCaseClick}
+              />
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
 
         <SiteFooter />
       </div>
