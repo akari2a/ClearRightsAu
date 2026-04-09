@@ -1,0 +1,24 @@
+:root {
+  --font-scale-factor: 1;
+  --font-family-sans: "Roboto Flex", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --font-size-title-page: calc(28px * var(--font-scale-factor));
+  --font-size-display-brand: calc(42px * var(--font-scale-factor));
+  --font-size-title-section: calc(26px * var(--font-scale-factor));
+  --font-size-title-tab: calc(20px * var(--font-scale-factor));
+  --font-size-title-card: calc(20px * var(--font-scale-factor));
+  --font-size-body-lg: calc(20px * var(--font-scale-factor));
+  --font-size-body-md: calc(18px * var(--font-scale-factor));
+  --font-size-body-sm: calc(16px * var(--font-scale-factor));
+  --font-size-label-lg: calc(18px * var(--font-scale-factor));
+  --font-size-label-sm: calc(14px * var(--font-scale-factor));
+  --font-size-label-md: calc(16px * var(--font-scale-factor));
+
+  --line-height-tight: 1.2;
+  --line-height-regular: 1.4;
+  --line-height-loose: 1.55;
+}

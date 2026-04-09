@@ -1,0 +1,36 @@
+:root {
+  --color-background-page: #f5f5f5;
+  --color-surface-primary: #ffffff;
+
+  --color-text-primary: #27282b;
+  --color-text-secondary: #50525a;
+
+  --color-border-subtle: #dbdbdd;
+  --color-border-soft: #e8edf8;
+
+  --color-brand-primary-600: #001e71;
+  --color-brand-primary-500: #0037bb;
+  --color-brand-primary-400: #2356ff;
+  --color-brand-primary-200: #a5aeff;
+
+  --color-brand-accent-500: #23c4ff;
+  --color-brand-accent-100: #bce4ff;
+  --color-brand-accent-050: #ddf1fe;
+
+  --color-brand-highlight: #ffcc23;
+
+  --gradient-placeholder-text: linear-gradient(
+    90deg,
+    var(--color-brand-primary-200) 0%,
+    var(--color-brand-accent-500) 50%,
+    var(--color-brand-highlight) 100%
+  );
+
+  --shadow-card-glow: 0 2px 16px 0 var(--color-brand-accent-100);
+  --shadow-pill-rest: 0 2px 10px rgba(0, 0, 0, 0.02);
+  --shadow-pill-hover: 0 8px 18px rgba(0, 55, 187, 0.08);
+  --shadow-surface-soft: 0 10px 30px rgba(0, 30, 113, 0.05);
+
+  --selection-accent: rgba(35, 196, 255, 0.25);
+  --highlight-marker-white: rgba(255, 255, 255, 0.82);
+}
