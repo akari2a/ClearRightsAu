@@ -1172,7 +1172,13 @@ button {
 
 .journey-option--active {
   border-color: var(--color-brand-primary-500);
-  box-shadow: 0 0 0 1px var(--color-brand-primary-500);
+  box-shadow: inset 0 0 0 1px var(--color-brand-primary-500);
+}
+
+.journey-option--active:hover,
+.journey-option--active:focus-visible {
+  border-color: var(--color-brand-primary-500);
+  box-shadow: inset 0 0 0 1px var(--color-brand-primary-500), var(--shadow-surface-soft);
 }
 
 .journey-option__title {
