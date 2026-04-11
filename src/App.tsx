@@ -132,22 +132,8 @@ function App() {
   const handleSecondaryNavigate = (destination: string) => {
     const categoryId = SECONDARY_NAV_CATEGORY_MAP[destination];
     if (categoryId) {
-      if (location.pathname === "/cases") {
-        const el = document.getElementById(categoryId);
-        if (el) {
-          const top = el.getBoundingClientRect().top + window.scrollY - 120;
-          window.scrollTo({ top, behavior: "smooth" });
-        }
-      } else {
-        navigate("/cases");
-        setTimeout(() => {
-          const el = document.getElementById(categoryId);
-          if (el) {
-            const top = el.getBoundingClientRect().top + window.scrollY - 120;
-            window.scrollTo({ top, behavior: "smooth" });
-          }
-        }, 100);
-      }
+      navigate(`/cases?filter=${categoryId}`);
+      window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
 

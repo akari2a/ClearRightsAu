@@ -19,7 +19,7 @@ const SECONDARY_NAV: Record<"guide" | "cases", SecondaryNavItem[]> = {
   ],
   cases: [
     { id: "c-scam", label: "Scam cases" },
-    { id: "c-products", label: "Product cases" },
+    { id: "c-products", label: "Refund & product cases" },
     { id: "c-tenancy", label: "Tenancy cases" }
   ]
 };
