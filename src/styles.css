@@ -1988,8 +1988,6 @@ button {
 }
 
 .filter-chip:hover {
-  color: #ffffff;
-  background: var(--color-brand-accent-500);
   border-color: var(--color-brand-accent-500);
 }
 
