@@ -1,0 +1,337 @@
+{
+  "scenarioId": "scam",
+  "actionPacks": [
+    {
+      "stageId": "A",
+      "resultTitle": {
+        "en": "You stopped in time."
+      },
+      "resultSummary": {
+        "en": "You did not continue with the scam. These are the safest next steps to keep a record and move on."
+      },
+      "steps": [
+        {
+          "id": "step_1",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Do not click, reply, or continue."
+            }
+          }
+        },
+        {
+          "id": "step_2",
+          "kind": "step",
+          "content": {
+            "type": "format_text",
+            "template": {
+              "en": "Take a screenshot of {evidence_target}."
+            },
+            "arguments": {
+              "evidence_target": {
+                "default": {
+                  "en": "the relevant evidence"
+                },
+                "fromQuestion": "how_happened",
+                "map": {
+                  "text": {
+                    "en": "the message"
+                  },
+                  "phone": {
+                    "en": "the phone number and call record"
+                  },
+                  "email": {
+                    "en": "the email and sender address"
+                  },
+                  "website": {
+                    "en": "the page and URL"
+                  },
+                  "social": {
+                    "en": "the profile, messages, and links"
+                  },
+                  "not_sure": {
+                    "en": "anything you can still see"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "step_3",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "If you still feel unsure, check through an official website or phone number."
+            }
+          }
+        },
+        {
+          "id": "step_4",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Block, delete, or report it."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "stageId": "D",
+      "resultTitle": {
+        "en": "You may need to protect your bank account now."
+      },
+      "resultSummary": {
+        "en": "Bank or card details may have been exposed. Treat this as something that needs prompt action."
+      },
+      "steps": [
+        {
+          "id": "step_1",
+          "kind": "step",
+          "content": {
+            "type": "format_text",
+            "template": {
+              "en": "Contact your {first_contact} immediately."
+            },
+            "arguments": {
+              "first_contact": {
+                "default": {
+                  "en": "bank or payment provider"
+                },
+                "fromQuestion": "main_worry",
+                "map": {
+                  "money": {
+                    "en": "bank or payment provider"
+                  },
+                  "account": {
+                    "en": "account provider and bank if financial details were used"
+                  },
+                  "personal_info": {
+                    "en": "bank or payment provider"
+                  },
+                  "device": {
+                    "en": "bank and any affected account provider"
+                  },
+                  "urgency": {
+                    "en": "bank or payment provider"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "step_2",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Tell them you may have shared your card or bank details with a scammer."
+            }
+          }
+        },
+        {
+          "id": "step_3",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Ask whether your card should be blocked, replaced, or monitored."
+            }
+          }
+        },
+        {
+          "id": "step_4",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Check your recent transactions."
+            }
+          }
+        },
+        {
+          "id": "step_5",
+          "kind": "step",
+          "content": {
+            "type": "format_text",
+            "template": {
+              "en": "Save {evidence_target}."
+            },
+            "arguments": {
+              "evidence_target": {
+                "default": {
+                  "en": "the relevant evidence"
+                },
+                "fromQuestion": "how_happened",
+                "map": {
+                  "text": {
+                    "en": "screenshots of the message, payment details, and sender information"
+                  },
+                  "phone": {
+                    "en": "the phone number, call record, payment details, and notes about the call"
+                  },
+                  "email": {
+                    "en": "the email, sender address, payment details, and any links"
+                  },
+                  "website": {
+                    "en": "screenshots of the page, URL, and any payment screen or confirmation"
+                  },
+                  "social": {
+                    "en": "screenshots of the profile, chat, payment details, and links"
+                  },
+                  "not_sure": {
+                    "en": "screenshots, payment records, and any contact details you still have"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "stageId": "H",
+      "resultTitle": {
+        "en": "This may already be affecting your account or money."
+      },
+      "resultSummary": {
+        "en": "You have already noticed suspicious activity. Focus on the fastest actions first and keep a full record."
+      },
+      "steps": [
+        {
+          "id": "step_1",
+          "kind": "step",
+          "content": {
+            "type": "format_text",
+            "template": {
+              "en": "Contact your {first_contact} first."
+            },
+            "arguments": {
+              "first_contact": {
+                "default": {
+                  "en": "most relevant provider"
+                },
+                "fromQuestion": "main_worry",
+                "map": {
+                  "money": {
+                    "en": "bank or payment provider"
+                  },
+                  "account": {
+                    "en": "account provider"
+                  },
+                  "personal_info": {
+                    "en": "account provider or identity support service"
+                  },
+                  "device": {
+                    "en": "device-related provider and affected account provider"
+                  },
+                  "urgency": {
+                    "en": "most relevant provider"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "step_2",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Tell them you have already noticed suspicious activity."
+            }
+          }
+        },
+        {
+          "id": "step_3",
+          "kind": "step",
+          "content": {
+            "type": "format_text",
+            "template": {
+              "en": "Secure your {affected_items} immediately."
+            },
+            "arguments": {
+              "affected_items": {
+                "default": {
+                  "en": "accounts, passwords, card, or device"
+                },
+                "fromQuestion": "main_worry",
+                "map": {
+                  "money": {
+                    "en": "bank account, card, and payment access"
+                  },
+                  "account": {
+                    "en": "account password and login access"
+                  },
+                  "personal_info": {
+                    "en": "identity details and any linked accounts"
+                  },
+                  "device": {
+                    "en": "device, important accounts, and connected passwords"
+                  },
+                  "urgency": {
+                    "en": "most important account, card, or device"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "step_4",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Write down what happened and when it started."
+            }
+          }
+        },
+        {
+          "id": "step_5",
+          "kind": "step",
+          "content": {
+            "type": "format_text",
+            "template": {
+              "en": "Save {evidence_target}."
+            },
+            "arguments": {
+              "evidence_target": {
+                "default": {
+                  "en": "all evidence"
+                },
+                "fromQuestion": "how_happened",
+                "map": {
+                  "text": {
+                    "en": "screenshots of the message and any suspicious follow-up texts"
+                  },
+                  "phone": {
+                    "en": "the phone number, call record, and any follow-up calls or messages"
+                  },
+                  "email": {
+                    "en": "the email, sender address, and any related links or attachments"
+                  },
+                  "website": {
+                    "en": "screenshots of the page, URL, and anything you entered or paid"
+                  },
+                  "social": {
+                    "en": "screenshots of the profile, messages, links, and any payment details"
+                  },
+                  "not_sure": {
+                    "en": "all evidence you can still access"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

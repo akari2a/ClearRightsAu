@@ -1,0 +1,105 @@
+{
+  "scenarioId": "scam",
+  "stages": [
+    {
+      "id": "A",
+      "label": {
+        "en": "Suspicious only"
+      },
+      "priority": 10,
+      "affectedBy": {
+        "what_did_you_do": ["saw_only"]
+      }
+    },
+    {
+      "id": "B",
+      "label": {
+        "en": "Clicked or opened, but no details entered"
+      },
+      "priority": 20,
+      "affectedBy": {
+        "what_did_you_do": ["clicked_opened"]
+      }
+    },
+    {
+      "id": "C",
+      "label": {
+        "en": "Personal details exposed"
+      },
+      "priority": 30,
+      "affectedBy": {
+        "what_did_you_do": ["personal_info"]
+      }
+    },
+    {
+      "id": "D",
+      "label": {
+        "en": "Bank or card details exposed"
+      },
+      "priority": 40,
+      "affectedBy": {
+        "what_did_you_do": ["bank_info"]
+      }
+    },
+    {
+      "id": "E",
+      "label": {
+        "en": "Password or verification code exposed"
+      },
+      "priority": 50,
+      "affectedBy": {
+        "what_did_you_do": ["password_code"]
+      }
+    },
+    {
+      "id": "F",
+      "label": {
+        "en": "Money sent or payment made"
+      },
+      "priority": 60,
+      "affectedBy": {
+        "what_did_you_do": ["sent_money"]
+      }
+    },
+    {
+      "id": "G",
+      "label": {
+        "en": "Device access or app download"
+      },
+      "priority": 70,
+      "affectedBy": {
+        "what_did_you_do": ["device_access"]
+      }
+    },
+    {
+      "id": "U",
+      "label": {
+        "en": "Not sure what happened"
+      },
+      "priority": 15,
+      "affectedBy": {
+        "what_did_you_do": ["not_sure"]
+      }
+    },
+    {
+      "id": "W",
+      "label": {
+        "en": "More suspicious contact continuing"
+      },
+      "priority": 80,
+      "affectedBy": {
+        "what_is_happening_now": ["more_suspicious_contact"]
+      }
+    },
+    {
+      "id": "H",
+      "label": {
+        "en": "Suspicious activity already affecting money"
+      },
+      "priority": 90,
+      "affectedBy": {
+        "what_is_happening_now": ["transaction_issue"]
+      }
+    }
+  ]
+}

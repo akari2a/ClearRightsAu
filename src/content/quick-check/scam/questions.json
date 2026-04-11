@@ -1,0 +1,203 @@
+{
+  "scenarioId": "scam",
+  "questionFlow": [
+    {
+      "id": "how_happened",
+      "title": {
+        "en": "How did this happen?"
+      },
+      "description": {
+        "en": ""
+      },
+      "selectionMode": "single",
+      "options": [
+        {
+          "id": "text",
+          "label": {
+            "en": "I got a text message"
+          }
+        },
+        {
+          "id": "phone",
+          "label": {
+            "en": "I got a phone call"
+          }
+        },
+        {
+          "id": "email",
+          "label": {
+            "en": "I got an email"
+          }
+        },
+        {
+          "id": "website",
+          "label": {
+            "en": "I opened a website or shopping page"
+          }
+        },
+        {
+          "id": "social",
+          "label": {
+            "en": "It happened on social media or a chat app"
+          }
+        },
+        {
+          "id": "not_sure",
+          "label": {
+            "en": "I'm not sure"
+          }
+        }
+      ]
+    },
+    {
+      "id": "what_did_you_do",
+      "title": {
+        "en": "What did you do?"
+      },
+      "description": {
+        "en": ""
+      },
+      "selectionMode": "single",
+      "options": [
+        {
+          "id": "saw_only",
+          "label": {
+            "en": "I only saw it and did not continue"
+          }
+        },
+        {
+          "id": "clicked_opened",
+          "label": {
+            "en": "I clicked the link / opened the page / answered the call"
+          }
+        },
+        {
+          "id": "personal_info",
+          "label": {
+            "en": "I entered personal details such as my name, address, phone number, or email"
+          }
+        },
+        {
+          "id": "bank_info",
+          "label": {
+            "en": "I entered card or bank details"
+          }
+        },
+        {
+          "id": "password_code",
+          "label": {
+            "en": "I entered a password or verification code"
+          }
+        },
+        {
+          "id": "sent_money",
+          "label": {
+            "en": "I sent money or made a payment"
+          }
+        },
+        {
+          "id": "device_access",
+          "label": {
+            "en": "I downloaded something or gave someone access to my device"
+          }
+        },
+        {
+          "id": "not_sure",
+          "label": {
+            "en": "I'm not sure"
+          }
+        }
+      ]
+    },
+    {
+      "id": "what_is_happening_now",
+      "title": {
+        "en": "What is happening now?"
+      },
+      "description": {
+        "en": ""
+      },
+      "selectionMode": "single",
+      "options": [
+        {
+          "id": "more_suspicious_contact",
+          "label": {
+            "en": "I started getting more suspicious calls or messages"
+          }
+        },
+        {
+          "id": "account_issue",
+          "label": {
+            "en": "Something seems wrong with my account"
+          }
+        },
+        {
+          "id": "transaction_issue",
+          "label": {
+            "en": "I noticed a transaction I do not recognise"
+          }
+        },
+        {
+          "id": "device_issue",
+          "label": {
+            "en": "Something seems wrong with my phone or device"
+          }
+        },
+        {
+          "id": "nothing_unusual",
+          "label": {
+            "en": "Nothing unusual has happened yet"
+          }
+        },
+        {
+          "id": "not_sure",
+          "label": {
+            "en": "I'm not sure"
+          }
+        }
+      ]
+    },
+    {
+      "id": "main_worry",
+      "title": {
+        "en": "What are you most worried about right now?"
+      },
+      "description": {
+        "en": ""
+      },
+      "selectionMode": "single",
+      "options": [
+        {
+          "id": "money",
+          "label": {
+            "en": "My money or bank card"
+          }
+        },
+        {
+          "id": "account",
+          "label": {
+            "en": "My account or password"
+          }
+        },
+        {
+          "id": "personal_info",
+          "label": {
+            "en": "My personal information"
+          }
+        },
+        {
+          "id": "device",
+          "label": {
+            "en": "My phone or device"
+          }
+        },
+        {
+          "id": "urgency",
+          "label": {
+            "en": "I just want to know whether I need to act now"
+          }
+        }
+      ]
+    }
+  ]
+}
