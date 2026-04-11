@@ -11,22 +11,16 @@ type SecondaryNavItem = {
   label: string;
 };
 
-const SECONDARY_NAV: Record<"guide" | "cases", SecondaryNavItem[]> = {
+const SECONDARY_NAV: Record<"guide", SecondaryNavItem[]> = {
   guide: [
     { id: "g-risk", label: "Risk checks" },
     { id: "g-evidence", label: "Evidence guides" },
     { id: "g-escalation", label: "Escalation steps" }
-  ],
-  cases: [
-    { id: "c-scam", label: "Scam cases" },
-    { id: "c-products", label: "Refund & product cases" },
-    { id: "c-tenancy", label: "Tenancy cases" }
   ]
 };
 
-const SECONDARY_NAV_LABELS: Record<"guide" | "cases", string> = {
-  guide: "Guide",
-  cases: "Cases",
+const SECONDARY_NAV_LABELS: Record<"guide", string> = {
+  guide: "Guide"
 };
 
 type SiteHeaderProps = {
@@ -105,15 +99,12 @@ export function SiteHeader({
             onPrimaryClick={() => onNavigate?.("guide")}
             onSecondaryClick={onSecondaryNavigate}
           />
-          <HeaderDropdownNavItem
+          <HeaderNavButton
             label="Cases"
             isActive={activePrimaryNav === "cases"}
-            isOpen={hoveredPrimaryNav === "cases"}
-            panelLabel={SECONDARY_NAV_LABELS.cases}
-            items={SECONDARY_NAV.cases}
-            onOpen={() => setHoveredPrimaryNav("cases")}
-            onPrimaryClick={() => onNavigate?.("cases")}
-            onSecondaryClick={onSecondaryNavigate}
+            onMouseEnter={() => setHoveredPrimaryNav(null)}
+            onFocus={() => setHoveredPrimaryNav(null)}
+            onClick={() => onNavigate?.("cases")}
           />
           <HeaderNavButton
             label="AIBot"
