@@ -179,14 +179,6 @@ export function CasesIndexPage({
                       <h3 className="showcase-card__title">{caseItem.title}</h3>
                       <p className="showcase-card__summary">{caseItem.summary}</p>
                     </div>
-                    <div className="showcase-card__bottom">
-                      <span className="showcase-card__meta">
-                        {caseItem.persona.name} · {caseItem.riskLabel}
-                      </span>
-                      <span className="showcase-card__read" style={{ "--accent": accentColor } as React.CSSProperties}>
-                        Read case
-                      </span>
-                    </div>
                   </div>
                 </InteractiveCardButton>
               );
