@@ -155,22 +155,19 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
       ...current,
       [question.id]: optionId
     }));
-  };
 
-  const handleAdvance = () => {
-    if (!currentQuestion || !currentAnswer) {
-      return;
-    }
+    const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
-    if (currentQuestionIndex === questions.length - 1) {
-      setIsComplete(true);
-      setTimeout(() => {
-        handleSectionNavigate("action-plan");
-      }, 50);
-      return;
-    }
-
-    setCurrentQuestionIndex((index) => index + 1);
+    setTimeout(() => {
+      if (isLastQuestion) {
+        setIsComplete(true);
+        setTimeout(() => {
+          handleSectionNavigate("action-plan");
+        }, 50);
+      } else {
+        setCurrentQuestionIndex((index) => index + 1);
+      }
+    }, 500);
   };
 
   const handleGoBack = () => {
@@ -208,11 +205,11 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
           <div className="detail-page__hero">
             <div className="detail-page__intro">
               <h1 className="detail-page__title">{isComplete ? "What to do next" : "Check your situation"}</h1>
-              <p className="detail-page__summary">
-                {isComplete
-                  ? "Your answers have been turned into the next steps you should focus on now."
-                  : "Answer a few questions about what happened. We will use the facts you know to guide the next steps."}
-              </p>
+              {!isComplete && (
+                <p className="detail-page__summary">
+                  Answer a few questions about what happened. We will use the facts you know to guide the next steps.
+                </p>
+              )}
             </div>
           </div>
 
@@ -232,6 +229,19 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
 
               <div className="questionnaire-panel">
                 <div className="questionnaire-panel__meta">
+                  <button 
+                    className="back-link" 
+                    type="button" 
+                    onClick={handleGoBack}
+                    style={{ visibility: currentQuestionIndex > 0 ? "visible" : "hidden" }}
+                    aria-hidden={currentQuestionIndex === 0 ? "true" : undefined}
+                    tabIndex={currentQuestionIndex === 0 ? -1 : 0}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor">
+                      <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/>
+                    </svg>
+                    Previous step
+                  </button>
                   <h3 className="questionnaire-panel__title">{getLocalizedText(currentQuestion.title, locale)}</h3>
                 </div>
 
@@ -249,22 +259,6 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
                       </InteractiveCardButton>
                     );
                   })}
-                </div>
-
-                <div className="questionnaire-panel__actions">
-                  {currentQuestionIndex > 0 ? (
-                    <button className="questionnaire-back" type="button" onClick={handleGoBack}>
-                      Back
-                    </button>
-                  ) : null}
-                  <button
-                    className="questionnaire-advance"
-                    type="button"
-                    onClick={handleAdvance}
-                    disabled={!currentAnswer}
-                  >
-                    {currentQuestionIndex === questions.length - 1 ? "Complete" : "Next"}
-                  </button>
                 </div>
               </div>
             </section>
