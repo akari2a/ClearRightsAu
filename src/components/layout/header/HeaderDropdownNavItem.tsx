@@ -33,7 +33,6 @@ export function HeaderDropdownNavItem({
 
       {isOpen ? (
         <div className="subnav-panel" aria-label={`${label} secondary navigation`}>
-          <div className="subnav-panel__header">{panelLabel}</div>
           <div className="subnav-panel__list">
             {items.map((item) => (
               <TextActionLink key={item.id} className="subnav-link" onClick={() => onSecondaryClick?.(item.id)}>

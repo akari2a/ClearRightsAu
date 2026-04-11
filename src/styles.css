@@ -193,7 +193,8 @@ button {
   width: auto;
 }
 
-.nav-item:hover {
+.nav-item:hover,
+.nav-dropdown-anchor:hover .nav-item {
   color: var(--color-brand-accent-500);
 }
 
