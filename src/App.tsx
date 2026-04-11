@@ -4,6 +4,7 @@ import { getHomePageContent } from "./content/homeContent";
 import { getCaseById, getCasesPageContent } from "./content/casesContent";
 import { SiteHeader, type HeaderPrimaryNavKey } from "./components/layout/SiteHeader";
 import { SiteFooter } from "./components/layout/SiteFooter";
+import { SiteBreadcrumbs, type BreadcrumbItem } from "./components/layout/SiteBreadcrumbs";
 import { ScamCheckPage } from "./components/pages/ScamCheckPage";
 import { CasesIndexPage } from "./components/pages/CasesIndexPage";
 import { CaseDetailPage } from "./components/pages/CaseDetailPage";
@@ -54,6 +55,34 @@ function App() {
   const location = useLocation();
   const homePageContent = useMemo(() => getHomePageContent(DEFAULT_LOCALE), []);
   const casesPageContent = useMemo(() => getCasesPageContent(DEFAULT_LOCALE), []);
+  const breadcrumbItems = useMemo<BreadcrumbItem[]>(() => {
+    if (location.pathname === "/scam-check") {
+      return [
+        { label: "Home", to: "/" },
+        { label: "Check if this is a scam" }
+      ];
+    }
+
+    if (location.pathname === "/cases") {
+      return [
+        { label: "Home", to: "/" },
+        { label: "Cases" }
+      ];
+    }
+
+    if (location.pathname.startsWith("/cases/")) {
+      const caseId = location.pathname.replace("/cases/", "");
+      const caseData = getCaseById(casesPageContent, caseId);
+
+      return [
+        { label: "Home", to: "/" },
+        { label: "Cases", to: "/cases" },
+        { label: caseData?.title ?? "Case details" }
+      ];
+    }
+
+    return [];
+  }, [location.pathname, casesPageContent]);
   const [activeTab, setActiveTab] = useState<TabKey>("scam");
   const [fontSize, setFontSize] = useState<"small" | "default" | "large">("default");
   const selectedTab = useMemo(
@@ -88,6 +117,12 @@ function App() {
   const handleNavigate = (destination: HeaderPrimaryNavKey) => {
     if (destination === "home") {
       navigate("/");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (destination === "guide") {
+      navigate("/scam-check");
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
@@ -202,9 +237,11 @@ function App() {
     document.documentElement.style.setProperty("--font-scale-factor", String(fontScaleMap[fontSize]));
   }, [fontSize]);
 
-  const activePrimaryNav: HeaderPrimaryNavKey = location.pathname.startsWith("/cases")
-    ? "cases"
-    : "home";
+  const activePrimaryNav: HeaderPrimaryNavKey = location.pathname === "/scam-check"
+    ? "guide"
+    : location.pathname.startsWith("/cases")
+      ? "cases"
+      : "home";
 
   return (
     <main className="page-shell">
@@ -217,6 +254,8 @@ function App() {
           onFontSizeChange={handleFontSizeChange}
           onLanguageSelect={handleLanguageSelect}
         />
+
+        {location.pathname !== "/" && breadcrumbItems.length > 0 ? <SiteBreadcrumbs items={breadcrumbItems} /> : null}
 
         <Routes>
           <Route

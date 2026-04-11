@@ -4,35 +4,29 @@ import { HeaderFontSizeControl } from "./header/HeaderFontSizeControl";
 import { HeaderLanguageButton } from "./header/HeaderLanguageButton";
 import { HeaderNavButton } from "./header/HeaderNavButton";
 
-export type HeaderPrimaryNavKey = "home" | "questions" | "cases" | "guides" | "aibot" | "about";
+export type HeaderPrimaryNavKey = "home" | "guide" | "cases" | "aibot" | "about";
 
 type SecondaryNavItem = {
   id: string;
   label: string;
 };
 
-const SECONDARY_NAV: Record<"questions" | "cases" | "guides", SecondaryNavItem[]> = {
-  questions: [
-    { id: "q-scam", label: "Scam questions" },
-    { id: "q-refund", label: "Refund questions" },
-    { id: "q-rental", label: "Rental bond questions" }
+const SECONDARY_NAV: Record<"guide" | "cases", SecondaryNavItem[]> = {
+  guide: [
+    { id: "g-risk", label: "Risk checks" },
+    { id: "g-evidence", label: "Evidence guides" },
+    { id: "g-escalation", label: "Escalation steps" }
   ],
   cases: [
     { id: "c-scam", label: "Scam cases" },
     { id: "c-products", label: "Product cases" },
     { id: "c-tenancy", label: "Tenancy cases" }
-  ],
-  guides: [
-    { id: "g-risk", label: "Risk checks" },
-    { id: "g-evidence", label: "Evidence guides" },
-    { id: "g-escalation", label: "Escalation steps" }
   ]
 };
 
-const SECONDARY_NAV_LABELS: Record<"questions" | "cases" | "guides", string> = {
-  questions: "Questions",
+const SECONDARY_NAV_LABELS: Record<"guide" | "cases", string> = {
+  guide: "Guide",
   cases: "Cases",
-  guides: "Guides"
 };
 
 type SiteHeaderProps = {
@@ -52,7 +46,7 @@ export function SiteHeader({
   onFontSizeChange,
   onLanguageSelect
 }: SiteHeaderProps) {
-  const [hoveredPrimaryNav, setHoveredPrimaryNav] = useState<"questions" | "cases" | "guides" | null>(null);
+  const [hoveredPrimaryNav, setHoveredPrimaryNav] = useState<"guide" | "cases" | null>(null);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [isPastTop, setIsPastTop] = useState(false);
   const lastScrollYRef = useRef(0);
@@ -102,13 +96,13 @@ export function SiteHeader({
             onClick={() => onNavigate?.("home")}
           />
           <HeaderDropdownNavItem
-            label="Questions"
-            isActive={activePrimaryNav === "questions"}
-            isOpen={hoveredPrimaryNav === "questions"}
-            panelLabel={SECONDARY_NAV_LABELS.questions}
-            items={SECONDARY_NAV.questions}
-            onOpen={() => setHoveredPrimaryNav("questions")}
-            onPrimaryClick={() => onNavigate?.("questions")}
+            label="Guide"
+            isActive={activePrimaryNav === "guide"}
+            isOpen={hoveredPrimaryNav === "guide"}
+            panelLabel={SECONDARY_NAV_LABELS.guide}
+            items={SECONDARY_NAV.guide}
+            onOpen={() => setHoveredPrimaryNav("guide")}
+            onPrimaryClick={() => onNavigate?.("guide")}
             onSecondaryClick={onSecondaryNavigate}
           />
           <HeaderDropdownNavItem
@@ -119,16 +113,6 @@ export function SiteHeader({
             items={SECONDARY_NAV.cases}
             onOpen={() => setHoveredPrimaryNav("cases")}
             onPrimaryClick={() => onNavigate?.("cases")}
-            onSecondaryClick={onSecondaryNavigate}
-          />
-          <HeaderDropdownNavItem
-            label="Guides"
-            isActive={activePrimaryNav === "guides"}
-            isOpen={hoveredPrimaryNav === "guides"}
-            panelLabel={SECONDARY_NAV_LABELS.guides}
-            items={SECONDARY_NAV.guides}
-            onOpen={() => setHoveredPrimaryNav("guides")}
-            onPrimaryClick={() => onNavigate?.("guides")}
             onSecondaryClick={onSecondaryNavigate}
           />
           <HeaderNavButton
