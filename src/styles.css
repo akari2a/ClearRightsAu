@@ -89,7 +89,7 @@ button {
 .site-breadcrumbs {
   width: 100%;
   margin-top: 36px;
-  margin-bottom: -20px;
+  margin-bottom: 16px;
 }
 
 .site-breadcrumbs__list {
@@ -126,7 +126,7 @@ button {
 .text-action-link:hover,
 .text-action-link:focus-visible,
 .text-action-link:active {
-  color: var(--color-brand-primary-500);
+  color: var(--color-brand-accent-500);
   text-decoration: underline;
 }
 
@@ -194,7 +194,7 @@ button {
 }
 
 .nav-item:hover {
-  color: var(--color-brand-primary-400);
+  color: var(--color-brand-accent-500);
 }
 
 .nav-item:active {
@@ -854,6 +854,7 @@ button {
 
 .text-link:hover {
   text-decoration: underline;
+  color: var(--color-brand-accent-500);
 }
 
 .popular-grid {
@@ -1213,17 +1214,38 @@ button {
 }
 
 .back-link {
+  position: relative;
   align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   margin-bottom: 32px;
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-semibold);
   line-height: normal;
-  color: var(--color-brand-primary-500);
+  color: var(--color-text-secondary);
   cursor: pointer;
+  padding: 0 0 2px 0;
+}
+
+.back-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.5px;
+  background-color: transparent;
+  transition: background-color 0.18s ease;
 }
 
 .back-link:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  color: var(--color-brand-accent-500);
+}
+
+.back-link:hover::after {
+  background-color: currentColor;
 }
 
 .detail-page__intro {
@@ -1231,6 +1253,12 @@ button {
   flex-direction: column;
   gap: 24px;
   max-width: 860px;
+}
+
+.detail-page__title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .detail-page__eyebrow {
@@ -1398,7 +1426,7 @@ button {
 
 .questionnaire-option:hover {
   transform: translateY(-1px);
-  border-color: var(--color-border-subtle);
+  border-color: var(--color-brand-accent-100);
   box-shadow: var(--shadow-surface-soft);
 }
 
@@ -1456,13 +1484,13 @@ button {
 
 .questionnaire-back:hover {
   transform: translateY(-1px);
-  border-color: var(--color-border-subtle);
+  border-color: var(--color-brand-accent-100);
   box-shadow: var(--shadow-surface-soft);
 }
 
 .questionnaire-back:active {
   transform: translateY(1px);
-  border-color: var(--color-brand-primary-500);
+  border-color: var(--color-brand-accent-500);
   box-shadow: none;
 }
 
@@ -1733,13 +1761,13 @@ button {
 
 .detail-result-intro__restart:hover {
   transform: translateY(-1px);
-  border-color: var(--color-border-subtle);
+  border-color: var(--color-brand-accent-100);
   box-shadow: var(--shadow-surface-soft);
 }
 
 .detail-result-intro__restart:active {
   transform: translateY(1px);
-  border-color: var(--color-brand-primary-500);
+  border-color: var(--color-brand-accent-500);
   box-shadow: none;
 }
 
@@ -1886,7 +1914,7 @@ button {
 }
 
 .site-footer__link:hover {
-  color: var(--color-brand-primary-500);
+  color: var(--color-brand-accent-500);
 }
 
 .site-footer__bottom {
@@ -2210,7 +2238,7 @@ button {
 
 .detail-page-nav__item:not(.detail-page-nav__item--active):hover {
   background: var(--color-surface-primary);
-  border-color: var(--color-border-subtle);
+  border-color: var(--color-brand-accent-100);
 }
 
 .detail-page-nav__item:not(.detail-page-nav__item--active):active {
