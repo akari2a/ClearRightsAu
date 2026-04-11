@@ -1,32 +1,21 @@
 import type { LinkCard } from "../../types/home";
+import { InteractiveCardButton } from "../controls/InteractiveCardButton";
 
 type ContentResourcesSectionProps = {
   eyebrow: string;
   title: string;
-  caseGroupTitle: string;
-  caseGroupDescription: string;
-  guideGroupTitle: string;
-  guideGroupDescription: string;
   caseCards: LinkCard[];
-  guideCards: LinkCard[];
   onCaseClick?: (card: LinkCard) => void;
-  onGuideClick?: (card: LinkCard) => void;
 };
 
 export function ContentResourcesSection({
   eyebrow,
   title,
-  caseGroupTitle,
-  caseGroupDescription,
-  guideGroupTitle,
-  guideGroupDescription,
   caseCards,
-  guideCards,
-  onCaseClick,
-  onGuideClick
+  onCaseClick
 }: ContentResourcesSectionProps) {
   return (
-    <section className="resource-section resource-section--split" aria-labelledby="content-heading">
+    <section className="resource-section" aria-labelledby="content-heading">
       <div className="section-heading section-heading--compact">
         <div>
           <p className="section-eyebrow">{eyebrow}</p>
@@ -36,38 +25,18 @@ export function ContentResourcesSection({
         </div>
       </div>
 
-      <div className="content-columns">
-        <div className="content-group">
-          <div className="content-group__header">
-            <h3 className="content-group__title">{caseGroupTitle}</h3>
-            <p className="content-group__description">{caseGroupDescription}</p>
-          </div>
-          <div className="content-card-list">
-            {caseCards.map((card) => (
-              <button key={card.title} className="content-card content-card--interactive" type="button" onClick={() => onCaseClick?.(card)}>
-                {card.eyebrow ? <p className="content-card__eyebrow">{card.eyebrow}</p> : null}
-                <h4 className="content-card__title">{card.title}</h4>
-                <p className="content-card__description">{card.description}</p>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="content-group">
-          <div className="content-group__header">
-            <h3 className="content-group__title">{guideGroupTitle}</h3>
-            <p className="content-group__description">{guideGroupDescription}</p>
-          </div>
-          <div className="content-card-list">
-            {guideCards.map((card) => (
-              <button key={card.title} className="content-card content-card--interactive" type="button" onClick={() => onGuideClick?.(card)}>
-                {card.eyebrow ? <p className="content-card__eyebrow">{card.eyebrow}</p> : null}
-                <h4 className="content-card__title">{card.title}</h4>
-                <p className="content-card__description">{card.description}</p>
-              </button>
-            ))}
-          </div>
-        </div>
+      <div className="content-card-list">
+        {caseCards.map((card) => (
+          <InteractiveCardButton
+            key={card.title}
+            className="content-card content-card--interactive"
+            onClick={() => onCaseClick?.(card)}
+          >
+            {card.eyebrow ? <p className="content-card__eyebrow">{card.eyebrow}</p> : null}
+            <h4 className="content-card__title">{card.title}</h4>
+            <p className="content-card__description">{card.description}</p>
+          </InteractiveCardButton>
+        ))}
       </div>
     </section>
   );

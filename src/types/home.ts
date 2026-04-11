@@ -32,18 +32,10 @@ export type HomeSiteCopy = {
   chatbotTitle: string;
 };
 
-export type ResourceGroupCopy = {
-  title: string;
-  description: string;
-};
-
 export type HomeResourcesCopy = {
   eyebrow: string;
   title: string;
-  caseGroup: ResourceGroupCopy;
-  guideGroup: ResourceGroupCopy;
   caseCards: LinkCard[];
-  guideCards: LinkCard[];
 };
 
 export type HomePageContent = {

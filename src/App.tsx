@@ -188,10 +188,6 @@ function App() {
     console.info("Case card clicked", { title: card.title });
   };
 
-  const handleGuideClick = (card: LinkCard) => {
-    console.info("Guide card clicked", { title: card.title });
-  };
-
   const handleCasesIndexCaseClick = (caseData: SuccessCase) => {
     navigate(`/cases/${caseData.id}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -272,14 +268,8 @@ function App() {
                 <ContentResourcesSection
                   eyebrow={homePageContent.resources.eyebrow}
                   title={homePageContent.resources.title}
-                  caseGroupTitle={homePageContent.resources.caseGroup.title}
-                  caseGroupDescription={homePageContent.resources.caseGroup.description}
-                  guideGroupTitle={homePageContent.resources.guideGroup.title}
-                  guideGroupDescription={homePageContent.resources.guideGroup.description}
                   caseCards={homePageContent.resources.caseCards}
-                  guideCards={homePageContent.resources.guideCards}
                   onCaseClick={handleCaseClick}
-                  onGuideClick={handleGuideClick}
                 />
               </>
             }

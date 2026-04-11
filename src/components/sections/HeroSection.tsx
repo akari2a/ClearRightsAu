@@ -1,4 +1,5 @@
 import { ArrowCircleIcon, StarIcon } from "../icons";
+import { InteractiveCardButton } from "../controls/InteractiveCardButton";
 import type { GuideTab, TabKey } from "../../types/home";
 
 type HeroSectionProps = {
@@ -90,17 +91,16 @@ export function HeroSection({
         <div className="hero-common-questions" aria-label="Suggested questions">
           <div className="popular-grid popular-grid--hero">
             {commonQuestions.map((item) => (
-              <button
+              <InteractiveCardButton
                 key={item}
                 className="popular-link popular-link--prompt"
-                type="button"
                 onClick={() => onCommonQuestionClick(item, activeTab)}
               >
                 <span className="popular-link__quote" aria-hidden="true">
                   “
                 </span>
                 <span>{item}</span>
-              </button>
+              </InteractiveCardButton>
             ))}
           </div>
         </div>

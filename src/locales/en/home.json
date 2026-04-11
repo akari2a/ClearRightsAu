@@ -126,15 +126,7 @@
   ],
   "resources": {
     "eyebrow": "Explore",
-    "title": "Cases and step-by-step guides",
-    "caseGroup": {
-      "title": "Success cases",
-      "description": "Examples that help users recognise familiar situations before they act."
-    },
-    "guideGroup": {
-      "title": "Next-step guides",
-      "description": "Structured guidance for what to do first, what evidence to keep, and when to escalate."
-    },
+    "title": "Successful cases",
     "caseCards": [
       {
         "eyebrow": "Case",
@@ -150,23 +142,6 @@
         "eyebrow": "Case",
         "title": "My landlord deducted bond money for cleaning",
         "description": "A tenancy example focused on evidence, reasonableness, and how to challenge deductions."
-      }
-    ],
-    "guideCards": [
-      {
-        "eyebrow": "Guide",
-        "title": "Understand what kind of problem this is",
-        "description": "A short decision guide that turns the user's story into a category, risk level, and likely next path."
-      },
-      {
-        "eyebrow": "Guide",
-        "title": "Prepare your evidence before contacting anyone",
-        "description": "Tell users what to gather first: receipts, screenshots, photos, contracts, and message history."
-      },
-      {
-        "eyebrow": "Guide",
-        "title": "Know when to escalate",
-        "description": "Explain when self-resolution is enough and when the user should move to formal complaints or official help."
       }
     ]
   }
