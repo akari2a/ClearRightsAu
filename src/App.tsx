@@ -16,11 +16,9 @@ import type { SuccessCase } from "./types/case";
 import type { QuickCheckAnswers, QuickCheckStage } from "./types/quickCheck";
 
 function CaseDetailRoute({
-  onBackClick,
   onRelatedGuideClick,
   onRelatedCaseClick
 }: {
-  onBackClick: () => void;
   onRelatedGuideClick: (route: string) => void;
   onRelatedCaseClick: (caseData: SuccessCase) => void;
 }) {
@@ -44,7 +42,6 @@ function CaseDetailRoute({
       caseData={caseData}
       sections={casesContent.sections}
       relatedCases={relatedCases}
-      onBackClick={onBackClick}
       onRelatedGuideClick={onRelatedGuideClick}
       onRelatedCaseClick={onRelatedCaseClick}
     />
@@ -57,18 +54,8 @@ function App() {
   const homePageContent = useMemo(() => getHomePageContent(DEFAULT_LOCALE), []);
   const casesPageContent = useMemo(() => getCasesPageContent(DEFAULT_LOCALE), []);
   const breadcrumbItems = useMemo<BreadcrumbItem[]>(() => {
-    if (location.pathname === "/scam-check") {
-      return [
-        { label: "Home", to: "/" },
-        { label: "Check if this is a scam" }
-      ];
-    }
-
     if (location.pathname === "/cases") {
-      return [
-        { label: "Home", to: "/" },
-        { label: "Cases" }
-      ];
+      return [];
     }
 
     if (location.pathname.startsWith("/cases/")) {
@@ -76,7 +63,6 @@ function App() {
       const caseData = getCaseById(casesPageContent, caseId);
 
       return [
-        { label: "Home", to: "/" },
         { label: "Cases", to: "/cases" },
         { label: caseData?.title ?? "Case details" }
       ];
@@ -193,11 +179,6 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleCaseBackClick = () => {
-    navigate("/cases");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   const handleCaseRelatedGuideClick = (route: string) => {
     navigate(route);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -299,7 +280,6 @@ function App() {
             path="/cases/:caseId"
             element={
               <CaseDetailRoute
-                onBackClick={handleCaseBackClick}
                 onRelatedGuideClick={handleCaseRelatedGuideClick}
                 onRelatedCaseClick={handleCasesIndexCaseClick}
               />

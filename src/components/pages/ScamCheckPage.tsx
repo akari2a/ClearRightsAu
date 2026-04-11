@@ -11,6 +11,7 @@ import {
 } from "../../content/quick-check/scam";
 import { DEFAULT_LOCALE } from "../../i18n/config";
 import type { QuickCheckActionPack, QuickCheckAnswers, QuickCheckQuestion, QuickCheckStage } from "../../types/quickCheck";
+import { InteractiveCardButton } from "../controls/InteractiveCardButton";
 
 type ScamCheckPageProps = {
   onQuestionnaireComplete?: (answers: QuickCheckAnswers, stage: QuickCheckStage | null) => void;
@@ -239,14 +240,13 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
                     const isSelected = answers[currentQuestion.id] === option.id;
 
                     return (
-                      <button
+                      <InteractiveCardButton
                         key={option.id}
                         className={`questionnaire-option${isSelected ? " questionnaire-option--active" : ""}`}
-                        type="button"
                         onClick={() => handleOptionSelect(currentQuestion, option.id)}
                       >
                         <span className="questionnaire-option__title">{getLocalizedText(option.label, locale)}</span>
-                      </button>
+                      </InteractiveCardButton>
                     );
                   })}
                 </div>
@@ -302,15 +302,14 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
           {isComplete ? (
             <nav className="detail-page-nav" aria-label="On this page">
               {resultNavItems.map((section, index) => (
-                <button
+                <InteractiveCardButton
                   key={section.id}
                   className={`detail-page-nav__item${activeSectionId === section.id ? " detail-page-nav__item--active" : ""}`}
-                  type="button"
                   onClick={() => handleSectionNavigate(section.id)}
                 >
                   <span className="detail-page-nav__number">{index + 1}</span>
                   <span className="detail-page-nav__label">{section.title}</span>
-                </button>
+                </InteractiveCardButton>
               ))}
             </nav>
           ) : (

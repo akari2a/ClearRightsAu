@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import type { CaseSectionMeta, SuccessCase } from "../../types/case";
+import { InteractiveCardButton } from "../controls/InteractiveCardButton";
 import { DetailSectionHeader } from "../sections/DetailSectionHeader";
 import { ActionCardSection } from "../sections/ActionCardSection";
 
@@ -7,7 +8,6 @@ type CaseDetailPageProps = {
   caseData: SuccessCase;
   sections: CaseSectionMeta[];
   relatedCases: SuccessCase[];
-  onBackClick?: () => void;
   onRelatedGuideClick?: (route: string) => void;
   onRelatedCaseClick?: (caseData: SuccessCase) => void;
 };
@@ -30,11 +30,9 @@ export function CaseDetailPage({
   caseData,
   sections,
   relatedCases,
-  onBackClick,
   onRelatedGuideClick,
   onRelatedCaseClick
 }: CaseDetailPageProps) {
-  const [readingProgress, setReadingProgress] = useState(0);
   const [activeSectionId, setActiveSectionId] = useState<string>(sections[0].id);
 
   const sectionTitles = useMemo(() => {
@@ -53,13 +51,7 @@ export function CaseDetailPage({
 
       if (sectionElements.length === 0) return;
 
-      const pageStart = sectionElements[0].offsetTop;
-      const pageEnd = sectionElements[sectionElements.length - 1].offsetTop;
       const viewportAnchor = window.scrollY + window.innerHeight * 0.28;
-      const totalDistance = Math.max(pageEnd - pageStart, 1);
-      const rawProgress = ((window.scrollY - pageStart + window.innerHeight * 0.2) / totalDistance) * 100;
-
-      setReadingProgress(Math.min(100, Math.max(0, rawProgress)));
 
       let currentSection = sectionElements[0];
       sectionElements.forEach((section) => {
@@ -93,11 +85,6 @@ export function CaseDetailPage({
         <div className="detail-page__content">
           <div className="detail-page__hero">
             <div className="detail-page__intro">
-              {onBackClick ? (
-                <button className="back-link" type="button" onClick={onBackClick}>
-                  ← Back to cases
-                </button>
-              ) : null}
               <p className="detail-page__eyebrow">{caseData.categoryLabel} case</p>
               <h1 className="detail-page__title">{caseData.title}</h1>
               <p className="case-persona-tag">
@@ -180,14 +167,10 @@ export function CaseDetailPage({
               <p className="case-related__title">Continue exploring cases</p>
               <div className="case-related__grid">
                 {relatedCases.map((relCase) => (
-                  <a
+                  <InteractiveCardButton
                     key={relCase.id}
-                    href={`/cases/${relCase.id}`}
                     className="content-card content-card--interactive"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      onRelatedCaseClick?.(relCase);
-                    }}
+                    onClick={() => onRelatedCaseClick?.(relCase)}
                   >
                     <p className="content-card__eyebrow">{relCase.categoryLabel}</p>
                     <p className="content-card__title">{relCase.title}</p>
@@ -195,7 +178,7 @@ export function CaseDetailPage({
                       {relCase.persona.name} · {relCase.riskLabel}
                     </p>
                     <p className="case-card__action">Read case →</p>
-                  </a>
+                  </InteractiveCardButton>
                 ))}
               </div>
             </div>
@@ -204,19 +187,15 @@ export function CaseDetailPage({
 
         <aside className="detail-page__rail detail-page__rail--side">
           <nav className="detail-page-nav" aria-label="On this page">
-            <div className="detail-progress" aria-hidden="true">
-              <span className="detail-progress__bar" style={{ height: `${readingProgress}%` }} />
-            </div>
             {sections.map((section) => (
-              <button
+              <InteractiveCardButton
                 key={section.id}
                 className={`detail-page-nav__item${activeSectionId === section.id ? " detail-page-nav__item--active" : ""}`}
-                type="button"
                 onClick={() => handleSectionNavigate(section.id)}
               >
                 <span className="detail-page-nav__number">{section.number}</span>
                 <span className="detail-page-nav__label">{sectionTitles[section.id]}</span>
-              </button>
+              </InteractiveCardButton>
             ))}
           </nav>
         </aside>

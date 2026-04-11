@@ -167,6 +167,7 @@ button {
   align-items: center;
   gap: 6px;
   position: relative;
+  margin-left: -18px;
 }
 
 .nav-item {
@@ -866,6 +867,15 @@ button {
 }
 
 .interactive-card-button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
   cursor: pointer;
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
 }
@@ -1157,6 +1167,10 @@ button {
   transform: translateY(-1px);
   border-color: var(--color-brand-accent-100);
   box-shadow: var(--shadow-surface-soft);
+}
+
+.detail-page-nav__item:active {
+  transform: translateY(1px);
 }
 
 .detail-page-nav__item--active {
@@ -1558,16 +1572,16 @@ button {
 
 .detail-case-card:hover,
 .detail-case-card:focus-visible {
-  transform: scale(1.015);
+  transform: translateY(-1px);
   border-color: var(--color-brand-accent-100);
   box-shadow: var(--shadow-surface-soft);
   outline: none;
 }
 
 .detail-case-card:active {
-  transform: scale(0.97);
+  transform: translateY(1px);
   transition-duration: 0.1s;
-  border-color: var(--color-brand-primary-500);
+  border-color: var(--color-border-soft);
   box-shadow: var(--shadow-pill-rest);
 }
 
@@ -1883,7 +1897,6 @@ button {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-left: 20px;
 }
 
 .cases-index__title {
@@ -1892,12 +1905,12 @@ button {
   font-weight: var(--font-weight-bold);
   line-height: 1.05;
   letter-spacing: -0.025em;
-  color: var(--color-brand-primary-600);
+  color: var(--color-text-primary);
 }
 
 .cases-index__description {
   margin: 0;
-  max-width: 560px;
+  max-width: 720px;
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-loose);
@@ -1914,7 +1927,6 @@ button {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding-left: 20px;
 }
 
 .cases-category-group__header {
@@ -2122,8 +2134,9 @@ button {
 }
 
 .case-cta-callout:active {
-  transform: none;
-  border-color: var(--color-brand-primary-500);
+  transform: translateY(1px);
+  border-color: var(--color-border-soft);
+  box-shadow: var(--shadow-pill-rest);
 }
 
 .case-cta-callout:focus-visible {
@@ -2179,6 +2192,11 @@ button {
   border-color: var(--color-border-soft);
 }
 
+.detail-page-nav__item:not(.detail-page-nav__item--active):active {
+  border-color: var(--color-border-soft);
+  box-shadow: var(--shadow-pill-rest);
+}
+
 .detail-progress-group {
   display: flex;
   flex-direction: column;
@@ -2217,15 +2235,14 @@ button {
 .showcase-section {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   width: 100%;
 }
 
 .showcase-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-end;
-  padding: 0 20px;
 }
 
 .showcase-header__text {
@@ -2236,101 +2253,50 @@ button {
 
 .showcase-header__title {
   margin: 0;
-  font-size: calc(32px * var(--font-scale-factor));
+  font-size: calc(28px * var(--font-scale-factor));
   font-weight: var(--font-weight-bold);
-  line-height: 1;
+  line-height: 1.05;
   letter-spacing: -0.01em;
   color: var(--color-text-primary);
 }
 
 .showcase-header__description {
   margin: 0;
-  max-width: 560px;
+  max-width: 680px;
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-loose);
   color: var(--color-text-secondary);
 }
 
-.showcase-header__controls {
-  display: flex;
-  gap: 12px;
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
 }
-
-.showcase-arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--color-background-page);
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  box-shadow: var(--shadow-pill-rest);
-  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
-}
-
-.showcase-arrow:hover {
-  background: var(--color-border-subtle);
-  color: var(--color-text-primary);
-}
-
-.showcase-arrow:active {
-  transform: scale(0.95);
-}
-
-.showcase-arrow:focus-visible {
-  outline: 2px solid var(--color-brand-primary-500);
-  outline-offset: 2px;
-}
-
-.showcase-track-wrapper {
-  width: 100%;
-  position: relative;
-}
-
-.showcase-track {
-  display: flex;
-  gap: 24px;
-  padding: 4px 20px 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.showcase-track::-webkit-scrollbar {
-  display: none;
-}
-
-.showcase-track__spacer {
-  flex: 0 0 4px;
-}
-
-/* ── Showcase Card ── */
 
 .showcase-card {
-  flex: 0 0 320px;
-  height: 480px;
-  scroll-snap-align: center;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   overflow: hidden;
-  border-radius: 32px;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  border-radius: 24px;
+  border: 1px solid var(--color-border-soft);
+  background: var(--color-surface-primary);
+  box-shadow: var(--shadow-surface-soft);
+  text-align: left;
 }
 
 .showcase-card:hover {
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+  border-color: var(--color-brand-accent-100);
+  box-shadow: var(--shadow-surface-soft);
 }
 
 .showcase-card:active {
-  transition-duration: 0.15s;
+  transform: translateY(1px);
+  border-color: var(--color-border-soft);
+  box-shadow: var(--shadow-pill-rest);
 }
 
 .showcase-card:focus-visible {
@@ -2338,47 +2304,35 @@ button {
   outline-offset: 2px;
 }
 
+.showcase-card__media {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--color-background-page);
+}
+
 .showcase-card__bg {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.4;
-  filter: blur(1px);
-  transition: transform 1.2s ease, opacity 0.5s ease;
+  transition: transform 0.4s ease;
 }
 
 .showcase-card:hover .showcase-card__bg {
-  opacity: 0.5;
-}
-
-.showcase-card:hover .showcase-card__bg {
-  transform: scale(1.05);
-}
-
-.showcase-card__overlay {
-  position: absolute;
-  inset: 0;
-  transition: opacity 0.5s ease;
+  transform: scale(1.03);
 }
 
 .showcase-card__body {
-  position: relative;
-  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
   padding: 24px;
+  gap: 18px;
 }
 
 .showcase-card__top {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 8px;
-  padding: 0 8px;
+  gap: 10px;
 }
 
 .showcase-card__eyebrow {
@@ -2392,32 +2346,28 @@ button {
 
 .showcase-card__title {
   margin: 0;
-  font-size: calc(24px * var(--font-scale-factor));
+  font-size: calc(22px * var(--font-scale-factor));
   font-weight: var(--font-weight-bold);
   line-height: 1.15;
   letter-spacing: -0.01em;
-  color: var(--color-text-primary);
+  color: var(--color-brand-primary-600);
+}
+
+.showcase-card__summary {
+  margin: 0;
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-loose);
+  color: var(--color-text-secondary);
 }
 
 .showcase-card__bottom {
-  -webkit-backdrop-filter: blur(24px);
-  backdrop-filter: blur(24px);
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 20px;
-  padding: 20px;
-  border: 1px solid rgba(200, 220, 255, 0.4);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-  transition: background 0.5s ease;
-}
-
-.showcase-card:hover .showcase-card__bottom {
-  background: rgba(255, 255, 255, 0.7);
-}
-
-.showcase-card__info {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
+  padding-top: 4px;
+  border-top: 1px solid var(--color-border-subtle);
 }
 
 .showcase-card__meta {
@@ -2431,17 +2381,10 @@ button {
 .showcase-card__read {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
   font-size: calc(13px * var(--font-scale-factor));
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-semibold);
   line-height: normal;
-  color: var(--color-text-primary);
-  transition: color 0.18s ease, padding-right 0.18s ease;
-}
-
-.showcase-card:hover .showcase-card__read {
   color: var(--accent, var(--color-brand-primary-500));
-  padding-right: 4px;
 }
 
 @media (max-width: 1200px) {

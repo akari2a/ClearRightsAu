@@ -10,6 +10,8 @@ type CasesIndexPageProps = {
 };
 
 export function CasesIndexPage({
+  pageTitle,
+  pageDescription,
   groups,
   cases,
   onCaseClick
@@ -21,7 +23,10 @@ export function CasesIndexPage({
 
   return (
     <section className="cases-index">
-      {/* Header removed based on user request */}
+      <div className="cases-index__header">
+        <h1 className="cases-index__title">{pageTitle}</h1>
+        <p className="cases-index__description">{pageDescription}</p>
+      </div>
 
       <div className="cases-index__groups">
         {groups.map((group) => {
