@@ -24,8 +24,20 @@ export function CasesIndexPage({
   const activeFilter = searchParams.get("filter") || "all";
   const [visibleCount, setVisibleCount] = useState<number>(BATCH_SIZE);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [colCount, setColCount] = useState<number>(3);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadingSentinelRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 600) setColCount(1);
+      else if (window.innerWidth <= 980) setColCount(2);
+      else setColCount(3);
+    };
+    handleResize(); // Init safely on client side
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Group dictionaries for quick lookup
   const groupAccentMap = useMemo(() => {
@@ -62,6 +74,14 @@ export function CasesIndexPage({
 
   const displayedCases = filteredCases.slice(0, visibleCount);
   const hasMoreCases = visibleCount < filteredCases.length;
+
+  const masonryColumns = useMemo(() => {
+    const cols: SuccessCase[][] = Array.from({ length: colCount }, () => []);
+    displayedCases.forEach((item, index) => {
+      cols[index % colCount].push(item);
+    });
+    return cols;
+  }, [displayedCases, colCount]);
 
   // Set up intersection observer for infinite scrolling
   const handleObserve = useCallback(
@@ -130,45 +150,49 @@ export function CasesIndexPage({
         </div>
       </div>
 
-      <div className="cases-masonry-grid">
-        {displayedCases.map((caseItem) => {
-          const accentColor = groupAccentMap[caseItem.category] ?? "#2563eb";
-          return (
-            <InteractiveCardButton
-              key={caseItem.id}
-              className="showcase-card showcase-card--masonry"
-              onClick={() => onCaseClick?.(caseItem)}
-            >
-              {caseItem.cardImage ? (
-                <div className="showcase-card__media">
-                  <img
-                    className="showcase-card__bg"
-                    src={caseItem.cardImage}
-                    alt=""
-                    loading="lazy"
-                  />
-                </div>
-              ) : null}
-              <div className="showcase-card__body">
-                <div className="showcase-card__top">
-                  <span className="showcase-card__eyebrow" style={{ color: accentColor }}>
-                    {caseItem.categoryLabel}
-                  </span>
-                  <h3 className="showcase-card__title">{caseItem.title}</h3>
-                  <p className="showcase-card__summary">{caseItem.summary}</p>
-                </div>
-                <div className="showcase-card__bottom">
-                  <span className="showcase-card__meta">
-                    {caseItem.persona.name} · {caseItem.riskLabel}
-                  </span>
-                  <span className="showcase-card__read" style={{ "--accent": accentColor } as React.CSSProperties}>
-                    Read case
-                  </span>
-                </div>
-              </div>
-            </InteractiveCardButton>
-          );
-        })}
+      <div className="cases-masonry-container">
+        {masonryColumns.map((col, colIndex) => (
+          <div key={`col-${colIndex}`} className="cases-masonry-column">
+            {col.map((caseItem) => {
+              const accentColor = groupAccentMap[caseItem.category] ?? "#2563eb";
+              return (
+                <InteractiveCardButton
+                  key={caseItem.id}
+                  className="showcase-card showcase-card--masonry"
+                  onClick={() => onCaseClick?.(caseItem)}
+                >
+                  {caseItem.cardImage ? (
+                    <div className="showcase-card__media">
+                      <img
+                        className="showcase-card__bg"
+                        src={caseItem.cardImage}
+                        alt=""
+                        loading="lazy"
+                      />
+                    </div>
+                  ) : null}
+                  <div className="showcase-card__body">
+                    <div className="showcase-card__top">
+                      <span className="showcase-card__eyebrow" style={{ color: accentColor }}>
+                        {caseItem.categoryLabel}
+                      </span>
+                      <h3 className="showcase-card__title">{caseItem.title}</h3>
+                      <p className="showcase-card__summary">{caseItem.summary}</p>
+                    </div>
+                    <div className="showcase-card__bottom">
+                      <span className="showcase-card__meta">
+                        {caseItem.persona.name} · {caseItem.riskLabel}
+                      </span>
+                      <span className="showcase-card__read" style={{ "--accent": accentColor } as React.CSSProperties}>
+                        Read case
+                      </span>
+                    </div>
+                  </div>
+                </InteractiveCardButton>
+              );
+            })}
+          </div>
+        ))}
       </div>
 
       {hasMoreCases && (
