@@ -129,14 +129,20 @@
     "title": "Successful cases",
     "caseCards": [
       {
+        "category": "scam",
+        "eyebrow": "Scam",
         "title": "I clicked a delivery text link but did not enter my details",
         "description": "See how the site should reassure the user, explain likely risk, and suggest monitoring steps."
       },
       {
+        "category": "refund",
+        "eyebrow": "Refund",
         "title": "The shop refused a refund for a faulty appliance",
         "description": "A practical example of how to separate store policy from consumer guarantees."
       },
       {
+        "category": "tenancy",
+        "eyebrow": "Tenancy",
         "title": "My landlord deducted bond money for cleaning",
         "description": "A tenancy example focused on evidence, reasonableness, and how to challenge deductions."
       }

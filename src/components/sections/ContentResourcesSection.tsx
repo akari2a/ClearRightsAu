@@ -1,5 +1,6 @@
 import type { LinkCard } from "../../types/home";
 import { InteractiveCardButton } from "../controls/InteractiveCardButton";
+import { CaseCategoryTag } from "../case/CaseCategoryTag";
 
 type ContentResourcesSectionProps = {
   eyebrow: string;
@@ -26,17 +27,19 @@ export function ContentResourcesSection({
       </div>
 
       <div className="content-card-list">
-        {caseCards.map((card) => (
-          <InteractiveCardButton
-            key={card.title}
-            className="content-card content-card--interactive"
-            onClick={() => onCaseClick?.(card)}
-          >
-            {card.eyebrow ? <p className="content-card__eyebrow">{card.eyebrow}</p> : null}
-            <h4 className="content-card__title">{card.title}</h4>
-            <p className="content-card__description">{card.description}</p>
-          </InteractiveCardButton>
-        ))}
+        {caseCards.map((card) => {
+          return (
+            <InteractiveCardButton
+              key={card.title}
+              className="content-card content-card--interactive"
+              onClick={() => onCaseClick?.(card)}
+            >
+              {card.eyebrow && card.category ? <CaseCategoryTag category={card.category} label={card.eyebrow} className="content-card__eyebrow" /> : null}
+              <h4 className="content-card__title">{card.title}</h4>
+              <p className="content-card__description">{card.description}</p>
+            </InteractiveCardButton>
+          );
+        })}
       </div>
     </section>
   );

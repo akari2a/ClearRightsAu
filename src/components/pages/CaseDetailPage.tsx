@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { CaseSectionMeta, SuccessCase } from "../../types/case";
 import { InteractiveCardButton } from "../controls/InteractiveCardButton";
+import { CaseCategoryTag } from "../case/CaseCategoryTag";
 import { DetailSectionHeader } from "../sections/DetailSectionHeader";
 import { ActionCardSection } from "../sections/ActionCardSection";
 
@@ -86,7 +87,7 @@ export function CaseDetailPage({
           <div className="detail-page__hero">
             <div className="detail-page__intro">
               <div className="detail-page__title-group">
-                <p className="detail-page__eyebrow">{caseData.categoryLabel} case</p>
+                <CaseCategoryTag category={caseData.category} label={`${caseData.categoryLabel} case`} className="detail-page__eyebrow" />
                 <h1 className="detail-page__title">{caseData.title}</h1>
               </div>
               <p className="case-persona-tag">
@@ -174,7 +175,7 @@ export function CaseDetailPage({
                     className="content-card content-card--interactive"
                     onClick={() => onRelatedCaseClick?.(relCase)}
                   >
-                    <p className="content-card__eyebrow">{relCase.categoryLabel}</p>
+                    <CaseCategoryTag category={relCase.category} label={relCase.categoryLabel} className="content-card__eyebrow" />
                     <p className="content-card__title">{relCase.title}</p>
                     <p className="case-card__meta">
                       {relCase.persona.name} · {relCase.riskLabel}

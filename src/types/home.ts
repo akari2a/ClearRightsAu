@@ -23,6 +23,7 @@ export type LinkCard = {
   title: string;
   description: string;
   eyebrow?: string;
+  category?: "scam" | "refund" | "tenancy";
 };
 
 export type HomeSiteCopy = {
