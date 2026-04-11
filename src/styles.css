@@ -1989,6 +1989,7 @@ button {
 
 .filter-chip:hover {
   border-color: var(--color-brand-accent-500);
+  background: var(--color-brand-accent-050);
 }
 
 .filter-chip--active,
