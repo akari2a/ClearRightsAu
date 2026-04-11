@@ -1,4 +1,5 @@
 import { HeaderNavButton } from "./HeaderNavButton";
+import { TextActionLink } from "../../controls/TextActionLink";
 
 type SecondaryNavItem = {
   id: string;
@@ -35,9 +36,9 @@ export function HeaderDropdownNavItem({
           <div className="subnav-panel__header">{panelLabel}</div>
           <div className="subnav-panel__list">
             {items.map((item) => (
-              <button key={item.id} className="subnav-link" type="button" onClick={() => onSecondaryClick?.(item.id)}>
+              <TextActionLink key={item.id} className="subnav-link" onClick={() => onSecondaryClick?.(item.id)}>
                 {item.label}
-              </button>
+              </TextActionLink>
             ))}
           </div>
         </div>
