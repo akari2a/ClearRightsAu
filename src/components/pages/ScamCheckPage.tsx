@@ -282,9 +282,6 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
                 {actionPack && getLocalizedText(actionPack.resultSummary, locale) ? (
                   <p className="detail-result-intro__summary">{getLocalizedText(actionPack.resultSummary, locale)}</p>
                 ) : null}
-                <button className="detail-result-intro__restart" type="button" onClick={handleRestart}>
-                  Start again
-                </button>
               </div>
 
               <div className="detail-step-list">
@@ -293,6 +290,12 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
                     <ResultStepCard number={step.number} text={step.text} />
                   </section>
                 ))}
+              </div>
+
+              <div style={{ marginTop: "40px" }}>
+                <button className="detail-result-intro__restart" type="button" onClick={handleRestart}>
+                  Start again
+                </button>
               </div>
             </section>
           )}
