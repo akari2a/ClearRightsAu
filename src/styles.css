@@ -2001,17 +2001,11 @@ button {
 }
 
 .cases-masonry-grid {
-  column-count: 4;
+  column-count: 3;
   column-gap: 20px;
 }
 
-@media (max-width: 1200px) {
-  .cases-masonry-grid {
-    column-count: 3;
-  }
-}
-
-@media (max-width: 900px) {
+@media (max-width: 980px) {
   .cases-masonry-grid {
     column-count: 2;
   }
