@@ -13,6 +13,7 @@ import { ContentResourcesSection } from "./components/sections/ContentResourcesS
 import { DEFAULT_LOCALE } from "./i18n/config";
 import type { GuideTab, LinkCard, TabKey } from "./types/home";
 import type { SuccessCase } from "./types/case";
+import type { QuickCheckAnswers, QuickCheckStage } from "./types/quickCheck";
 
 function CaseDetailRoute({
   onBackClick,
@@ -206,21 +207,12 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleScamJourneyChange = (journey: { key: string }) => {
-    console.info("Scam journey changed", { journey: journey.key });
+  const handleScamQuestionnaireComplete = (answers: QuickCheckAnswers, stage: QuickCheckStage | null) => {
+    console.info("Scam questionnaire completed", { answers, stage: stage?.id ?? null });
   };
 
-  const handleScamSectionNavigate = (section: { id: string }) => {
-    console.info("Scam section navigated", { section: section.id });
-  };
-
-  const handleScamCaseClick = (title: string) => {
-    if (title.toLowerCase().includes("clicked a parcel") || title.toLowerCase().includes("delivery link")) {
-      navigate("/cases/zhang-san-scam");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-    console.info("Scam case clicked", { title });
+  const handleScamSectionNavigate = (sectionId: string) => {
+    console.info("Scam section navigated", { sectionId });
   };
 
   const handleFontSizeChange = (size: "small" | "default" | "large") => {
@@ -296,9 +288,8 @@ function App() {
             path="/scam-check"
             element={
               <ScamCheckPage
-                onJourneyChange={handleScamJourneyChange}
+                onQuestionnaireComplete={handleScamQuestionnaireComplete}
                 onSectionNavigate={handleScamSectionNavigate}
-                onCaseClick={handleScamCaseClick}
               />
             }
           />

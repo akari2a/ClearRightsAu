@@ -1,45 +1,116 @@
 import { useEffect, useMemo, useState } from "react";
-import { getScamActionCards, getScamPageContent, getScamSectionTitle } from "../../content/scamCheckContent";
+import {
+  createFallbackActionPack,
+  getActionPackForStage,
+  getLocalizedText,
+  hasUsableActionPackContent,
+  resolveActionItemText,
+  resolveHighestPriorityStage,
+  resolveMatchingStages,
+  SCAM_QUESTIONNAIRE
+} from "../../content/quick-check/scam";
 import { DEFAULT_LOCALE } from "../../i18n/config";
-import type { DetailSectionMeta, ScamJourney, ScamJourneyKey } from "../../types/scam";
-import { DetailSectionHeader } from "../sections/DetailSectionHeader";
-import { ActionCardSection } from "../sections/ActionCardSection";
+import type { QuickCheckActionPack, QuickCheckAnswers, QuickCheckQuestion, QuickCheckStage } from "../../types/quickCheck";
 
 type ScamCheckPageProps = {
-  onJourneyChange?: (journey: ScamJourney) => void;
-  onSectionNavigate?: (section: DetailSectionMeta) => void;
-  onCaseClick?: (title: string, journey: ScamJourney) => void;
+  onQuestionnaireComplete?: (answers: QuickCheckAnswers, stage: QuickCheckStage | null) => void;
+  onSectionNavigate?: (sectionId: string) => void;
 };
 
-export function ScamCheckPage({ onJourneyChange, onSectionNavigate, onCaseClick }: ScamCheckPageProps) {
-  const pageContent = useMemo(() => getScamPageContent(DEFAULT_LOCALE), []);
-  const sections = pageContent.sections;
-  const journeys = pageContent.journeys;
-  const [journeyKey, setJourneyKey] = useState<ScamJourneyKey>("unsure");
-  const [readingProgress, setReadingProgress] = useState(0);
-  const [activeSectionId, setActiveSectionId] = useState<string>(sections[0].id);
-  const selectedJourney = useMemo(
-    () => journeys.find((journey) => journey.key === journeyKey) ?? journeys[0],
-    [journeyKey, journeys]
+function getResultBadge(stageId?: string) {
+  if (stageId === "H" || stageId === "F" || stageId === "G") {
+    return { label: "Act now", tone: "danger" as const };
+  }
+
+  if (stageId === "D" || stageId === "E" || stageId === "W") {
+    return { label: "Take action soon", tone: "warning" as const };
+  }
+
+  return { label: "Quick check result", tone: "warning" as const };
+}
+
+function ResultStepCard({ number, text }: { number: number; text: string }) {
+  return (
+    <section className="detail-card detail-card--step">
+      <span className="detail-card__floating-index" aria-hidden="true">
+        {number}
+      </span>
+      <p className="detail-card__eyebrow">{`Step ${number}`}</p>
+      <p className="detail-card__step-text">{text}</p>
+    </section>
   );
-  const firstJudgementTitle = getScamSectionTitle(sections, "first-judgement", selectedJourney.key);
-  const actionCards = useMemo(() => getScamActionCards(pageContent, selectedJourney), [pageContent, selectedJourney]);
+}
+
+export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: ScamCheckPageProps) {
+  const locale = DEFAULT_LOCALE;
+  const questions = SCAM_QUESTIONNAIRE.questionFlow;
+  const [answers, setAnswers] = useState<QuickCheckAnswers>({});
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
+  const [activeSectionId, setActiveSectionId] = useState<string>("questionnaire");
+
+  const currentQuestion = questions[currentQuestionIndex];
+  const currentAnswer = currentQuestion ? answers[currentQuestion.id] : undefined;
+  const matchingStages = useMemo(() => (isComplete ? resolveMatchingStages(answers) : []), [answers, isComplete]);
+  const resolvedStage = useMemo(() => (isComplete ? resolveHighestPriorityStage(answers) : null), [answers, isComplete]);
+  const actionPack = useMemo<QuickCheckActionPack | null>(() => {
+    if (!resolvedStage) {
+      return null;
+    }
+
+    const configuredPack = getActionPackForStage(resolvedStage.id);
+
+    if (!configuredPack || !hasUsableActionPackContent(configuredPack)) {
+      return createFallbackActionPack(resolvedStage);
+    }
+
+    return configuredPack;
+  }, [resolvedStage]);
+  const resultBadge = useMemo(() => getResultBadge(resolvedStage?.id), [resolvedStage]);
+  const flattenedSteps = useMemo(
+    () =>
+      (actionPack?.steps ?? []).map((step, index) => ({
+        id: `result-step-${step.id}`,
+        number: index + 1,
+        text: resolveActionItemText(step, answers, locale),
+        navLabel: resolveActionItemText(step, answers, locale)
+      })),
+    [actionPack, answers, locale]
+  );
+  const resultNavItems = useMemo(() => flattenedSteps.map((step) => ({ id: step.id, title: step.navLabel })), [flattenedSteps]);
 
   useEffect(() => {
-    onJourneyChange?.(selectedJourney);
-  }, [onJourneyChange, selectedJourney]);
+    if (isComplete) {
+      console.log("[Quick Check] Stage resolution", {
+        answers,
+        matchedStageIds: matchingStages.map((stage) => stage.id),
+        matchedStages: matchingStages,
+        resolvedStage
+      });
+      onQuestionnaireComplete?.(answers, resolvedStage);
+    }
+  }, [answers, isComplete, matchingStages, onQuestionnaireComplete, resolvedStage]);
 
   useEffect(() => {
+    if (!isComplete) {
+      setActiveSectionId("questionnaire");
+      return;
+    }
+
+    setActiveSectionId(resultNavItems[0]?.id ?? "action-plan");
+  }, [isComplete, resultNavItems]);
+
+  useEffect(() => {
+    if (!isComplete || resultNavItems.length === 0) {
+      return;
+    }
+
     const handleScroll = () => {
-      const sectionElements = sections.map((section) => document.getElementById(section.id)).filter(Boolean) as HTMLElement[];
-      const pageStart = sectionElements[0]?.offsetTop ?? 0;
-      const pageEnd = sectionElements[sectionElements.length - 1]?.offsetTop ?? pageStart;
+      const sectionElements = resultNavItems
+        .map((section) => document.getElementById(section.id))
+        .filter(Boolean) as HTMLElement[];
+
       const viewportAnchor = window.scrollY + window.innerHeight * 0.28;
-      const totalDistance = Math.max(pageEnd - pageStart, 1);
-      const rawProgress = ((window.scrollY - pageStart + window.innerHeight * 0.2) / totalDistance) * 100;
-
-      setReadingProgress(Math.min(100, Math.max(0, rawProgress)));
-
       let currentSection = sectionElements[0];
 
       sectionElements.forEach((section) => {
@@ -57,19 +128,20 @@ export function ScamCheckPage({ onJourneyChange, onSectionNavigate, onCaseClick 
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [sections, selectedJourney.key]);
+  }, [isComplete, resultNavItems]);
 
   const handleSectionNavigate = (sectionId: string) => {
+    if (sectionId === "action-plan" && !isComplete) {
+      return;
+    }
+
     const section = document.getElementById(sectionId);
-    const sectionMeta = sections.find((item) => item.id === sectionId);
 
     if (!section) {
       return;
     }
 
-    if (sectionMeta) {
-      onSectionNavigate?.(sectionMeta);
-    }
+    onSectionNavigate?.(sectionId);
 
     const headerOffset = 120;
     const top = section.getBoundingClientRect().top + window.scrollY - headerOffset;
@@ -77,115 +149,173 @@ export function ScamCheckPage({ onJourneyChange, onSectionNavigate, onCaseClick 
     window.scrollTo({ top, behavior: "smooth" });
   };
 
+  const handleOptionSelect = (question: QuickCheckQuestion, optionId: string) => {
+    setAnswers((current) => ({
+      ...current,
+      [question.id]: optionId
+    }));
+  };
+
+  const handleAdvance = () => {
+    if (!currentQuestion || !currentAnswer) {
+      return;
+    }
+
+    if (currentQuestionIndex === questions.length - 1) {
+      setIsComplete(true);
+      setTimeout(() => {
+        handleSectionNavigate("action-plan");
+      }, 50);
+      return;
+    }
+
+    setCurrentQuestionIndex((index) => index + 1);
+  };
+
+  const handleGoBack = () => {
+    if (currentQuestionIndex === 0) {
+      return;
+    }
+
+    setCurrentQuestionIndex((index) => Math.max(0, index - 1));
+  };
+
+  const handleRestart = () => {
+    setAnswers({});
+    setCurrentQuestionIndex(0);
+    setIsComplete(false);
+    setActiveSectionId("questionnaire");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const questionnaireProgress = useMemo(() => {
+    if (questions.length === 0) {
+      return 0;
+    }
+
+    if (isComplete) {
+      return 100;
+    }
+
+    return ((currentQuestionIndex + 1) / questions.length) * 100;
+  }, [currentQuestionIndex, isComplete, questions.length]);
+
   return (
     <section className="detail-page">
       <div className="detail-page__layout">
         <div className="detail-page__content">
           <div className="detail-page__hero">
             <div className="detail-page__intro">
-              <h1 className="detail-page__title">{pageContent.pageTitle}</h1>
-              <p className="detail-page__summary">{selectedJourney.summary}</p>
+              <h1 className="detail-page__title">{isComplete ? "What to do next" : "Check your situation"}</h1>
+              <p className="detail-page__summary">
+                {isComplete
+                  ? "Your answers have been turned into the next steps you should focus on now."
+                  : "Answer a few questions about what happened. We will use the facts you know to guide the next steps."}
+              </p>
             </div>
-
-            <section className="detail-section" id="choose-path">
-              <DetailSectionHeader eyebrow={`1. ${sections[0].eyebrow}`} title={sections[0].title} />
-
-              <div className="journey-switcher">
-              <div className="journey-switcher__grid">
-                {journeys.map((journey) => {
-                  const isActive = journey.key === selectedJourney.key;
-
-                  return (
-                    <button
-                      key={journey.key}
-                      className={`journey-option${isActive ? " journey-option--active" : ""}`}
-                      type="button"
-                      onClick={() => setJourneyKey(journey.key)}
-                    >
-                      <span className="journey-option__title">{journey.optionLabel}</span>
-                      <span className="journey-option__description">{journey.optionDescription}</span>
-                    </button>
-                  );
-                })}
-              </div>
-              </div>
-            </section>
-
-            <section className="detail-section" id="first-judgement">
-              <DetailSectionHeader eyebrow={`2. ${sections[1].eyebrow}`} title={firstJudgementTitle} />
-
-              <div className="detail-page__risk-card">
-                {selectedJourney.riskLabel ? (
-                  <p className={`risk-badge ${selectedJourney.riskTone === "danger" ? "risk-badge--danger" : "risk-badge--warning"}`}>
-                    {selectedJourney.riskLabel}
-                  </p>
-                ) : null}
-                <h2 className="detail-page__card-title">{selectedJourney.headline}</h2>
-                <p className="detail-page__card-text">{selectedJourney.cardText}</p>
-              </div>
-            </section>
           </div>
 
-          <section className="detail-section" id="action-plan">
-            <DetailSectionHeader eyebrow={`3. ${sections[2].eyebrow}`} title={sections[2].title} />
+          {!isComplete ? (
+            <section className="detail-section" id="questionnaire">
+              <div className="questionnaire-progress-block" aria-label="Questionnaire progress">
+                <div className="questionnaire-progress-block__copy">
+                  <p className="questionnaire-progress-block__label">Questionnaire progress</p>
+                  <p className="questionnaire-progress-block__step">
+                    {`Step ${Math.min(currentQuestionIndex + 1, questions.length)} of ${questions.length}`}
+                  </p>
+                </div>
+                <div className="questionnaire-progress-block__track" aria-hidden="true">
+                  <span className="questionnaire-progress-block__fill" style={{ width: `${questionnaireProgress}%` }} />
+                </div>
+              </div>
 
-            <div className="detail-grid">
-              {actionCards.map((card) => (
-                <ActionCardSection key={card.id} card={card} />
-              ))}
-            </div>
-          </section>
+              <div className="questionnaire-panel">
+                <div className="questionnaire-panel__meta">
+                  <h3 className="questionnaire-panel__title">{getLocalizedText(currentQuestion.title, locale)}</h3>
+                </div>
 
-          <section className="detail-section detail-cases" id="real-situations">
-            <DetailSectionHeader eyebrow={`4. ${sections[3].eyebrow}`} title={sections[3].title} />
+                <div className="questionnaire-options">
+                  {currentQuestion.options.map((option) => {
+                    const isSelected = answers[currentQuestion.id] === option.id;
 
-            <div className="detail-cases__grid">
-              {selectedJourney.cases.map((item) => (
-                <article
-                  key={item}
-                  className="detail-case-card"
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => onCaseClick?.(item, selectedJourney)}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter" || event.key === " ") {
-                      event.preventDefault();
-                      onCaseClick?.(item, selectedJourney);
-                    }
-                  }}
-                >
-                  <p className="detail-case-card__eyebrow">{pageContent.caseEyebrow}</p>
-                  <p className="detail-case-card__title">{item}</p>
-                </article>
-              ))}
-            </div>
-          </section>
+                    return (
+                      <button
+                        key={option.id}
+                        className={`questionnaire-option${isSelected ? " questionnaire-option--active" : ""}`}
+                        type="button"
+                        onClick={() => handleOptionSelect(currentQuestion, option.id)}
+                      >
+                        <span className="questionnaire-option__title">{getLocalizedText(option.label, locale)}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div className="questionnaire-panel__actions">
+                  {currentQuestionIndex > 0 ? (
+                    <button className="questionnaire-back" type="button" onClick={handleGoBack}>
+                      Back
+                    </button>
+                  ) : null}
+                  <button
+                    className="questionnaire-advance"
+                    type="button"
+                    onClick={handleAdvance}
+                    disabled={!currentAnswer}
+                  >
+                    {currentQuestionIndex === questions.length - 1 ? "Complete" : "Next"}
+                  </button>
+                </div>
+              </div>
+            </section>
+          ) : (
+            <section className="detail-section" id="action-plan">
+              <div className="detail-page__risk-card detail-result-intro">
+                <span className={`risk-badge risk-badge--${resultBadge.tone}`}>{resultBadge.label}</span>
+                <h3 className="detail-result-intro__title">
+                  {actionPack
+                    ? getLocalizedText(actionPack.resultTitle, locale)
+                    : resolvedStage
+                      ? getLocalizedText(resolvedStage.label, locale)
+                      : "Result"}
+                </h3>
+                {actionPack && getLocalizedText(actionPack.resultSummary, locale) ? (
+                  <p className="detail-result-intro__summary">{getLocalizedText(actionPack.resultSummary, locale)}</p>
+                ) : null}
+                <button className="detail-result-intro__restart" type="button" onClick={handleRestart}>
+                  Start again
+                </button>
+              </div>
+
+              <div className="detail-step-list">
+                {flattenedSteps.map((step) => (
+                  <section key={step.id} id={step.id}>
+                    <ResultStepCard number={step.number} text={step.text} />
+                  </section>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
 
         <aside className="detail-page__rail detail-page__rail--side">
-          <nav className="detail-page-nav" aria-label="On this page">
-            {sections.map((section) => {
-              const title = getScamSectionTitle(sections, section.id, selectedJourney.key);
-
-              return (
+          {isComplete ? (
+            <nav className="detail-page-nav" aria-label="On this page">
+              {resultNavItems.map((section, index) => (
                 <button
                   key={section.id}
                   className={`detail-page-nav__item${activeSectionId === section.id ? " detail-page-nav__item--active" : ""}`}
                   type="button"
                   onClick={() => handleSectionNavigate(section.id)}
                 >
-                  <span className="detail-page-nav__number">{section.number}</span>
-                  <span className="detail-page-nav__label">{title}</span>
+                  <span className="detail-page-nav__number">{index + 1}</span>
+                  <span className="detail-page-nav__label">{section.title}</span>
                 </button>
-              );
-            })}
-          </nav>
-
-          <div className="detail-progress-group">
-            <div className="detail-progress" aria-hidden="true">
-              <span className="detail-progress__bar" style={{ height: `${readingProgress}%` }} />
-            </div>
-          </div>
+              ))}
+            </nav>
+          ) : (
+            <div className="detail-page__rail-placeholder" aria-hidden="true" />
+          )}
         </aside>
       </div>
     </section>
