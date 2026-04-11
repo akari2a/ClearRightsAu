@@ -85,8 +85,10 @@ export function CaseDetailPage({
         <div className="detail-page__content">
           <div className="detail-page__hero">
             <div className="detail-page__intro">
-              <p className="detail-page__eyebrow">{caseData.categoryLabel} case</p>
-              <h1 className="detail-page__title">{caseData.title}</h1>
+              <div className="detail-page__title-group">
+                <p className="detail-page__eyebrow">{caseData.categoryLabel} case</p>
+                <h1 className="detail-page__title">{caseData.title}</h1>
+              </div>
               <p className="case-persona-tag">
                 {caseData.persona.name}, {caseData.persona.age} — {caseData.persona.background}
               </p>
