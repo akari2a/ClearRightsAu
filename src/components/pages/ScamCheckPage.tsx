@@ -1,51 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
 import { getScamActionCards, getScamPageContent, getScamSectionTitle } from "../../content/scamCheckContent";
 import { DEFAULT_LOCALE } from "../../i18n/config";
-import type { DetailSectionMeta, ScamActionCard, ScamJourney, ScamJourneyKey } from "../../types/scam";
+import type { DetailSectionMeta, ScamJourney, ScamJourneyKey } from "../../types/scam";
+import { DetailSectionHeader } from "../sections/DetailSectionHeader";
+import { ActionCardSection } from "../sections/ActionCardSection";
 
 type ScamCheckPageProps = {
   onJourneyChange?: (journey: ScamJourney) => void;
   onSectionNavigate?: (section: DetailSectionMeta) => void;
   onCaseClick?: (title: string, journey: ScamJourney) => void;
 };
-
-function DetailSectionHeader({ eyebrow, title }: { eyebrow: string; title: string }) {
-  return (
-    <div className="detail-section__header">
-      <p className="detail-section__eyebrow">{eyebrow}</p>
-      <h2 className="detail-section__title">{title}</h2>
-    </div>
-  );
-}
-
-function ScamActionCardSection({ card }: { card: ScamActionCard }) {
-  return (
-    <section className="detail-card detail-card--numbered">
-      <span className="detail-card__floating-index" aria-hidden="true">
-        {card.number}
-      </span>
-      <p className="detail-card__eyebrow">{card.eyebrow}</p>
-      <h2 className="detail-card__title">{card.title}</h2>
-      {card.ordered ? (
-        <ol className="detail-steps">
-          {card.items.map((item) => (
-            <li key={item} className="detail-steps__item">
-              {item}
-            </li>
-          ))}
-        </ol>
-      ) : (
-        <ul className="detail-list">
-          {card.items.map((item) => (
-            <li key={item} className="detail-list__item">
-              {item}
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
-  );
-}
 
 export function ScamCheckPage({ onJourneyChange, onSectionNavigate, onCaseClick }: ScamCheckPageProps) {
   const pageContent = useMemo(() => getScamPageContent(DEFAULT_LOCALE), []);
@@ -167,7 +131,7 @@ export function ScamCheckPage({ onJourneyChange, onSectionNavigate, onCaseClick 
 
             <div className="detail-grid">
               {actionCards.map((card) => (
-                <ScamActionCardSection key={card.id} card={card} />
+                <ActionCardSection key={card.id} card={card} />
               ))}
             </div>
           </section>

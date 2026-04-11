@@ -1,18 +1,59 @@
 import { useEffect, useMemo, useState } from "react";
-import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from "react-router-dom";
 import { getHomePageContent } from "./content/homeContent";
+import { getCaseById, getCasesPageContent } from "./content/casesContent";
 import { SiteHeader, type HeaderPrimaryNavKey } from "./components/layout/SiteHeader";
 import { SiteFooter } from "./components/layout/SiteFooter";
 import { ScamCheckPage } from "./components/pages/ScamCheckPage";
+import { CasesIndexPage } from "./components/pages/CasesIndexPage";
+import { CaseDetailPage } from "./components/pages/CaseDetailPage";
 import { HeroSection } from "./components/sections/HeroSection";
 import { ContentResourcesSection } from "./components/sections/ContentResourcesSection";
 import { DEFAULT_LOCALE } from "./i18n/config";
 import type { GuideTab, LinkCard, TabKey } from "./types/home";
+import type { SuccessCase } from "./types/case";
+
+function CaseDetailRoute({
+  onBackClick,
+  onRelatedGuideClick,
+  onRelatedCaseClick
+}: {
+  onBackClick: () => void;
+  onRelatedGuideClick: (route: string) => void;
+  onRelatedCaseClick: (caseData: SuccessCase) => void;
+}) {
+  const { caseId } = useParams<{ caseId: string }>();
+  const casesContent = useMemo(() => getCasesPageContent(DEFAULT_LOCALE), []);
+  const caseData = caseId ? getCaseById(casesContent, caseId) : undefined;
+
+  const relatedCases = useMemo(() => {
+    if (!caseData) return [];
+    return caseData.relatedCaseIds
+      .map((id) => getCaseById(casesContent, id))
+      .filter(Boolean) as SuccessCase[];
+  }, [caseData, casesContent]);
+
+  if (!caseData) {
+    return <Navigate to="/cases" replace />;
+  }
+
+  return (
+    <CaseDetailPage
+      caseData={caseData}
+      sections={casesContent.sections}
+      relatedCases={relatedCases}
+      onBackClick={onBackClick}
+      onRelatedGuideClick={onRelatedGuideClick}
+      onRelatedCaseClick={onRelatedCaseClick}
+    />
+  );
+}
 
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const homePageContent = useMemo(() => getHomePageContent(DEFAULT_LOCALE), []);
+  const casesPageContent = useMemo(() => getCasesPageContent(DEFAULT_LOCALE), []);
   const [activeTab, setActiveTab] = useState<TabKey>("scam");
   const [fontSize, setFontSize] = useState<"small" | "default" | "large">("default");
   const selectedTab = useMemo(
@@ -51,10 +92,43 @@ function App() {
       return;
     }
 
+    if (destination === "cases") {
+      navigate("/cases");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
     console.info("Navigation clicked", { destination });
   };
 
+  const SECONDARY_NAV_CATEGORY_MAP: Record<string, string> = {
+    "c-scam": "scam",
+    "c-products": "refund",
+    "c-tenancy": "tenancy"
+  };
+
   const handleSecondaryNavigate = (destination: string) => {
+    const categoryId = SECONDARY_NAV_CATEGORY_MAP[destination];
+    if (categoryId) {
+      if (location.pathname === "/cases") {
+        const el = document.getElementById(categoryId);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY - 120;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      } else {
+        navigate("/cases");
+        setTimeout(() => {
+          const el = document.getElementById(categoryId);
+          if (el) {
+            const top = el.getBoundingClientRect().top + window.scrollY - 120;
+            window.scrollTo({ top, behavior: "smooth" });
+          }
+        }, 100);
+      }
+      return;
+    }
+
     console.info("Secondary navigation clicked", { destination });
   };
 
@@ -62,12 +136,39 @@ function App() {
     console.info("Language selector clicked");
   };
 
+  const HOMEPAGE_CASE_ROUTE_MAP: Record<string, string> = {
+    "I clicked a delivery text link but did not enter my details": "/cases/zhang-san-scam",
+    "The shop refused a refund for a faulty appliance": "/cases/ching-refund",
+    "My landlord deducted bond money for cleaning": "/cases/simon-wang-bond"
+  };
+
   const handleCaseClick = (card: LinkCard) => {
+    const route = HOMEPAGE_CASE_ROUTE_MAP[card.title];
+    if (route) {
+      navigate(route);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     console.info("Case card clicked", { title: card.title });
   };
 
   const handleGuideClick = (card: LinkCard) => {
     console.info("Guide card clicked", { title: card.title });
+  };
+
+  const handleCasesIndexCaseClick = (caseData: SuccessCase) => {
+    navigate(`/cases/${caseData.id}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleCaseBackClick = () => {
+    navigate("/cases");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleCaseRelatedGuideClick = (route: string) => {
+    navigate(route);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleScamJourneyChange = (journey: { key: string }) => {
@@ -79,6 +180,11 @@ function App() {
   };
 
   const handleScamCaseClick = (title: string) => {
+    if (title.toLowerCase().includes("clicked a parcel") || title.toLowerCase().includes("delivery link")) {
+      navigate("/cases/zhang-san-scam");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     console.info("Scam case clicked", { title });
   };
 
@@ -96,7 +202,9 @@ function App() {
     document.documentElement.style.setProperty("--font-scale-factor", String(fontScaleMap[fontSize]));
   }, [fontSize]);
 
-  const activePrimaryNav: HeaderPrimaryNavKey = location.pathname === "/" ? "home" : "home";
+  const activePrimaryNav: HeaderPrimaryNavKey = location.pathname.startsWith("/cases")
+    ? "cases"
+    : "home";
 
   return (
     <main className="page-shell">
@@ -152,6 +260,28 @@ function App() {
                 onJourneyChange={handleScamJourneyChange}
                 onSectionNavigate={handleScamSectionNavigate}
                 onCaseClick={handleScamCaseClick}
+              />
+            }
+          />
+          <Route
+            path="/cases"
+            element={
+              <CasesIndexPage
+                pageTitle={casesPageContent.pageTitle}
+                pageDescription={casesPageContent.pageDescription}
+                groups={casesPageContent.groups}
+                cases={casesPageContent.cases}
+                onCaseClick={handleCasesIndexCaseClick}
+              />
+            }
+          />
+          <Route
+            path="/cases/:caseId"
+            element={
+              <CaseDetailRoute
+                onBackClick={handleCaseBackClick}
+                onRelatedGuideClick={handleCaseRelatedGuideClick}
+                onRelatedCaseClick={handleCasesIndexCaseClick}
               />
             }
           />

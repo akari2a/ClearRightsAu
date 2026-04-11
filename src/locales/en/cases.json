@@ -1,0 +1,688 @@
+{
+  "pageTitle": "Success cases",
+  "pageDescription": "Real examples that help you recognise familiar situations and see what steps others have taken.",
+  "caseEyebrow": "Case",
+  "sections": [
+    {
+      "id": "situation",
+      "number": "1",
+      "eyebrow": "What happened",
+      "title": "The situation"
+    },
+    {
+      "id": "assessment",
+      "number": "2",
+      "eyebrow": "Risk assessment",
+      "title": "How serious was this?"
+    },
+    {
+      "id": "action-plan",
+      "number": "3",
+      "eyebrow": "What they did",
+      "title": "Steps taken"
+    },
+    {
+      "id": "outcome",
+      "number": "4",
+      "eyebrow": "Resolution",
+      "title": "How it turned out"
+    },
+    {
+      "id": "takeaway",
+      "number": "5",
+      "eyebrow": "Key takeaways",
+      "title": "What you can learn"
+    }
+  ],
+  "groups": [
+    {
+      "categoryKey": "scam",
+      "categoryLabel": "Scam cases",
+      "description": "Examples of how people handled suspicious messages, calls, and phishing links.",
+      "caseIds": [
+        "zhang-san-scam",
+        "fake-job-text",
+        "tax-office-call",
+        "rental-scam-fb"
+      ],
+      "tintColor": "#F0F7FF",
+      "accentColor": "#2563eb"
+    },
+    {
+      "categoryKey": "refund",
+      "categoryLabel": "Refund & product cases",
+      "description": "Examples of how people dealt with misleading products, faulty goods, and safety concerns.",
+      "caseIds": [
+        "ching-refund",
+        "mrs-wang-heater",
+        "broken-laptop",
+        "gym-membership-cancel"
+      ],
+      "tintColor": "#EDF9F8",
+      "accentColor": "#0d9488"
+    },
+    {
+      "categoryKey": "tenancy",
+      "categoryLabel": "Tenancy cases",
+      "description": "Examples of how renters resolved bond deductions and disputes with landlords.",
+      "caseIds": [
+        "simon-wang-bond",
+        "mold-ignored",
+        "rent-increase-notice",
+        "water-leak-repair"
+      ],
+      "tintColor": "#FFF7ED",
+      "accentColor": "#d97706"
+    }
+  ],
+  "cases": [
+    {
+      "id": "zhang-san-scam",
+      "category": "scam",
+      "categoryLabel": "Scam",
+      "cardImage": "/images/cases/scam-phishing.png",
+      "title": "I clicked a parcel delivery link but did not enter any details",
+      "summary": "A student clicked a phishing delivery link but stopped before entering any details. See how he checked the risk and what he did next.",
+      "persona": {
+        "name": "Zhang San",
+        "age": 18,
+        "background": "First-year international student, Sydney"
+      },
+      "situation": "One afternoon between classes, Zhang San checked his phone and saw a text that appeared to be from Australia Post. It said there was a problem with a parcel delivery and included a link to reschedule. Because he was already waiting for a package, the message felt believable, and he clicked the link without thinking much.\n\nThe page looked official at first. It asked for personal details and bank card information. That was the moment he realised something was off. He stopped, read more carefully, and closed the page without submitting anything.\n\nEven after closing it, he did not feel reassured. He was not sure whether simply opening the link had already put his phone, bank account, or personal information at risk.",
+      "riskLabel": "Low risk — monitor and stay alert",
+      "riskTone": "low",
+      "riskHeadline": "Clicking a link without entering information usually carries low risk, but it is still worth checking.",
+      "riskExplanation": "Most phishing sites need you to actively submit information before they can cause real harm. Simply opening a link and closing it without typing anything is unlikely to compromise your bank account or identity. However, some links may attempt to install tracking or collect device data, so monitoring your accounts for a few days is a reasonable precaution.",
+      "actionCards": [
+        {
+          "id": "signals",
+          "number": "1",
+          "eyebrow": "What he noticed",
+          "title": "Warning signals",
+          "items": [
+            "The text used urgent language about a delivery problem.",
+            "The page asked for personal details and bank card information — something Australia Post would never do via text.",
+            "The URL did not match the official Australia Post website."
+          ]
+        },
+        {
+          "id": "actions",
+          "number": "2",
+          "eyebrow": "What he did next",
+          "title": "Immediate actions",
+          "items": [
+            "Did not click the link again or reply to the message.",
+            "Checked his bank account and confirmed there were no unexpected transactions.",
+            "Changed passwords for his email and banking apps as a precaution.",
+            "Blocked the sender's phone number."
+          ],
+          "ordered": true
+        },
+        {
+          "id": "evidence",
+          "number": "3",
+          "eyebrow": "What he kept",
+          "title": "Evidence gathered",
+          "items": [
+            "Screenshot of the text message and the sender's number.",
+            "Screenshot of the phishing page before closing it.",
+            "The URL from the suspicious link.",
+            "A note of the date and time the message arrived."
+          ]
+        },
+        {
+          "id": "escalation",
+          "number": "4",
+          "eyebrow": "Where he reported it",
+          "title": "Escalation path",
+          "items": [
+            "Reported the suspicious text to Scamwatch (scamwatch.gov.au) using the online form.",
+            "Forwarded the message to Australia Post's scam reporting service.",
+            "Contacted his bank to flag the incident and confirm his account was secure."
+          ]
+        }
+      ],
+      "outcome": {
+        "headline": "No harm done — and better prepared for next time",
+        "description": "Zhang San confirmed there were no unauthorised transactions on his accounts. He reported the phishing text to Scamwatch, and the phone number was flagged. The whole process took less than an hour. More importantly, the next time he received a suspicious delivery message, he knew exactly how to check whether it was real — and he did not click."
+      },
+      "takeaway": {
+        "items": [
+          "Clicking a phishing link without entering information usually carries low risk, but monitoring your accounts afterwards is still a good idea.",
+          "Australia Post will never ask for bank card details via text message.",
+          "When something feels off, stop and check before reacting — even a few seconds of pause can prevent real damage.",
+          "Reporting scams to Scamwatch helps protect others from the same message.",
+          "Changing passwords and blocking the sender are quick, low-effort precautions that reduce future risk."
+        ],
+        "relatedGuideLabel": "Want to check your own situation?",
+        "relatedGuideRoute": "/scam-check"
+      },
+      "relatedCaseIds": [
+        "ching-refund",
+        "mrs-wang-heater"
+      ]
+    },
+    {
+      "id": "ching-refund",
+      "category": "refund",
+      "categoryLabel": "Refund",
+      "title": "The shop sold me boots with a misleading brand name",
+      "summary": "A tourist bought boots she thought were genuine UGG products, but the display was misleading and the seller refused a refund. See how she chose a practical path forward.",
+      "persona": {
+        "name": "Ching Li",
+        "age": 28,
+        "background": "Working professional, two-week holiday in Australia"
+      },
+      "situation": "While shopping during her trip, Ching walked into a store with a large \"UGG\" sign displayed prominently. She picked out a pair of boots, assuming they were the well-known brand.\n\nAfter paying, she noticed the actual brand name printed in much smaller text on the product label. It was not the brand she thought she was buying.\n\nShe also felt the material did not match what she expected for the price. When she returned to the store and asked for a refund, the seller refused and insisted the product was clearly labelled.\n\nThe conversation turned unpleasant. Ching then had to decide whether it was worth spending more time on the dispute. She did not want it to ruin the rest of her holiday, but she also did not want to simply accept the loss.",
+      "riskLabel": "Worth pursuing — but weigh your options",
+      "riskTone": "warning",
+      "riskHeadline": "If the product display or description was genuinely misleading, Australian Consumer Law may support your claim.",
+      "riskExplanation": "Under Australian Consumer Law, products must not be presented in a way that creates a false impression about their nature, origin, or quality. A large brand sign that does not match the actual product may constitute misleading conduct. However, as a short-term visitor, the practical question is how to pursue this without derailing your plans. Options like credit card chargebacks or formal complaints can continue after you leave.",
+      "actionCards": [
+        {
+          "id": "signals",
+          "number": "1",
+          "eyebrow": "What she noticed",
+          "title": "Warning signals",
+          "items": [
+            "The store displayed a large \"UGG\" sign, but the actual brand on the product was different and printed in much smaller text.",
+            "The product material felt inconsistent with the expected quality for the price paid.",
+            "The seller refused to acknowledge the branding could be misleading and declined a refund."
+          ]
+        },
+        {
+          "id": "actions",
+          "number": "2",
+          "eyebrow": "What she did next",
+          "title": "Immediate actions",
+          "items": [
+            "Kept the product and all packaging in original condition.",
+            "Took photos of the store signage, the product label, and the receipt side by side.",
+            "Contacted her credit card company to ask about the chargeback process.",
+            "Filed a complaint with NSW Fair Trading describing the misleading display."
+          ],
+          "ordered": true
+        },
+        {
+          "id": "evidence",
+          "number": "3",
+          "eyebrow": "What she kept",
+          "title": "Evidence gathered",
+          "items": [
+            "Photos of the store's prominent \"UGG\" signage and the much smaller actual brand label on the product.",
+            "The purchase receipt with date, amount, and store details.",
+            "Credit card transaction record.",
+            "A written timeline of the purchase, the discovery, and the failed refund conversation."
+          ]
+        },
+        {
+          "id": "escalation",
+          "number": "4",
+          "eyebrow": "How she escalated",
+          "title": "Escalation path",
+          "items": [
+            "Initiated a chargeback through her credit card provider, attaching the photo evidence and a written description of the misleading display.",
+            "Submitted a formal complaint to NSW Fair Trading via their online form.",
+            "Decided not to return to the store in person, choosing to handle the dispute remotely to protect her remaining holiday time."
+          ]
+        }
+      ],
+      "outcome": {
+        "headline": "Refund recovered through chargeback — without losing more holiday time",
+        "description": "Ching's credit card company accepted the chargeback request after reviewing the evidence. The process took a few weeks to complete, but it did not require any further in-person visits. Her NSW Fair Trading complaint was also logged, contributing to a pattern of reports about the store. She finished her holiday without further disruption and received the refund after returning home."
+      },
+      "takeaway": {
+        "items": [
+          "Under Australian Consumer Law, product displays and branding must not create a false impression — even if the fine print is technically correct.",
+          "Credit card chargebacks are a practical tool for tourists who cannot easily return to a store or wait for a local resolution.",
+          "Photos comparing the store signage with the actual product label are powerful evidence.",
+          "It is reasonable to weigh time, effort, and emotional cost before deciding how far to push a dispute — especially during a trip.",
+          "Filing a complaint with Fair Trading helps even if your individual case is small — it builds a record that may trigger broader action."
+        ],
+        "relatedGuideLabel": "Explore more cases",
+        "relatedGuideRoute": "/cases"
+      },
+      "relatedCaseIds": [
+        "zhang-san-scam",
+        "mrs-wang-heater"
+      ],
+      "cardImage": "https://images.unsplash.com/photo-1562360896-ec533e730425?w=640&q=80"
+    },
+    {
+      "id": "mrs-wang-heater",
+      "category": "product-safety",
+      "categoryLabel": "Unsafe Products",
+      "title": "The portable heater I bought smells of plastic and gets dangerously hot",
+      "summary": "An older visitor bought a heater that smelled of plastic and became dangerously hot. See how she treated it as a safety concern and got it resolved.",
+      "persona": {
+        "name": "Mrs. Wang",
+        "age": 63,
+        "background": "Retired, visiting family in Australia"
+      },
+      "situation": "Mrs. Wang was staying with her daughter's family during colder weather. While helping with household shopping, she bought a portable heater from a local store.\n\nThe first time she used it, she noticed a strong plastic smell. She also felt that the surface became unusually hot — much hotter than she expected.\n\nThat made her uneasy, but she was not sure whether this was just how a new heater works, a sign of poor quality, or a genuine safety problem.\n\nBecause her English was limited and her eyesight was not good, she found it hard to read the product manual or search for information online. She did not want to bother her daughter unnecessarily, but she also did not want to keep using something that might be dangerous.",
+      "riskLabel": "Safety concern — stop using and check further",
+      "riskTone": "caution",
+      "riskHeadline": "A strong plastic smell and excessive surface heat may indicate a product defect or safety hazard.",
+      "riskExplanation": "Unusual smells and overheating are recognised warning signs for electrical appliances. Even if the product is not formally recalled, these symptoms can indicate manufacturing defects, inadequate insulation, or substandard materials. The safest response is to stop using the product immediately and seek more information before deciding whether to return it or report it.",
+      "actionCards": [
+        {
+          "id": "signals",
+          "number": "1",
+          "eyebrow": "What she noticed",
+          "title": "Warning signals",
+          "items": [
+            "A strong, persistent plastic smell during the first use.",
+            "The outer surface became much hotter than expected — uncomfortable to touch.",
+            "She felt uneasy using the product but was unsure whether the symptoms were normal for a new appliance."
+          ]
+        },
+        {
+          "id": "actions",
+          "number": "2",
+          "eyebrow": "What she did next",
+          "title": "Immediate actions",
+          "items": [
+            "Stopped using the heater and unplugged it from the wall.",
+            "Placed the heater in a safe location away from furniture and curtains.",
+            "Kept the original packaging and receipt.",
+            "Asked her daughter to help contact the store."
+          ],
+          "ordered": true
+        },
+        {
+          "id": "evidence",
+          "number": "3",
+          "eyebrow": "What she kept",
+          "title": "Evidence gathered",
+          "items": [
+            "The purchase receipt with store name, date, and product details.",
+            "Photos of the product model number and serial number on the label.",
+            "Photos of the packaging and any safety certification marks.",
+            "A simple written description of the problem: what happened, when, and how it felt."
+          ]
+        },
+        {
+          "id": "escalation",
+          "number": "4",
+          "eyebrow": "Where she sought help",
+          "title": "Escalation path",
+          "items": [
+            "Contacted the store with photos and receipt, explaining the plastic smell and overheating.",
+            "Checked productsafety.gov.au to see whether the product model had any recall notices.",
+            "If the store had refused, the next step would have been to contact the ACCC or state Fair Trading office."
+          ]
+        }
+      ],
+      "outcome": {
+        "headline": "Full refund from the store — and the issue was reported",
+        "description": "Mrs. Wang's daughter helped her contact the store, providing the receipt and photos of the product. The store acknowledged the issue and offered a full refund without difficulty. They also checked whether the heater model had been reported before. Mrs. Wang felt reassured that she had made the right decision to stop using it, and she now feels more confident recognising similar warning signs in future."
+      },
+      "takeaway": {
+        "items": [
+          "When a product feels unsafe during use, stop using it immediately — you do not need to be certain before taking action.",
+          "Unusual smells and excessive heat in electrical appliances are recognised safety warning signs.",
+          "You can check whether a product has been recalled at productsafety.gov.au.",
+          "Even with limited English, photos of the product, receipt, and model number provide enough basis for a clear conversation with the store.",
+          "If the store refuses to help, the ACCC and state Fair Trading offices handle product safety complaints."
+        ],
+        "relatedGuideLabel": "Explore more cases",
+        "relatedGuideRoute": "/cases"
+      },
+      "relatedCaseIds": [
+        "ching-refund",
+        "simon-wang-bond"
+      ],
+      "cardImage": "https://images.unsplash.com/photo-1550836084-e258d0f0db4d?w=640&q=80"
+    },
+    {
+      "id": "simon-wang-bond",
+      "category": "tenancy",
+      "categoryLabel": "Tenancy",
+      "title": "My landlord deducted bond money for cleaning after I moved out",
+      "summary": "An international student was told part of his bond would be deducted for cleaning. See how he worked out whether the claim was fair and challenged it.",
+      "persona": {
+        "name": "Simon Wang",
+        "age": 23,
+        "background": "International student, Sydney"
+      },
+      "situation": "After moving out of his rental property, Simon received a notice saying part of his bond would be deducted for cleaning-related reasons.\n\nThis came as a surprise. He had spent a long time cleaning the property before leaving and believed he had done everything properly.\n\nInstead of responding straight away, Simon tried to understand the situation first. He read through the tenancy agreement and looked up related information online.\n\nAlthough he was comfortable with English in everyday life, formal terms and legal language were much harder for him to interpret. He found it difficult to judge whether the deduction was actually reasonable under local rules.\n\nHe was not sure whether he should accept the deduction to avoid conflict, or whether he had grounds to challenge it.",
+      "riskLabel": "Disputable — understand your position first",
+      "riskTone": "warning",
+      "riskHeadline": "Bond deductions must be reasonable and supported by evidence. Tenants have the right to dispute unfair claims.",
+      "riskExplanation": "In most Australian states, landlords cannot deduct bond money without proper justification. Cleaning costs are only valid if the property was left in a condition worse than fair wear and tear. The condition report completed at the start and end of the tenancy is the key document. If the deduction seems unreasonable, tenants can formally dispute it through the relevant state bond authority or tribunal.",
+      "actionCards": [
+        {
+          "id": "signals",
+          "number": "1",
+          "eyebrow": "What he noticed",
+          "title": "Warning signals",
+          "items": [
+            "The deduction reason was vague — \"cleaning\" without specific details of what was unsatisfactory.",
+            "He had cleaned thoroughly before leaving and had photos to show the condition.",
+            "The amount seemed higher than a reasonable cleaning cost for the issues described."
+          ]
+        },
+        {
+          "id": "actions",
+          "number": "2",
+          "eyebrow": "What he did next",
+          "title": "Immediate actions",
+          "items": [
+            "Did not agree to the deduction immediately — asked for a detailed breakdown in writing.",
+            "Compared the move-in condition report with the move-out condition report side by side.",
+            "Reviewed the lease agreement to check what the cleaning obligations actually were.",
+            "Prepared a written response to the landlord explaining why he believed the deduction was unreasonable."
+          ],
+          "ordered": true
+        },
+        {
+          "id": "evidence",
+          "number": "3",
+          "eyebrow": "What he kept",
+          "title": "Evidence gathered",
+          "items": [
+            "The move-in condition report (with photos if available).",
+            "Photos taken on the day he moved out showing the cleaned property.",
+            "A copy of the lease agreement with the relevant cleaning clauses highlighted.",
+            "Written communication with the landlord or agent about the deduction."
+          ]
+        },
+        {
+          "id": "escalation",
+          "number": "4",
+          "eyebrow": "How he escalated",
+          "title": "Escalation path",
+          "items": [
+            "Sent a written response to the landlord with before-and-after photo evidence and a reference to the condition reports.",
+            "If the landlord had not agreed, the next step would have been to lodge a dispute with the NSW Rental Bond Board or apply to the NSW Civil and Administrative Tribunal (NCAT).",
+            "Free tenancy advice services were also available through local community legal centres."
+          ]
+        }
+      ],
+      "outcome": {
+        "headline": "Most of the deduction was returned after a clear, evidence-based response",
+        "description": "Simon sent the landlord a written response comparing the move-in and move-out condition reports, along with his photos from the day he left. He pointed out that the property was in a reasonable condition consistent with normal use. The landlord reviewed the evidence and agreed to return most of the deducted amount. The process took about a week of email exchanges. Simon felt that having clear evidence and a calm, factual tone made the difference."
+      },
+      "takeaway": {
+        "items": [
+          "Do not agree to a bond deduction if you are not sure it is fair — you have the right to ask for a detailed breakdown.",
+          "The move-in and move-out condition reports are the most important documents in a bond dispute.",
+          "\"Fair wear and tear\" means normal use over time — landlords cannot charge tenants for it.",
+          "Written communication is more effective than verbal discussions and creates a clear record.",
+          "If the landlord does not agree, state bond authorities and tribunals offer a formal, low-cost dispute process."
+        ],
+        "relatedGuideLabel": "Explore more cases",
+        "relatedGuideRoute": "/cases"
+      },
+      "relatedCaseIds": [
+        "zhang-san-scam",
+        "mrs-wang-heater"
+      ],
+      "cardImage": "https://images.unsplash.com/photo-1743487014165-c26c868b8186?w=640&q=80"
+    },
+    {
+      "id": "fake-job-text",
+      "category": "scam",
+      "categoryLabel": "Scam",
+      "title": "I was offered a well-paying job over WhatsApp with no interview",
+      "summary": "A job offer arrived via WhatsApp promising high pay for simple online tasks. See how identifying red flags prevented financial loss.",
+      "persona": {
+        "name": "Maria Gonzalez",
+        "age": 25,
+        "background": "Working holiday maker"
+      },
+      "situation": "Maria received a WhatsApp message from someone claiming to be a recruiter...",
+      "riskLabel": "High risk — disengage immediately",
+      "riskTone": "danger",
+      "riskHeadline": "Paying money to secure a job is a critical red flag.",
+      "riskExplanation": "Legitimate employers never ask candidates to pay for training or setup fees.",
+      "actionCards": [],
+      "outcome": {
+        "headline": "Blocked the sender and avoided financial loss",
+        "description": "Maria researched the recruiter's name and found warnings online."
+      },
+      "takeaway": {
+        "items": [
+          "If an offer sounds too good to be true, it likely is."
+        ],
+        "relatedGuideLabel": "Explore cases",
+        "relatedGuideRoute": "/cases"
+      },
+      "relatedCaseIds": [
+        "zhang-san-scam"
+      ],
+      "cardImage": "/images/cases/scam-shield.png"
+    },
+    {
+      "id": "tax-office-call",
+      "category": "scam",
+      "categoryLabel": "Scam",
+      "title": "I received an automated call saying my tax file number was suspended",
+      "summary": "An intimidating call threatening arrest for unpaid taxation.",
+      "persona": {
+        "name": "David Lee",
+        "age": 21,
+        "background": "University student"
+      },
+      "situation": "David got an automated call transferring him to an 'officer'.",
+      "riskLabel": "High risk — hang up",
+      "riskTone": "danger",
+      "riskHeadline": "Government agencies never demand payment via gift cards.",
+      "riskExplanation": "The ATO and Police do not demand immediate payment over the phone.",
+      "actionCards": [],
+      "outcome": {
+        "headline": "Hung up and verified securely",
+        "description": "David hung up, logged into his myGov account and confirmed his tax affairs were in order."
+      },
+      "takeaway": {
+        "items": [
+          "The ATO will never demand payment in gift cards."
+        ],
+        "relatedGuideLabel": "Explore cases",
+        "relatedGuideRoute": "/cases"
+      },
+      "relatedCaseIds": [
+        "zhang-san-scam"
+      ],
+      "cardImage": "https://images.unsplash.com/photo-1611330500121-d9439ddc3d9d?w=640&q=80"
+    },
+    {
+      "id": "rental-scam-fb",
+      "category": "scam",
+      "categoryLabel": "Scam",
+      "title": "The landlord asked for bond before letting me inspect the apartment",
+      "summary": "Looking for accommodation online, a student is asked to transfer bond money sight unseen.",
+      "persona": {
+        "name": "Elena Rossi",
+        "age": 27,
+        "background": "International student"
+      },
+      "situation": "Elena found a beautiful apartment on Facebook Marketplace.",
+      "riskLabel": "High risk — do not transfer",
+      "riskTone": "danger",
+      "riskHeadline": "Transferring bond money without an inspection is risky.",
+      "riskExplanation": "Scammers often hijack photos of real properties to create fake listings.",
+      "actionCards": [],
+      "outcome": {
+        "headline": "Avoided a major financial trap",
+        "description": "Elena insisted on a virtual inspection. When refused, she reported the listing."
+      },
+      "takeaway": {
+        "items": [
+          "Never pay bond before inspecting property."
+        ],
+        "relatedGuideLabel": "Explore cases",
+        "relatedGuideRoute": "/cases"
+      },
+      "relatedCaseIds": [
+        "simon-wang-bond"
+      ],
+      "cardImage": "https://images.unsplash.com/photo-1620302044670-f4a8ba5fe4d8?w=640&q=80"
+    },
+    {
+      "id": "broken-laptop",
+      "category": "refund",
+      "categoryLabel": "Refund",
+      "title": "My new laptop screen failed, but the store claimed physical damage",
+      "summary": "A known hardware defect emerged, but the retailer refused.",
+      "persona": {
+        "name": "Tom Harding",
+        "age": 35,
+        "background": "Local resident"
+      },
+      "situation": "Tom's laptop developed screen flickering.",
+      "riskLabel": "Worth pursuing — enforce your rights",
+      "riskTone": "warning",
+      "riskHeadline": "Consumer guarantees apply for a reasonable time.",
+      "riskExplanation": "Retailers cannot simply brush off manufacturing defects.",
+      "actionCards": [],
+      "outcome": {
+        "headline": "Free repair secured",
+        "description": "Tom referenced the ACCC's consumer guarantees."
+      },
+      "takeaway": {
+        "items": [
+          "Retailers cannot ignore statutory warranties."
+        ],
+        "relatedGuideLabel": "Explore cases",
+        "relatedGuideRoute": "/cases"
+      },
+      "relatedCaseIds": [
+        "ching-refund"
+      ],
+      "cardImage": "https://images.unsplash.com/photo-1646992914433-de93d0d06c98?w=640&q=80"
+    },
+    {
+      "id": "gym-membership-cancel",
+      "category": "refund",
+      "categoryLabel": "Refund",
+      "title": "The gym kept charging my card after I cancelled",
+      "summary": "A common issue where subscriptions are difficult to cancel.",
+      "persona": {
+        "name": "Sarah Jenkins",
+        "age": 29,
+        "background": "Working professional"
+      },
+      "situation": "Sarah moved interstate and cancelled her gym membership.",
+      "riskLabel": "Low risk — resolvable",
+      "riskTone": "low",
+      "riskHeadline": "Unauthorised recurring charges can be reversed.",
+      "riskExplanation": "If you have proof of cancellation, the business has no right to charge you.",
+      "actionCards": [],
+      "outcome": {
+        "headline": "Bank issued a chargeback",
+        "description": "Sarah contacted her bank with the cancellation email."
+      },
+      "takeaway": {
+        "items": [
+          "Always cancel subscriptions in writing."
+        ],
+        "relatedGuideLabel": "Explore cases",
+        "relatedGuideRoute": "/cases"
+      },
+      "relatedCaseIds": [
+        "ching-refund"
+      ],
+      "cardImage": "https://images.unsplash.com/photo-1675239514439-1c128b0cffcd?w=640&q=80"
+    },
+    {
+      "id": "mold-ignored",
+      "category": "tenancy",
+      "categoryLabel": "Tenancy",
+      "title": "The landlord ignored black mold in my bedroom",
+      "summary": "Persistent dampness led to a severe mold problem.",
+      "persona": {
+        "name": "Anita Desai",
+        "age": 22,
+        "background": "Student"
+      },
+      "situation": "Anita noticed black mold spreading on her bedroom ceiling.",
+      "riskLabel": "Health concern — demand repairs",
+      "riskTone": "caution",
+      "riskHeadline": "Landlords are obligated to maintain properties.",
+      "riskExplanation": "Mold caused by structural defects is landlord liability.",
+      "actionCards": [],
+      "outcome": {
+        "headline": "Repairs ordered",
+        "description": "Anita issued a formal 'Notice of Breach'."
+      },
+      "takeaway": {
+        "items": [
+          "Structural mold is not a tenant's fault."
+        ],
+        "relatedGuideLabel": "Explore cases",
+        "relatedGuideRoute": "/cases"
+      },
+      "relatedCaseIds": [
+        "simon-wang-bond"
+      ],
+      "cardImage": "https://images.unsplash.com/photo-1586195082207-21fae0fc101b?w=640&q=80"
+    },
+    {
+      "id": "rent-increase-notice",
+      "category": "tenancy",
+      "categoryLabel": "Tenancy",
+      "title": "I was given two weeks' notice for a $150 rent increase",
+      "summary": "An agent attempted to force a massive rent increase without notice.",
+      "persona": {
+        "name": "James Mitchell",
+        "age": 31,
+        "background": "Freelance designer"
+      },
+      "situation": "James received an email stating his rent would increase.",
+      "riskLabel": "Disputable — know your notice periods",
+      "riskTone": "warning",
+      "riskHeadline": "Rent increases require proper formal notice.",
+      "riskExplanation": "Landlords cannot arbitrarily increase rent with informal emails.",
+      "actionCards": [],
+      "outcome": {
+        "headline": "Increase delayed",
+        "description": "James pointed out the strict 60-day requirement."
+      },
+      "takeaway": {
+        "items": [
+          "Informal emails are usually not legally binding for rent increases."
+        ],
+        "relatedGuideLabel": "Explore cases",
+        "relatedGuideRoute": "/cases"
+      },
+      "relatedCaseIds": [
+        "simon-wang-bond"
+      ],
+      "cardImage": "https://images.unsplash.com/photo-1719595412473-df74075129ff?w=640&q=80"
+    },
+    {
+      "id": "water-leak-repair",
+      "category": "tenancy",
+      "categoryLabel": "Tenancy",
+      "title": "I paid for an emergency plumber myself",
+      "summary": "A burst pipe flooded the bathroom on a Sunday.",
+      "persona": {
+        "name": "Wei Chen",
+        "age": 45,
+        "background": "Family of four"
+      },
+      "situation": "A pipe burst in Wei's bathroom. The agency was closed.",
+      "riskLabel": "Urgent — act to prevent damage",
+      "riskTone": "caution",
+      "riskHeadline": "Tenants can authorise urgent repairs.",
+      "riskExplanation": "Laws allow tenants to spend up to a specific amount.",
+      "actionCards": [],
+      "outcome": {
+        "headline": "Reimbursed fully",
+        "description": "Wei hired a plumber and stored the invoice."
+      },
+      "takeaway": {
+        "items": [
+          "Know the emergency repair limits."
+        ],
+        "relatedGuideLabel": "Explore cases",
+        "relatedGuideRoute": "/cases"
+      },
+      "relatedCaseIds": [
+        "simon-wang-bond"
+      ],
+      "cardImage": "https://images.unsplash.com/photo-1585205375399-ea54ce3f3124?w=640&q=80"
+    }
+  ]
+}

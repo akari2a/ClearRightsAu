@@ -7,10 +7,10 @@
   --font-weight-bold: 700;
 
   --font-size-title-page: calc(28px * var(--font-scale-factor));
-  --font-size-display-brand: calc(42px * var(--font-scale-factor));
-  --font-size-title-section: calc(26px * var(--font-scale-factor));
+  --font-size-display-brand: calc(48px * var(--font-scale-factor));
+  --font-size-title-section: calc(28px * var(--font-scale-factor));
   --font-size-title-tab: calc(20px * var(--font-scale-factor));
-  --font-size-title-card: calc(20px * var(--font-scale-factor));
+  --font-size-title-card: calc(21px * var(--font-scale-factor));
   --font-size-body-lg: calc(20px * var(--font-scale-factor));
   --font-size-body-md: calc(18px * var(--font-scale-factor));
   --font-size-body-sm: calc(16px * var(--font-scale-factor));
@@ -18,7 +18,9 @@
   --font-size-label-sm: calc(14px * var(--font-scale-factor));
   --font-size-label-md: calc(16px * var(--font-scale-factor));
 
-  --line-height-tight: 1.2;
+  --line-height-tight: 1.08;
   --line-height-regular: 1.4;
   --line-height-loose: 1.55;
+
+  --transition-apple-ease: cubic-bezier(0.32, 0.72, 0, 1);
 }

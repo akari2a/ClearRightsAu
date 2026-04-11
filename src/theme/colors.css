@@ -29,8 +29,27 @@
   --shadow-card-glow: 0 2px 16px 0 var(--color-brand-accent-100);
   --shadow-pill-rest: 0 2px 10px rgba(0, 0, 0, 0.02);
   --shadow-pill-hover: 0 8px 18px rgba(0, 55, 187, 0.08);
-  --shadow-surface-soft: 0 10px 30px rgba(0, 30, 113, 0.05);
+  --shadow-surface-soft: 0 20px 40px rgba(0, 30, 113, 0.04);
 
   --selection-accent: rgba(35, 196, 255, 0.25);
   --highlight-marker-white: rgba(255, 255, 255, 0.82);
+
+  --color-outcome-surface: #e8f5e9;
+  --color-outcome-border: #b9e0bc;
+
+  --color-risk-low-surface: #e8f5e9;
+  --color-risk-low-border: #b9e0bc;
+  --color-risk-low-text: #2e6b34;
+
+  --color-risk-caution-surface: #fff5e6;
+  --color-risk-caution-border: #f0d4a0;
+  --color-risk-caution-text: #7a5500;
+
+  --color-risk-warning-surface: #fff5cc;
+  --color-risk-warning-border: #ffe28a;
+  --color-risk-warning-text: #8a6400;
+
+  --color-risk-danger-surface: #ffd8d6;
+  --color-risk-danger-border: #f2a09b;
+  --color-risk-danger-text: #8e1f17;
 }
