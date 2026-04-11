@@ -638,21 +638,21 @@ button {
 }
 
 .prompt-shell--button:hover {
-  border-color: var(--color-brand-accent-500);
+  border-color: var(--color-brand-accent-100);
   box-shadow:
-    inset 0 0 0 1px var(--color-brand-accent-500),
-    0 0 0 3px rgba(35, 196, 255, 0.18),
+    inset 0 0 0 1px var(--color-brand-accent-100),
+    0 0 0 3px rgba(188, 228, 255, 0.28),
     var(--shadow-card-glow);
   transform: translateY(-1px);
 }
 
 .prompt-shell--button:active {
-  border-color: var(--color-brand-accent-500);
+  border-color: var(--color-brand-accent-100);
   box-shadow:
-    inset 0 0 0 1px var(--color-brand-accent-500),
-    0 0 0 3px rgba(35, 196, 255, 0.22),
+    inset 0 0 0 1px var(--color-brand-accent-100),
+    0 0 0 3px rgba(188, 228, 255, 0.32),
     var(--shadow-card-glow);
-  transform: none;
+  transform: translateY(1px);
 }
 
 .prompt-shell--button:focus-visible {
@@ -865,6 +865,15 @@ button {
   gap: 10px 14px;
 }
 
+.interactive-card-button {
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.interactive-card-button:active {
+  transform: translateY(1px);
+}
+
 .popular-link {
   display: flex;
   align-items: center;
@@ -876,14 +885,17 @@ button {
   border: 1px solid var(--color-border-soft);
   color: var(--color-text-primary);
   text-align: left;
-  cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
 .popular-link:hover {
   transform: translateY(-1px);
   border-color: var(--color-brand-accent-100);
   box-shadow: var(--shadow-surface-soft);
+}
+
+.popular-link:active {
+  border-color: var(--color-border-soft);
+  box-shadow: var(--shadow-pill-rest);
 }
 
 .popular-link span:first-child {
@@ -902,8 +914,8 @@ button {
 
 .popular-link--prompt span:last-child {
   font-size: var(--font-size-body-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brand-primary-600);
   text-align: left;
 }
 
@@ -968,12 +980,15 @@ button {
 }
 
 .content-card-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  column-count: 2;
+  column-gap: 20px;
 }
 
 .content-card {
+  display: inline-block;
+  width: 100%;
+  break-inside: avoid;
+  margin: 0 0 16px;
   padding: 20px;
   border-radius: 20px;
   border: 1px solid var(--color-border-soft);
@@ -984,22 +999,16 @@ button {
   display: block;
   width: 100%;
   text-align: left;
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.3s var(--transition-apple-ease), box-shadow 0.3s var(--transition-apple-ease), border-color 0.3s var(--transition-apple-ease);
 }
 
 .content-card--interactive:hover {
-  transform: scale(1.015);
+  transform: translateY(-1px);
   border-color: var(--color-brand-accent-100);
   box-shadow: var(--shadow-surface-soft);
 }
 
 .content-card--interactive:active {
-  transform: scale(0.97);
-  transition-duration: 0.1s;
-  border-color: var(--color-brand-primary-500);
+  border-color: var(--color-border-soft);
   box-shadow: var(--shadow-pill-rest);
 }
 
@@ -1008,9 +1017,9 @@ button {
   font-size: var(--font-size-label-sm);
   font-weight: var(--font-weight-semibold);
   line-height: normal;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--color-brand-primary-500);
+  color: var(--color-brand-accent-500);
 }
 
 .content-card__title {
