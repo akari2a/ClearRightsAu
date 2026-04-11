@@ -19,10 +19,6 @@ const SECONDARY_NAV: Record<"guide", SecondaryNavItem[]> = {
   ]
 };
 
-const SECONDARY_NAV_LABELS: Record<"guide", string> = {
-  guide: "Guide"
-};
-
 type SiteHeaderProps = {
   activePrimaryNav: HeaderPrimaryNavKey;
   activeFontSize: "small" | "default" | "large";
@@ -40,7 +36,7 @@ export function SiteHeader({
   onFontSizeChange,
   onLanguageSelect
 }: SiteHeaderProps) {
-  const [hoveredPrimaryNav, setHoveredPrimaryNav] = useState<"guide" | "cases" | null>(null);
+  const [hoveredPrimaryNav, setHoveredPrimaryNav] = useState<"guide" | null>(null);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [isPastTop, setIsPastTop] = useState(false);
   const lastScrollYRef = useRef(0);
@@ -93,7 +89,6 @@ export function SiteHeader({
             label="Guide"
             isActive={activePrimaryNav === "guide"}
             isOpen={hoveredPrimaryNav === "guide"}
-            panelLabel={SECONDARY_NAV_LABELS.guide}
             items={SECONDARY_NAV.guide}
             onOpen={() => setHoveredPrimaryNav("guide")}
             onPrimaryClick={() => onNavigate?.("guide")}

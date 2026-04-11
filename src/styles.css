@@ -126,7 +126,7 @@ button {
 .text-action-link:hover,
 .text-action-link:focus-visible,
 .text-action-link:active {
-  color: var(--color-brand-accent-500);
+  color: var(--color-brand-primary-500);
   text-decoration: underline;
 }
 
@@ -195,7 +195,7 @@ button {
 
 .nav-item:hover,
 .nav-dropdown-anchor:hover .nav-item {
-  color: var(--color-brand-accent-500);
+  color: var(--color-brand-primary-400);
 }
 
 .nav-item:active {
@@ -435,7 +435,7 @@ button {
   display: flex;
   align-items: flex-start;
   gap: 48px;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 
 .guide-tab {
@@ -479,14 +479,17 @@ button {
   padding: 0;
   width: calc(100% - 180px);
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .guide-list__item {
   position: relative;
-  padding: 8px 0 8px 22px;
+  padding: 5px 0 5px 22px;
   font-size: var(--font-size-body-lg);
   font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-tight);
+  line-height: 1.22;
   color: var(--color-text-primary);
 }
 
@@ -494,7 +497,7 @@ button {
   content: "";
   position: absolute;
   left: 0;
-  top: 18px;
+  top: 15px;
   width: 6px;
   height: 3px;
   background: var(--color-brand-primary-500);
@@ -784,7 +787,7 @@ button {
   line-height: normal;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-brand-primary-500);
+  color: var(--color-brand-accent-500);
 }
 
 .section-title {
@@ -855,7 +858,7 @@ button {
 
 .text-link:hover {
   text-decoration: underline;
-  color: var(--color-brand-accent-500);
+  color: var(--color-brand-primary-500);
 }
 
 .popular-grid {
@@ -1035,12 +1038,34 @@ button {
   color: var(--color-brand-accent-500);
 }
 
+.case-category-tag {
+  display: inline-block;
+}
+
+.case-category-tag--scam {
+  color: #2563eb;
+}
+
+.case-category-tag--refund {
+  color: #0d9488;
+}
+
+.case-category-tag--tenancy {
+  color: #d97706;
+}
+
 .content-card__title {
   margin: 0 0 10px;
   font-size: var(--font-size-body-md);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
   color: var(--color-text-primary);
+  transition: color 0.18s ease;
+}
+
+.content-card--interactive:hover .content-card__title,
+.content-card--interactive:focus-visible .content-card__title {
+  color: var(--color-brand-primary-600);
 }
 
 .content-card__description {
@@ -1212,6 +1237,12 @@ button {
   font-weight: var(--font-weight-semibold);
   line-height: 1.35;
   text-align: left;
+  transition: color 0.18s ease;
+}
+
+.detail-page-nav__item:hover .detail-page-nav__label,
+.detail-page-nav__item:focus-visible .detail-page-nav__label {
+  color: var(--color-brand-primary-600);
 }
 
 .back-link {
@@ -1242,7 +1273,7 @@ button {
 
 .back-link:hover {
   text-decoration: none;
-  color: var(--color-brand-accent-500);
+  color: var(--color-brand-primary-500);
 }
 
 .back-link:hover::after {
@@ -1399,12 +1430,59 @@ button {
   gap: 10px;
 }
 
+.questionnaire-panel__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.questionnaire-continue {
+  min-width: 120px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--color-brand-primary-500);
+  background: var(--color-brand-primary-500);
+  color: #fff;
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: normal;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+  box-shadow: var(--shadow-button-primary);
+}
+
+.questionnaire-continue:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: var(--color-brand-primary-600);
+  background: var(--color-brand-primary-600);
+}
+
+.questionnaire-continue:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.questionnaire-continue:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 .questionnaire-panel__title {
   margin: 0;
   font-size: var(--font-size-title-card);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
   color: var(--color-text-primary);
+}
+
+.questionnaire-panel__description {
+  margin: -2px 0 0;
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-loose);
+  color: var(--color-text-secondary);
 }
 
 .questionnaire-options {
@@ -1453,6 +1531,12 @@ button {
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-loose);
   color: var(--color-text-primary);
+  transition: color 0.18s ease;
+}
+
+.questionnaire-option:hover .questionnaire-option__title,
+.questionnaire-option:focus-visible .questionnaire-option__title {
+  color: var(--color-brand-primary-600);
 }
 
 .questionnaire-panel__actions {
@@ -1720,6 +1804,7 @@ button {
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-loose);
   color: var(--color-text-secondary);
+  white-space: pre-line;
 }
 
 .detail-result-intro {
@@ -1769,6 +1854,102 @@ button {
 .detail-result-intro__restart:active {
   transform: translateY(1px);
   border-color: var(--color-brand-accent-500);
+  box-shadow: none;
+}
+
+.quick-check-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(12, 18, 34, 0.28);
+}
+
+.quick-check-dialog {
+  width: min(100%, 460px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px;
+  border-radius: 28px;
+  border: 1px solid var(--color-border-soft);
+  background: var(--color-surface-primary);
+  box-shadow: var(--shadow-surface-medium);
+}
+
+.quick-check-dialog__title {
+  margin: 0;
+  font-size: var(--font-size-title-card);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+.quick-check-dialog__description {
+  margin: 0;
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-loose);
+  color: var(--color-text-secondary);
+}
+
+.quick-check-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.quick-check-dialog__button {
+  min-width: 124px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: normal;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+}
+
+.quick-check-dialog__button--secondary {
+  border: 1px solid var(--color-border-soft);
+  background: var(--color-surface-primary);
+  color: var(--color-text-primary);
+}
+
+.quick-check-dialog__button--secondary:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-brand-accent-100);
+  color: var(--color-brand-primary-600);
+  box-shadow: var(--shadow-surface-soft);
+}
+
+.quick-check-dialog__button--secondary:focus-visible {
+  color: var(--color-brand-primary-600);
+}
+
+.quick-check-dialog__button--secondary:active {
+  transform: translateY(1px);
+}
+
+.quick-check-dialog__button--primary {
+  border: 1px solid var(--color-brand-primary-500);
+  background: var(--color-brand-primary-500);
+  color: #fff;
+  box-shadow: var(--shadow-button-primary);
+}
+
+.quick-check-dialog__button--primary:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-brand-primary-600);
+  background: var(--color-brand-primary-600);
+}
+
+.quick-check-dialog__button--primary:active {
+  transform: translateY(1px);
   box-shadow: none;
 }
 
@@ -1915,7 +2096,8 @@ button {
 }
 
 .site-footer__link:hover {
-  color: var(--color-brand-accent-500);
+  color: var(--color-brand-primary-500);
+  text-decoration: underline;
 }
 
 .site-footer__bottom {
@@ -2407,6 +2589,12 @@ button {
   line-height: 1.15;
   letter-spacing: -0.01em;
   color: var(--color-text-primary);
+  transition: color 0.18s ease;
+}
+
+.showcase-card:hover .showcase-card__title,
+.showcase-card:focus-visible .showcase-card__title {
+  color: var(--color-brand-primary-600);
 }
 
 .showcase-card__summary {

@@ -10,7 +10,6 @@ type HeaderDropdownNavItemProps = {
   label: string;
   isActive?: boolean;
   isOpen?: boolean;
-  panelLabel: string;
   items: SecondaryNavItem[];
   onOpen: () => void;
   onPrimaryClick?: () => void;
@@ -21,7 +20,6 @@ export function HeaderDropdownNavItem({
   label,
   isActive = false,
   isOpen = false,
-  panelLabel,
   items,
   onOpen,
   onPrimaryClick,
