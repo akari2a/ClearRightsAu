@@ -7,11 +7,14 @@ import {
   resolveActionItemText,
   resolveHighestPriorityStage,
   resolveMatchingStages,
+  shouldDisplayActionItem,
   SCAM_QUESTIONNAIRE
 } from "../../content/quick-check/scam";
 import { DEFAULT_LOCALE } from "../../i18n/config";
-import type { QuickCheckActionPack, QuickCheckAnswers, QuickCheckQuestion, QuickCheckStage } from "../../types/quickCheck";
+import type { QuickCheckActionPack, QuickCheckAnswers, QuickCheckStage } from "../../types/quickCheck";
 import { InteractiveCardButton } from "../controls/InteractiveCardButton";
+import { QuickCheckExitDialog } from "./scam-check/QuickCheckExitDialog";
+import { isOptionSelected, useScamQuestionnaire } from "./scam-check/useScamQuestionnaire";
 
 type ScamCheckPageProps = {
   onQuestionnaireComplete?: (answers: QuickCheckAnswers, stage: QuickCheckStage | null) => void;
@@ -45,13 +48,29 @@ function ResultStepCard({ number, text }: { number: number; text: string }) {
 export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: ScamCheckPageProps) {
   const locale = DEFAULT_LOCALE;
   const questions = SCAM_QUESTIONNAIRE.questionFlow;
-  const [answers, setAnswers] = useState<QuickCheckAnswers>({});
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const [activeSectionId, setActiveSectionId] = useState<string>("questionnaire");
-
-  const currentQuestion = questions[currentQuestionIndex];
-  const currentAnswer = currentQuestion ? answers[currentQuestion.id] : undefined;
+  const {
+    answers,
+    currentQuestion,
+    currentQuestionIndex,
+    currentSelectionCount,
+    isExitDialogOpen,
+    isMultiSelectQuestion,
+    questionnaireProgress,
+    handleOptionSelect,
+    handleContinue,
+    handleGoBack,
+    handleRestart,
+    handleStayInQuestionnaire,
+    handleLeaveQuestionnaire
+  } = useScamQuestionnaire({
+    questions,
+    isComplete,
+    onComplete: () => setIsComplete(true),
+    onShowResults: () => handleSectionNavigate("action-plan")
+  });
+  const currentAnswer = answers[currentQuestion.id];
   const matchingStages = useMemo(() => (isComplete ? resolveMatchingStages(answers) : []), [answers, isComplete]);
   const resolvedStage = useMemo(() => (isComplete ? resolveHighestPriorityStage(answers) : null), [answers, isComplete]);
   const actionPack = useMemo<QuickCheckActionPack | null>(() => {
@@ -70,7 +89,9 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
   const resultBadge = useMemo(() => getResultBadge(resolvedStage?.id), [resolvedStage]);
   const flattenedSteps = useMemo(
     () =>
-      (actionPack?.steps ?? []).map((step, index) => ({
+      (actionPack?.steps ?? [])
+        .filter((step) => shouldDisplayActionItem(step, answers))
+        .map((step, index) => ({
         id: `result-step-${step.id}`,
         number: index + 1,
         text: resolveActionItemText(step, answers, locale),
@@ -150,53 +171,11 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
     window.scrollTo({ top, behavior: "smooth" });
   };
 
-  const handleOptionSelect = (question: QuickCheckQuestion, optionId: string) => {
-    setAnswers((current) => ({
-      ...current,
-      [question.id]: optionId
-    }));
-
-    const isLastQuestion = currentQuestionIndex === questions.length - 1;
-
-    setTimeout(() => {
-      if (isLastQuestion) {
-        setIsComplete(true);
-        setTimeout(() => {
-          handleSectionNavigate("action-plan");
-        }, 50);
-      } else {
-        setCurrentQuestionIndex((index) => index + 1);
-      }
-    }, 500);
-  };
-
-  const handleGoBack = () => {
-    if (currentQuestionIndex === 0) {
-      return;
-    }
-
-    setCurrentQuestionIndex((index) => Math.max(0, index - 1));
-  };
-
-  const handleRestart = () => {
-    setAnswers({});
-    setCurrentQuestionIndex(0);
+  const restartQuestionnaire = () => {
+    handleRestart();
     setIsComplete(false);
     setActiveSectionId("questionnaire");
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  const questionnaireProgress = useMemo(() => {
-    if (questions.length === 0) {
-      return 0;
-    }
-
-    if (isComplete) {
-      return 100;
-    }
-
-    return ((currentQuestionIndex + 1) / questions.length) * 100;
-  }, [currentQuestionIndex, isComplete, questions.length]);
 
   return (
     <section className="detail-page">
@@ -229,31 +208,46 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
 
               <div className="questionnaire-panel">
                 <div className="questionnaire-panel__meta">
-                  <button 
-                    className="back-link" 
-                    type="button" 
-                    onClick={handleGoBack}
-                    style={{ visibility: currentQuestionIndex > 0 ? "visible" : "hidden" }}
-                    aria-hidden={currentQuestionIndex === 0 ? "true" : undefined}
-                    tabIndex={currentQuestionIndex === 0 ? -1 : 0}
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor">
-                      <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/>
-                    </svg>
-                    Previous step
-                  </button>
+                  <div className="questionnaire-panel__toolbar">
+                    <button 
+                      className="back-link" 
+                      type="button" 
+                      onClick={handleGoBack}
+                      style={{ visibility: currentQuestionIndex > 0 ? "visible" : "hidden" }}
+                      aria-hidden={currentQuestionIndex === 0 ? "true" : undefined}
+                      tabIndex={currentQuestionIndex === 0 ? -1 : 0}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor">
+                        <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/>
+                      </svg>
+                      Previous step
+                    </button>
+                    {isMultiSelectQuestion ? (
+                      <button
+                        className="questionnaire-continue"
+                        type="button"
+                        onClick={handleContinue}
+                        disabled={currentSelectionCount === 0}
+                      >
+                        Continue
+                      </button>
+                    ) : null}
+                  </div>
                   <h3 className="questionnaire-panel__title">{getLocalizedText(currentQuestion.title, locale)}</h3>
+                  {getLocalizedText(currentQuestion.description, locale) ? (
+                    <p className="questionnaire-panel__description">{getLocalizedText(currentQuestion.description, locale)}</p>
+                  ) : null}
                 </div>
 
                 <div className="questionnaire-options">
                   {currentQuestion.options.map((option) => {
-                    const isSelected = answers[currentQuestion.id] === option.id;
+                    const isSelected = isOptionSelected(currentAnswer, option.id);
 
                     return (
                       <InteractiveCardButton
                         key={option.id}
                         className={`questionnaire-option${isSelected ? " questionnaire-option--active" : ""}`}
-                        onClick={() => handleOptionSelect(currentQuestion, option.id)}
+                        onClick={() => handleOptionSelect(option.id)}
                       >
                         <span className="questionnaire-option__title">{getLocalizedText(option.label, locale)}</span>
                       </InteractiveCardButton>
@@ -287,7 +281,7 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
               </div>
 
               <div style={{ marginTop: "40px" }}>
-                <button className="detail-result-intro__restart" type="button" onClick={handleRestart}>
+                <button className="detail-result-intro__restart" type="button" onClick={restartQuestionnaire}>
                   Start again
                 </button>
               </div>
@@ -314,6 +308,8 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
           )}
         </aside>
       </div>
+
+      <QuickCheckExitDialog isOpen={isExitDialogOpen} onStay={handleStayInQuestionnaire} onLeave={handleLeaveQuestionnaire} />
     </section>
   );
 }

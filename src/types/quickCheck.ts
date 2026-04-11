@@ -11,7 +11,8 @@ export type QuickCheckQuestion = {
   id: string;
   title: QuickCheckLocalizedText;
   description: QuickCheckLocalizedText;
-  selectionMode: "single";
+  selectionMode: "single" | "multiple";
+  exclusiveOptionIds?: string[];
   options: QuickCheckQuestionOption[];
 };
 
@@ -24,6 +25,7 @@ export type QuickCheckStage = {
   id: string;
   label: QuickCheckLocalizedText;
   priority: number;
+  riskLevel?: number;
   affectedBy: Record<string, string[]>;
 };
 
@@ -52,6 +54,10 @@ export type QuickCheckFormatTextContent = {
 export type QuickCheckActionItem = {
   id: string;
   kind: "step";
+  showWhen?: Array<{
+    questionId: string;
+    includesAny: string[];
+  }>;
   content: QuickCheckPlainTextContent | QuickCheckFormatTextContent;
 };
 
@@ -67,4 +73,6 @@ export type QuickCheckActionPackFile = {
   actionPacks: QuickCheckActionPack[];
 };
 
-export type QuickCheckAnswers = Record<string, string>;
+export type QuickCheckAnswerValue = string | string[];
+
+export type QuickCheckAnswers = Record<string, QuickCheckAnswerValue>;

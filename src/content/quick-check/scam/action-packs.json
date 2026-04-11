@@ -4,19 +4,47 @@
     {
       "stageId": "A",
       "resultTitle": {
-        "en": "You stopped in time."
+        "en": "You stopped in time. Here's what to do next."
       },
       "resultSummary": {
-        "en": "You did not continue with the scam. These are the safest next steps to keep a record and move on."
+        "en": "This looks suspicious, but you may have stopped in time. You noticed something suspicious, but you do not appear to have shared information or taken further action."
       },
       "steps": [
         {
           "id": "step_1",
           "kind": "step",
           "content": {
-            "type": "plain_text",
-            "text": {
-              "en": "Do not click, reply, or continue."
+            "type": "format_text",
+            "template": {
+              "en": "Do not {continue_action}."
+            },
+            "arguments": {
+              "continue_action": {
+                "default": {
+                  "en": "continue"
+                },
+                "fromQuestion": "how_happened",
+                "map": {
+                  "website": {
+                    "en": "click the suspicious link"
+                  },
+                  "text": {
+                    "en": "reply to the suspicious message"
+                  },
+                  "phone": {
+                    "en": "continue the call"
+                  },
+                  "email": {
+                    "en": "reply to the email"
+                  },
+                  "social": {
+                    "en": "reply to the suspicious person on social media or in the chat app"
+                  },
+                  "not_sure": {
+                    "en": "continue interacting with it"
+                  }
+                }
+              }
             }
           }
         },
@@ -26,32 +54,29 @@
           "content": {
             "type": "format_text",
             "template": {
-              "en": "Take a screenshot of {evidence_target}."
+              "en": "Take a screenshot and save {evidence_target} as evidence."
             },
             "arguments": {
               "evidence_target": {
                 "default": {
-                  "en": "the relevant evidence"
+                  "en": "anything related to this contact"
                 },
                 "fromQuestion": "how_happened",
                 "map": {
+                  "website": {
+                    "en": "the suspicious link or website"
+                  },
                   "text": {
-                    "en": "the message"
+                    "en": "the suspicious message"
                   },
                   "phone": {
-                    "en": "the phone number and call record"
+                    "en": "the suspicious call record"
                   },
                   "email": {
-                    "en": "the email and sender address"
-                  },
-                  "website": {
-                    "en": "the page and URL"
+                    "en": "the suspicious email address and email content"
                   },
                   "social": {
-                    "en": "the profile, messages, and links"
-                  },
-                  "not_sure": {
-                    "en": "anything you can still see"
+                    "en": "the information of the suspicious person you encountered on social media"
                   }
                 }
               }
@@ -64,7 +89,374 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "If you still feel unsure, check through an official website or phone number."
+              "en": "If you still feel unsure, verify it through official channels. Do not use the contact details provided by the other party."
+            }
+          }
+        },
+        {
+          "id": "step_4",
+          "kind": "step",
+          "content": {
+            "type": "format_text",
+            "template": {
+              "en": "{report_action}."
+            },
+            "arguments": {
+              "report_action": {
+                "default": {
+                  "en": "Block, delete, or report it"
+                },
+                "fromQuestion": "how_happened",
+                "map": {
+                  "website": {
+                    "en": "Report the suspicious link or website"
+                  },
+                  "text": {
+                    "en": "Delete and block the suspicious message"
+                  },
+                  "phone": {
+                    "en": "Block the suspicious phone number"
+                  },
+                  "email": {
+                    "en": "Block, delete, and report the suspicious email address and email content"
+                  },
+                  "social": {
+                    "en": "Block and report the suspicious person you encountered on social media"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "step_5",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "If you see similar content again in the future, stop and check first."
+            }
+          }
+        },
+        {
+          "id": "step_6",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Some of your personal information may already have been partially exposed. Strengthen the protection of your personal information and avoid displaying personal information on suspicious websites and public social media platforms."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "stageId": "B",
+      "resultTitle": {
+        "en": "You interacted with it, but the risk may still be limited."
+      },
+      "resultSummary": {
+        "en": "You may have clicked a link, opened a page, or answered a call, but you do not appear to have shared sensitive details."
+      },
+      "steps": [
+        {
+          "id": "step_1",
+          "kind": "step",
+          "content": {
+            "type": "format_text",
+            "template": {
+              "en": "Do not continue {continue_action}."
+            },
+            "arguments": {
+              "continue_action": {
+                "default": {
+                  "en": "interacting"
+                },
+                "fromQuestion": "how_happened",
+                "map": {
+                  "website": {
+                    "en": "clicking the link"
+                  },
+                  "text": {
+                    "en": "replying to the message"
+                  },
+                  "phone": {
+                    "en": "continuing the call"
+                  },
+                  "email": {
+                    "en": "replying to the email"
+                  },
+                  "social": {
+                    "en": "replying to the suspicious person on social media or in the chat app"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "step_2",
+          "kind": "step",
+          "content": {
+            "type": "format_text",
+            "template": {
+              "en": "Take a screenshot and save {evidence_target} as evidence."
+            },
+            "arguments": {
+              "evidence_target": {
+                "default": {
+                  "en": "anything related to this contact"
+                },
+                "fromQuestion": "how_happened",
+                "map": {
+                  "website": {
+                    "en": "the suspicious link or website"
+                  },
+                  "text": {
+                    "en": "the suspicious message"
+                  },
+                  "phone": {
+                    "en": "the suspicious call record"
+                  },
+                  "email": {
+                    "en": "the suspicious email address and email content"
+                  },
+                  "social": {
+                    "en": "the information of the suspicious person you encountered on social media"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "step_3",
+          "kind": "step",
+          "content": {
+            "type": "format_text",
+            "template": {
+              "en": "{report_action}."
+            },
+            "arguments": {
+              "report_action": {
+                "default": {
+                  "en": "Block, delete, or report it"
+                },
+                "fromQuestion": "how_happened",
+                "map": {
+                  "website": {
+                    "en": "Report the suspicious link or website"
+                  },
+                  "text": {
+                    "en": "Delete and block the suspicious message"
+                  },
+                  "phone": {
+                    "en": "Block the suspicious phone number"
+                  },
+                  "email": {
+                    "en": "Block, delete, and report the suspicious email address and email content"
+                  },
+                  "social": {
+                    "en": "Block and report the suspicious person you encountered on social media"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "step_4",
+          "kind": "step",
+          "content": {
+            "type": "format_text",
+            "template": {
+              "en": "Think back carefully about whether you {info_check}. If not, the risk is usually lower."
+            },
+            "arguments": {
+              "info_check": {
+                "default": {
+                  "en": "entered or shared any information"
+                },
+                "fromQuestion": "how_happened",
+                "map": {
+                  "website": {
+                    "en": "entered any information"
+                  },
+                  "text": {
+                    "en": "replied with any information"
+                  },
+                  "phone": {
+                    "en": "told them any information"
+                  },
+                  "email": {
+                    "en": "replied with any information"
+                  },
+                  "social": {
+                    "en": "told them any information"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "step_5",
+          "kind": "step",
+          "content": {
+            "type": "format_text",
+            "template": {
+              "en": "Over the next few days, watch for anything unusual in {monitor_target}."
+            },
+            "arguments": {
+              "monitor_target": {
+                "default": {
+                  "en": "your accounts and messages"
+                },
+                "fromQuestion": "how_happened",
+                "map": {
+                  "website": {
+                    "en": "your account"
+                  },
+                  "text": {
+                    "en": "your text messages"
+                  },
+                  "phone": {
+                    "en": "your text messages"
+                  },
+                  "email": {
+                    "en": "your email"
+                  },
+                  "social": {
+                    "en": "your account"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "step_6",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Use security software to scan your device and update your phone or computer system in time, to make sure the suspicious link cannot exploit system vulnerabilities to attack your device."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "stageId": "C",
+      "resultTitle": {
+        "en": "Your personal information may have been exposed."
+      },
+      "resultSummary": {
+        "en": "Stop engaging, keep a record, and watch for suspicious follow-up messages or account activity."
+      },
+      "steps": [
+        {
+          "id": "step_1",
+          "kind": "step",
+          "content": {
+            "type": "format_text",
+            "template": {
+              "en": "Do not continue {continue_action}."
+            },
+            "arguments": {
+              "continue_action": {
+                "default": {
+                  "en": "interacting"
+                },
+                "fromQuestion": "how_happened",
+                "map": {
+                  "website": {
+                    "en": "clicking the link"
+                  },
+                  "text": {
+                    "en": "replying to the message"
+                  },
+                  "phone": {
+                    "en": "continuing the call"
+                  },
+                  "email": {
+                    "en": "replying to the email"
+                  },
+                  "social": {
+                    "en": "replying to the suspicious person on social media or in the chat app"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "step_2",
+          "kind": "step",
+          "content": {
+            "type": "format_text",
+            "template": {
+              "en": "Take a screenshot and save {evidence_target} as evidence."
+            },
+            "arguments": {
+              "evidence_target": {
+                "default": {
+                  "en": "anything related to this contact"
+                },
+                "fromQuestion": "how_happened",
+                "map": {
+                  "website": {
+                    "en": "the suspicious link or website"
+                  },
+                  "text": {
+                    "en": "the suspicious message"
+                  },
+                  "phone": {
+                    "en": "the suspicious call record"
+                  },
+                  "email": {
+                    "en": "the suspicious email address and email content"
+                  },
+                  "social": {
+                    "en": "the information of the suspicious person you encountered on social media"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "step_3",
+          "kind": "step",
+          "content": {
+            "type": "format_text",
+            "template": {
+              "en": "{report_action}."
+            },
+            "arguments": {
+              "report_action": {
+                "default": {
+                  "en": "Block, delete, or report it"
+                },
+                "fromQuestion": "how_happened",
+                "map": {
+                  "website": {
+                    "en": "Report the suspicious link or website"
+                  },
+                  "text": {
+                    "en": "Delete and block the suspicious message"
+                  },
+                  "phone": {
+                    "en": "Block the suspicious phone number"
+                  },
+                  "email": {
+                    "en": "Block, delete, and report the suspicious email address and email content"
+                  },
+                  "social": {
+                    "en": "Block and report the suspicious person you encountered on social media"
+                  }
+                }
+              }
             }
           }
         },
@@ -74,7 +466,49 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Block, delete, or report it."
+              "en": "Watch over the next period for more impersonation messages, unusual phone calls, or emails."
+            }
+          }
+        },
+        {
+          "id": "step_5",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "If you are worried that your identity information may continue to be misused, seek help from official reporting channels as soon as possible."
+            }
+          }
+        },
+        {
+          "id": "step_6",
+          "kind": "step",
+          "showWhen": [
+            {
+              "questionId": "main_worry",
+              "includesAny": ["account"]
+            }
+          ],
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Change your account-related passwords as soon as possible."
+            }
+          }
+        },
+        {
+          "id": "step_7",
+          "kind": "step",
+          "showWhen": [
+            {
+              "questionId": "main_worry",
+              "includesAny": ["account"]
+            }
+          ],
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Check with the relevant official service or platform whether your account may be at risk."
             }
           }
         }
@@ -86,41 +520,16 @@
         "en": "You may need to protect your bank account now."
       },
       "resultSummary": {
-        "en": "Bank or card details may have been exposed. Treat this as something that needs prompt action."
+        "en": "Your account, password, or payment details may be at risk. Secure your accounts as soon as possible and contact your bank or provider if needed."
       },
       "steps": [
         {
           "id": "step_1",
           "kind": "step",
           "content": {
-            "type": "format_text",
-            "template": {
-              "en": "Contact your {first_contact} immediately."
-            },
-            "arguments": {
-              "first_contact": {
-                "default": {
-                  "en": "bank or payment provider"
-                },
-                "fromQuestion": "main_worry",
-                "map": {
-                  "money": {
-                    "en": "bank or payment provider"
-                  },
-                  "account": {
-                    "en": "account provider and bank if financial details were used"
-                  },
-                  "personal_info": {
-                    "en": "bank or payment provider"
-                  },
-                  "device": {
-                    "en": "bank and any affected account provider"
-                  },
-                  "urgency": {
-                    "en": "bank or payment provider"
-                  }
-                }
-              }
+            "type": "plain_text",
+            "text": {
+              "en": "If you can still log in to the account, change the password immediately.\nIf you entered online banking information, or if this bank card is linked to a payment account, immediately change:\n• online banking password\n• mobile banking password\n• payment platform password\n• the email password related to the account (if it is the same or similar, change it as well)"
             }
           }
         },
@@ -130,7 +539,7 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Tell them you may have shared your card or bank details with a scammer."
+              "en": "Contact your bank or payment platform immediately.\nCall the customer service number on the back of your bank card, on the bank's official website, or in the official app.\nDo not call any number provided in suspicious messages, emails, or web pages."
             }
           }
         },
@@ -140,7 +549,7 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Ask whether your card should be blocked, replaced, or monitored."
+              "en": "Check recent transaction records immediately.\nOpen your bank app, online banking, or payment platform and review transactions from the past few days or weeks.\nPay special attention to:\n• small charges you do not recognise\n• repeated charges\n• overseas transactions\n• transfers you did not authorise\n• unfamiliar merchant names"
             }
           }
         },
@@ -150,7 +559,7 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Check your recent transactions."
+              "en": "Follow the bank's advice and decide whether you need to freeze the account or replace the bank card."
             }
           }
         },
@@ -158,37 +567,282 @@
           "id": "step_5",
           "kind": "step",
           "content": {
-            "type": "format_text",
-            "template": {
-              "en": "Save {evidence_target}."
-            },
-            "arguments": {
-              "evidence_target": {
-                "default": {
-                  "en": "the relevant evidence"
-                },
-                "fromQuestion": "how_happened",
-                "map": {
-                  "text": {
-                    "en": "screenshots of the message, payment details, and sender information"
-                  },
-                  "phone": {
-                    "en": "the phone number, call record, payment details, and notes about the call"
-                  },
-                  "email": {
-                    "en": "the email, sender address, payment details, and any links"
-                  },
-                  "website": {
-                    "en": "screenshots of the page, URL, and any payment screen or confirmation"
-                  },
-                  "social": {
-                    "en": "screenshots of the profile, chat, payment details, and links"
-                  },
-                  "not_sure": {
-                    "en": "screenshots, payment records, and any contact details you still have"
-                  }
-                }
-              }
+            "type": "plain_text",
+            "text": {
+              "en": "Save the evidence and do not delete the related information.\nKeep as much information related to this incident as possible, such as:\n• screenshots of the suspicious website page\n• screenshots of text messages\n• conversation records\n• screenshots of payment pages\n• records of charges or deductions\n• the other party's account, number, website, or email\n• the time you contacted the bank and the result"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "stageId": "E",
+      "resultTitle": {
+        "en": "Your account or payment details may be at higher risk."
+      },
+      "resultSummary": {
+        "en": "You may have entered a password, login detail, or verification code. Contact your bank immediately if payment or banking access may be involved."
+      },
+      "steps": [
+        {
+          "id": "step_1",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Change the passwords of the relevant accounts immediately.\nFirst change the password of the account where you just entered the password.\nIf the same password is also used elsewhere, change those accounts as well.\nPrioritise changing:\n• email\n• bank or payment platform\n• commonly used shopping platforms\n• social accounts\n• mobile carrier account"
+            }
+          }
+        },
+        {
+          "id": "step_2",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "If possible, enable or reset two-factor authentication.\nIf you still have control of the account, do this as soon as possible:\n• enable two-factor authentication\n• re-bind your own phone number or verification method\n• check whether it has been changed to an unfamiliar number, unfamiliar email, or unfamiliar device"
+            }
+          }
+        },
+        {
+          "id": "step_3",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Check whether the account has been changed.\nAfter logging in, check for these signs:\n• unfamiliar device logins\n• unusual login locations\n• changed phone number or email\n• password changes\n• security notifications you do not recognise\n• account profile changes\n• orders, transfers, or activity records you did not carry out"
+            }
+          }
+        },
+        {
+          "id": "step_4",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "If you entered an SMS verification code, treat it as high risk.\nIf you gave the code to someone else or entered it on a suspicious page, do not only change the password. Also check whether the account and payment records have already been used."
+            }
+          }
+        },
+        {
+          "id": "step_5",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "If the verification code was related to a bank account, bank card, or payment platform, contact the bank immediately."
+            }
+          }
+        },
+        {
+          "id": "step_6",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "If you entered a bank card expiry date and CVV, treat it as a bank card risk issue."
+            }
+          }
+        },
+        {
+          "id": "step_7",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Save the evidence and related records.\nSave the following information:\n• screenshots of suspicious pages\n• screenshots of text messages\n• screenshots of emails\n• URL links\n• the other party's account or contact details\n• unusual notifications\n• transaction records\n• the time you contacted the platform or bank and the result"
+            }
+          }
+        },
+        {
+          "id": "step_8",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Continue checking for unusual activity over the next few days: whether you receive new login alerts, whether unfamiliar devices appear again, whether there are unusual charges, whether any account details are changed again, and whether you receive unfamiliar verification codes or security notifications."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "stageId": "F",
+      "resultTitle": {
+        "en": "Act quickly if money has already been sent."
+      },
+      "resultSummary": {
+        "en": "You may already have made a payment or transferred money. Contact your bank or payment provider immediately and keep all transaction records and related evidence."
+      },
+      "steps": [
+        {
+          "id": "step_1",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Contact your bank or payment platform immediately.\nImmediately contact the bank, card issuer, or payment platform you actually used to make the payment. Use the official app, official website, or the contact details on the back of your bank card.\nDo not continue handling this through the number, link, or chat window sent by the other party."
+            }
+          }
+        },
+        {
+          "id": "step_2",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Ask whether the payment can be stopped, disputed, or recovered. Different payment methods may have different handling options."
+            }
+          }
+        },
+        {
+          "id": "step_3",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Save the transaction number, payment screenshots, chat records, and the other party's information.\nDo not delete chat records and do not close the page.\nSave all information related to this payment, including:\n• payment screenshots\n• transaction records from the bank or payment platform\n• transaction number / reference number\n• the other party's name, account number, phone number, or email\n• chat records\n• suspicious text messages, emails, or website screenshots\n• product page or order page\n• the reason the other party gave for asking you to pay\n• the time you contacted the bank and the result"
+            }
+          }
+        },
+        {
+          "id": "step_4",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Do not make any further payments, and do not believe claims like \"make one more payment and you can get it back.\""
+            }
+          }
+        },
+        {
+          "id": "step_5",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Report it to the police or a scam reporting channel as soon as possible."
+            }
+          }
+        },
+        {
+          "id": "step_6",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Keep checking whether there is any more unusual activity in the account."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "stageId": "G",
+      "resultTitle": {
+        "en": "Your device may have been put at risk."
+      },
+      "resultSummary": {
+        "en": "You may have downloaded something, installed software, or allowed someone to access your device. Stop further access immediately and protect your accounts using another safe device."
+      },
+      "steps": [
+        {
+          "id": "step_1",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Immediately stop the other party from continuing to operate your device.\nIf the other party is still on the call, in the chat, remotely connected, or screen-sharing, stop it at once.\nWhat you should do now:\n• hang up the call\n• end the chat\n• close remote control or screen sharing\n• do not click any buttons as instructed by the other party\n• do not open bank, payment, or verification code pages for them to see"
+            }
+          }
+        },
+        {
+          "id": "step_2",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "If you are worried about the risk, disconnect from the network first (Wi-Fi, mobile data, Bluetooth, wired connection)."
+            }
+          }
+        },
+        {
+          "id": "step_3",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Delete the suspicious app, software, or file you just installed.\nDeleting it may help, but it does not necessarily mean the risk has been fully removed."
+            }
+          }
+        },
+        {
+          "id": "step_4",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Use another safe device to change important passwords.\nPrioritise these accounts:\n• email\n• bank / payment platform\n• commonly used shopping platforms\n• social accounts\n• mobile carrier account"
+            }
+          }
+        },
+        {
+          "id": "step_5",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "If you logged in to bank or payment accounts on that device, contact the bank as well."
+            }
+          }
+        },
+        {
+          "id": "step_6",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Check whether your phone or computer is behaving unusually.\nCheck for things such as:\n• the device becoming very slow\n• strange pages popping up automatically\n• apps or programs appearing that you did not open\n• battery draining unusually fast\n• messages or emails being sent automatically\n• unfamiliar login alerts\n• camera or microphone turning on unexpectedly\n• unusual bank or payment account notifications"
+            }
+          }
+        },
+        {
+          "id": "step_7",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Check whether there are unfamiliar remote control permissions or accessibility permissions."
+            }
+          }
+        },
+        {
+          "id": "step_8",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Save evidence, but do not keep dealing with the other party.\nSuggested items to save:\n• call records\n• chat records\n• screenshots of the download page\n• the name of the installed software\n• links sent by the other party\n• the actions the other party told you to perform\n• screenshots of unusual prompts or pop-ups"
+            }
+          }
+        },
+        {
+          "id": "step_9",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "If you are not sure whether the device is safe, do not use it to do these things for now.\nBefore you confirm the device is safe, try not to use it for:\n• logging in to email\n• logging in to bank accounts\n• entering bank card details\n• entering verification codes\n• saving new passwords\n• handling large payments"
+            }
+          }
+        },
+        {
+          "id": "step_10",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "If the risk is high, consider asking a professional to inspect the device."
             }
           }
         }
@@ -207,34 +861,9 @@
           "id": "step_1",
           "kind": "step",
           "content": {
-            "type": "format_text",
-            "template": {
-              "en": "Contact your {first_contact} first."
-            },
-            "arguments": {
-              "first_contact": {
-                "default": {
-                  "en": "most relevant provider"
-                },
-                "fromQuestion": "main_worry",
-                "map": {
-                  "money": {
-                    "en": "bank or payment provider"
-                  },
-                  "account": {
-                    "en": "account provider"
-                  },
-                  "personal_info": {
-                    "en": "account provider or identity support service"
-                  },
-                  "device": {
-                    "en": "device-related provider and affected account provider"
-                  },
-                  "urgency": {
-                    "en": "most relevant provider"
-                  }
-                }
-              }
+            "type": "plain_text",
+            "text": {
+              "en": "Contact the most relevant institution first: the bank, payment platform, or account service provider.\n• If it is a bank card, transfer, or deduction issue: contact the bank or card issuer first\n• If it is PayPal, a third-party payment service, or a platform wallet issue: contact the payment platform first\n• If an email, social account, or shopping account has been logged into or changed: contact the account service provider first\n• If multiple areas are affected: deal first with the one most likely to cause further loss, usually the bank or payment account"
             }
           }
         },
@@ -244,7 +873,7 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Tell them you have already noticed suspicious activity."
+              "en": "Clearly tell them that you have already noticed unusual activity."
             }
           }
         },
@@ -252,34 +881,9 @@
           "id": "step_3",
           "kind": "step",
           "content": {
-            "type": "format_text",
-            "template": {
-              "en": "Secure your {affected_items} immediately."
-            },
-            "arguments": {
-              "affected_items": {
-                "default": {
-                  "en": "accounts, passwords, card, or device"
-                },
-                "fromQuestion": "main_worry",
-                "map": {
-                  "money": {
-                    "en": "bank account, card, and payment access"
-                  },
-                  "account": {
-                    "en": "account password and login access"
-                  },
-                  "personal_info": {
-                    "en": "identity details and any linked accounts"
-                  },
-                  "device": {
-                    "en": "device, important accounts, and connected passwords"
-                  },
-                  "urgency": {
-                    "en": "most important account, card, or device"
-                  }
-                }
-              }
+            "type": "plain_text",
+            "text": {
+              "en": "Immediately protect the account, password, card, or device.\nIf it is an account issue:\n• change the password immediately\n• log out all unfamiliar devices\n• check whether the bound email or phone number has been changed\n• reset two-factor authentication\n\nIf it is a bank card or payment issue:\n• contact the bank or payment platform\n• ask whether the account needs to be frozen, the card replaced, or transactions paused\n• check recent transaction records\n\nIf the device may also be affected:\n• stop using the suspicious device for important tasks\n• use another safe device to change passwords\n• check for suspicious software, remote access, or unusual permissions\n• refer to the device access guidance in Stage G if needed"
             }
           }
         },
@@ -289,7 +893,7 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Write down what happened and when it started."
+              "en": "Record clearly what unusual activity happened and when it started.\n• what unusual activity you noticed\n• when you first noticed it\n• which account, card, or platform was involved\n• how much money was involved\n• whether you received texts, emails, verification codes, or alerts\n• what actions you have already taken\n• when you contacted the bank, platform, or service provider\n• what reply they gave"
             }
           }
         },
@@ -297,37 +901,39 @@
           "id": "step_5",
           "kind": "step",
           "content": {
-            "type": "format_text",
-            "template": {
-              "en": "Save {evidence_target}."
-            },
-            "arguments": {
-              "evidence_target": {
-                "default": {
-                  "en": "all evidence"
-                },
-                "fromQuestion": "how_happened",
-                "map": {
-                  "text": {
-                    "en": "screenshots of the message and any suspicious follow-up texts"
-                  },
-                  "phone": {
-                    "en": "the phone number, call record, and any follow-up calls or messages"
-                  },
-                  "email": {
-                    "en": "the email, sender address, and any related links or attachments"
-                  },
-                  "website": {
-                    "en": "screenshots of the page, URL, and anything you entered or paid"
-                  },
-                  "social": {
-                    "en": "screenshots of the profile, messages, links, and any payment details"
-                  },
-                  "not_sure": {
-                    "en": "all evidence you can still access"
-                  }
-                }
-              }
+            "type": "plain_text",
+            "text": {
+              "en": "Save all evidence.\nSuggested items to save:\n• screenshots of unusual transactions\n• screenshots showing account balance changes\n• login alerts or security notifications\n• verification code messages\n• email notifications\n• chat records\n• suspicious links or page screenshots\n• order records\n• the other party's account, number, email, or username\n• the time and outcome of your communication with the bank or platform"
+            }
+          }
+        },
+        {
+          "id": "step_6",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Continue reporting and handling the matter through official channels.\n• official bank customer service number\n• official bank app\n• payment platform help centre\n• account service provider's official security page\n• official scam reporting or police reporting channel"
+            }
+          }
+        },
+        {
+          "id": "step_7",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Continue checking whether there is any further unusual activity."
+            }
+          }
+        },
+        {
+          "id": "step_8",
+          "kind": "step",
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "If loss has already happened, do not continue doing more risky actions."
             }
           }
         }

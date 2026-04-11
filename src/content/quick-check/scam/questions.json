@@ -55,9 +55,10 @@
         "en": "What did you do?"
       },
       "description": {
-        "en": ""
+        "en": "Select everything that happened."
       },
-      "selectionMode": "single",
+      "selectionMode": "multiple",
+      "exclusiveOptionIds": ["saw_only", "not_sure"],
       "options": [
         {
           "id": "saw_only",
@@ -115,14 +116,21 @@
         "en": "What is happening now?"
       },
       "description": {
-        "en": ""
+        "en": "Select everything that is happening now."
       },
-      "selectionMode": "single",
+      "selectionMode": "multiple",
+      "exclusiveOptionIds": ["nothing_unusual", "not_sure"],
       "options": [
         {
           "id": "more_suspicious_contact",
           "label": {
             "en": "I started getting more suspicious calls or messages"
+          }
+        },
+        {
+          "id": "login_alert",
+          "label": {
+            "en": "I received a suspicious login alert"
           }
         },
         {

@@ -26,9 +26,21 @@ export function resolveMatchingStages(answers: QuickCheckAnswers): QuickCheckSta
   return SCAM_STAGES.stages.filter((stage) =>
     Object.entries(stage.affectedBy).every(([questionId, optionIds]) => {
       const answer = answers[questionId];
+      if (Array.isArray(answer)) {
+        return answer.some((selectedOptionId) => optionIds.includes(selectedOptionId));
+      }
+
       return answer !== undefined && optionIds.includes(answer);
     })
   );
+}
+
+function answerMatchesOptionIds(answer: QuickCheckAnswers[string] | undefined, optionIds: string[]) {
+  if (Array.isArray(answer)) {
+    return answer.some((selectedOptionId) => optionIds.includes(selectedOptionId));
+  }
+
+  return answer !== undefined && optionIds.includes(answer);
 }
 
 export function resolveHighestPriorityStage(answers: QuickCheckAnswers): QuickCheckStage | null {
@@ -93,12 +105,21 @@ export function resolveActionItemText(
   return resolveFormatText(item.content, answers, locale);
 }
 
+export function shouldDisplayActionItem(item: QuickCheckActionItem, answers: QuickCheckAnswers): boolean {
+  if (!item.showWhen || item.showWhen.length === 0) {
+    return true;
+  }
+
+  return item.showWhen.every((condition) => answerMatchesOptionIds(answers[condition.questionId], condition.includesAny));
+}
+
 function resolveFormatText(content: QuickCheckFormatTextContent, answers: QuickCheckAnswers, locale: AppLocale): string {
   let output = getLocalizedText(content.template, locale);
 
   Object.entries(content.arguments).forEach(([token, config]) => {
     const answer = answers[config.fromQuestion];
-    const replacement = getLocalizedText((answer && config.map[answer]) || config.default, locale);
+    const selectedAnswer = Array.isArray(answer) ? answer[0] : answer;
+    const replacement = getLocalizedText((selectedAnswer && config.map[selectedAnswer]) || config.default, locale);
     output = output.split(`{${token}}`).join(replacement);
   });
 

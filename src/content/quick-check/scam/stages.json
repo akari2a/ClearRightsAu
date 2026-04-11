@@ -7,6 +7,7 @@
         "en": "Suspicious only"
       },
       "priority": 10,
+      "riskLevel": 0,
       "affectedBy": {
         "what_did_you_do": ["saw_only"]
       }
@@ -17,6 +18,7 @@
         "en": "Clicked or opened, but no details entered"
       },
       "priority": 20,
+      "riskLevel": 1,
       "affectedBy": {
         "what_did_you_do": ["clicked_opened"]
       }
@@ -27,6 +29,7 @@
         "en": "Personal details exposed"
       },
       "priority": 30,
+      "riskLevel": 1,
       "affectedBy": {
         "what_did_you_do": ["personal_info"]
       }
@@ -37,6 +40,7 @@
         "en": "Bank or card details exposed"
       },
       "priority": 40,
+      "riskLevel": 2,
       "affectedBy": {
         "what_did_you_do": ["bank_info"]
       }
@@ -47,6 +51,7 @@
         "en": "Password or verification code exposed"
       },
       "priority": 50,
+      "riskLevel": 2,
       "affectedBy": {
         "what_did_you_do": ["password_code"]
       }
@@ -57,6 +62,7 @@
         "en": "Money sent or payment made"
       },
       "priority": 60,
+      "riskLevel": 3,
       "affectedBy": {
         "what_did_you_do": ["sent_money"]
       }
@@ -67,8 +73,20 @@
         "en": "Device access or app download"
       },
       "priority": 70,
+      "riskLevel": 3,
       "affectedBy": {
         "what_did_you_do": ["device_access"]
+      }
+    },
+    {
+      "id": "H",
+      "label": {
+        "en": "Suspicious activity already happening"
+      },
+      "priority": 90,
+      "riskLevel": 4,
+      "affectedBy": {
+        "what_is_happening_now": ["transaction_issue", "login_alert", "account_issue", "device_issue"]
       }
     },
     {
@@ -77,28 +95,9 @@
         "en": "Not sure what happened"
       },
       "priority": 15,
+      "riskLevel": 1,
       "affectedBy": {
         "what_did_you_do": ["not_sure"]
-      }
-    },
-    {
-      "id": "W",
-      "label": {
-        "en": "More suspicious contact continuing"
-      },
-      "priority": 80,
-      "affectedBy": {
-        "what_is_happening_now": ["more_suspicious_contact"]
-      }
-    },
-    {
-      "id": "H",
-      "label": {
-        "en": "Suspicious activity already affecting money"
-      },
-      "priority": 90,
-      "affectedBy": {
-        "what_is_happening_now": ["transaction_issue"]
       }
     }
   ]
