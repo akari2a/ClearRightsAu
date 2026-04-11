@@ -2406,7 +2406,7 @@ button {
   font-weight: var(--font-weight-bold);
   line-height: 1.15;
   letter-spacing: -0.01em;
-  color: var(--color-brand-primary-600);
+  color: var(--color-text-primary);
 }
 
 .showcase-card__summary {
