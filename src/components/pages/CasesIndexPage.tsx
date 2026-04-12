@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { CaseCategoryTag } from "../case/CaseCategoryTag";
 import type { CaseIndexGroup, SuccessCase } from "../../types/case";
 import { InteractiveCardButton } from "../controls/InteractiveCardButton";
@@ -20,18 +21,53 @@ export function CasesIndexPage({
 }: CasesIndexPageProps) {
   const {
     activeFilter,
+    searchQuery,
     hasMoreCases,
     isLoading,
     loadingSentinelRef,
     masonryColumns,
-    handleFilterClick
+    handleFilterClick,
+    handleSearchChange
   } = useCasesIndexState(groups, cases);
+  const [searchDraft, setSearchDraft] = useState(searchQuery);
+
+  useEffect(() => {
+    setSearchDraft(searchQuery);
+  }, [searchQuery]);
 
   return (
     <section className="cases-index">
       <div className="cases-index__header">
         <h1 className="cases-index__title">{pageTitle}</h1>
         <p className="cases-index__description">{pageDescription}</p>
+
+        <form
+          className="cases-index__search"
+          onSubmit={(event) => {
+            event.preventDefault();
+            handleSearchChange(searchDraft);
+          }}
+        >
+          <div className="cases-index__search-field">
+            <span className="cases-index__search-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="7" />
+                <path d="M20 20l-3.5-3.5" />
+              </svg>
+            </span>
+            <input
+              id="cases-search"
+              type="search"
+              className="cases-index__search-input"
+              placeholder="Search by topic, category, or situation"
+              value={searchDraft}
+              onChange={(event) => setSearchDraft(event.target.value)}
+            />
+          </div>
+          <button type="submit" className="cases-index__search-button">
+            Search
+          </button>
+        </form>
         
         <div className="filter-chips-container" role="tablist" aria-label="Filter cases">
           <button
@@ -90,6 +126,21 @@ export function CasesIndexPage({
           </div>
         ))}
       </div>
+
+      {!isLoading && masonryColumns.every((column) => column.length === 0) ? (
+        <div className="cases-index__empty-state">
+          <div className="cases-index__empty-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="7" />
+              <path d="M20 20l-3.5-3.5" />
+            </svg>
+          </div>
+          <h2 className="cases-index__empty-title">No cases found</h2>
+          <p className="cases-index__empty-copy">
+            Try a different keyword or change the category filter.
+          </p>
+        </div>
+      ) : null}
 
       {hasMoreCases && (
         <div ref={loadingSentinelRef} className="cases-loading-sentinel" aria-hidden="true">
