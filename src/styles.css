@@ -3648,6 +3648,54 @@ button {
   text-align: right;
 }
 
+/* ── Thinking Indicator ── */
+
+.aibot-thinking {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  color: var(--color-brand-primary-500);
+  font-size: calc(14px * var(--font-scale-factor));
+  font-weight: var(--font-weight-medium);
+  animation: aibot-thinking-fade 2s ease-in-out infinite;
+}
+
+.aibot-thinking__icon {
+  display: flex;
+  animation: aibot-thinking-pulse 1.5s ease-in-out infinite;
+}
+
+.aibot-thinking__text {
+  letter-spacing: 0.02em;
+}
+
+.aibot-thinking__dots {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.aibot-thinking__dots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: aibot-dot-bounce 1.2s infinite ease-in-out;
+}
+
+.aibot-thinking__dots span:nth-child(2) { animation-delay: 0.15s; }
+.aibot-thinking__dots span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes aibot-thinking-fade {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+@keyframes aibot-thinking-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
 /* ── Typing Indicator ── */
 
 .aibot-typing {

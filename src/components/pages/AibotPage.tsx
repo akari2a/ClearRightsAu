@@ -25,11 +25,11 @@ function formatTime(timestamp: number): string {
 }
 
 export function AibotPage({ content, initialQuestion, onFallbackNavigate }: AibotPageProps) {
-  const { messages, input, setInput, sendMessage, isStreaming, status, error, clearMessages, stopGeneration, retryConnection } =
+  const { messages, input, setInput, sendMessage, isThinking, isStreaming, status, error, clearMessages, stopGeneration, retryConnection } =
     useOllamaChat();
 
   const initialSentRef = useRef(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const pageRef = useRef<HTMLDivElement>(null);
 
@@ -58,7 +58,13 @@ export function AibotPage({ content, initialQuestion, onFallbackNavigate }: Aibo
   }, [initialQuestion, status, sendMessage]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: isStreaming ? "auto" : "smooth" });
+    const el = messagesContainerRef.current;
+    if (!el) return;
+    if (isStreaming) {
+      el.scrollTop = el.scrollHeight;
+    } else {
+      el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+    }
   }, [messages, isStreaming]);
 
   const handleSend = useCallback(() => {
@@ -230,7 +236,7 @@ export function AibotPage({ content, initialQuestion, onFallbackNavigate }: Aibo
             </button>
           </div>
 
-          <div className="aibot-conversation__messages">
+          <div className="aibot-conversation__messages" ref={messagesContainerRef}>
             {messages.map((msg) => (
               <div
                 key={msg.id}
@@ -248,8 +254,19 @@ export function AibotPage({ content, initialQuestion, onFallbackNavigate }: Aibo
                     {msg.role === "assistant" ? (
                       msg.content ? (
                         <ChatMarkdown content={msg.content} />
+                      ) : isThinking ? (
+                        <span className="aibot-thinking" aria-label="Thinking">
+                          <span className="aibot-thinking__icon" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <circle cx="12" cy="12" r="10" />
+                              <path d="M12 6v6l4 2" />
+                            </svg>
+                          </span>
+                          <span className="aibot-thinking__text">Thinking</span>
+                          <span className="aibot-thinking__dots"><span /><span /><span /></span>
+                        </span>
                       ) : isStreaming ? (
-                        <span className="aibot-typing" aria-label="Thinking">
+                        <span className="aibot-typing" aria-label="Typing">
                           <span /><span /><span />
                         </span>
                       ) : null
@@ -272,7 +289,7 @@ export function AibotPage({ content, initialQuestion, onFallbackNavigate }: Aibo
               </div>
             ) : null}
 
-            <div ref={messagesEndRef} />
+            <div />
           </div>
 
           {/* Bottom input */}

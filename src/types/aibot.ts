@@ -26,4 +26,4 @@ export type ChatMessage = {
   createdAt: number;
 };
 
-export type OllamaStatus = "idle" | "connecting" | "streaming" | "error" | "offline";
+export type OllamaStatus = "idle" | "connecting" | "thinking" | "streaming" | "error" | "offline";
