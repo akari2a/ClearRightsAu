@@ -115,7 +115,6 @@ export function AibotPage({ content, initialQuestion, onFallbackNavigate }: Aibo
 
           {/* Input card */}
           <div className={`prompt-shell prompt-shell--aibot${isOffline ? " prompt-shell--disabled" : ""}`}>
-            <StatusDot status={status} />
             <div className="prompt-field">
               <input
                 ref={inputRef}
@@ -279,7 +278,6 @@ export function AibotPage({ content, initialQuestion, onFallbackNavigate }: Aibo
           {/* Bottom input */}
           <div className="aibot-conversation__input">
             <div className={`prompt-shell prompt-shell--aibot${isOffline ? " prompt-shell--disabled" : ""}`}>
-              <StatusDot status={status} />
               <div className="prompt-field">
                 <input
                   ref={inputRef}
