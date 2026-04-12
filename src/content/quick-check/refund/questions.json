@@ -3,85 +3,85 @@
   "questionFlow": [
     {
       "id": "what_kind_of_problem",
-      "title": { "en": "What kind of problem is this?" },
-      "description": { "en": "" },
+      "title": { "en": "What kind of problem is this?", "zh-Hans": "这属于哪一类问题？" },
+      "description": { "en": "", "zh-Hans": "" },
       "selectionMode": "single",
       "options": [
         {
           "id": "misleading_product",
-          "label": { "en": "The product or service was misleading or not what I was promised" }
+          "label": { "en": "The product or service was misleading or not what I was promised", "zh-Hans": "商品或服务具有误导性，或与承诺不符" }
         },
         {
           "id": "seller_unresolved",
-          "label": { "en": "I already asked the seller, but the issue is still not resolved" }
+          "label": { "en": "I already asked the seller, but the issue is still not resolved", "zh-Hans": "我已经联系过卖家，但问题仍未解决" }
         },
         {
           "id": "rental_bond",
-          "label": { "en": "Part of my rental bond was deducted for cleaning, damage, or property condition issues" }
+          "label": { "en": "Part of my rental bond was deducted for cleaning, damage, or property condition issues", "zh-Hans": "我的租房押金因清洁、损坏或房屋状况问题被扣掉了一部分" }
         },
         {
           "id": "not_sure",
-          "label": { "en": "I'm not sure" }
+          "label": { "en": "I'm not sure", "zh-Hans": "我不确定" }
         }
       ]
     },
     {
       "id": "what_have_you_done_so_far",
-      "title": { "en": "What have you done so far?" },
-      "description": { "en": "" },
+      "title": { "en": "What have you done so far?", "zh-Hans": "到目前为止你做了什么？" },
+      "description": { "en": "", "zh-Hans": "" },
       "selectionMode": "single",
       "options": [
         {
           "id": "not_contacted_yet",
-          "label": { "en": "I have not contacted the seller, landlord, or agent yet" }
+          "label": { "en": "I have not contacted the seller, landlord, or agent yet", "zh-Hans": "我还没有联系卖家、房东或中介" }
         },
         {
           "id": "contacted_once",
-          "label": { "en": "I contacted them once, but I did not get a clear answer" }
+          "label": { "en": "I contacted them once, but I did not get a clear answer", "zh-Hans": "我联系过一次，但没有得到明确答复" }
         },
         {
           "id": "already_followed_up",
-          "label": { "en": "I have already gone back and forth, but nothing is changing" }
+          "label": { "en": "I have already gone back and forth, but nothing is changing", "zh-Hans": "我已经反复沟通过，但情况没有变化" }
         },
         {
           "id": "clear_refusal_or_deduction",
-          "label": { "en": "They clearly refused, deducted money, or said they will not fix it" }
+          "label": { "en": "They clearly refused, deducted money, or said they will not fix it", "zh-Hans": "对方明确拒绝、扣了钱，或表示不会处理" }
         },
         {
           "id": "not_sure",
-          "label": { "en": "I'm not sure" }
+          "label": { "en": "I'm not sure", "zh-Hans": "我不确定" }
         }
       ]
     },
     {
       "id": "what_is_happening_now",
-      "title": { "en": "What is happening now?" },
-      "description": { "en": "" },
+      "title": { "en": "What is happening now?", "zh-Hans": "现在是什么情况？" },
+      "description": { "en": "", "zh-Hans": "" },
       "selectionMode": "single",
       "options": [
         {
           "id": "nothing_urgent",
-          "label": { "en": "Nothing urgent is happening right now" }
+          "label": { "en": "Nothing urgent is happening right now", "zh-Hans": "目前没有特别紧急的情况" }
         },
         {
           "id": "need_to_organise_evidence",
-          "label": { "en": "I need to organise my evidence" }
+          "label": { "en": "I need to organise my evidence", "zh-Hans": "我需要整理证据" }
         },
         {
           "id": "no_clear_reply_yet",
-          "label": { "en": "I am still waiting for a clear reply" }
+          "label": { "en": "I am still waiting for a clear reply", "zh-Hans": "我还在等待明确回复" }
         },
         {
           "id": "same_argument_or_refusal",
-          "label": { "en": "They keep repeating the same answer or refusing to help" }
+          "label": { "en": "They keep repeating the same answer or refusing to help", "zh-Hans": "对方一直重复同样的说法，或拒绝协助" }
         },
         {
           "id": "evidence_may_be_lost",
-          "label": { "en": "I am worried messages, receipts, or evidence may be lost" }
+          "label": { "en": "I am worried messages, receipts, or evidence may be lost", "zh-Hans": "我担心消息、收据或证据会丢失" }
         },
         {
           "id": "not_sure",
-          "label": { "en": "I'm not sure" }
+          "label": { "en": "I'm not sure", "zh-Hans": "我不确定" }
         }
       ]
     }

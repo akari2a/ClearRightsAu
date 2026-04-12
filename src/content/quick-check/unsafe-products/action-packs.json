@@ -3,61 +3,61 @@
   "actionPacks": [
     {
       "stageId": "P",
-      "resultTitle": { "en": "This product may be unsafe to use." },
-      "resultSummary": { "en": "The product seems dangerous, behaves unusually, or may cause harm." },
+      "resultTitle": { "en": "This product may be unsafe to use.", "zh-Hans": "这个产品使用起来可能不安全。" },
+      "resultSummary": { "en": "The product seems dangerous, behaves unusually, or may cause harm.", "zh-Hans": "这个产品看起来存在危险、表现异常，或可能造成伤害。" },
       "steps": [
         {
           "id": "p_stop",
           "kind": "step",
-          "summary": { "en": "Stop using the product immediately" },
+          "summary": { "en": "Stop using the product immediately", "zh-Hans": "立即停止使用该产品" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Stop using the product immediately." }
+            "text": { "en": "Stop using the product immediately.", "zh-Hans": "立即停止使用该产品。" }
           }
         },
         {
           "id": "p_move",
           "kind": "step",
-          "summary": { "en": "Move it away from children, bedding, or anything flammable if needed" },
+          "summary": { "en": "Move it away from children, bedding, or anything flammable if needed", "zh-Hans": "如有需要，将它移离儿童、床品或可燃物" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Move it away from children, bedding, or anything flammable if needed." }
+            "text": { "en": "Move it away from children, bedding, or anything flammable if needed.", "zh-Hans": "如有需要，将它移离儿童、床品或任何可燃物。" }
           }
         },
         {
           "id": "p_test",
           "kind": "step",
-          "summary": { "en": "Do not keep testing it repeatedly" },
+          "summary": { "en": "Do not keep testing it repeatedly", "zh-Hans": "不要反复测试它" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Do not keep testing it repeatedly." }
+            "text": { "en": "Do not keep testing it repeatedly.", "zh-Hans": "不要继续反复测试它。" }
           }
         },
         {
           "id": "p_photo",
           "kind": "step",
-          "summary": { "en": "Take photos or videos of the issue if it is safe to do so" },
+          "summary": { "en": "Take photos or videos of the issue if it is safe to do so", "zh-Hans": "如果安全的话，拍下问题的照片或视频" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Take photos or videos of the issue if it is safe to do so." }
+            "text": { "en": "Take photos or videos of the issue if it is safe to do so.", "zh-Hans": "如果这样做是安全的，拍下问题的照片或视频。" }
           }
         },
         {
           "id": "p_keep",
           "kind": "step",
-          "summary": { "en": "Keep the receipt, packaging, and product details" },
+          "summary": { "en": "Keep the receipt, packaging, and product details", "zh-Hans": "保留收据、包装和产品信息" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Keep the receipt, packaging, and product details." }
+            "text": { "en": "Keep the receipt, packaging, and product details.", "zh-Hans": "保留收据、包装和产品信息。" }
           }
         },
         {
           "id": "p_explain",
           "kind": "step",
-          "summary": { "en": "Be ready to explain clearly what happened" },
+          "summary": { "en": "Be ready to explain clearly what happened", "zh-Hans": "准备好清楚说明发生了什么" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Be ready to explain clearly what happened." }
+            "text": { "en": "Be ready to explain clearly what happened.", "zh-Hans": "准备好清楚说明发生了什么。" }
           }
         }
       ],
@@ -65,16 +65,16 @@
         {
           "id": "p_prepare_1",
           "kind": "step",
-          "summary": { "en": "Relevant evidence" },
+          "summary": { "en": "Relevant evidence", "zh-Hans": "相关证据" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{evidence}" },
+            "template": { "en": "{evidence}", "zh-Hans": "{evidence}" },
             "arguments": {
               "evidence": {
-                "default": { "en": "Gather the receipt or proof of purchase, packaging or label, photos or video of the issue, and a short note about when and how the problem happened." },
+                "default": { "en": "Gather the receipt or proof of purchase, packaging or label, photos or video of the issue, and a short note about when and how the problem happened.", "zh-Hans": "收集收据或购买凭证、包装或标签、问题照片或视频，以及问题何时、如何发生的简短记录。" },
                 "fromQuestion": "what_seems_wrong",
                 "map": {
-                  "unsafe": { "en": "Gather the receipt or proof of purchase, packaging or label, photos or video of the issue, and a short note about when and how the problem happened." }
+                  "unsafe": { "en": "Gather the receipt or proof of purchase, packaging or label, photos or video of the issue, and a short note about when and how the problem happened.", "zh-Hans": "收集收据或购买凭证、包装或标签、问题照片或视频，以及问题何时、如何发生的简短记录。" }
                 }
               }
             }
@@ -85,75 +85,75 @@
         {
           "id": "p_help_1",
           "kind": "step",
-          "summary": { "en": "Seller" },
-          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+          "summary": { "en": "Seller", "zh-Hans": "卖家" },
+          "content": { "type": "plain_text", "text": { "en": "Seller", "zh-Hans": "卖家" } }
         },
         {
           "id": "p_help_2",
           "kind": "step",
-          "summary": { "en": "Refund, replacement, or complaint pathway" },
-          "content": { "type": "plain_text", "text": { "en": "Refund, replacement, or complaint pathway" } }
+          "summary": { "en": "Refund, replacement, or complaint pathway", "zh-Hans": "退款、更换或投诉途径" },
+          "content": { "type": "plain_text", "text": { "en": "Refund, replacement, or complaint pathway", "zh-Hans": "退款、更换或投诉途径" } }
         }
       ]
     },
 
     {
       "stageId": "Q",
-      "resultTitle": { "en": "This looks like a product quality or defect concern." },
-      "resultSummary": { "en": "The product may be faulty, poor quality, damaged, or not working as expected." },
+      "resultTitle": { "en": "This looks like a product quality or defect concern.", "zh-Hans": "这看起来像是产品质量或故障问题。" },
+      "resultSummary": { "en": "The product may be faulty, poor quality, damaged, or not working as expected.", "zh-Hans": "这个产品可能存在故障、质量差、损坏，或无法正常工作。" },
       "steps": [
         {
           "id": "q_identify",
           "kind": "step",
-          "summary": { "en": "Work out exactly what seems wrong" },
+          "summary": { "en": "Work out exactly what seems wrong", "zh-Hans": "先弄清楚具体出了什么问题" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Work out exactly what seems wrong." }
+            "text": { "en": "Work out exactly what seems wrong.", "zh-Hans": "先弄清楚具体出了什么问题。" }
           }
         },
         {
           "id": "q_stop",
           "kind": "step",
-          "summary": { "en": "Stop using it first if there may be any risk" },
+          "summary": { "en": "Stop using it first if there may be any risk", "zh-Hans": "如果存在任何风险，先停止使用" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Stop using it first if there may be any risk." }
+            "text": { "en": "Stop using it first if there may be any risk.", "zh-Hans": "如果存在任何风险，先停止使用它。" }
           }
         },
         {
           "id": "q_gather",
           "kind": "step",
-          "summary": { "en": "Gather your evidence before contacting the seller" },
+          "summary": { "en": "Gather your evidence before contacting the seller", "zh-Hans": "联系卖家前先收集证据" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Gather your evidence before contacting the seller." }
+            "text": { "en": "Gather your evidence before contacting the seller.", "zh-Hans": "联系卖家前先把证据准备好。" }
           }
         },
         {
           "id": "q_note",
           "kind": "step",
-          "summary": { "en": "Write down what happened in simple terms" },
+          "summary": { "en": "Write down what happened in simple terms", "zh-Hans": "用简单的话写下发生了什么" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Write down what happened in simple terms." }
+            "text": { "en": "Write down what happened in simple terms.", "zh-Hans": "用简单的话写下发生了什么。" }
           }
         },
         {
           "id": "q_ask",
           "kind": "step",
-          "summary": { "en": "Ask the seller clearly whether they can inspect, replace, or refund the product" },
+          "summary": { "en": "Ask the seller clearly whether they can inspect, replace, or refund the product", "zh-Hans": "明确询问卖家是否会检查、更换或退款" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Ask the seller clearly whether they can inspect, replace, or refund the product." }
+            "text": { "en": "Ask the seller clearly whether they can inspect, replace, or refund the product.", "zh-Hans": "明确询问卖家是否会检查、更换或退款。" }
           }
         },
         {
           "id": "q_keep",
           "kind": "step",
-          "summary": { "en": "Keep their reply if it is vague or dismissive" },
+          "summary": { "en": "Keep their reply if it is vague or dismissive", "zh-Hans": "保存对方含糊或敷衍的回复" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Keep their reply if it is vague or dismissive." }
+            "text": { "en": "Keep their reply if it is vague or dismissive.", "zh-Hans": "如果对方回复含糊或敷衍，请保存下来。" }
           }
         }
       ],
@@ -161,16 +161,16 @@
         {
           "id": "q_prepare_1",
           "kind": "step",
-          "summary": { "en": "Relevant evidence" },
+          "summary": { "en": "Relevant evidence", "zh-Hans": "相关证据" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{evidence}" },
+            "template": { "en": "{evidence}", "zh-Hans": "{evidence}" },
             "arguments": {
               "evidence": {
-                "default": { "en": "Gather the receipt, product photos, packaging or label details, and notes on what happened and when." },
+                "default": { "en": "Gather the receipt, product photos, packaging or label details, and notes on what happened and when.", "zh-Hans": "收集收据、产品照片、包装或标签信息，以及关于何时发生、发生了什么的记录。" },
                 "fromQuestion": "what_seems_wrong",
                 "map": {
-                  "quality_or_fault": { "en": "Gather the receipt, product photos, packaging or label details, and notes on what happened and when." }
+                  "quality_or_fault": { "en": "Gather the receipt, product photos, packaging or label details, and notes on what happened and when.", "zh-Hans": "收集收据、产品照片、包装或标签信息，以及关于何时发生、发生了什么的记录。" }
                 }
               }
             }
@@ -181,66 +181,66 @@
         {
           "id": "q_help_1",
           "kind": "step",
-          "summary": { "en": "Seller" },
-          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+          "summary": { "en": "Seller", "zh-Hans": "卖家" },
+          "content": { "type": "plain_text", "text": { "en": "Seller", "zh-Hans": "卖家" } }
         },
         {
           "id": "q_help_2",
           "kind": "step",
-          "summary": { "en": "Refund, replacement, or complaint pathway" },
-          "content": { "type": "plain_text", "text": { "en": "Refund, replacement, or complaint pathway" } }
+          "summary": { "en": "Refund, replacement, or complaint pathway", "zh-Hans": "退款、更换或投诉途径" },
+          "content": { "type": "plain_text", "text": { "en": "Refund, replacement, or complaint pathway", "zh-Hans": "退款、更换或投诉途径" } }
         }
       ]
     },
 
     {
       "stageId": "U",
-      "resultTitle": { "en": "You are not sure whether this is a safety issue or a quality problem." },
-      "resultSummary": { "en": "That is okay. Start by treating any possible risk seriously and gathering the facts." },
+      "resultTitle": { "en": "You are not sure whether this is a safety issue or a quality problem.", "zh-Hans": "您还不确定这是安全问题还是质量问题。" },
+      "resultSummary": { "en": "That is okay. Start by treating any possible risk seriously and gathering the facts.", "zh-Hans": "没关系，先认真对待任何可能的风险，并把事实整理清楚。" },
       "steps": [
         {
           "id": "u_stop",
           "kind": "step",
-          "summary": { "en": "If there may be any risk, stop using the product first" },
+          "summary": { "en": "If there may be any risk, stop using the product first", "zh-Hans": "如果存在任何风险，先停止使用产品" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "If there may be any risk, stop using the product first." }
+            "text": { "en": "If there may be any risk, stop using the product first.", "zh-Hans": "如果存在任何风险，先停止使用产品。" }
           }
         },
         {
           "id": "u_gather",
           "kind": "step",
-          "summary": { "en": "Gather your receipt, packaging, photos, videos, and notes" },
+          "summary": { "en": "Gather your receipt, packaging, photos, videos, and notes", "zh-Hans": "收集收据、包装、照片、视频和记录" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Gather your receipt, packaging, photos, videos, and notes." }
+            "text": { "en": "Gather your receipt, packaging, photos, videos, and notes.", "zh-Hans": "收集收据、包装、照片、视频和记录。" }
           }
         },
         {
           "id": "u_write",
           "kind": "step",
-          "summary": { "en": "Write down what feels wrong and when it happened" },
+          "summary": { "en": "Write down what feels wrong and when it happened", "zh-Hans": "写下哪里不对，以及何时发生" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Write down what feels wrong and when it happened." }
+            "text": { "en": "Write down what feels wrong and when it happened.", "zh-Hans": "写下哪里不对，以及问题何时发生。" }
           }
         },
         {
           "id": "u_contact",
           "kind": "step",
-          "summary": { "en": "Start by asking the seller clearly what they will do to inspect, replace, or refund it" },
+          "summary": { "en": "Start by asking the seller clearly what they will do to inspect, replace, or refund it", "zh-Hans": "先明确询问卖家会如何检查、更换或退款" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Start by asking the seller clearly what they will do to inspect, replace, or refund it." }
+            "text": { "en": "Start by asking the seller clearly what they will do to inspect, replace, or refund it.", "zh-Hans": "先明确询问卖家会如何检查、更换或退款。" }
           }
         },
         {
           "id": "u_written",
           "kind": "step",
-          "summary": { "en": "Keep everything in writing as much as possible" },
+          "summary": { "en": "Keep everything in writing as much as possible", "zh-Hans": "尽量保留书面记录" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Keep everything in writing as much as possible." }
+            "text": { "en": "Keep everything in writing as much as possible.", "zh-Hans": "尽量把所有沟通保留成书面记录。" }
           }
         }
       ],
@@ -248,17 +248,17 @@
         {
           "id": "u_prepare_1",
           "kind": "step",
-          "summary": { "en": "Relevant evidence" },
+          "summary": { "en": "Relevant evidence", "zh-Hans": "相关证据" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{evidence}" },
+            "template": { "en": "{evidence}", "zh-Hans": "{evidence}" },
             "arguments": {
               "evidence": {
-                "default": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have." },
+                "default": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have.", "zh-Hans": "收集您目前还保留的任何收据、包装、照片、视频和记录。" },
                 "fromQuestion": "what_seems_wrong",
                 "map": {
-                  "uncertain_type": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have." },
-                  "not_sure": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have." }
+                  "uncertain_type": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have.", "zh-Hans": "收集您目前还保留的任何收据、包装、照片、视频和记录。" },
+                  "not_sure": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have.", "zh-Hans": "收集您目前还保留的任何收据、包装、照片、视频和记录。" }
                 }
               }
             }
@@ -269,57 +269,57 @@
         {
           "id": "u_help_1",
           "kind": "step",
-          "summary": { "en": "Seller" },
-          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+          "summary": { "en": "Seller", "zh-Hans": "卖家" },
+          "content": { "type": "plain_text", "text": { "en": "Seller", "zh-Hans": "卖家" } }
         },
         {
           "id": "u_help_2",
           "kind": "step",
-          "summary": { "en": "Refund, replacement, or complaint pathway" },
-          "content": { "type": "plain_text", "text": { "en": "Refund, replacement, or complaint pathway" } }
+          "summary": { "en": "Refund, replacement, or complaint pathway", "zh-Hans": "退款、更换或投诉途径" },
+          "content": { "type": "plain_text", "text": { "en": "Refund, replacement, or complaint pathway", "zh-Hans": "退款、更换或投诉途径" } }
         }
       ]
     },
 
     {
       "stageId": "S",
-      "resultTitle": { "en": "Safety comes first." },
-      "resultSummary": { "en": "If the product may still be unsafe, deal with the safety risk before anything else." },
+      "resultTitle": { "en": "Safety comes first.", "zh-Hans": "安全应当放在第一位。" },
+      "resultSummary": { "en": "If the product may still be unsafe, deal with the safety risk before anything else.", "zh-Hans": "如果产品仍然可能存在安全风险，请先处理安全问题，再考虑其他步骤。" },
       "steps": [
         {
           "id": "s_stop",
           "kind": "step",
-          "summary": { "en": "Stop using the product immediately" },
+          "summary": { "en": "Stop using the product immediately", "zh-Hans": "立即停止使用该产品" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Stop using the product immediately." }
+            "text": { "en": "Stop using the product immediately.", "zh-Hans": "立即停止使用该产品。" }
           }
         },
         {
           "id": "s_move",
           "kind": "step",
-          "summary": { "en": "Move it away from anything flammable if needed" },
+          "summary": { "en": "Move it away from anything flammable if needed", "zh-Hans": "如有需要，将它移离任何可燃物" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Move it away from anything flammable if needed." }
+            "text": { "en": "Move it away from anything flammable if needed.", "zh-Hans": "如有需要，将它移离任何可燃物。" }
           }
         },
         {
           "id": "s_test",
           "kind": "step",
-          "summary": { "en": "Do not keep testing it" },
+          "summary": { "en": "Do not keep testing it", "zh-Hans": "不要继续反复测试它" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Do not keep testing it." }
+            "text": { "en": "Do not keep testing it.", "zh-Hans": "不要继续反复测试它。" }
           }
         },
         {
           "id": "s_photo",
           "kind": "step",
-          "summary": { "en": "Only take photos or videos if it is safe to do so" },
+          "summary": { "en": "Only take photos or videos if it is safe to do so", "zh-Hans": "只有在安全的前提下才拍照或录像" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Only take photos or videos if it is safe to do so." }
+            "text": { "en": "Only take photos or videos if it is safe to do so.", "zh-Hans": "只有在这样做是安全的情况下，才拍照或录像。" }
           }
         }
       ],
@@ -327,50 +327,50 @@
         {
           "id": "s_prepare_1",
           "kind": "step",
-          "summary": { "en": "Basic evidence of what happened" },
-          "content": { "type": "plain_text", "text": { "en": "Basic evidence of what happened" } }
+          "summary": { "en": "Basic evidence of what happened", "zh-Hans": "发生情况的基础证据" },
+          "content": { "type": "plain_text", "text": { "en": "Basic evidence of what happened", "zh-Hans": "发生情况的基础证据" } }
         }
       ],
       "help": [
         {
           "id": "s_help_1",
           "kind": "step",
-          "summary": { "en": "Seller" },
-          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+          "summary": { "en": "Seller", "zh-Hans": "卖家" },
+          "content": { "type": "plain_text", "text": { "en": "Seller", "zh-Hans": "卖家" } }
         }
       ]
     },
 
     {
       "stageId": "E",
-      "resultTitle": { "en": "Save and organise your evidence now." },
-      "resultSummary": { "en": "Your photos, receipts, packaging, and notes may be important for the next step." },
+      "resultTitle": { "en": "Save and organise your evidence now.", "zh-Hans": "现在就把证据保存并整理好。" },
+      "resultSummary": { "en": "Your photos, receipts, packaging, and notes may be important for the next step.", "zh-Hans": "你的照片、收据、包装和记录可能会对下一步非常重要。" },
       "steps": [
         {
           "id": "e_put",
           "kind": "step",
-          "summary": { "en": "Put your receipt, packaging, photos, videos, and notes in one place" },
+          "summary": { "en": "Put your receipt, packaging, photos, videos, and notes in one place", "zh-Hans": "把收据、包装、照片、视频和记录整理到一起" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Put your receipt, packaging, photos, videos, and notes in one place." }
+            "text": { "en": "Put your receipt, packaging, photos, videos, and notes in one place.", "zh-Hans": "把收据、包装、照片、视频和记录整理到一个地方。" }
           }
         },
         {
           "id": "e_write",
           "kind": "step",
-          "summary": { "en": "Write down when and how the problem happened" },
+          "summary": { "en": "Write down when and how the problem happened", "zh-Hans": "写下问题是在何时、如何发生的" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Write down when and how the problem happened." }
+            "text": { "en": "Write down when and how the problem happened.", "zh-Hans": "写下问题是在何时、如何发生的。" }
           }
         },
         {
           "id": "e_save_reply",
           "kind": "step",
-          "summary": { "en": "Save anything the seller has already said" },
+          "summary": { "en": "Save anything the seller has already said", "zh-Hans": "保存卖家已经说过的内容" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Save anything the seller has already said." }
+            "text": { "en": "Save anything the seller has already said.", "zh-Hans": "保存卖家已经说过的内容。" }
           }
         }
       ],
@@ -378,19 +378,19 @@
         {
           "id": "e_prepare_1",
           "kind": "step",
-          "summary": { "en": "Relevant evidence" },
+          "summary": { "en": "Relevant evidence", "zh-Hans": "相关证据" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{evidence}" },
+            "template": { "en": "{evidence}", "zh-Hans": "{evidence}" },
             "arguments": {
               "evidence": {
-                "default": { "en": "Put your receipt, photos, packaging, and notes in one place." },
+                "default": { "en": "Put your receipt, photos, packaging, and notes in one place.", "zh-Hans": "把收据、照片、包装和记录整理到一个地方。" },
                 "fromQuestion": "what_seems_wrong",
                 "map": {
-                  "unsafe": { "en": "Gather the receipt or proof of purchase, packaging or label, photos or video of the issue, and a short note about when and how the problem happened." },
-                  "quality_or_fault": { "en": "Gather the receipt, product photos, packaging or label details, and notes on what happened and when." },
-                  "uncertain_type": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have." },
-                  "not_sure": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have." }
+                  "unsafe": { "en": "Gather the receipt or proof of purchase, packaging or label, photos or video of the issue, and a short note about when and how the problem happened.", "zh-Hans": "收集收据或购买凭证、包装或标签、问题照片或视频，以及问题何时、如何发生的简短记录。" },
+                  "quality_or_fault": { "en": "Gather the receipt, product photos, packaging or label details, and notes on what happened and when.", "zh-Hans": "收集收据、产品照片、包装或标签信息，以及关于何时发生、发生了什么的记录。" },
+                  "uncertain_type": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have.", "zh-Hans": "收集您目前还保留的任何收据、包装、照片、视频和记录。" },
+                  "not_sure": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have.", "zh-Hans": "收集您目前还保留的任何收据、包装、照片、视频和记录。" }
                 }
               }
             }
@@ -401,51 +401,51 @@
         {
           "id": "e_help_1",
           "kind": "step",
-          "summary": { "en": "Seller" },
-          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+          "summary": { "en": "Seller", "zh-Hans": "卖家" },
+          "content": { "type": "plain_text", "text": { "en": "Seller", "zh-Hans": "卖家" } }
         }
       ]
     },
 
     {
       "stageId": "W",
-      "resultTitle": { "en": "You may still need one clear follow-up." },
-      "resultSummary": { "en": "You have contacted the seller, but you still do not have a clear answer." },
+      "resultTitle": { "en": "You may still need one clear follow-up.", "zh-Hans": "你可能还需要进行一次明确的跟进。" },
+      "resultSummary": { "en": "You have contacted the seller, but you still do not have a clear answer.", "zh-Hans": "你已经联系过卖家，但仍然没有得到明确答复。" },
       "steps": [
         {
           "id": "w_ask",
           "kind": "step",
-          "summary": { "en": "Ask for a clear written reply" },
+          "summary": { "en": "Ask for a clear written reply", "zh-Hans": "要求对方给出明确的书面回复" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Ask for a clear written reply." }
+            "text": { "en": "Ask for a clear written reply.", "zh-Hans": "要求对方给出明确的书面回复。" }
           }
         },
         {
           "id": "w_state",
           "kind": "step",
-          "summary": { "en": "State the problem clearly in simple words" },
+          "summary": { "en": "State the problem clearly in simple words", "zh-Hans": "用简单清楚的话说明问题" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "State the problem clearly in simple words." }
+            "text": { "en": "State the problem clearly in simple words.", "zh-Hans": "用简单清楚的话说明问题。" }
           }
         },
         {
           "id": "w_request",
           "kind": "step",
-          "summary": { "en": "Ask whether the seller will inspect, replace, or refund the product" },
+          "summary": { "en": "Ask whether the seller will inspect, replace, or refund the product", "zh-Hans": "询问卖家是否会检查、更换或退款" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Ask whether the seller will inspect, replace, or refund the product." }
+            "text": { "en": "Ask whether the seller will inspect, replace, or refund the product.", "zh-Hans": "询问卖家是否会检查、更换或退款。" }
           }
         },
         {
           "id": "w_save",
           "kind": "step",
-          "summary": { "en": "Save any vague or dismissive reply" },
+          "summary": { "en": "Save any vague or dismissive reply", "zh-Hans": "保存任何含糊或敷衍的回复" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Save any vague or dismissive reply." }
+            "text": { "en": "Save any vague or dismissive reply.", "zh-Hans": "保存任何含糊或敷衍的回复。" }
           }
         }
       ],
@@ -453,65 +453,65 @@
         {
           "id": "w_prepare_1",
           "kind": "step",
-          "summary": { "en": "Chat history, emails, or message record" },
-          "content": { "type": "plain_text", "text": { "en": "Chat history, emails, or message record" } }
+          "summary": { "en": "Chat history, emails, or message record", "zh-Hans": "聊天记录、邮件或消息记录" },
+          "content": { "type": "plain_text", "text": { "en": "Chat history, emails, or message record", "zh-Hans": "聊天记录、邮件或消息记录" } }
         }
       ],
       "help": [
         {
           "id": "w_help_1",
           "kind": "step",
-          "summary": { "en": "Seller" },
-          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+          "summary": { "en": "Seller", "zh-Hans": "卖家" },
+          "content": { "type": "plain_text", "text": { "en": "Seller", "zh-Hans": "卖家" } }
         },
         {
           "id": "w_help_2",
           "kind": "step",
-          "summary": { "en": "Refund, replacement, or complaint pathway" },
-          "content": { "type": "plain_text", "text": { "en": "Refund, replacement, or complaint pathway" } }
+          "summary": { "en": "Refund, replacement, or complaint pathway", "zh-Hans": "退款、更换或投诉途径" },
+          "content": { "type": "plain_text", "text": { "en": "Refund, replacement, or complaint pathway", "zh-Hans": "退款、更换或投诉途径" } }
         }
       ]
     },
 
     {
       "stageId": "H",
-      "resultTitle": { "en": "This may need the next refund or complaint step." },
-      "resultSummary": { "en": "The seller has dismissed the issue or the problem still has not been resolved." },
+      "resultTitle": { "en": "This may need the next refund or complaint step.", "zh-Hans": "这件事可能需要进入下一步退款或投诉程序。" },
+      "resultSummary": { "en": "The seller has dismissed the issue or the problem still has not been resolved.", "zh-Hans": "卖家淡化了这个问题，或问题至今仍未解决。" },
       "steps": [
         {
           "id": "h_stop",
           "kind": "step",
-          "summary": { "en": "Do not keep repeating the same argument unless you have new evidence" },
+          "summary": { "en": "Do not keep repeating the same argument unless you have new evidence", "zh-Hans": "除非有新证据，否则不要重复同样的说法" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Do not keep repeating the same argument unless you have new evidence." }
+            "text": { "en": "Do not keep repeating the same argument unless you have new evidence.", "zh-Hans": "除非你有新的证据，否则不要重复同样的说法。" }
           }
         },
         {
           "id": "h_save",
           "kind": "step",
-          "summary": { "en": "Save the seller's response" },
+          "summary": { "en": "Save the seller's response", "zh-Hans": "保存卖家的回复" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Save the seller's response." }
+            "text": { "en": "Save the seller's response.", "zh-Hans": "保存卖家的回复。" }
           }
         },
         {
           "id": "h_written",
           "kind": "step",
-          "summary": { "en": "Ask for a clear written reply if needed" },
+          "summary": { "en": "Ask for a clear written reply if needed", "zh-Hans": "如有需要，要求对方给出明确书面回复" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Ask for a clear written reply if needed." }
+            "text": { "en": "Ask for a clear written reply if needed.", "zh-Hans": "如有需要，要求对方给出明确的书面回复。" }
           }
         },
         {
           "id": "h_prepare",
           "kind": "step",
-          "summary": { "en": "Prepare your documents for the next refund, replacement, or complaint step" },
+          "summary": { "en": "Prepare your documents for the next refund, replacement, or complaint step", "zh-Hans": "为下一步退款、更换或投诉整理文件" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Prepare your documents for the next refund, replacement, or complaint step." }
+            "text": { "en": "Prepare your documents for the next refund, replacement, or complaint step.", "zh-Hans": "为下一步退款、更换或投诉整理好文件。" }
           }
         }
       ],
@@ -519,27 +519,27 @@
         {
           "id": "h_prepare_1",
           "kind": "step",
-          "summary": { "en": "All receipts, packaging, photos, notes, and seller replies" },
-          "content": { "type": "plain_text", "text": { "en": "All receipts, packaging, photos, notes, and seller replies" } }
+          "summary": { "en": "All receipts, packaging, photos, notes, and seller replies", "zh-Hans": "所有收据、包装、照片、记录和卖家回复" },
+          "content": { "type": "plain_text", "text": { "en": "All receipts, packaging, photos, notes, and seller replies", "zh-Hans": "所有收据、包装、照片、记录和卖家回复" } }
         }
       ],
       "help": [
         {
           "id": "h_help_1",
           "kind": "step",
-          "summary": { "en": "Refund, replacement, or complaint pathway" },
+          "summary": { "en": "Refund, replacement, or complaint pathway", "zh-Hans": "退款、更换或投诉途径" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{help}" },
+            "template": { "en": "{help}", "zh-Hans": "{help}" },
             "arguments": {
               "help": {
-                "default": { "en": "Refund, replacement, or complaint pathway" },
+                "default": { "en": "Refund, replacement, or complaint pathway", "zh-Hans": "退款、更换或投诉途径" },
                 "fromQuestion": "what_seems_wrong",
                 "map": {
-                  "unsafe": { "en": "Refund, replacement, or complaint pathway" },
-                  "quality_or_fault": { "en": "Refund, replacement, or complaint pathway" },
-                  "uncertain_type": { "en": "Refund, replacement, or complaint pathway" },
-                  "not_sure": { "en": "Refund, replacement, or complaint pathway" }
+                  "unsafe": { "en": "Refund, replacement, or complaint pathway", "zh-Hans": "退款、更换或投诉途径" },
+                  "quality_or_fault": { "en": "Refund, replacement, or complaint pathway", "zh-Hans": "退款、更换或投诉途径" },
+                  "uncertain_type": { "en": "Refund, replacement, or complaint pathway", "zh-Hans": "退款、更换或投诉途径" },
+                  "not_sure": { "en": "Refund, replacement, or complaint pathway", "zh-Hans": "退款、更换或投诉途径" }
                 }
               }
             }
@@ -550,25 +550,25 @@
 
     {
       "stageId": "C",
-      "resultTitle": { "en": "Start with one clear seller contact." },
-      "resultSummary": { "en": "You have stopped using the product, but you have not clearly contacted the seller yet." },
+      "resultTitle": { "en": "Start with one clear seller contact.", "zh-Hans": "先进行一次明确的卖家联系。" },
+      "resultSummary": { "en": "You have stopped using the product, but you have not clearly contacted the seller yet.", "zh-Hans": "你已经停止使用该产品，但还没有清楚明确地联系卖家。" },
       "steps": [
         {
           "id": "c_gather",
           "kind": "step",
-          "summary": { "en": "Put your evidence together first" },
+          "summary": { "en": "Put your evidence together first", "zh-Hans": "先把证据整理好" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{evidence}" },
+            "template": { "en": "{evidence}", "zh-Hans": "{evidence}" },
             "arguments": {
               "evidence": {
-                "default": { "en": "Put your receipt, photos, packaging, and notes in one place." },
+                "default": { "en": "Put your receipt, photos, packaging, and notes in one place.", "zh-Hans": "把收据、照片、包装和记录整理到一个地方。" },
                 "fromQuestion": "what_seems_wrong",
                 "map": {
-                  "unsafe": { "en": "Gather the receipt or proof of purchase, packaging or label, photos or video of the issue, and a short note about when and how the problem happened." },
-                  "quality_or_fault": { "en": "Gather the receipt, product photos, packaging or label details, and notes on what happened and when." },
-                  "uncertain_type": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have." },
-                  "not_sure": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have." }
+                  "unsafe": { "en": "Gather the receipt or proof of purchase, packaging or label, photos or video of the issue, and a short note about when and how the problem happened.", "zh-Hans": "收集收据或购买凭证、包装或标签、问题照片或视频，以及问题何时、如何发生的简短记录。" },
+                  "quality_or_fault": { "en": "Gather the receipt, product photos, packaging or label details, and notes on what happened and when.", "zh-Hans": "收集收据、产品照片、包装或标签信息，以及关于何时发生、发生了什么的记录。" },
+                  "uncertain_type": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have.", "zh-Hans": "收集您目前还保留的任何收据、包装、照片、视频和记录。" },
+                  "not_sure": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have.", "zh-Hans": "收集您目前还保留的任何收据、包装、照片、视频和记录。" }
                 }
               }
             }
@@ -577,28 +577,28 @@
         {
           "id": "c_decide",
           "kind": "step",
-          "summary": { "en": "Decide what you want to ask for before contacting the seller" },
+          "summary": { "en": "Decide what you want to ask for before contacting the seller", "zh-Hans": "联系卖家前先明确自己想提出什么要求" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Decide what you want to ask for before contacting the seller." }
+            "text": { "en": "Decide what you want to ask for before contacting the seller.", "zh-Hans": "联系卖家之前，先明确自己想提出什么要求。" }
           }
         },
         {
           "id": "c_contact",
           "kind": "step",
-          "summary": { "en": "Contact the seller clearly and explain what happened" },
+          "summary": { "en": "Contact the seller clearly and explain what happened", "zh-Hans": "清楚联系卖家并说明发生了什么" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{contact}" },
+            "template": { "en": "{contact}", "zh-Hans": "{contact}" },
             "arguments": {
               "contact": {
-                "default": { "en": "Contact the seller clearly and explain what happened." },
+                "default": { "en": "Contact the seller clearly and explain what happened.", "zh-Hans": "清楚联系卖家并说明发生了什么。" },
                 "fromQuestion": "what_seems_wrong",
                 "map": {
-                  "unsafe": { "en": "Contact the seller clearly, explain what happened, and say why you are worried the product may be unsafe." },
-                  "quality_or_fault": { "en": "Contact the seller clearly and ask whether they will inspect, replace, or refund the product." },
-                  "uncertain_type": { "en": "Contact the seller clearly, explain what feels wrong, and ask what they will do next." },
-                  "not_sure": { "en": "Contact the seller clearly, explain what feels wrong, and ask what they will do next." }
+                  "unsafe": { "en": "Contact the seller clearly, explain what happened, and say why you are worried the product may be unsafe.", "zh-Hans": "清楚联系卖家，说明发生了什么，并解释你为何担心该产品可能不安全。" },
+                  "quality_or_fault": { "en": "Contact the seller clearly and ask whether they will inspect, replace, or refund the product.", "zh-Hans": "清楚联系卖家，并询问对方是否会检查、更换或退款。" },
+                  "uncertain_type": { "en": "Contact the seller clearly, explain what feels wrong, and ask what they will do next.", "zh-Hans": "清楚联系卖家，说明哪里感觉不对，并询问对方接下来会怎么处理。" },
+                  "not_sure": { "en": "Contact the seller clearly, explain what feels wrong, and ask what they will do next.", "zh-Hans": "清楚联系卖家，说明哪里感觉不对，并询问对方接下来会怎么处理。" }
                 }
               }
             }
@@ -609,16 +609,16 @@
         {
           "id": "c_prepare_1",
           "kind": "step",
-          "summary": { "en": "Your main evidence" },
-          "content": { "type": "plain_text", "text": { "en": "Your main evidence" } }
+          "summary": { "en": "Your main evidence", "zh-Hans": "主要证据" },
+          "content": { "type": "plain_text", "text": { "en": "Your main evidence", "zh-Hans": "主要证据" } }
         }
       ],
       "help": [
         {
           "id": "c_help_1",
           "kind": "step",
-          "summary": { "en": "Seller" },
-          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+          "summary": { "en": "Seller", "zh-Hans": "卖家" },
+          "content": { "type": "plain_text", "text": { "en": "Seller", "zh-Hans": "卖家" } }
         }
       ]
     }

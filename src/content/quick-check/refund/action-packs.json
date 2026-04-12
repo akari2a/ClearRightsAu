@@ -3,52 +3,52 @@
   "actionPacks": [
     {
       "stageId": "M",
-      "resultTitle": { "en": "This looks like a misleading product information issue." },
-      "resultSummary": { "en": "The product or service may not match what was promised, shown, or labelled." },
+      "resultTitle": { "en": "This looks like a misleading product information issue.", "zh-Hans": "这看起来像是商品信息误导的问题。" },
+      "resultSummary": { "en": "The product or service may not match what was promised, shown, or labelled.", "zh-Hans": "商品或服务可能与承诺、展示或标签描述不一致。" },
       "steps": [
         {
           "id": "m_compare",
           "kind": "step",
-          "summary": { "en": "Compare what was shown or promised with what you actually received" },
+          "summary": { "en": "Compare what was shown or promised with what you actually received", "zh-Hans": "对比展示或承诺内容与实际收到的商品" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Compare what was shown or promised with what you actually received." }
+            "text": { "en": "Compare what was shown or promised with what you actually received.", "zh-Hans": "把展示或承诺的内容，与您实际收到的商品或服务进行对比。" }
           }
         },
         {
           "id": "m_photos",
           "kind": "step",
-          "summary": { "en": "Take clear photos of the product and anything misleading" },
+          "summary": { "en": "Take clear photos of the product and anything misleading", "zh-Hans": "拍下商品及误导性内容的清晰照片" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Take clear photos of the product, label, packaging, and anything that seems misleading." }
+            "text": { "en": "Take clear photos of the product, label, packaging, and anything that seems misleading.", "zh-Hans": "拍下商品、标签、包装，以及任何看起来具有误导性的内容。" }
           }
         },
         {
           "id": "m_receipt",
           "kind": "step",
-          "summary": { "en": "Keep the receipt or order details" },
+          "summary": { "en": "Keep the receipt or order details", "zh-Hans": "保留收据或订单信息" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Keep the receipt or order details." }
+            "text": { "en": "Keep the receipt or order details.", "zh-Hans": "保留收据或订单详情。" }
           }
         },
         {
           "id": "m_explain",
           "kind": "step",
-          "summary": { "en": "Be ready to explain exactly what was misleading" },
+          "summary": { "en": "Be ready to explain exactly what was misleading", "zh-Hans": "准备好明确说明哪里具有误导性" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Be ready to explain exactly what was misleading." }
+            "text": { "en": "Be ready to explain exactly what was misleading.", "zh-Hans": "准备好准确说明，哪一部分让您觉得具有误导性。" }
           }
         },
         {
           "id": "m_request",
           "kind": "step",
-          "summary": { "en": "Decide whether you want a refund or replacement" },
+          "summary": { "en": "Decide whether you want a refund or replacement", "zh-Hans": "先决定自己想要退款还是更换" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Decide whether you want a refund or replacement before contacting the seller." }
+            "text": { "en": "Decide whether you want a refund or replacement before contacting the seller.", "zh-Hans": "在联系卖家之前，先想清楚您想要退款还是更换。" }
           }
         }
       ],
@@ -56,16 +56,16 @@
         {
           "id": "m_prepare_1",
           "kind": "step",
-          "summary": { "en": "Relevant evidence" },
+          "summary": { "en": "Relevant evidence", "zh-Hans": "相关证据" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{evidence}" },
+            "template": { "en": "{evidence}", "zh-Hans": "{evidence}" },
             "arguments": {
               "evidence": {
-                "default": { "en": "Gather the receipt, product photos, labels, packaging, and any shop sign or website description." },
+                "default": { "en": "Gather the receipt, product photos, labels, packaging, and any shop sign or website description.", "zh-Hans": "收集收据、商品照片、标签、包装，以及任何店内标识或网站描述。" },
                 "fromQuestion": "what_kind_of_problem",
                 "map": {
-                  "misleading_product": { "en": "Gather the receipt, product photos, labels, packaging, and any shop sign or website description." }
+                  "misleading_product": { "en": "Gather the receipt, product photos, labels, packaging, and any shop sign or website description.", "zh-Hans": "收集收据、商品照片、标签、包装，以及任何店内标识或网站描述。" }
                 }
               }
             }
@@ -76,66 +76,66 @@
         {
           "id": "m_help_1",
           "kind": "step",
-          "summary": { "en": "Seller" },
-          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+          "summary": { "en": "Seller", "zh-Hans": "卖家" },
+          "content": { "type": "plain_text", "text": { "en": "Seller", "zh-Hans": "卖家" } }
         },
         {
           "id": "m_help_2",
           "kind": "step",
-          "summary": { "en": "Consumer complaint service" },
-          "content": { "type": "plain_text", "text": { "en": "Consumer complaint service" } }
+          "summary": { "en": "Consumer complaint service", "zh-Hans": "消费者投诉服务" },
+          "content": { "type": "plain_text", "text": { "en": "Consumer complaint service", "zh-Hans": "消费者投诉服务" } }
         }
       ]
     },
 
     {
       "stageId": "S",
-      "resultTitle": { "en": "This looks like an unresolved seller dispute." },
-      "resultSummary": { "en": "You have already contacted the seller, but the issue is still not moving forward." },
+      "resultTitle": { "en": "This looks like an unresolved seller dispute.", "zh-Hans": "这看起来像是卖家纠纷尚未解决。" },
+      "resultSummary": { "en": "You have already contacted the seller, but the issue is still not moving forward.", "zh-Hans": "您已经联系过卖家，但事情仍然没有推进。" },
       "steps": [
         {
           "id": "s_stop_repeat",
           "kind": "step",
-          "summary": { "en": "Do not keep repeating the same conversation" },
+          "summary": { "en": "Do not keep repeating the same conversation", "zh-Hans": "不要反复进行同样的对话" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Do not keep repeating the same conversation without new evidence or a clearer request." }
+            "text": { "en": "Do not keep repeating the same conversation without new evidence or a clearer request.", "zh-Hans": "如果没有新的证据或更明确的诉求，不要一遍又一遍重复同样的沟通。" }
           }
         },
         {
           "id": "s_collect",
           "kind": "step",
-          "summary": { "en": "Put all your documents and messages in one place" },
+          "summary": { "en": "Put all your documents and messages in one place", "zh-Hans": "把所有文件和聊天记录整理到一起" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Put all your documents and messages in one place." }
+            "text": { "en": "Put all your documents and messages in one place.", "zh-Hans": "把所有文件和聊天记录整理到一个地方。" }
           }
         },
         {
           "id": "s_summary",
           "kind": "step",
-          "summary": { "en": "Write one short summary of the problem" },
+          "summary": { "en": "Write one short summary of the problem", "zh-Hans": "写一段简短的问题概述" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Write one short summary of the problem." }
+            "text": { "en": "Write one short summary of the problem.", "zh-Hans": "用简短的话写下问题概述。" }
           }
         },
         {
           "id": "s_request",
           "kind": "step",
-          "summary": { "en": "Decide exactly what you want before contacting the seller again" },
+          "summary": { "en": "Decide exactly what you want before contacting the seller again", "zh-Hans": "再次联系卖家前先明确自己想要什么" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Decide exactly what you want before contacting the seller again." }
+            "text": { "en": "Decide exactly what you want before contacting the seller again.", "zh-Hans": "再次联系卖家之前，先明确自己想要什么结果。" }
           }
         },
         {
           "id": "s_save",
           "kind": "step",
-          "summary": { "en": "Save every reply, refusal, or promise" },
+          "summary": { "en": "Save every reply, refusal, or promise", "zh-Hans": "保存每一次回复、拒绝或承诺" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Save every reply, refusal, or promise." }
+            "text": { "en": "Save every reply, refusal, or promise.", "zh-Hans": "保存对方的每一次回复、拒绝或承诺。" }
           }
         }
       ],
@@ -143,16 +143,16 @@
         {
           "id": "s_prepare_1",
           "kind": "step",
-          "summary": { "en": "Relevant evidence" },
+          "summary": { "en": "Relevant evidence", "zh-Hans": "相关证据" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{evidence}" },
+            "template": { "en": "{evidence}", "zh-Hans": "{evidence}" },
             "arguments": {
               "evidence": {
-                "default": { "en": "Gather the receipt, photos, chat history, emails, and a note of what the seller has already said." },
+                "default": { "en": "Gather the receipt, photos, chat history, emails, and a note of what the seller has already said.", "zh-Hans": "收集收据、照片、聊天记录、邮件，以及卖家已作出回应的记录。" },
                 "fromQuestion": "what_kind_of_problem",
                 "map": {
-                  "seller_unresolved": { "en": "Gather the receipt, photos, chat history, emails, and a note of what the seller has already said." }
+                  "seller_unresolved": { "en": "Gather the receipt, photos, chat history, emails, and a note of what the seller has already said.", "zh-Hans": "收集收据、照片、聊天记录、邮件，以及卖家已作出回应的记录。" }
                 }
               }
             }
@@ -163,66 +163,66 @@
         {
           "id": "s_help_1",
           "kind": "step",
-          "summary": { "en": "Seller" },
-          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+          "summary": { "en": "Seller", "zh-Hans": "卖家" },
+          "content": { "type": "plain_text", "text": { "en": "Seller", "zh-Hans": "卖家" } }
         },
         {
           "id": "s_help_2",
           "kind": "step",
-          "summary": { "en": "Consumer complaint service" },
-          "content": { "type": "plain_text", "text": { "en": "Consumer complaint service" } }
+          "summary": { "en": "Consumer complaint service", "zh-Hans": "消费者投诉服务" },
+          "content": { "type": "plain_text", "text": { "en": "Consumer complaint service", "zh-Hans": "消费者投诉服务" } }
         }
       ]
     },
 
     {
       "stageId": "R",
-      "resultTitle": { "en": "This looks like a rental bond or cleaning fee dispute." },
-      "resultSummary": { "en": "Part of your bond may have been deducted for cleaning, damage, or property condition reasons." },
+      "resultTitle": { "en": "This looks like a rental bond or cleaning fee dispute.", "zh-Hans": "这看起来像是租房押金或清洁费用纠纷。" },
+      "resultSummary": { "en": "Part of your bond may have been deducted for cleaning, damage, or property condition reasons.", "zh-Hans": "您的押金可能因为清洁、损坏或房屋状况问题被扣掉了一部分。" },
       "steps": [
         {
           "id": "r_notice",
           "kind": "step",
-          "summary": { "en": "Read the deduction notice carefully" },
+          "summary": { "en": "Read the deduction notice carefully", "zh-Hans": "仔细阅读扣款通知" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Read the deduction notice carefully." }
+            "text": { "en": "Read the deduction notice carefully.", "zh-Hans": "仔细阅读扣款通知。" }
           }
         },
         {
           "id": "r_check",
           "kind": "step",
-          "summary": { "en": "Check your tenancy agreement and move-out evidence" },
+          "summary": { "en": "Check your tenancy agreement and move-out evidence", "zh-Hans": "查看租约和退租时的证据" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Check your tenancy agreement and move-out evidence." }
+            "text": { "en": "Check your tenancy agreement and move-out evidence.", "zh-Hans": "查看您的租约以及退租时保存的证据。" }
           }
         },
         {
           "id": "r_compare",
           "kind": "step",
-          "summary": { "en": "Compare the claim with your own photos, receipts, and messages" },
+          "summary": { "en": "Compare the claim with your own photos, receipts, and messages", "zh-Hans": "将对方说法与自己的照片、收据和消息记录进行对比" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Compare the claim with your own photos, cleaning receipts, and messages." }
+            "text": { "en": "Compare the claim with your own photos, cleaning receipts, and messages.", "zh-Hans": "将对方的扣款理由与您自己的照片、清洁收据和消息记录进行对比。" }
           }
         },
         {
           "id": "r_write",
           "kind": "step",
-          "summary": { "en": "Be ready to contact the landlord or agent in writing" },
+          "summary": { "en": "Be ready to contact the landlord or agent in writing", "zh-Hans": "准备好以书面形式联系房东或中介" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Be ready to contact the landlord or agent in writing." }
+            "text": { "en": "Be ready to contact the landlord or agent in writing.", "zh-Hans": "准备好以书面形式联系房东或中介。" }
           }
         },
         {
           "id": "r_disagree",
           "kind": "step",
-          "summary": { "en": "Be clear about which part of the deduction you disagree with" },
+          "summary": { "en": "Be clear about which part of the deduction you disagree with", "zh-Hans": "明确自己不同意哪一部分扣款" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Be clear about which part of the deduction you disagree with and why." }
+            "text": { "en": "Be clear about which part of the deduction you disagree with and why.", "zh-Hans": "明确指出您不同意哪一部分扣款，以及原因是什么。" }
           }
         }
       ],
@@ -230,16 +230,16 @@
         {
           "id": "r_prepare_1",
           "kind": "step",
-          "summary": { "en": "Relevant evidence" },
+          "summary": { "en": "Relevant evidence", "zh-Hans": "相关证据" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{evidence}" },
+            "template": { "en": "{evidence}", "zh-Hans": "{evidence}" },
             "arguments": {
               "evidence": {
-                "default": { "en": "Gather the tenancy agreement, move-out photos or videos, cleaning receipts, messages, and the bond deduction notice." },
+                "default": { "en": "Gather the tenancy agreement, move-out photos or videos, cleaning receipts, messages, and the bond deduction notice.", "zh-Hans": "收集租约、退租照片或视频、清洁收据、聊天记录，以及押金扣款通知。" },
                 "fromQuestion": "what_kind_of_problem",
                 "map": {
-                  "rental_bond": { "en": "Gather the tenancy agreement, move-out photos or videos, cleaning receipts, messages, and the bond deduction notice." }
+                  "rental_bond": { "en": "Gather the tenancy agreement, move-out photos or videos, cleaning receipts, messages, and the bond deduction notice.", "zh-Hans": "收集租约、退租照片或视频、清洁收据、聊天记录，以及押金扣款通知。" }
                 }
               }
             }
@@ -250,57 +250,57 @@
         {
           "id": "r_help_1",
           "kind": "step",
-          "summary": { "en": "Landlord or agent" },
-          "content": { "type": "plain_text", "text": { "en": "Landlord or agent" } }
+          "summary": { "en": "Landlord or agent", "zh-Hans": "房东或中介" },
+          "content": { "type": "plain_text", "text": { "en": "Landlord or agent", "zh-Hans": "房东或中介" } }
         },
         {
           "id": "r_help_2",
           "kind": "step",
-          "summary": { "en": "Tenancy complaint service" },
-          "content": { "type": "plain_text", "text": { "en": "Tenancy complaint service" } }
+          "summary": { "en": "Tenancy complaint service", "zh-Hans": "租务投诉服务" },
+          "content": { "type": "plain_text", "text": { "en": "Tenancy complaint service", "zh-Hans": "租务投诉服务" } }
         }
       ]
     },
 
     {
       "stageId": "U",
-      "resultTitle": { "en": "You are not sure which type of dispute this is." },
-      "resultSummary": { "en": "That is okay. Start by organising the facts and evidence first." },
+      "resultTitle": { "en": "You are not sure which type of dispute this is.", "zh-Hans": "您目前还不确定这属于哪一类纠纷。" },
+      "resultSummary": { "en": "That is okay. Start by organising the facts and evidence first.", "zh-Hans": "没关系，先把事实和证据整理清楚。" },
       "steps": [
         {
           "id": "u_collect",
           "kind": "step",
-          "summary": { "en": "Gather your key documents, messages, receipts, and screenshots" },
+          "summary": { "en": "Gather your key documents, messages, receipts, and screenshots", "zh-Hans": "收集关键文件、聊天记录、收据和截图" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Gather your key documents, messages, receipts, and screenshots." }
+            "text": { "en": "Gather your key documents, messages, receipts, and screenshots.", "zh-Hans": "收集关键文件、聊天记录、收据和截图。" }
           }
         },
         {
           "id": "u_summary",
           "kind": "step",
-          "summary": { "en": "Write one short summary of what happened" },
+          "summary": { "en": "Write one short summary of what happened", "zh-Hans": "写一段简短的事情经过" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Write one short summary of what happened." }
+            "text": { "en": "Write one short summary of what happened.", "zh-Hans": "简要写下事情经过。" }
           }
         },
         {
           "id": "u_identify",
           "kind": "step",
-          "summary": { "en": "Try to work out which type of issue this is" },
+          "summary": { "en": "Try to work out which type of issue this is", "zh-Hans": "先判断这更像哪一类问题" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Try to work out whether this is about misleading information, an unresolved seller issue, or a rental bond deduction." }
+            "text": { "en": "Try to work out whether this is about misleading information, an unresolved seller issue, or a rental bond deduction.", "zh-Hans": "尝试判断这是误导性信息、卖家纠纷未解决，还是押金扣款问题。" }
           }
         },
         {
           "id": "u_written",
           "kind": "step",
-          "summary": { "en": "Keep everything in writing as much as possible" },
+          "summary": { "en": "Keep everything in writing as much as possible", "zh-Hans": "尽量把所有沟通都留成书面记录" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Keep everything in writing as much as possible." }
+            "text": { "en": "Keep everything in writing as much as possible.", "zh-Hans": "尽量把所有沟通都留成书面记录。" }
           }
         }
       ],
@@ -308,16 +308,16 @@
         {
           "id": "u_prepare_1",
           "kind": "step",
-          "summary": { "en": "Relevant evidence" },
+          "summary": { "en": "Relevant evidence", "zh-Hans": "相关证据" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{evidence}" },
+            "template": { "en": "{evidence}", "zh-Hans": "{evidence}" },
             "arguments": {
               "evidence": {
-                "default": { "en": "Gather any receipts, screenshots, messages, notices, photos, or contracts you still have." },
+                "default": { "en": "Gather any receipts, screenshots, messages, notices, photos, or contracts you still have.", "zh-Hans": "收集您目前还保留的任何收据、截图、消息、通知、照片或合同。" },
                 "fromQuestion": "what_kind_of_problem",
                 "map": {
-                  "not_sure": { "en": "Gather any receipts, screenshots, messages, notices, photos, or contracts you still have." }
+                  "not_sure": { "en": "Gather any receipts, screenshots, messages, notices, photos, or contracts you still have.", "zh-Hans": "收集您目前还保留的任何收据、截图、消息、通知、照片或合同。" }
                 }
               }
             }
@@ -328,19 +328,19 @@
         {
           "id": "u_help_1",
           "kind": "step",
-          "summary": { "en": "Relevant complaint service" },
+          "summary": { "en": "Relevant complaint service", "zh-Hans": "相关投诉渠道" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{help}" },
+            "template": { "en": "{help}", "zh-Hans": "{help}" },
             "arguments": {
               "help": {
-                "default": { "en": "Relevant complaint service" },
+                "default": { "en": "Relevant complaint service", "zh-Hans": "相关投诉渠道" },
                 "fromQuestion": "what_kind_of_problem",
                 "map": {
-                  "misleading_product": { "en": "Consumer complaint service" },
-                  "seller_unresolved": { "en": "Consumer complaint service" },
-                  "rental_bond": { "en": "Tenancy complaint service" },
-                  "not_sure": { "en": "Relevant complaint service" }
+                  "misleading_product": { "en": "Consumer complaint service", "zh-Hans": "消费者投诉服务" },
+                  "seller_unresolved": { "en": "Consumer complaint service", "zh-Hans": "消费者投诉服务" },
+                  "rental_bond": { "en": "Tenancy complaint service", "zh-Hans": "租务投诉服务" },
+                  "not_sure": { "en": "Relevant complaint service", "zh-Hans": "相关投诉渠道" }
                 }
               }
             }
@@ -351,25 +351,25 @@
 
     {
       "stageId": "C",
-      "resultTitle": { "en": "Start with one clear request." },
-      "resultSummary": { "en": "You have not made a clear written request yet." },
+      "resultTitle": { "en": "Start with one clear request.", "zh-Hans": "先提出一次明确的书面请求。" },
+      "resultSummary": { "en": "You have not made a clear written request yet.", "zh-Hans": "您还没有提出过一次明确的书面请求。" },
       "steps": [
         {
           "id": "c_gather",
           "kind": "step",
-          "summary": { "en": "Put your evidence together first" },
+          "summary": { "en": "Put your evidence together first", "zh-Hans": "先把证据整理好" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{evidence}" },
+            "template": { "en": "{evidence}", "zh-Hans": "{evidence}" },
             "arguments": {
               "evidence": {
-                "default": { "en": "Put your key documents and screenshots in one place." },
+                "default": { "en": "Put your key documents and screenshots in one place.", "zh-Hans": "把关键文件和截图整理到一个地方。" },
                 "fromQuestion": "what_kind_of_problem",
                 "map": {
-                  "misleading_product": { "en": "Gather the receipt, product photos, labels, packaging, and any shop sign or website description." },
-                  "seller_unresolved": { "en": "Gather the receipt, photos, chat history, emails, and a note of what the seller has already said." },
-                  "rental_bond": { "en": "Gather the tenancy agreement, move-out photos or videos, cleaning receipts, messages, and the bond deduction notice." },
-                  "not_sure": { "en": "Gather any receipts, screenshots, messages, notices, photos, or contracts you still have." }
+                  "misleading_product": { "en": "Gather the receipt, product photos, labels, packaging, and any shop sign or website description.", "zh-Hans": "收集收据、商品照片、标签、包装，以及任何店内标识或网站描述。" },
+                  "seller_unresolved": { "en": "Gather the receipt, photos, chat history, emails, and a note of what the seller has already said.", "zh-Hans": "收集收据、照片、聊天记录、邮件，以及卖家已作出回应的记录。" },
+                  "rental_bond": { "en": "Gather the tenancy agreement, move-out photos or videos, cleaning receipts, messages, and the bond deduction notice.", "zh-Hans": "收集租约、退租照片或视频、清洁收据、聊天记录，以及押金扣款通知。" },
+                  "not_sure": { "en": "Gather any receipts, screenshots, messages, notices, photos, or contracts you still have.", "zh-Hans": "收集您目前还保留的任何收据、截图、消息、通知、照片或合同。" }
                 }
               }
             }
@@ -378,28 +378,28 @@
         {
           "id": "c_decide",
           "kind": "step",
-          "summary": { "en": "Decide exactly what you want before contacting them" },
+          "summary": { "en": "Decide exactly what you want before contacting them", "zh-Hans": "联系前先明确自己想要什么" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Decide exactly what you want before contacting them." }
+            "text": { "en": "Decide exactly what you want before contacting them.", "zh-Hans": "联系对方之前，先明确自己想要什么结果。" }
           }
         },
         {
           "id": "c_contact",
           "kind": "step",
-          "summary": { "en": "Make one clear written contact" },
+          "summary": { "en": "Make one clear written contact", "zh-Hans": "发出一次清晰明确的书面联系" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{contact}" },
+            "template": { "en": "{contact}", "zh-Hans": "{contact}" },
             "arguments": {
               "contact": {
-                "default": { "en": "Make one clear written contact instead of starting with repeated back-and-forth discussion." },
+                "default": { "en": "Make one clear written contact instead of starting with repeated back-and-forth discussion.", "zh-Hans": "不要一开始就反复来回沟通，先发出一次清晰明确的书面联系。" },
                 "fromQuestion": "what_kind_of_problem",
                 "map": {
-                  "misleading_product": { "en": "Contact the seller clearly and explain what was misleading. Ask for a refund or replacement." },
-                  "seller_unresolved": { "en": "Send one clear follow-up message to the seller and state exactly what you want." },
-                  "rental_bond": { "en": "Contact the landlord or agent in writing and explain which part of the deduction you disagree with and why." },
-                  "not_sure": { "en": "Contact the other side in writing and explain the issue as clearly as you can." }
+                  "misleading_product": { "en": "Contact the seller clearly and explain what was misleading. Ask for a refund or replacement.", "zh-Hans": "清楚联系卖家，说明哪里具有误导性，并提出退款或更换要求。" },
+                  "seller_unresolved": { "en": "Send one clear follow-up message to the seller and state exactly what you want.", "zh-Hans": "给卖家发送一次明确的跟进消息，清楚说明您的诉求。" },
+                  "rental_bond": { "en": "Contact the landlord or agent in writing and explain which part of the deduction you disagree with and why.", "zh-Hans": "以书面形式联系房东或中介，说明您不同意哪一部分扣款，以及原因。" },
+                  "not_sure": { "en": "Contact the other side in writing and explain the issue as clearly as you can.", "zh-Hans": "以书面形式联系对方，尽可能清楚地说明问题。" }
                 }
               }
             }
@@ -410,50 +410,50 @@
         {
           "id": "c_prepare_1",
           "kind": "step",
-          "summary": { "en": "Your main evidence" },
-          "content": { "type": "plain_text", "text": { "en": "Your main evidence" } }
+          "summary": { "en": "Your main evidence", "zh-Hans": "主要证据" },
+          "content": { "type": "plain_text", "text": { "en": "Your main evidence", "zh-Hans": "主要证据" } }
         }
       ],
       "help": [
         {
           "id": "c_help_1",
           "kind": "step",
-          "summary": { "en": "Seller, landlord, or agent" },
-          "content": { "type": "plain_text", "text": { "en": "Seller, landlord, or agent" } }
+          "summary": { "en": "Seller, landlord, or agent", "zh-Hans": "卖家、房东或中介" },
+          "content": { "type": "plain_text", "text": { "en": "Seller, landlord, or agent", "zh-Hans": "卖家、房东或中介" } }
         }
       ]
     },
 
     {
       "stageId": "W",
-      "resultTitle": { "en": "You may still need one clear follow-up." },
-      "resultSummary": { "en": "You contacted them once, but you still do not have a clear answer." },
+      "resultTitle": { "en": "You may still need one clear follow-up.", "zh-Hans": "你可能还需要进行一次明确的跟进。" },
+      "resultSummary": { "en": "You contacted them once, but you still do not have a clear answer.", "zh-Hans": "你已经联系过一次，但仍然没有得到明确答复。" },
       "steps": [
         {
           "id": "w_repeat",
           "kind": "step",
-          "summary": { "en": "Do not keep repeating the same argument" },
+          "summary": { "en": "Do not keep repeating the same argument", "zh-Hans": "不要反复重复同样的说法" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Do not keep repeating the same argument without changing anything." }
+            "text": { "en": "Do not keep repeating the same argument without changing anything.", "zh-Hans": "如果没有新增内容，就不要反复重复同样的说法。" }
           }
         },
         {
           "id": "w_followup",
           "kind": "step",
-          "summary": { "en": "Send one clear follow-up message" },
+          "summary": { "en": "Send one clear follow-up message", "zh-Hans": "发送一次清晰明确的跟进消息" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Send one clear follow-up message and ask for a clear written response." }
+            "text": { "en": "Send one clear follow-up message and ask for a clear written response.", "zh-Hans": "发送一次清晰明确的跟进消息，并要求对方给出书面明确回复。" }
           }
         },
         {
           "id": "w_save",
           "kind": "step",
-          "summary": { "en": "Save any reply, refusal, or promise" },
+          "summary": { "en": "Save any reply, refusal, or promise", "zh-Hans": "保存任何回复、拒绝或承诺" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Save any reply, refusal, or promise." }
+            "text": { "en": "Save any reply, refusal, or promise.", "zh-Hans": "保存对方的任何回复、拒绝或承诺。" }
           }
         }
       ],
@@ -461,27 +461,27 @@
         {
           "id": "w_prepare_1",
           "kind": "step",
-          "summary": { "en": "Chat history, emails, or message record" },
-          "content": { "type": "plain_text", "text": { "en": "Chat history, emails, or message record" } }
+          "summary": { "en": "Chat history, emails, or message record", "zh-Hans": "聊天记录、邮件或消息记录" },
+          "content": { "type": "plain_text", "text": { "en": "Chat history, emails, or message record", "zh-Hans": "聊天记录、邮件或消息记录" } }
         }
       ],
       "help": [
         {
           "id": "w_help_1",
           "kind": "step",
-          "summary": { "en": "Complaint service" },
+          "summary": { "en": "Complaint service", "zh-Hans": "投诉服务" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{help}" },
+            "template": { "en": "{help}", "zh-Hans": "{help}" },
             "arguments": {
               "help": {
-                "default": { "en": "Consumer or tenancy complaint service" },
+                "default": { "en": "Consumer or tenancy complaint service", "zh-Hans": "消费者或租务投诉服务" },
                 "fromQuestion": "what_kind_of_problem",
                 "map": {
-                  "misleading_product": { "en": "Consumer complaint service" },
-                  "seller_unresolved": { "en": "Consumer complaint service" },
-                  "rental_bond": { "en": "Tenancy complaint service" },
-                  "not_sure": { "en": "Relevant complaint service" }
+                  "misleading_product": { "en": "Consumer complaint service", "zh-Hans": "消费者投诉服务" },
+                  "seller_unresolved": { "en": "Consumer complaint service", "zh-Hans": "消费者投诉服务" },
+                  "rental_bond": { "en": "Tenancy complaint service", "zh-Hans": "租务投诉服务" },
+                  "not_sure": { "en": "Relevant complaint service", "zh-Hans": "相关投诉服务" }
                 }
               }
             }
@@ -492,52 +492,52 @@
 
     {
       "stageId": "H",
-      "resultTitle": { "en": "This may need the next formal complaint step." },
-      "resultSummary": { "en": "The issue appears to be repeating, unresolved, or clearly refused." },
+      "resultTitle": { "en": "This may need the next formal complaint step.", "zh-Hans": "这件事可能需要进入下一步正式投诉程序。" },
+      "resultSummary": { "en": "The issue appears to be repeating, unresolved, or clearly refused.", "zh-Hans": "这个问题似乎反复出现、仍未解决，或已被明确拒绝。" },
       "steps": [
         {
           "id": "h_stop",
           "kind": "step",
-          "summary": { "en": "Stop repeating the same argument" },
+          "summary": { "en": "Stop repeating the same argument", "zh-Hans": "停止重复同样的说法" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Stop repeating the same argument unless you have new evidence." }
+            "text": { "en": "Stop repeating the same argument unless you have new evidence.", "zh-Hans": "除非你有新的证据，否则不要反复重复同样的说法。" }
           }
         },
         {
           "id": "h_written",
           "kind": "step",
-          "summary": { "en": "Ask for a clear written reply" },
+          "summary": { "en": "Ask for a clear written reply", "zh-Hans": "要求对方给出明确的书面回复" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Ask for a clear written reply if you do not already have one." }
+            "text": { "en": "Ask for a clear written reply if you do not already have one.", "zh-Hans": "如果你还没有拿到明确的书面回复，请现在要求对方给出。" }
           }
         },
         {
           "id": "h_prepare",
           "kind": "step",
-          "summary": { "en": "Prepare your documents and timeline" },
+          "summary": { "en": "Prepare your documents and timeline", "zh-Hans": "整理文件和时间线" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Prepare your documents and timeline for the next formal complaint step." }
+            "text": { "en": "Prepare your documents and timeline for the next formal complaint step.", "zh-Hans": "为下一步正式投诉整理好所有文件和时间线。" }
           }
         },
         {
           "id": "h_help",
           "kind": "step",
-          "summary": { "en": "Check the relevant complaint pathway" },
+          "summary": { "en": "Check the relevant complaint pathway", "zh-Hans": "查看对应的投诉途径" },
           "content": {
             "type": "format_text",
-            "template": { "en": "Check the relevant complaint pathway for your type of issue. {help}" },
+            "template": { "en": "Check the relevant complaint pathway for your type of issue. {help}", "zh-Hans": "根据你的问题类型查看对应的投诉途径。{help}" },
             "arguments": {
               "help": {
-                "default": { "en": "" },
+                "default": { "en": "", "zh-Hans": "" },
                 "fromQuestion": "what_kind_of_problem",
                 "map": {
-                  "misleading_product": { "en": "For consumer disputes, contact the consumer complaint service." },
-                  "seller_unresolved": { "en": "For consumer disputes, contact the consumer complaint service." },
-                  "rental_bond": { "en": "For tenancy disputes, contact the tenancy complaint service." },
-                  "not_sure": { "en": "" }
+                  "misleading_product": { "en": "For consumer disputes, contact the consumer complaint service.", "zh-Hans": "如果是消费者纠纷，请联系消费者投诉服务。" },
+                  "seller_unresolved": { "en": "For consumer disputes, contact the consumer complaint service.", "zh-Hans": "如果是消费者纠纷，请联系消费者投诉服务。" },
+                  "rental_bond": { "en": "For tenancy disputes, contact the tenancy complaint service.", "zh-Hans": "如果是租务纠纷，请联系租务投诉服务。" },
+                  "not_sure": { "en": "", "zh-Hans": "" }
                 }
               }
             }
@@ -548,33 +548,33 @@
         {
           "id": "h_prepare_1",
           "kind": "step",
-          "summary": { "en": "A short timeline of what happened" },
-          "content": { "type": "plain_text", "text": { "en": "A short timeline of what happened" } }
+          "summary": { "en": "A short timeline of what happened", "zh-Hans": "简短时间线" },
+          "content": { "type": "plain_text", "text": { "en": "A short timeline of what happened", "zh-Hans": "发生经过的简短时间线" } }
         },
         {
           "id": "h_prepare_2",
           "kind": "step",
-          "summary": { "en": "All messages, receipts, notices, and supporting evidence" },
-          "content": { "type": "plain_text", "text": { "en": "All messages, receipts, notices, and supporting evidence" } }
+          "summary": { "en": "All messages, receipts, notices, and supporting evidence", "zh-Hans": "所有消息、收据、通知和支持性证据" },
+          "content": { "type": "plain_text", "text": { "en": "All messages, receipts, notices, and supporting evidence", "zh-Hans": "所有消息、收据、通知和支持性证据" } }
         }
       ],
       "help": [
         {
           "id": "h_help_1",
           "kind": "step",
-          "summary": { "en": "Complaint service" },
+          "summary": { "en": "Complaint service", "zh-Hans": "投诉服务" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{help}" },
+            "template": { "en": "{help}", "zh-Hans": "{help}" },
             "arguments": {
               "help": {
-                "default": { "en": "Relevant complaint service" },
+                "default": { "en": "Relevant complaint service", "zh-Hans": "相关投诉服务" },
                 "fromQuestion": "what_kind_of_problem",
                 "map": {
-                  "misleading_product": { "en": "Consumer complaint service" },
-                  "seller_unresolved": { "en": "Consumer complaint service" },
-                  "rental_bond": { "en": "Tenancy complaint service" },
-                  "not_sure": { "en": "Relevant complaint service" }
+                  "misleading_product": { "en": "Consumer complaint service", "zh-Hans": "消费者投诉服务" },
+                  "seller_unresolved": { "en": "Consumer complaint service", "zh-Hans": "消费者投诉服务" },
+                  "rental_bond": { "en": "Tenancy complaint service", "zh-Hans": "租务投诉服务" },
+                  "not_sure": { "en": "Relevant complaint service", "zh-Hans": "相关投诉服务" }
                 }
               }
             }
@@ -585,34 +585,34 @@
 
     {
       "stageId": "E",
-      "resultTitle": { "en": "Save and organise your evidence now." },
-      "resultSummary": { "en": "Some of your key records may still need to be gathered or protected." },
+      "resultTitle": { "en": "Save and organise your evidence now.", "zh-Hans": "现在就把证据保存并整理好。" },
+      "resultSummary": { "en": "Some of your key records may still need to be gathered or protected.", "zh-Hans": "你的一些关键记录可能还需要继续收集或妥善保存。" },
       "steps": [
         {
           "id": "e_save",
           "kind": "step",
-          "summary": { "en": "Save screenshots, receipts, notices, and messages" },
+          "summary": { "en": "Save screenshots, receipts, notices, and messages", "zh-Hans": "保存截图、收据、通知和消息" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Save screenshots, receipts, notices, and messages before anything is deleted or lost." }
+            "text": { "en": "Save screenshots, receipts, notices, and messages before anything is deleted or lost.", "zh-Hans": "在任何内容被删除或丢失之前，先保存截图、收据、通知和消息。" }
           }
         },
         {
           "id": "e_put",
           "kind": "step",
-          "summary": { "en": "Put everything in one place" },
+          "summary": { "en": "Put everything in one place", "zh-Hans": "把所有材料整理到一起" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Put everything in one place." }
+            "text": { "en": "Put everything in one place.", "zh-Hans": "把所有材料整理到一个地方。" }
           }
         },
         {
           "id": "e_note",
           "kind": "step",
-          "summary": { "en": "Write down the key dates and what happened" },
+          "summary": { "en": "Write down the key dates and what happened", "zh-Hans": "记录关键日期和经过" },
           "content": {
             "type": "plain_text",
-            "text": { "en": "Write down the key dates, what happened, and what the other side has already said." }
+            "text": { "en": "Write down the key dates, what happened, and what the other side has already said.", "zh-Hans": "写下关键日期、发生了什么，以及对方已经说过什么。" }
           }
         }
       ],
@@ -620,19 +620,19 @@
         {
           "id": "e_prepare_1",
           "kind": "step",
-          "summary": { "en": "Relevant evidence" },
+          "summary": { "en": "Relevant evidence", "zh-Hans": "相关证据" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{evidence}" },
+            "template": { "en": "{evidence}", "zh-Hans": "{evidence}" },
             "arguments": {
               "evidence": {
-                "default": { "en": "Put your key documents and screenshots in one place." },
+                "default": { "en": "Put your key documents and screenshots in one place.", "zh-Hans": "把关键文件和截图整理到一个地方。" },
                 "fromQuestion": "what_kind_of_problem",
                 "map": {
-                  "misleading_product": { "en": "Gather the receipt, product photos, labels, packaging, and any shop sign or website description." },
-                  "seller_unresolved": { "en": "Gather the receipt, photos, chat history, emails, and a note of what the seller has already said." },
-                  "rental_bond": { "en": "Gather the tenancy agreement, move-out photos or videos, cleaning receipts, messages, and the bond deduction notice." },
-                  "not_sure": { "en": "Gather any receipts, screenshots, messages, notices, photos, or contracts you still have." }
+                  "misleading_product": { "en": "Gather the receipt, product photos, labels, packaging, and any shop sign or website description.", "zh-Hans": "收集收据、商品照片、标签、包装，以及任何店内标识或网站描述。" },
+                  "seller_unresolved": { "en": "Gather the receipt, photos, chat history, emails, and a note of what the seller has already said.", "zh-Hans": "收集收据、照片、聊天记录、邮件，以及卖家已作出回应的记录。" },
+                  "rental_bond": { "en": "Gather the tenancy agreement, move-out photos or videos, cleaning receipts, messages, and the bond deduction notice.", "zh-Hans": "收集租约、退租照片或视频、清洁收据、聊天记录，以及押金扣款通知。" },
+                  "not_sure": { "en": "Gather any receipts, screenshots, messages, notices, photos, or contracts you still have.", "zh-Hans": "收集您目前还保留的任何收据、截图、消息、通知、照片或合同。" }
                 }
               }
             }
@@ -643,19 +643,19 @@
         {
           "id": "e_help_1",
           "kind": "step",
-          "summary": { "en": "Complaint service" },
+          "summary": { "en": "Complaint service", "zh-Hans": "投诉服务" },
           "content": {
             "type": "format_text",
-            "template": { "en": "{help}" },
+            "template": { "en": "{help}", "zh-Hans": "{help}" },
             "arguments": {
               "help": {
-                "default": { "en": "Relevant complaint service" },
+                "default": { "en": "Relevant complaint service", "zh-Hans": "相关投诉服务" },
                 "fromQuestion": "what_kind_of_problem",
                 "map": {
-                  "misleading_product": { "en": "Consumer complaint service" },
-                  "seller_unresolved": { "en": "Consumer complaint service" },
-                  "rental_bond": { "en": "Tenancy complaint service" },
-                  "not_sure": { "en": "Relevant complaint service" }
+                  "misleading_product": { "en": "Consumer complaint service", "zh-Hans": "消费者投诉服务" },
+                  "seller_unresolved": { "en": "Consumer complaint service", "zh-Hans": "消费者投诉服务" },
+                  "rental_bond": { "en": "Tenancy complaint service", "zh-Hans": "租务投诉服务" },
+                  "not_sure": { "en": "Relevant complaint service", "zh-Hans": "相关投诉服务" }
                 }
               }
             }

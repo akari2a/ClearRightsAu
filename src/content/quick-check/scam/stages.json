@@ -4,7 +4,8 @@
     {
       "id": "A",
       "label": {
-        "en": "Suspicious only"
+        "en": "Suspicious only",
+        "zh-Hans": "只是可疑迹象"
       },
       "priority": 10,
       "riskLevel": 0,
@@ -15,7 +16,8 @@
     {
       "id": "B",
       "label": {
-        "en": "Clicked or opened, but no details entered"
+        "en": "Clicked or opened, but no details entered",
+        "zh-Hans": "点击或打开过，但没有填写信息"
       },
       "priority": 20,
       "riskLevel": 1,
@@ -26,7 +28,8 @@
     {
       "id": "C",
       "label": {
-        "en": "Personal details exposed"
+        "en": "Personal details exposed",
+        "zh-Hans": "个人信息可能已泄露"
       },
       "priority": 30,
       "riskLevel": 1,
@@ -37,7 +40,8 @@
     {
       "id": "D",
       "label": {
-        "en": "Bank or card details exposed"
+        "en": "Bank or card details exposed",
+        "zh-Hans": "银行卡或银行信息可能已泄露"
       },
       "priority": 40,
       "riskLevel": 2,
@@ -48,7 +52,8 @@
     {
       "id": "E",
       "label": {
-        "en": "Password or verification code exposed"
+        "en": "Password or verification code exposed",
+        "zh-Hans": "密码或验证码可能已泄露"
       },
       "priority": 50,
       "riskLevel": 2,
@@ -59,7 +64,8 @@
     {
       "id": "F",
       "label": {
-        "en": "Money sent or payment made"
+        "en": "Money sent or payment made",
+        "zh-Hans": "已经转账或完成付款"
       },
       "priority": 60,
       "riskLevel": 3,
@@ -70,7 +76,8 @@
     {
       "id": "G",
       "label": {
-        "en": "Device access or app download"
+        "en": "Device access or app download",
+        "zh-Hans": "设备访问或下载应用带来风险"
       },
       "priority": 70,
       "riskLevel": 3,
@@ -81,7 +88,8 @@
     {
       "id": "H",
       "label": {
-        "en": "Suspicious activity already happening"
+        "en": "Suspicious activity already happening",
+        "zh-Hans": "可疑活动已经发生"
       },
       "priority": 90,
       "riskLevel": 4,
@@ -92,7 +100,8 @@
     {
       "id": "U",
       "label": {
-        "en": "Not sure what happened"
+        "en": "Not sure what happened",
+        "zh-Hans": "不确定发生了什么"
       },
       "priority": 15,
       "riskLevel": 1,

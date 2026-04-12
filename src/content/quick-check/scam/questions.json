@@ -4,47 +4,55 @@
     {
       "id": "how_happened",
       "title": {
-        "en": "How did this happen?"
+        "en": "How did this happen?",
+        "zh-Hans": "这是怎么发生的？"
       },
       "description": {
-        "en": ""
+        "en": "",
+        "zh-Hans": ""
       },
       "selectionMode": "single",
       "options": [
         {
           "id": "text",
           "label": {
-            "en": "I got a text message"
+            "en": "I got a text message",
+            "zh-Hans": "我收到了一条短信"
           }
         },
         {
           "id": "phone",
           "label": {
-            "en": "I got a phone call"
+            "en": "I got a phone call",
+            "zh-Hans": "我接到了一通电话"
           }
         },
         {
           "id": "email",
           "label": {
-            "en": "I got an email"
+            "en": "I got an email",
+            "zh-Hans": "我收到了一封电子邮件"
           }
         },
         {
           "id": "website",
           "label": {
-            "en": "I opened a website or shopping page"
+            "en": "I opened a website or shopping page",
+            "zh-Hans": "我打开了一个网站或购物页面"
           }
         },
         {
           "id": "social",
           "label": {
-            "en": "It happened on social media or a chat app"
+            "en": "It happened on social media or a chat app",
+            "zh-Hans": "这件事发生在社交媒体或聊天应用上"
           }
         },
         {
           "id": "not_sure",
           "label": {
-            "en": "I'm not sure"
+            "en": "I'm not sure",
+            "zh-Hans": "我不确定"
           }
         }
       ]
@@ -52,10 +60,12 @@
     {
       "id": "what_did_you_do",
       "title": {
-        "en": "What did you do?"
+        "en": "What did you do?",
+        "zh-Hans": "你做了什么？"
       },
       "description": {
-        "en": "Select everything that happened."
+        "en": "Select everything that happened.",
+        "zh-Hans": "请选择所有实际发生过的情况。"
       },
       "selectionMode": "multiple",
       "exclusiveOptionIds": ["saw_only", "not_sure"],
@@ -63,49 +73,57 @@
         {
           "id": "saw_only",
           "label": {
-            "en": "I only saw it and did not continue"
+            "en": "I only saw it and did not continue",
+            "zh-Hans": "我只是看到了，但没有继续"
           }
         },
         {
           "id": "clicked_opened",
           "label": {
-            "en": "I clicked the link / opened the page / answered the call"
+            "en": "I clicked the link / opened the page / answered the call",
+            "zh-Hans": "我点击了链接 / 打开了页面 / 接了电话"
           }
         },
         {
           "id": "personal_info",
           "label": {
-            "en": "I entered personal details such as my name, address, phone number, or email"
+            "en": "I entered personal details such as my name, address, phone number, or email",
+            "zh-Hans": "我填写了姓名、地址、电话号码或邮箱等个人信息"
           }
         },
         {
           "id": "bank_info",
           "label": {
-            "en": "I entered card or bank details"
+            "en": "I entered card or bank details",
+            "zh-Hans": "我填写了银行卡或银行账户信息"
           }
         },
         {
           "id": "password_code",
           "label": {
-            "en": "I entered a password or verification code"
+            "en": "I entered a password or verification code",
+            "zh-Hans": "我输入了密码或验证码"
           }
         },
         {
           "id": "sent_money",
           "label": {
-            "en": "I sent money or made a payment"
+            "en": "I sent money or made a payment",
+            "zh-Hans": "我转了钱或完成了付款"
           }
         },
         {
           "id": "device_access",
           "label": {
-            "en": "I downloaded something or gave someone access to my device"
+            "en": "I downloaded something or gave someone access to my device",
+            "zh-Hans": "我下载了某些内容，或让别人访问了我的设备"
           }
         },
         {
           "id": "not_sure",
           "label": {
-            "en": "I'm not sure"
+            "en": "I'm not sure",
+            "zh-Hans": "我不确定"
           }
         }
       ]
@@ -113,10 +131,12 @@
     {
       "id": "what_is_happening_now",
       "title": {
-        "en": "What is happening now?"
+        "en": "What is happening now?",
+        "zh-Hans": "现在发生了什么？"
       },
       "description": {
-        "en": "Select everything that is happening now."
+        "en": "Select everything that is happening now.",
+        "zh-Hans": "请选择现在正在发生的所有情况。"
       },
       "selectionMode": "multiple",
       "exclusiveOptionIds": ["nothing_unusual", "not_sure"],
@@ -124,43 +144,50 @@
         {
           "id": "more_suspicious_contact",
           "label": {
-            "en": "I started getting more suspicious calls or messages"
+            "en": "I started getting more suspicious calls or messages",
+            "zh-Hans": "我开始收到更多可疑的电话或消息"
           }
         },
         {
           "id": "login_alert",
           "label": {
-            "en": "I received a suspicious login alert"
+            "en": "I received a suspicious login alert",
+            "zh-Hans": "我收到了可疑的登录提醒"
           }
         },
         {
           "id": "account_issue",
           "label": {
-            "en": "Something seems wrong with my account"
+            "en": "Something seems wrong with my account",
+            "zh-Hans": "我的账户似乎出现了异常"
           }
         },
         {
           "id": "transaction_issue",
           "label": {
-            "en": "I noticed a transaction I do not recognise"
+            "en": "I noticed a transaction I do not recognise",
+            "zh-Hans": "我发现了一笔我不认识的交易"
           }
         },
         {
           "id": "device_issue",
           "label": {
-            "en": "Something seems wrong with my phone or device"
+            "en": "Something seems wrong with my phone or device",
+            "zh-Hans": "我的手机或设备似乎出现了异常"
           }
         },
         {
           "id": "nothing_unusual",
           "label": {
-            "en": "Nothing unusual has happened yet"
+            "en": "Nothing unusual has happened yet",
+            "zh-Hans": "目前还没有出现异常情况"
           }
         },
         {
           "id": "not_sure",
           "label": {
-            "en": "I'm not sure"
+            "en": "I'm not sure",
+            "zh-Hans": "我不确定"
           }
         }
       ]
@@ -168,41 +195,48 @@
     {
       "id": "main_worry",
       "title": {
-        "en": "What are you most worried about right now?"
+        "en": "What are you most worried about right now?",
+        "zh-Hans": "你现在最担心的是什么？"
       },
       "description": {
-        "en": ""
+        "en": "",
+        "zh-Hans": ""
       },
       "selectionMode": "single",
       "options": [
         {
           "id": "money",
           "label": {
-            "en": "My money or bank card"
+            "en": "My money or bank card",
+            "zh-Hans": "我的钱或银行卡"
           }
         },
         {
           "id": "account",
           "label": {
-            "en": "My account or password"
+            "en": "My account or password",
+            "zh-Hans": "我的账户或密码"
           }
         },
         {
           "id": "personal_info",
           "label": {
-            "en": "My personal information"
+            "en": "My personal information",
+            "zh-Hans": "我的个人信息"
           }
         },
         {
           "id": "device",
           "label": {
-            "en": "My phone or device"
+            "en": "My phone or device",
+            "zh-Hans": "我的手机或设备"
           }
         },
         {
           "id": "urgency",
           "label": {
-            "en": "I just want to know whether I need to act now"
+            "en": "I just want to know whether I need to act now",
+            "zh-Hans": "我只想知道现在是否需要马上采取行动"
           }
         }
       ]

@@ -3,7 +3,7 @@
   "stages": [
     {
       "id": "M",
-      "label": { "en": "Misleading product information" },
+      "label": { "en": "Misleading product information", "zh-Hans": "商品信息具有误导性" },
       "priority": 20,
       "riskLevel": 2,
       "stageLayer": "primary",
@@ -13,7 +13,7 @@
     },
     {
       "id": "S",
-      "label": { "en": "Unresolved seller dispute" },
+      "label": { "en": "Unresolved seller dispute", "zh-Hans": "卖家纠纷尚未解决" },
       "priority": 30,
       "riskLevel": 3,
       "stageLayer": "primary",
@@ -23,7 +23,7 @@
     },
     {
       "id": "R",
-      "label": { "en": "Rental bond or cleaning fee dispute" },
+      "label": { "en": "Rental bond or cleaning fee dispute", "zh-Hans": "租房押金或清洁费用纠纷" },
       "priority": 30,
       "riskLevel": 3,
       "stageLayer": "primary",
@@ -33,7 +33,7 @@
     },
     {
       "id": "U",
-      "label": { "en": "Uncertain dispute type" },
+      "label": { "en": "Uncertain dispute type", "zh-Hans": "纠纷类型不明确" },
       "priority": 10,
       "riskLevel": 2,
       "stageLayer": "primary",
@@ -43,7 +43,7 @@
     },
     {
       "id": "C",
-      "label": { "en": "First clear contact needed" },
+      "label": { "en": "First clear contact needed", "zh-Hans": "需要先进行一次明确联系" },
       "priority": 10,
       "riskLevel": 2,
       "stageLayer": "overlay",
@@ -53,7 +53,7 @@
     },
     {
       "id": "W",
-      "label": { "en": "Waiting for a clear answer" },
+      "label": { "en": "Waiting for a clear answer", "zh-Hans": "正在等待明确答复" },
       "priority": 20,
       "riskLevel": 3,
       "stageLayer": "overlay",
@@ -64,7 +64,7 @@
     },
     {
       "id": "H",
-      "label": { "en": "Unresolved after follow-up or refusal" },
+      "label": { "en": "Unresolved after follow-up or refusal", "zh-Hans": "多次跟进后仍未解决或已被明确拒绝" },
       "priority": 40,
       "riskLevel": 4,
       "stageLayer": "overlay",
@@ -75,7 +75,7 @@
     },
     {
       "id": "E",
-      "label": { "en": "Evidence needs to be organised or protected" },
+      "label": { "en": "Evidence needs to be organised or protected", "zh-Hans": "证据需要整理或妥善保存" },
       "priority": 30,
       "riskLevel": 3,
       "stageLayer": "overlay",

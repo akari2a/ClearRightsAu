@@ -3,7 +3,7 @@
   "stages": [
     {
       "id": "P",
-      "label": { "en": "Products that seem immediately unsafe" },
+      "label": { "en": "Products that seem immediately unsafe", "zh-Hans": "产品看起来存在即时安全风险" },
       "priority": 30,
       "riskLevel": 4,
       "stageLayer": "primary",
@@ -13,7 +13,7 @@
     },
     {
       "id": "Q",
-      "label": { "en": "Product safety or quality concerns" },
+      "label": { "en": "Product safety or quality concerns", "zh-Hans": "产品安全或质量存在疑虑" },
       "priority": 20,
       "riskLevel": 3,
       "stageLayer": "primary",
@@ -23,7 +23,7 @@
     },
     {
       "id": "U",
-      "label": { "en": "Uncertain product issue" },
+      "label": { "en": "Uncertain product issue", "zh-Hans": "产品问题类型不明确" },
       "priority": 10,
       "riskLevel": 2,
       "stageLayer": "primary",
@@ -33,7 +33,7 @@
     },
     {
       "id": "S",
-      "label": { "en": "Safety first" },
+      "label": { "en": "Safety first", "zh-Hans": "先处理安全风险" },
       "priority": 100,
       "riskLevel": 5,
       "stageLayer": "overlay",
@@ -43,7 +43,7 @@
     },
     {
       "id": "E",
-      "label": { "en": "Evidence needs to be organised" },
+      "label": { "en": "Evidence needs to be organised", "zh-Hans": "证据需要整理" },
       "priority": 80,
       "riskLevel": 3,
       "stageLayer": "overlay",
@@ -54,7 +54,7 @@
     },
     {
       "id": "W",
-      "label": { "en": "Waiting for a clear seller response" },
+      "label": { "en": "Waiting for a clear seller response", "zh-Hans": "正在等待卖家明确回复" },
       "priority": 60,
       "riskLevel": 3,
       "stageLayer": "overlay",
@@ -65,7 +65,7 @@
     },
     {
       "id": "H",
-      "label": { "en": "Seller dismissed the issue or it remains unresolved" },
+      "label": { "en": "Seller dismissed the issue or it remains unresolved", "zh-Hans": "卖家淡化问题，或问题仍未解决" },
       "priority": 90,
       "riskLevel": 4,
       "stageLayer": "overlay",
@@ -76,7 +76,7 @@
     },
     {
       "id": "C",
-      "label": { "en": "First clear seller contact needed" },
+      "label": { "en": "First clear seller contact needed", "zh-Hans": "需要先与卖家进行一次明确联系" },
       "priority": 50,
       "riskLevel": 2,
       "stageLayer": "overlay",

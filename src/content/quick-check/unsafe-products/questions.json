@@ -3,89 +3,89 @@
   "questionFlow": [
     {
       "id": "what_seems_wrong",
-      "title": { "en": "What seems wrong with the product?" },
-      "description": { "en": "" },
+      "title": { "en": "What seems wrong with the product?", "zh-Hans": "这个产品看起来哪里有问题？" },
+      "description": { "en": "", "zh-Hans": "" },
       "selectionMode": "single",
       "options": [
         {
           "id": "unsafe",
-          "label": { "en": "It feels unsafe to use" }
+          "label": { "en": "It feels unsafe to use", "zh-Hans": "使用起来感觉不安全" }
         },
         {
           "id": "quality_or_fault",
-          "label": { "en": "It seems faulty, poor quality, or not working properly" }
+          "label": { "en": "It seems faulty, poor quality, or not working properly", "zh-Hans": "它似乎有故障、质量差，或无法正常工作" }
         },
         {
           "id": "uncertain_type",
-          "label": { "en": "I'm not sure whether it is a quality problem or a safety problem" }
+          "label": { "en": "I'm not sure whether it is a quality problem or a safety problem", "zh-Hans": "我不确定这是质量问题还是安全问题" }
         },
         {
           "id": "not_sure",
-          "label": { "en": "I'm not sure" }
+          "label": { "en": "I'm not sure", "zh-Hans": "我不确定" }
         }
       ]
     },
     {
       "id": "what_have_you_done_so_far",
-      "title": { "en": "What have you done so far?" },
-      "description": { "en": "" },
+      "title": { "en": "What have you done so far?", "zh-Hans": "到目前为止你做了什么？" },
+      "description": { "en": "", "zh-Hans": "" },
       "selectionMode": "single",
       "options": [
         {
           "id": "stopped_not_contacted",
-          "label": { "en": "I stopped using it, but I have not contacted the seller yet" }
+          "label": { "en": "I stopped using it, but I have not contacted the seller yet", "zh-Hans": "我已经停止使用，但还没有联系卖家" }
         },
         {
           "id": "collecting_evidence",
-          "label": { "en": "I have started collecting photos, receipts, or other evidence" }
+          "label": { "en": "I have started collecting photos, receipts, or other evidence", "zh-Hans": "我已经开始收集照片、收据或其他证据" }
         },
         {
           "id": "contacted_once",
-          "label": { "en": "I contacted the seller once, but I did not get a clear answer" }
+          "label": { "en": "I contacted the seller once, but I did not get a clear answer", "zh-Hans": "我联系过卖家一次，但没有得到明确答复" }
         },
         {
           "id": "seller_says_normal",
-          "label": { "en": "The seller said the problem is normal or not serious" }
+          "label": { "en": "The seller said the problem is normal or not serious", "zh-Hans": "卖家说这是正常情况，或问题并不严重" }
         },
         {
           "id": "still_unresolved",
-          "label": { "en": "The issue is still not resolved" }
+          "label": { "en": "The issue is still not resolved", "zh-Hans": "问题仍然没有解决" }
         },
         {
           "id": "not_sure",
-          "label": { "en": "I'm not sure" }
+          "label": { "en": "I'm not sure", "zh-Hans": "我不确定" }
         }
       ]
     },
     {
       "id": "what_is_happening_now",
-      "title": { "en": "What is happening now?" },
-      "description": { "en": "" },
+      "title": { "en": "What is happening now?", "zh-Hans": "现在是什么情况？" },
+      "description": { "en": "", "zh-Hans": "" },
       "selectionMode": "single",
       "options": [
         {
           "id": "may_still_be_unsafe",
-          "label": { "en": "I think it may still be unsafe to use" }
+          "label": { "en": "I think it may still be unsafe to use", "zh-Hans": "我觉得它现在用起来可能仍然不安全" }
         },
         {
           "id": "need_to_organise_evidence",
-          "label": { "en": "I need to organise my evidence" }
+          "label": { "en": "I need to organise my evidence", "zh-Hans": "我需要整理证据" }
         },
         {
           "id": "waiting_for_clear_reply",
-          "label": { "en": "I am still waiting for a clear reply" }
+          "label": { "en": "I am still waiting for a clear reply", "zh-Hans": "我还在等待明确回复" }
         },
         {
           "id": "seller_repeating_normal",
-          "label": { "en": "The seller keeps saying the problem is normal or not serious" }
+          "label": { "en": "The seller keeps saying the problem is normal or not serious", "zh-Hans": "卖家一直说这是正常情况，或问题并不严重" }
         },
         {
           "id": "still_unresolved_now",
-          "label": { "en": "The issue is still not resolved" }
+          "label": { "en": "The issue is still not resolved", "zh-Hans": "问题仍然没有解决" }
         },
         {
           "id": "not_sure",
-          "label": { "en": "I'm not sure" }
+          "label": { "en": "I'm not sure", "zh-Hans": "我不确定" }
         }
       ]
     }
