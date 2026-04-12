@@ -10,16 +10,6 @@ type AibotPageProps = {
   onFallbackNavigate?: (route: string) => void;
 };
 
-function StatusDot({ status }: { status: string }) {
-  const cls =
-    status === "offline" || status === "error"
-      ? "aibot-dot aibot-dot--offline"
-      : status === "connecting" || status === "streaming"
-        ? "aibot-dot aibot-dot--connecting"
-        : "aibot-dot aibot-dot--online";
-  return <span className={cls} aria-hidden="true" />;
-}
-
 function formatTime(timestamp: number): string {
   return new Date(timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }

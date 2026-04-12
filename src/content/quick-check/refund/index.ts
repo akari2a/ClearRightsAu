@@ -87,7 +87,7 @@ const OVERLAY_DISPLAY_ORDER: Record<string, { order: number; role: GuideResultSe
 
 export function getRefundResultSections(
   result: GuideResult,
-  answers: QuickCheckAnswers
+  _answers: QuickCheckAnswers
 ): GuideResultSection[] {
   const sections: Array<GuideResultSection & { displayOrder: number }> = [];
 
