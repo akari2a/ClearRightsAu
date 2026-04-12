@@ -55,7 +55,7 @@ export type SuccessCase = {
 };
 
 export type CaseIndexGroup = {
-  categoryKey: CaseCategoryKey;
+  categoryKey: string;
   categoryLabel: string;
   description: string;
   tintColor: string;

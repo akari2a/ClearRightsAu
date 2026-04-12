@@ -50,6 +50,10 @@
   --color-risk-warning-border: #ffe28a;
   --color-risk-warning-text: #8a6400;
 
+  --color-risk-high-surface: #fff0e3;
+  --color-risk-high-border: #f6be84;
+  --color-risk-high-text: #9a4700;
+
   --color-risk-danger-surface: #ffd8d6;
   --color-risk-danger-border: #f2a09b;
   --color-risk-danger-text: #8e1f17;

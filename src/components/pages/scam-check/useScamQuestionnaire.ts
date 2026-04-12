@@ -7,6 +7,7 @@ type ScamQuestionnaireOptions = {
   isComplete: boolean;
   onComplete: () => void;
   onShowResults: () => void;
+  onRestoreResult: (answers: QuickCheckAnswers) => void;
 };
 
 type ScamQuestionnaireHistoryState = {
@@ -29,6 +30,120 @@ function createQuickCheckHistoryState(
     quickCheckQuestionIndex: questionIndex,
     quickCheckResultView: options?.resultView ?? false,
     quickCheckEntryType: options?.entryType ?? "question"
+  };
+}
+
+type ParsedQuestionnaireUrlState = {
+  answers: QuickCheckAnswers;
+  questionIndex: number;
+  resultView: boolean;
+  hasExplicitState: boolean;
+};
+
+function clampQuestionIndex(index: number, questionCount: number) {
+  if (questionCount === 0) {
+    return 0;
+  }
+
+  return Math.min(Math.max(index, 0), questionCount - 1);
+}
+
+function isValidOptionId(question: QuickCheckQuestion, optionId: string) {
+  return question.options.some((option) => option.id === optionId);
+}
+
+function parseAnswerFromSearchParams(searchParams: URLSearchParams, question: QuickCheckQuestion) {
+  const rawValue = searchParams.get(question.id);
+
+  if (!rawValue) {
+    return undefined;
+  }
+
+  if (question.selectionMode === "multiple") {
+    const values = rawValue
+      .split(",")
+      .map((value) => value.trim())
+      .filter((value) => value.length > 0 && isValidOptionId(question, value));
+
+    return values.length > 0 ? values : undefined;
+  }
+
+  return isValidOptionId(question, rawValue) ? rawValue : undefined;
+}
+
+function createQuestionnaireSearchParams(
+  answers: QuickCheckAnswers,
+  questions: QuickCheckQuestion[],
+  options?: {
+    questionIndex?: number;
+    resultView?: boolean;
+  }
+) {
+  const searchParams = new URLSearchParams();
+
+  questions.forEach((question) => {
+    const answer = answers[question.id];
+
+    if (Array.isArray(answer) && answer.length > 0) {
+      searchParams.set(question.id, answer.join(","));
+      return;
+    }
+
+    if (typeof answer === "string" && answer.length > 0) {
+      searchParams.set(question.id, answer);
+    }
+  });
+
+  if (options?.resultView) {
+    searchParams.set("view", "result");
+  } else {
+    searchParams.set("step", String(clampQuestionIndex(options?.questionIndex ?? 0, questions.length)));
+  }
+
+  return searchParams;
+}
+
+function buildQuestionnaireUrl(
+  answers: QuickCheckAnswers,
+  questions: QuickCheckQuestion[],
+  options?: {
+    questionIndex?: number;
+    resultView?: boolean;
+  }
+) {
+  const search = createQuestionnaireSearchParams(answers, questions, options).toString();
+
+  return search.length > 0 ? `${window.location.pathname}?${search}` : window.location.pathname;
+}
+
+export function parseQuestionnaireUrlState(
+  search: string,
+  questions: QuickCheckQuestion[]
+): ParsedQuestionnaireUrlState {
+  const searchParams = new URLSearchParams(search);
+  const answers: QuickCheckAnswers = {};
+
+  questions.forEach((question) => {
+    const answer = parseAnswerFromSearchParams(searchParams, question);
+
+    if (answer !== undefined) {
+      answers[question.id] = answer;
+    }
+  });
+
+  const resultView = searchParams.get("view") === "result";
+  const rawQuestionIndex = Number.parseInt(searchParams.get("step") ?? "0", 10);
+  const questionIndex = clampQuestionIndex(Number.isNaN(rawQuestionIndex) ? 0 : rawQuestionIndex, questions.length);
+  const hasExplicitState =
+    searchParams.has("view") ||
+    searchParams.has("step") ||
+    questions.some((question) => searchParams.has(question.id));
+
+  return {
+    answers,
+    questionIndex,
+    resultView,
+    hasExplicitState
   };
 }
 
@@ -70,22 +185,70 @@ export function useScamQuestionnaire({
   questions,
   isComplete,
   onComplete,
-  onShowResults
+  onShowResults,
+  onRestoreResult
 }: ScamQuestionnaireOptions) {
   const navigate = useNavigate();
-  const [answers, setAnswers] = useState<QuickCheckAnswers>({});
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const initialUrlStateRef = useRef<ParsedQuestionnaireUrlState>(parseQuestionnaireUrlState(window.location.search, questions));
+  const [answers, setAnswers] = useState<QuickCheckAnswers>(initialUrlStateRef.current.answers);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(initialUrlStateRef.current.questionIndex);
   const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
   const isCollapsingHistoryRef = useRef(false);
   const isLeavingQuestionnaireRef = useRef(false);
   const quickCheckSessionIdRef = useRef(`quick-check-${Date.now()}`);
   const questionnaireExitFallbackRef = useRef("/");
   const completionTimeoutRef = useRef<number | null>(null);
+  const answersRef = useRef<QuickCheckAnswers>(initialUrlStateRef.current.answers);
+  const questionIndexRef = useRef(initialUrlStateRef.current.questionIndex);
+  const onShowResultsRef = useRef(onShowResults);
+  const onRestoreResultRef = useRef(onRestoreResult);
 
   const currentQuestion = questions[currentQuestionIndex];
   const currentAnswer = answers[currentQuestion.id];
   const currentSelectionCount = getSelectedOptionCount(currentAnswer);
   const isMultiSelectQuestion = currentQuestion.selectionMode === "multiple";
+
+  useEffect(() => {
+    onShowResultsRef.current = onShowResults;
+  }, [onShowResults]);
+
+  useEffect(() => {
+    onRestoreResultRef.current = onRestoreResult;
+  }, [onRestoreResult]);
+
+  useEffect(() => {
+    answersRef.current = answers;
+  }, [answers]);
+
+  useEffect(() => {
+    questionIndexRef.current = currentQuestionIndex;
+  }, [currentQuestionIndex]);
+
+  useEffect(() => {
+    if (isComplete) {
+      return;
+    }
+
+    const nextUrl = buildQuestionnaireUrl(answers, questions, { questionIndex: currentQuestionIndex });
+    const currentUrl = `${window.location.pathname}${window.location.search}`;
+
+    if (currentUrl === nextUrl) {
+      return;
+    }
+
+    const currentState = (window.history.state ?? {}) as Partial<ScamQuestionnaireHistoryState>;
+    const nextState =
+      currentState.quickCheckSessionId === quickCheckSessionIdRef.current
+        ? {
+            ...currentState,
+            quickCheckQuestionIndex: currentQuestionIndex,
+            quickCheckResultView: false,
+            quickCheckEntryType: currentState.quickCheckEntryType === "base" ? "base" : "question"
+          }
+        : createQuickCheckHistoryState(quickCheckSessionIdRef.current, currentQuestionIndex);
+
+    navigate(nextUrl, { replace: true, state: nextState });
+  }, [answers, currentQuestionIndex, isComplete, navigate, questions]);
 
   useEffect(() => {
     const sessionId = quickCheckSessionIdRef.current;
@@ -103,9 +266,42 @@ export function useScamQuestionnaire({
       }
     }
 
-    window.history.replaceState(createQuickCheckHistoryState(sessionId, 0, { entryType: "base" }), "", window.location.href);
-    window.history.pushState(createQuickCheckHistoryState(sessionId, 0), "", window.location.href);
-  }, []);
+    if (initialUrlStateRef.current.resultView) {
+      const resultUrl = buildQuestionnaireUrl(initialUrlStateRef.current.answers, questions, {
+        resultView: true
+      });
+      navigate(resultUrl, {
+        replace: true,
+        state: createQuickCheckHistoryState(sessionId, 0, {
+          resultView: true,
+          entryType: "result"
+        })
+      });
+      onRestoreResultRef.current(initialUrlStateRef.current.answers);
+      window.setTimeout(() => {
+        onShowResultsRef.current();
+      }, 0);
+      return;
+    }
+
+    if (!initialUrlStateRef.current.hasExplicitState) {
+      window.history.replaceState(createQuickCheckHistoryState(sessionId, 0, { entryType: "base" }), "", window.location.pathname);
+      navigate(buildQuestionnaireUrl(initialUrlStateRef.current.answers, questions, { questionIndex: 0 }), {
+        state: createQuickCheckHistoryState(sessionId, 0)
+      });
+      return;
+    }
+
+    window.history.replaceState(createQuickCheckHistoryState(sessionId, 0, { entryType: "base" }), "", window.location.pathname);
+    navigate(
+      buildQuestionnaireUrl(initialUrlStateRef.current.answers, questions, {
+        questionIndex: initialUrlStateRef.current.questionIndex
+      }),
+      {
+        state: createQuickCheckHistoryState(sessionId, initialUrlStateRef.current.questionIndex)
+      }
+    );
+  }, [navigate, questions]);
 
   useEffect(() => {
     const handlePopState = (event: PopStateEvent) => {
@@ -121,18 +317,28 @@ export function useScamQuestionnaire({
       }
 
       if (isCollapsingHistoryRef.current) {
-        window.history.replaceState(
-          createQuickCheckHistoryState(quickCheckSessionIdRef.current, 0, {
+        const resultUrl = buildQuestionnaireUrl(answersRef.current, questions, { resultView: true });
+        navigate(resultUrl, {
+          replace: true,
+          state: createQuickCheckHistoryState(quickCheckSessionIdRef.current, 0, {
             resultView: true,
             entryType: "result"
-          }),
-          "",
-          window.location.href
-        );
+          })
+        });
         isCollapsingHistoryRef.current = false;
         setCurrentQuestionIndex(0);
         window.setTimeout(() => {
-          onShowResults();
+          onShowResultsRef.current();
+        }, 50);
+        return;
+      }
+
+      if (!isComplete && state.quickCheckEntryType === "result") {
+        const restoredAnswers = parseQuestionnaireUrlState(window.location.search, questions).answers;
+        setAnswers(restoredAnswers);
+        onRestoreResultRef.current(restoredAnswers);
+        window.setTimeout(() => {
+          onShowResultsRef.current();
         }, 50);
         return;
       }
@@ -142,21 +348,33 @@ export function useScamQuestionnaire({
       }
 
       if (state.quickCheckEntryType === "base" && state.quickCheckQuestionIndex === 0) {
-        window.history.pushState(createQuickCheckHistoryState(quickCheckSessionIdRef.current, 0), "", window.location.href);
+        window.history.pushState(
+          createQuickCheckHistoryState(quickCheckSessionIdRef.current, questionIndexRef.current),
+          "",
+          buildQuestionnaireUrl(answersRef.current, questions, { questionIndex: questionIndexRef.current })
+        );
         setIsExitDialogOpen(true);
         return;
       }
 
       if (typeof state.quickCheckQuestionIndex === "number") {
-        setAnswers((currentAnswers) => clearAnswersFromQuestionIndex(currentAnswers, questions, state.quickCheckQuestionIndex ?? 0));
-        setCurrentQuestionIndex(state.quickCheckQuestionIndex);
+        const nextQuestionIndex = state.quickCheckQuestionIndex;
+        setAnswers((currentAnswers) => {
+          const nextAnswers = clearAnswersFromQuestionIndex(currentAnswers, questions, nextQuestionIndex);
+          navigate(buildQuestionnaireUrl(nextAnswers, questions, { questionIndex: nextQuestionIndex }), {
+            replace: true,
+            state: createQuickCheckHistoryState(quickCheckSessionIdRef.current, nextQuestionIndex)
+          });
+          return nextAnswers;
+        });
+        setCurrentQuestionIndex(nextQuestionIndex);
       }
     };
 
     window.addEventListener("popstate", handlePopState);
 
     return () => window.removeEventListener("popstate", handlePopState);
-  }, [isComplete, onShowResults, questions]);
+  }, [isComplete, navigate, questions]);
 
   useEffect(() => {
     return () => {
@@ -189,11 +407,9 @@ export function useScamQuestionnaire({
       return;
     }
 
-    window.history.pushState(
-      createQuickCheckHistoryState(quickCheckSessionIdRef.current, nextQuestionIndex),
-      "",
-      window.location.href
-    );
+    navigate(buildQuestionnaireUrl(answersRef.current, questions, { questionIndex: nextQuestionIndex }), {
+      state: createQuickCheckHistoryState(quickCheckSessionIdRef.current, nextQuestionIndex)
+    });
     setCurrentQuestionIndex(nextQuestionIndex);
   };
 
@@ -220,18 +436,24 @@ export function useScamQuestionnaire({
             : [...nonExclusiveSelections, optionId];
         }
 
-        return {
+        const nextAnswers = {
           ...current,
           [currentQuestion.id]: nextSelections
         };
+
+        return nextAnswers;
       });
       return;
     }
 
-    setAnswers((current) => ({
-      ...current,
-      [currentQuestion.id]: optionId
-    }));
+    setAnswers((current) => {
+      const nextAnswers = {
+        ...current,
+        [currentQuestion.id]: optionId
+      };
+
+      return nextAnswers;
+    });
 
     completionTimeoutRef.current = window.setTimeout(() => {
       advanceQuestionnaire();
@@ -258,8 +480,9 @@ export function useScamQuestionnaire({
     setAnswers({});
     setCurrentQuestionIndex(0);
     setIsExitDialogOpen(false);
-    window.history.replaceState(createQuickCheckHistoryState(quickCheckSessionIdRef.current, 0, { entryType: "base" }), "", window.location.href);
-    window.history.pushState(createQuickCheckHistoryState(quickCheckSessionIdRef.current, 0), "", window.location.href);
+    navigate(buildQuestionnaireUrl({}, questions, { questionIndex: 0 }), {
+      state: createQuickCheckHistoryState(quickCheckSessionIdRef.current, 0)
+    });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

@@ -49,27 +49,27 @@
       "accentColor": "#2563eb"
     },
     {
-      "categoryKey": "refund",
-      "categoryLabel": "Refund & product cases",
-      "description": "Examples of how people dealt with misleading products, faulty goods, and safety concerns.",
+      "categoryKey": "refund-replacement",
+      "categoryLabel": "Refund & replacement cases",
+      "description": "Examples of how people dealt with refunds, misleading sales, replacements, and housing disputes.",
       "caseIds": [
         "ching-refund",
-        "mrs-wang-heater",
         "broken-laptop",
-        "gym-membership-cancel"
-      ],
-      "tintColor": "#EDF9F8",
-      "accentColor": "#0d9488"
-    },
-    {
-      "categoryKey": "tenancy",
-      "categoryLabel": "Tenancy cases",
-      "description": "Examples of how renters resolved bond deductions and disputes with landlords.",
-      "caseIds": [
+        "gym-membership-cancel",
         "simon-wang-bond",
         "mold-ignored",
         "rent-increase-notice",
         "water-leak-repair"
+      ],
+      "tintColor": "#FFF7ED",
+      "accentColor": "#d97706"
+    },
+    {
+      "categoryKey": "product-safety",
+      "categoryLabel": "Unsafe products",
+      "description": "Examples of how people responded to product safety issues and dangerous defects.",
+      "caseIds": [
+        "mrs-wang-heater"
       ],
       "tintColor": "#FFF7ED",
       "accentColor": "#d97706"

@@ -54,6 +54,7 @@ export type QuickCheckFormatTextContent = {
 export type QuickCheckActionItem = {
   id: string;
   kind: "step";
+  summary: QuickCheckLocalizedText;
   showWhen?: Array<{
     questionId: string;
     includesAny: string[];

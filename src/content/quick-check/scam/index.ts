@@ -84,6 +84,7 @@ export function createFallbackActionPack(stage: QuickCheckStage): QuickCheckActi
       {
         id: "pending_guidance",
         kind: "step",
+        summary: { en: "Detailed guidance" },
         content: {
           type: "plain_text",
           text: { en: "Detailed guidance for this stage will be added next." }
@@ -103,6 +104,13 @@ export function resolveActionItemText(
   }
 
   return resolveFormatText(item.content, answers, locale);
+}
+
+export function resolveActionItemSummary(
+  item: QuickCheckActionItem,
+  locale: AppLocale = DEFAULT_LOCALE
+): string {
+  return getLocalizedText(item.summary, locale);
 }
 
 export function shouldDisplayActionItem(item: QuickCheckActionItem, answers: QuickCheckAnswers): boolean {

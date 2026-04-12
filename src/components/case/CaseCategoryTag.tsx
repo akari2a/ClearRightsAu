@@ -9,7 +9,7 @@ type CaseCategoryTagProps = {
 const CASE_CATEGORY_TONE_MAP: Record<CaseCategoryTagProps["category"], string> = {
   scam: "scam",
   refund: "refund",
-  "product-safety": "refund",
+  "product-safety": "product-safety",
   tenancy: "tenancy"
 };
 

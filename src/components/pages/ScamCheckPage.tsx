@@ -1,9 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getCasesPageContent } from "../../content/casesContent";
 import {
   createFallbackActionPack,
   getActionPackForStage,
   getLocalizedText,
   hasUsableActionPackContent,
+  resolveActionItemSummary,
   resolveActionItemText,
   resolveHighestPriorityStage,
   resolveMatchingStages,
@@ -13,43 +16,58 @@ import {
 import { DEFAULT_LOCALE } from "../../i18n/config";
 import type { QuickCheckActionPack, QuickCheckAnswers, QuickCheckStage } from "../../types/quickCheck";
 import { InteractiveCardButton } from "../controls/InteractiveCardButton";
+import { CaseCategoryTag } from "../case/CaseCategoryTag";
+import { RiskSummaryCard } from "../risk/RiskSummaryCard";
+import { createStepPresentation, StepDetailCard } from "../steps/StepDetailCard";
 import { QuickCheckExitDialog } from "./scam-check/QuickCheckExitDialog";
-import { isOptionSelected, useScamQuestionnaire } from "./scam-check/useScamQuestionnaire";
+import {
+  isOptionSelected,
+  parseQuestionnaireUrlState,
+  useScamQuestionnaire
+} from "./scam-check/useScamQuestionnaire";
 
 type ScamCheckPageProps = {
   onQuestionnaireComplete?: (answers: QuickCheckAnswers, stage: QuickCheckStage | null) => void;
   onSectionNavigate?: (sectionId: string) => void;
 };
 
-function getResultBadge(stageId?: string) {
-  if (stageId === "H" || stageId === "F" || stageId === "G") {
-    return { label: "Act now", tone: "danger" as const };
+function getRiskLevelPresentation(riskLevel?: number) {
+  if (riskLevel === 0) {
+    return { label: "Risk level 0", tone: "low" as const };
   }
 
-  if (stageId === "D" || stageId === "E" || stageId === "W") {
-    return { label: "Take action soon", tone: "warning" as const };
+  if (riskLevel === 1) {
+    return { label: "Risk level 1", tone: "caution" as const };
   }
 
-  return { label: "Quick check result", tone: "warning" as const };
-}
+  if (riskLevel === 2) {
+    return { label: "Risk level 2", tone: "warning" as const };
+  }
 
-function ResultStepCard({ number, text }: { number: number; text: string }) {
-  return (
-    <section className="detail-card detail-card--step">
-      <span className="detail-card__floating-index" aria-hidden="true">
-        {number}
-      </span>
-      <p className="detail-card__eyebrow">{`Step ${number}`}</p>
-      <p className="detail-card__step-text">{text}</p>
-    </section>
-  );
+  if (riskLevel === 3) {
+    return { label: "Risk level 3", tone: "high" as const };
+  }
+
+  if (riskLevel === 4) {
+    return { label: "Risk level 4", tone: "danger" as const };
+  }
+
+  return { label: "Risk level", tone: "warning" as const };
 }
 
 export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: ScamCheckPageProps) {
+  const navigate = useNavigate();
   const locale = DEFAULT_LOCALE;
   const questions = SCAM_QUESTIONNAIRE.questionFlow;
-  const [isComplete, setIsComplete] = useState(false);
-  const [activeSectionId, setActiveSectionId] = useState<string>("questionnaire");
+  const initialQuestionnaireUrlState = useMemo(
+    () => parseQuestionnaireUrlState(window.location.search, questions),
+    [questions]
+  );
+  const casesContent = useMemo(() => getCasesPageContent(locale), [locale]);
+  const [isComplete, setIsComplete] = useState(initialQuestionnaireUrlState.resultView);
+  const [activeSectionId, setActiveSectionId] = useState<string>(
+    initialQuestionnaireUrlState.resultView ? "action-plan" : "questionnaire"
+  );
   const {
     answers,
     currentQuestion,
@@ -68,7 +86,11 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
     questions,
     isComplete,
     onComplete: () => setIsComplete(true),
-    onShowResults: () => handleSectionNavigate("action-plan")
+    onShowResults: () => handleSectionNavigate("action-plan"),
+    onRestoreResult: () => {
+      setIsComplete(true);
+      setActiveSectionId("action-plan");
+    }
   });
   const currentAnswer = answers[currentQuestion.id];
   const matchingStages = useMemo(() => (isComplete ? resolveMatchingStages(answers) : []), [answers, isComplete]);
@@ -86,20 +108,31 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
 
     return configuredPack;
   }, [resolvedStage]);
-  const resultBadge = useMemo(() => getResultBadge(resolvedStage?.id), [resolvedStage]);
+  const resultBadge = useMemo(() => getRiskLevelPresentation(resolvedStage?.riskLevel), [resolvedStage]);
   const flattenedSteps = useMemo(
     () =>
       (actionPack?.steps ?? [])
         .filter((step) => shouldDisplayActionItem(step, answers))
-        .map((step, index) => ({
-        id: `result-step-${step.id}`,
-        number: index + 1,
-        text: resolveActionItemText(step, answers, locale),
-        navLabel: resolveActionItemText(step, answers, locale)
-      })),
+        .map((step, index) => {
+          const resolvedSummary = resolveActionItemSummary(step, locale);
+          const resolvedText = resolveActionItemText(step, answers, locale);
+          const presentation = createStepPresentation(resolvedSummary, resolvedText);
+
+          return {
+            id: `result-step-${step.id}`,
+            number: index + 1,
+            summary: presentation.summary,
+            text: presentation.paragraphs.join("\n"),
+            navLabel: presentation.summary
+          };
+        }),
     [actionPack, answers, locale]
   );
   const resultNavItems = useMemo(() => flattenedSteps.map((step) => ({ id: step.id, title: step.navLabel })), [flattenedSteps]);
+  const relatedCases = useMemo(
+    () => casesContent.cases.filter((caseItem) => caseItem.category === "scam").slice(0, 3),
+    [casesContent]
+  );
 
   useEffect(() => {
     if (isComplete) {
@@ -175,6 +208,10 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
     handleRestart();
     setIsComplete(false);
     setActiveSectionId("questionnaire");
+  };
+
+  const saveAsPdf = () => {
+    window.print();
   };
 
   return (
@@ -258,51 +295,85 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
             </section>
           ) : (
             <section className="detail-section" id="action-plan">
-              <div className="detail-page__risk-card detail-result-intro">
-                <span className={`risk-badge risk-badge--${resultBadge.tone}`}>{resultBadge.label}</span>
-                <h3 className="detail-result-intro__title">
-                  {actionPack
-                    ? getLocalizedText(actionPack.resultTitle, locale)
-                    : resolvedStage
-                      ? getLocalizedText(resolvedStage.label, locale)
-                      : "Result"}
-                </h3>
-                {actionPack && getLocalizedText(actionPack.resultSummary, locale) ? (
-                  <p className="detail-result-intro__summary">{getLocalizedText(actionPack.resultSummary, locale)}</p>
-                ) : null}
-              </div>
+              <RiskSummaryCard
+                label={resultBadge.label}
+                tone={resultBadge.tone}
+                title={
+                  resolvedStage
+                    ? getLocalizedText(resolvedStage.label, locale)
+                    : actionPack
+                      ? getLocalizedText(actionPack.resultTitle, locale)
+                      : "Result"
+                }
+                summary={actionPack ? getLocalizedText(actionPack.resultSummary, locale) : ""}
+              />
 
               <div className="detail-step-list">
                 {flattenedSteps.map((step) => (
                   <section key={step.id} id={step.id}>
-                    <ResultStepCard number={step.number} text={step.text} />
+                    <StepDetailCard number={step.number} summary={step.summary} text={step.text} />
                   </section>
                 ))}
               </div>
 
-              <div style={{ marginTop: "40px" }}>
-                <button className="detail-result-intro__restart" type="button" onClick={restartQuestionnaire}>
-                  Start again
-                </button>
-              </div>
+              {relatedCases.length > 0 ? (
+                <section className="detail-result-related">
+                  <div className="detail-section__header detail-section__header--compact">
+                    <h2 className="detail-section__title">Related cases</h2>
+                  </div>
+                  <div className="case-related__grid">
+                    {relatedCases.map((caseItem) => (
+                      <InteractiveCardButton
+                        key={caseItem.id}
+                        className="content-card content-card--interactive"
+                        onClick={() => navigate(`/cases/${caseItem.id}`)}
+                      >
+                        <CaseCategoryTag category={caseItem.category} label={caseItem.categoryLabel} className="content-card__eyebrow" />
+                        <p className="content-card__title">{caseItem.title}</p>
+                        <p className="content-card__description">{caseItem.summary}</p>
+                      </InteractiveCardButton>
+                    ))}
+                  </div>
+                </section>
+              ) : null}
             </section>
           )}
         </div>
 
         <aside className="detail-page__rail detail-page__rail--side">
           {isComplete ? (
-            <nav className="detail-page-nav" aria-label="On this page">
-              {resultNavItems.map((section, index) => (
-                <InteractiveCardButton
-                  key={section.id}
-                  className={`detail-page-nav__item${activeSectionId === section.id ? " detail-page-nav__item--active" : ""}`}
-                  onClick={() => handleSectionNavigate(section.id)}
-                >
-                  <span className="detail-page-nav__number">{index + 1}</span>
-                  <span className="detail-page-nav__label">{section.title}</span>
-                </InteractiveCardButton>
-              ))}
-            </nav>
+            <>
+              <div className="detail-page__rail-actions">
+                <button className="detail-page__rail-action" type="button" onClick={restartQuestionnaire}>
+                  <span className="detail-page__rail-action-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor">
+                      <path d="M480-80q-134 0-227-93T160-400q0-134 93-227t227-93q69 0 132 28.5T720-614v-106h80v280H520v-80h168q-32-56-87.5-88T480-640q-100 0-170 70t-70 170q0 100 70 170t170 70q68 0 124.5-34.5T692-288h90q-35 95-117 151.5T480-80Z"/>
+                    </svg>
+                  </span>
+                  <span className="detail-page__rail-action-label">Start again</span>
+                </button>
+                <button className="detail-page__rail-action" type="button" onClick={saveAsPdf}>
+                  <span className="detail-page__rail-action-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor">
+                      <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/>
+                    </svg>
+                  </span>
+                  <span className="detail-page__rail-action-label">Save as PDF</span>
+                </button>
+              </div>
+              <nav className="detail-page-nav" aria-label="On this page">
+                {resultNavItems.map((section, index) => (
+                  <InteractiveCardButton
+                    key={section.id}
+                    className={`detail-page-nav__item${activeSectionId === section.id ? " detail-page-nav__item--active" : ""}`}
+                    onClick={() => handleSectionNavigate(section.id)}
+                  >
+                    <span className="detail-page-nav__number">{index + 1}</span>
+                    <span className="detail-page-nav__label">{section.title}</span>
+                  </InteractiveCardButton>
+                ))}
+              </nav>
+            </>
           ) : (
             <div className="detail-page__rail-placeholder" aria-hidden="true" />
           )}

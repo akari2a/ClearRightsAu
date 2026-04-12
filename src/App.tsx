@@ -109,6 +109,11 @@ function App() {
     }
 
     if (destination === "guide") {
+      if (window.location.pathname === "/scam-check") {
+        window.location.assign("/scam-check");
+        return;
+      }
+
       navigate("/scam-check");
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;

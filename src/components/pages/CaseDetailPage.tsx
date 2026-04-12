@@ -2,8 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import type { CaseSectionMeta, SuccessCase } from "../../types/case";
 import { InteractiveCardButton } from "../controls/InteractiveCardButton";
 import { CaseCategoryTag } from "../case/CaseCategoryTag";
+import { RiskSummaryCard } from "../risk/RiskSummaryCard";
+import { StepDetailCard } from "../steps/StepDetailCard";
 import { DetailSectionHeader } from "../sections/DetailSectionHeader";
-import { ActionCardSection } from "../sections/ActionCardSection";
 
 type CaseDetailPageProps = {
   caseData: SuccessCase;
@@ -20,11 +21,23 @@ function riskToneClass(tone: string): string {
   return "risk-badge--warning";
 }
 
-function riskCardClass(tone: string): string {
-  if (tone === "low") return "detail-page__risk-card detail-page__risk-card--low";
-  if (tone === "caution") return "detail-page__risk-card detail-page__risk-card--caution";
-  if (tone === "danger") return "detail-page__risk-card detail-page__risk-card--danger";
-  return "detail-page__risk-card detail-page__risk-card--warning";
+function getCaseRiskLevelLabel(tone: string): string {
+  if (tone === "low") return "Risk level 0";
+  if (tone === "caution") return "Risk level 1";
+  if (tone === "danger") return "Risk level 4";
+  return "Risk level 2";
+}
+
+function getOutcomeSummaryLabel(headline: string): string {
+  return headline.split("—")[0]?.trim() || headline;
+}
+
+function getAssessmentSectionTitle(category: SuccessCase["category"]) {
+  return category === "scam" ? "How serious was this?" : "What this could mean";
+}
+
+function getAssessmentSectionEyebrow(category: SuccessCase["category"]) {
+  return category === "scam" ? "RISK ASSESSMENT" : "WHAT THIS COULD MEAN";
 }
 
 export function CaseDetailPage({
@@ -35,14 +48,29 @@ export function CaseDetailPage({
   onRelatedCaseClick
 }: CaseDetailPageProps) {
   const [activeSectionId, setActiveSectionId] = useState<string>(sections[0].id);
+  const isScamCase = caseData.category === "scam";
+  const riskLevelLabel = useMemo(() => getCaseRiskLevelLabel(caseData.riskTone), [caseData.riskTone]);
+  const outcomeSummaryLabel = useMemo(() => getOutcomeSummaryLabel(caseData.outcome.headline), [caseData.outcome.headline]);
+  const assessmentSectionTitle = useMemo(() => getAssessmentSectionTitle(caseData.category), [caseData.category]);
+  const assessmentSectionEyebrow = useMemo(() => getAssessmentSectionEyebrow(caseData.category), [caseData.category]);
+  const actionSteps = useMemo(
+    () =>
+      caseData.actionCards.map((card) => ({
+        id: card.id,
+        summary: card.title,
+        text: card.items.map((item) => `• ${item}`).join("\n")
+      })),
+    [caseData.actionCards]
+  );
 
   const sectionTitles = useMemo(() => {
     const map: Record<string, string> = {};
     sections.forEach((s) => {
       map[s.id] = s.title;
     });
+    map.assessment = assessmentSectionTitle;
     return map;
-  }, [sections]);
+  }, [assessmentSectionTitle, sections]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -99,13 +127,15 @@ export function CaseDetailPage({
                   <p className="case-glance__label">Category</p>
                   <p className="case-glance__value">{caseData.categoryLabel}</p>
                 </div>
-                <div className="case-glance__item">
-                  <p className="case-glance__label">Risk level</p>
-                  <p className="case-glance__value">{caseData.riskLabel}</p>
-                </div>
+                {isScamCase ? (
+                  <div className="case-glance__item">
+                    <p className="case-glance__label">Risk level</p>
+                    <p className="case-glance__value">{riskLevelLabel}</p>
+                  </div>
+                ) : null}
                 <div className="case-glance__item">
                   <p className="case-glance__label">Outcome</p>
-                  <p className="case-glance__value">{caseData.outcome.headline}</p>
+                  <p className="case-glance__value">{outcomeSummaryLabel}</p>
                 </div>
               </div>
             </div>
@@ -117,35 +147,58 @@ export function CaseDetailPage({
                   <p key={index} className="case-narrative__paragraph">{paragraph}</p>
                 ))}
               </div>
+              {isScamCase ? (
+                <button
+                  className="case-cta-callout"
+                  type="button"
+                  onClick={() => onRelatedGuideClick?.(caseData.takeaway.relatedGuideRoute)}
+                >
+                  <span className="case-cta-callout__text">{caseData.takeaway.relatedGuideLabel}</span>
+                  <span className="case-cta-callout__arrow" aria-hidden="true">→</span>
+                </button>
+              ) : null}
             </section>
 
-            <section className="detail-section" id="assessment">
-              <DetailSectionHeader eyebrow={`2. ${sections[1].eyebrow}`} title={sections[1].title} />
-              <div className={riskCardClass(caseData.riskTone)}>
-                <p className={`risk-badge ${riskToneClass(caseData.riskTone)}`}>
-                  {caseData.riskLabel}
-                </p>
-                <h2 className="detail-page__card-title">{caseData.riskHeadline}</h2>
-                <p className="detail-page__card-text">{caseData.riskExplanation}</p>
+          <section className="detail-section" id="assessment">
+            <DetailSectionHeader eyebrow={`2. ${assessmentSectionEyebrow}`} title={assessmentSectionTitle} />
+            {isScamCase ? (
+              <RiskSummaryCard
+                label={riskLevelLabel}
+                tone={riskToneClass(caseData.riskTone).replace("risk-badge--", "") as "low" | "caution" | "warning" | "danger"}
+                title={caseData.riskHeadline}
+                summary={caseData.riskExplanation}
+              />
+            ) : (
+              <div className="case-narrative">
+                <p className="case-narrative__paragraph case-narrative__paragraph--emphasis">{caseData.riskHeadline}</p>
+                <p className="case-narrative__paragraph">{caseData.riskExplanation}</p>
               </div>
-            </section>
+            )}
+          </section>
           </div>
 
           <section className="detail-section" id="action-plan">
             <DetailSectionHeader eyebrow={`3. ${sections[2].eyebrow}`} title={sections[2].title} />
-            <div className="detail-grid">
-              {caseData.actionCards.map((card) => (
-                <ActionCardSection key={card.id} card={card} />
+            <div className="detail-step-list">
+              {actionSteps.map((step, index) => (
+                <StepDetailCard key={step.id} number={index + 1} summary={step.summary} text={step.text} />
               ))}
             </div>
           </section>
 
           <section className="detail-section" id="outcome">
             <DetailSectionHeader eyebrow={`4. ${sections[3].eyebrow}`} title={sections[3].title} />
-            <div className="case-outcome-card">
-              <h2 className="detail-page__card-title">{caseData.outcome.headline}</h2>
-              <p className="detail-page__card-text">{caseData.outcome.description}</p>
-            </div>
+            {isScamCase ? (
+              <div className="case-outcome-card">
+                <h2 className="detail-page__card-title">{caseData.outcome.headline}</h2>
+                <p className="detail-page__card-text">{caseData.outcome.description}</p>
+              </div>
+            ) : (
+              <div className="case-narrative">
+                <p className="case-narrative__paragraph case-narrative__paragraph--emphasis">{caseData.outcome.headline}</p>
+                <p className="case-narrative__paragraph">{caseData.outcome.description}</p>
+              </div>
+            )}
           </section>
 
           <section className="detail-section" id="takeaway">
@@ -155,14 +208,16 @@ export function CaseDetailPage({
                 <li key={item} className="detail-list__item">{item}</li>
               ))}
             </ul>
-            <button
-              className="case-cta-callout"
-              type="button"
-              onClick={() => onRelatedGuideClick?.(caseData.takeaway.relatedGuideRoute)}
-            >
-              <span className="case-cta-callout__text">{caseData.takeaway.relatedGuideLabel}</span>
-              <span className="case-cta-callout__arrow" aria-hidden="true">→</span>
-            </button>
+            {!isScamCase ? (
+              <button
+                className="case-cta-callout"
+                type="button"
+                onClick={() => onRelatedGuideClick?.(caseData.takeaway.relatedGuideRoute)}
+              >
+                <span className="case-cta-callout__text">{caseData.takeaway.relatedGuideLabel}</span>
+                <span className="case-cta-callout__arrow" aria-hidden="true">→</span>
+              </button>
+            ) : null}
           </section>
 
           {relatedCases.length > 0 ? (
@@ -177,10 +232,7 @@ export function CaseDetailPage({
                   >
                     <CaseCategoryTag category={relCase.category} label={relCase.categoryLabel} className="content-card__eyebrow" />
                     <p className="content-card__title">{relCase.title}</p>
-                    <p className="case-card__meta">
-                      {relCase.persona.name} · {relCase.riskLabel}
-                    </p>
-                    <p className="case-card__action">Read case →</p>
+                    <p className="content-card__description">{relCase.summary}</p>
                   </InteractiveCardButton>
                 ))}
               </div>

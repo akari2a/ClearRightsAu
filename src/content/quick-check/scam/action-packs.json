@@ -46,6 +46,9 @@
                 }
               }
             }
+          },
+          "summary": {
+            "en": "Stop interacting"
           }
         },
         {
@@ -81,6 +84,9 @@
                 }
               }
             }
+          },
+          "summary": {
+            "en": "Save the evidence"
           }
         },
         {
@@ -91,6 +97,9 @@
             "text": {
               "en": "If you still feel unsure, verify it through official channels. Do not use the contact details provided by the other party."
             }
+          },
+          "summary": {
+            "en": "Verify through official channels"
           }
         },
         {
@@ -126,6 +135,9 @@
                 }
               }
             }
+          },
+          "summary": {
+            "en": "Block or report the source"
           }
         },
         {
@@ -136,6 +148,9 @@
             "text": {
               "en": "If you see similar content again in the future, stop and check first."
             }
+          },
+          "summary": {
+            "en": "Stay cautious next time"
           }
         },
         {
@@ -146,6 +161,9 @@
             "text": {
               "en": "Some of your personal information may already have been partially exposed. Strengthen the protection of your personal information and avoid displaying personal information on suspicious websites and public social media platforms."
             }
+          },
+          "summary": {
+            "en": "Protect exposed personal information"
           }
         }
       ]
@@ -192,6 +210,9 @@
                 }
               }
             }
+          },
+          "summary": {
+            "en": "Stop engaging now"
           }
         },
         {
@@ -227,6 +248,9 @@
                 }
               }
             }
+          },
+          "summary": {
+            "en": "Close the page or end the call"
           }
         },
         {
@@ -262,6 +286,9 @@
                 }
               }
             }
+          },
+          "summary": {
+            "en": "Check what you shared"
           }
         },
         {
@@ -297,6 +324,9 @@
                 }
               }
             }
+          },
+          "summary": {
+            "en": "Monitor follow-up activity"
           }
         },
         {
@@ -332,6 +362,9 @@
                 }
               }
             }
+          },
+          "summary": {
+            "en": "Save the details"
           }
         },
         {
@@ -342,6 +375,9 @@
             "text": {
               "en": "Use security software to scan your device and update your phone or computer system in time, to make sure the suspicious link cannot exploit system vulnerabilities to attack your device."
             }
+          },
+          "summary": {
+            "en": "Check device safety"
           }
         }
       ]
@@ -388,6 +424,9 @@
                 }
               }
             }
+          },
+          "summary": {
+            "en": "Write down what you shared"
           }
         },
         {
@@ -423,6 +462,9 @@
                 }
               }
             }
+          },
+          "summary": {
+            "en": "Change related passwords"
           }
         },
         {
@@ -458,6 +500,9 @@
                 }
               }
             }
+          },
+          "summary": {
+            "en": "Watch for follow-up scams"
           }
         },
         {
@@ -468,6 +513,9 @@
             "text": {
               "en": "Watch over the next period for more impersonation messages, unusual phone calls, or emails."
             }
+          },
+          "summary": {
+            "en": "Save the records"
           }
         },
         {
@@ -478,6 +526,9 @@
             "text": {
               "en": "If you are worried that your identity information may continue to be misused, seek help from official reporting channels as soon as possible."
             }
+          },
+          "summary": {
+            "en": "Report identity misuse"
           }
         },
         {
@@ -486,7 +537,9 @@
           "showWhen": [
             {
               "questionId": "main_worry",
-              "includesAny": ["account"]
+              "includesAny": [
+                "account"
+              ]
             }
           ],
           "content": {
@@ -494,6 +547,9 @@
             "text": {
               "en": "Change your account-related passwords as soon as possible."
             }
+          },
+          "summary": {
+            "en": "Secure affected accounts"
           }
         },
         {
@@ -502,7 +558,9 @@
           "showWhen": [
             {
               "questionId": "main_worry",
-              "includesAny": ["account"]
+              "includesAny": [
+                "account"
+              ]
             }
           ],
           "content": {
@@ -510,6 +568,9 @@
             "text": {
               "en": "Check with the relevant official service or platform whether your account may be at risk."
             }
+          },
+          "summary": {
+            "en": "Contact your bank if needed"
           }
         }
       ]
@@ -529,8 +590,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "If you can still log in to the account, change the password immediately.\nIf you entered online banking information, or if this bank card is linked to a payment account, immediately change:\n• online banking password\n• mobile banking password\n• payment platform password\n• the email password related to the account (if it is the same or similar, change it as well)"
+              "en": "If you can still log in to the account, change the password immediately.\nIf you entered online banking information, or if this bank card is linked to a payment account, immediately change:\n• Online banking password\n• Mobile banking password\n• Payment platform password\n• The email password related to the account (if it is the same or similar, change it as well)"
             }
+          },
+          "summary": {
+            "en": "Contact your bank"
           }
         },
         {
@@ -541,6 +605,9 @@
             "text": {
               "en": "Contact your bank or payment platform immediately.\nCall the customer service number on the back of your bank card, on the bank's official website, or in the official app.\nDo not call any number provided in suspicious messages, emails, or web pages."
             }
+          },
+          "summary": {
+            "en": "Explain what was shared"
           }
         },
         {
@@ -549,8 +616,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Check recent transaction records immediately.\nOpen your bank app, online banking, or payment platform and review transactions from the past few days or weeks.\nPay special attention to:\n• small charges you do not recognise\n• repeated charges\n• overseas transactions\n• transfers you did not authorise\n• unfamiliar merchant names"
+              "en": "Check recent transaction records immediately.\nOpen your bank app, online banking, or payment platform and review transactions from the past few days or weeks.\nPay special attention to:\n• Small charges you do not recognise\n• Repeated charges\n• Overseas transactions\n• Transfers you did not authorise\n• Unfamiliar merchant names"
             }
+          },
+          "summary": {
+            "en": "Ask about blocking or replacing cards"
           }
         },
         {
@@ -561,6 +631,9 @@
             "text": {
               "en": "Follow the bank's advice and decide whether you need to freeze the account or replace the bank card."
             }
+          },
+          "summary": {
+            "en": "Check recent transactions"
           }
         },
         {
@@ -569,8 +642,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Save the evidence and do not delete the related information.\nKeep as much information related to this incident as possible, such as:\n• screenshots of the suspicious website page\n• screenshots of text messages\n• conversation records\n• screenshots of payment pages\n• records of charges or deductions\n• the other party's account, number, website, or email\n• the time you contacted the bank and the result"
+              "en": "Save the evidence and do not delete the related information.\nKeep as much information related to this incident as possible, such as:\n• Screenshots of the suspicious website page\n• Screenshots of text messages\n• Conversation records\n• Screenshots of payment pages\n• Records of charges or deductions\n• The other party's account, number, website, or email\n• The time you contacted the bank and the result"
             }
+          },
+          "summary": {
+            "en": "Save payment evidence"
           }
         }
       ]
@@ -590,8 +666,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Change the passwords of the relevant accounts immediately.\nFirst change the password of the account where you just entered the password.\nIf the same password is also used elsewhere, change those accounts as well.\nPrioritise changing:\n• email\n• bank or payment platform\n• commonly used shopping platforms\n• social accounts\n• mobile carrier account"
+              "en": "Change the passwords of the relevant accounts immediately.\nFirst change the password of the account where you just entered the password.\nIf the same password is also used elsewhere, change those accounts as well.\nPrioritise changing:\n• Email\n• Bank or payment platform\n• Commonly used shopping platforms\n• Social accounts\n• Mobile carrier account"
             }
+          },
+          "summary": {
+            "en": "Change affected passwords"
           }
         },
         {
@@ -600,8 +679,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "If possible, enable or reset two-factor authentication.\nIf you still have control of the account, do this as soon as possible:\n• enable two-factor authentication\n• re-bind your own phone number or verification method\n• check whether it has been changed to an unfamiliar number, unfamiliar email, or unfamiliar device"
+              "en": "If possible, enable or reset two-factor authentication.\nIf you still have control of the account, do this as soon as possible:\n• Enable two-factor authentication\n• Re-bind your own phone number or verification method\n• Check whether it has been changed to an unfamiliar number, unfamiliar email, or unfamiliar device"
             }
+          },
+          "summary": {
+            "en": "Reset two-factor authentication"
           }
         },
         {
@@ -610,8 +692,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Check whether the account has been changed.\nAfter logging in, check for these signs:\n• unfamiliar device logins\n• unusual login locations\n• changed phone number or email\n• password changes\n• security notifications you do not recognise\n• account profile changes\n• orders, transfers, or activity records you did not carry out"
+              "en": "Check whether the account has been changed.\nAfter logging in, check for these signs:\n• Unfamiliar device logins\n• Unusual login locations\n• Changed phone number or email\n• Password changes\n• Security notifications you do not recognise\n• Account profile changes\n• Orders, transfers, or activity records you did not carry out"
             }
+          },
+          "summary": {
+            "en": "Check for account changes"
           }
         },
         {
@@ -622,6 +707,9 @@
             "text": {
               "en": "If you entered an SMS verification code, treat it as high risk.\nIf you gave the code to someone else or entered it on a suspicious page, do not only change the password. Also check whether the account and payment records have already been used."
             }
+          },
+          "summary": {
+            "en": "Treat verification codes as high risk"
           }
         },
         {
@@ -632,6 +720,9 @@
             "text": {
               "en": "If the verification code was related to a bank account, bank card, or payment platform, contact the bank immediately."
             }
+          },
+          "summary": {
+            "en": "Contact your bank if needed"
           }
         },
         {
@@ -642,6 +733,9 @@
             "text": {
               "en": "If you entered a bank card expiry date and CVV, treat it as a bank card risk issue."
             }
+          },
+          "summary": {
+            "en": "Treat card details as card risk"
           }
         },
         {
@@ -650,8 +744,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Save the evidence and related records.\nSave the following information:\n• screenshots of suspicious pages\n• screenshots of text messages\n• screenshots of emails\n• URL links\n• the other party's account or contact details\n• unusual notifications\n• transaction records\n• the time you contacted the platform or bank and the result"
+              "en": "Save the evidence and related records.\nSave the following information:\n• Screenshots of suspicious pages\n• Screenshots of text messages\n• Screenshots of emails\n• URL links\n• The other party's account or contact details\n• Unusual notifications\n• Transaction records\n• The time you contacted the platform or bank and the result"
             }
+          },
+          "summary": {
+            "en": "Save the evidence"
           }
         },
         {
@@ -662,6 +759,9 @@
             "text": {
               "en": "Continue checking for unusual activity over the next few days: whether you receive new login alerts, whether unfamiliar devices appear again, whether there are unusual charges, whether any account details are changed again, and whether you receive unfamiliar verification codes or security notifications."
             }
+          },
+          "summary": {
+            "en": "Monitor for unusual activity"
           }
         }
       ]
@@ -683,6 +783,9 @@
             "text": {
               "en": "Contact your bank or payment platform immediately.\nImmediately contact the bank, card issuer, or payment platform you actually used to make the payment. Use the official app, official website, or the contact details on the back of your bank card.\nDo not continue handling this through the number, link, or chat window sent by the other party."
             }
+          },
+          "summary": {
+            "en": "Contact your bank or payment provider"
           }
         },
         {
@@ -693,6 +796,9 @@
             "text": {
               "en": "Ask whether the payment can be stopped, disputed, or recovered. Different payment methods may have different handling options."
             }
+          },
+          "summary": {
+            "en": "Ask about stopping or recovering payment"
           }
         },
         {
@@ -701,8 +807,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Save the transaction number, payment screenshots, chat records, and the other party's information.\nDo not delete chat records and do not close the page.\nSave all information related to this payment, including:\n• payment screenshots\n• transaction records from the bank or payment platform\n• transaction number / reference number\n• the other party's name, account number, phone number, or email\n• chat records\n• suspicious text messages, emails, or website screenshots\n• product page or order page\n• the reason the other party gave for asking you to pay\n• the time you contacted the bank and the result"
+              "en": "Save the transaction number, payment screenshots, chat records, and the other party's information.\nDo not delete chat records and do not close the page.\nSave all information related to this payment, including:\n• Payment screenshots\n• Transaction records from the bank or payment platform\n• Transaction number / reference number\n• The other party's name, account number, phone number, or email\n• Chat records\n• Suspicious text messages, emails, or website screenshots\n• Product page or order page\n• The reason the other party gave for asking you to pay\n• The time you contacted the bank and the result"
             }
+          },
+          "summary": {
+            "en": "Save transaction evidence"
           }
         },
         {
@@ -713,6 +822,9 @@
             "text": {
               "en": "Do not make any further payments, and do not believe claims like \"make one more payment and you can get it back.\""
             }
+          },
+          "summary": {
+            "en": "Stop further payments"
           }
         },
         {
@@ -723,6 +835,9 @@
             "text": {
               "en": "Report it to the police or a scam reporting channel as soon as possible."
             }
+          },
+          "summary": {
+            "en": "Report the scam"
           }
         },
         {
@@ -733,6 +848,9 @@
             "text": {
               "en": "Keep checking whether there is any more unusual activity in the account."
             }
+          },
+          "summary": {
+            "en": "Keep watching the account"
           }
         }
       ]
@@ -752,8 +870,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Immediately stop the other party from continuing to operate your device.\nIf the other party is still on the call, in the chat, remotely connected, or screen-sharing, stop it at once.\nWhat you should do now:\n• hang up the call\n• end the chat\n• close remote control or screen sharing\n• do not click any buttons as instructed by the other party\n• do not open bank, payment, or verification code pages for them to see"
+              "en": "Immediately stop the other party from continuing to operate your device.\nIf the other party is still on the call, in the chat, remotely connected, or screen-sharing, stop it at once.\nWhat you should do now:\n• Hang up the call\n• End the chat\n• Close remote control or screen sharing\n• Do not click any buttons as instructed by the other party\n• Do not open bank, payment, or verification code pages for them to see"
             }
+          },
+          "summary": {
+            "en": "Stop remote access immediately"
           }
         },
         {
@@ -764,6 +885,9 @@
             "text": {
               "en": "If you are worried about the risk, disconnect from the network first (Wi-Fi, mobile data, Bluetooth, wired connection)."
             }
+          },
+          "summary": {
+            "en": "Disconnect the device if needed"
           }
         },
         {
@@ -774,6 +898,9 @@
             "text": {
               "en": "Delete the suspicious app, software, or file you just installed.\nDeleting it may help, but it does not necessarily mean the risk has been fully removed."
             }
+          },
+          "summary": {
+            "en": "Remove suspicious software"
           }
         },
         {
@@ -782,8 +909,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Use another safe device to change important passwords.\nPrioritise these accounts:\n• email\n• bank / payment platform\n• commonly used shopping platforms\n• social accounts\n• mobile carrier account"
+              "en": "Use another safe device to change important passwords.\nPrioritise these accounts:\n• Email\n• Bank / payment platform\n• Commonly used shopping platforms\n• Social accounts\n• Mobile carrier account"
             }
+          },
+          "summary": {
+            "en": "Change passwords from a safe device"
           }
         },
         {
@@ -794,6 +924,9 @@
             "text": {
               "en": "If you logged in to bank or payment accounts on that device, contact the bank as well."
             }
+          },
+          "summary": {
+            "en": "Contact your bank if accounts were used"
           }
         },
         {
@@ -802,8 +935,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Check whether your phone or computer is behaving unusually.\nCheck for things such as:\n• the device becoming very slow\n• strange pages popping up automatically\n• apps or programs appearing that you did not open\n• battery draining unusually fast\n• messages or emails being sent automatically\n• unfamiliar login alerts\n• camera or microphone turning on unexpectedly\n• unusual bank or payment account notifications"
+              "en": "Check whether your phone or computer is behaving unusually.\nCheck for things such as:\n• The device becoming very slow\n• Strange pages popping up automatically\n• Apps or programs appearing that you did not open\n• Battery draining unusually fast\n• Messages or emails being sent automatically\n• Unfamiliar login alerts\n• Camera or microphone turning on unexpectedly\n• Unusual bank or payment account notifications"
             }
+          },
+          "summary": {
+            "en": "Check for unusual device behaviour"
           }
         },
         {
@@ -814,6 +950,9 @@
             "text": {
               "en": "Check whether there are unfamiliar remote control permissions or accessibility permissions."
             }
+          },
+          "summary": {
+            "en": "Review remote permissions"
           }
         },
         {
@@ -822,8 +961,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Save evidence, but do not keep dealing with the other party.\nSuggested items to save:\n• call records\n• chat records\n• screenshots of the download page\n• the name of the installed software\n• links sent by the other party\n• the actions the other party told you to perform\n• screenshots of unusual prompts or pop-ups"
+              "en": "Save evidence, but do not keep dealing with the other party.\nSuggested items to save:\n• Call records\n• Chat records\n• Screenshots of the download page\n• The name of the installed software\n• Links sent by the other party\n• The actions the other party told you to perform\n• Screenshots of unusual prompts or pop-ups"
             }
+          },
+          "summary": {
+            "en": "Save device evidence"
           }
         },
         {
@@ -832,8 +974,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "If you are not sure whether the device is safe, do not use it to do these things for now.\nBefore you confirm the device is safe, try not to use it for:\n• logging in to email\n• logging in to bank accounts\n• entering bank card details\n• entering verification codes\n• saving new passwords\n• handling large payments"
+              "en": "If you are not sure whether the device is safe, do not use it to do these things for now.\nBefore you confirm the device is safe, try not to use it for:\n• Logging in to email\n• Logging in to bank accounts\n• Entering bank card details\n• Entering verification codes\n• Saving new passwords\n• Handling large payments"
             }
+          },
+          "summary": {
+            "en": "Avoid risky account use"
           }
         },
         {
@@ -844,6 +989,9 @@
             "text": {
               "en": "If the risk is high, consider asking a professional to inspect the device."
             }
+          },
+          "summary": {
+            "en": "Get technical help if needed"
           }
         }
       ]
@@ -858,13 +1006,60 @@
       },
       "steps": [
         {
-          "id": "step_1",
+          "id": "step_1_bank",
           "kind": "step",
+          "showWhen": [
+            {
+              "questionId": "what_is_happening_now",
+              "includesAny": ["transaction_issue"]
+            }
+          ],
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Contact the most relevant institution first: the bank, payment platform, or account service provider.\n• If it is a bank card, transfer, or deduction issue: contact the bank or card issuer first\n• If it is PayPal, a third-party payment service, or a platform wallet issue: contact the payment platform first\n• If an email, social account, or shopping account has been logged into or changed: contact the account service provider first\n• If multiple areas are affected: deal first with the one most likely to cause further loss, usually the bank or payment account"
+              "en": "Contact the bank, card issuer, or payment platform first.\n• Use the official bank app, bank customer service number, or payment platform help centre\n• Ask them to freeze, pause, reverse, or urgently review suspicious transactions if possible\n• If more than one payment method is affected, start with the one most likely to cause further loss"
             }
+          },
+          "summary": {
+            "en": "Contact the bank or payment provider first"
+          }
+        },
+        {
+          "id": "step_1_account",
+          "kind": "step",
+          "showWhen": [
+            {
+              "questionId": "what_is_happening_now",
+              "includesAny": ["login_alert", "account_issue"]
+            }
+          ],
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Contact the affected account service provider first.\n• Use the official security page, official help centre, or official support number\n• Tell them the account may already have been accessed, changed, or used without permission\n• If more than one account is affected, start with the one that could lead to the fastest further loss"
+            }
+          },
+          "summary": {
+            "en": "Contact the account provider first"
+          }
+        },
+        {
+          "id": "step_1_device",
+          "kind": "step",
+          "showWhen": [
+            {
+              "questionId": "what_is_happening_now",
+              "includesAny": ["device_issue"]
+            }
+          ],
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Treat the device issue as urgent and contact the most affected provider first.\n• If the device issue may affect your bank or payment access, contact the bank or payment provider first\n• If the device issue may affect an email, social, or shopping account, contact that account provider first\n• Prioritise the area most likely to cause further loss"
+            }
+          },
+          "summary": {
+            "en": "Prioritise the most affected provider"
           }
         },
         {
@@ -875,16 +1070,66 @@
             "text": {
               "en": "Clearly tell them that you have already noticed unusual activity."
             }
+          },
+          "summary": {
+            "en": "Explain the unusual activity"
           }
         },
         {
-          "id": "step_3",
+          "id": "step_3_account",
           "kind": "step",
+          "showWhen": [
+            {
+              "questionId": "what_is_happening_now",
+              "includesAny": ["login_alert", "account_issue"]
+            }
+          ],
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Immediately protect the account, password, card, or device.\nIf it is an account issue:\n• change the password immediately\n• log out all unfamiliar devices\n• check whether the bound email or phone number has been changed\n• reset two-factor authentication\n\nIf it is a bank card or payment issue:\n• contact the bank or payment platform\n• ask whether the account needs to be frozen, the card replaced, or transactions paused\n• check recent transaction records\n\nIf the device may also be affected:\n• stop using the suspicious device for important tasks\n• use another safe device to change passwords\n• check for suspicious software, remote access, or unusual permissions\n• refer to the device access guidance in Stage G if needed"
+              "en": "Secure the affected account immediately.\n• Change the password immediately\n• Log out all unfamiliar devices\n• Check whether the bound email or phone number has been changed\n• Reset two-factor authentication"
             }
+          },
+          "summary": {
+            "en": "Secure the affected account"
+          }
+        },
+        {
+          "id": "step_3_bank",
+          "kind": "step",
+          "showWhen": [
+            {
+              "questionId": "what_is_happening_now",
+              "includesAny": ["transaction_issue"]
+            }
+          ],
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Secure the affected bank card or payment method immediately.\n• Contact the bank or payment platform\n• Ask whether the account needs to be frozen, the card replaced, or transactions paused\n• Check recent transaction records"
+            }
+          },
+          "summary": {
+            "en": "Secure the affected payment method"
+          }
+        },
+        {
+          "id": "step_3_device",
+          "kind": "step",
+          "showWhen": [
+            {
+              "questionId": "what_is_happening_now",
+              "includesAny": ["device_issue"]
+            }
+          ],
+          "content": {
+            "type": "plain_text",
+            "text": {
+              "en": "Secure the affected device immediately.\n• Stop using the suspicious device for important tasks\n• Use another safe device to change passwords\n• Check for suspicious software, remote access, or unusual permissions\n• Refer to the device access guidance in Stage G if needed"
+            }
+          },
+          "summary": {
+            "en": "Secure the affected device"
           }
         },
         {
@@ -893,8 +1138,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Record clearly what unusual activity happened and when it started.\n• what unusual activity you noticed\n• when you first noticed it\n• which account, card, or platform was involved\n• how much money was involved\n• whether you received texts, emails, verification codes, or alerts\n• what actions you have already taken\n• when you contacted the bank, platform, or service provider\n• what reply they gave"
+              "en": "Record clearly what unusual activity happened and when it started.\n• What unusual activity you noticed\n• When you first noticed it\n• Which account, card, or platform was involved\n• How much money was involved\n• Whether you received texts, emails, verification codes, or alerts\n• What actions you have already taken\n• When you contacted the bank, platform, or service provider\n• What reply they gave"
             }
+          },
+          "summary": {
+            "en": "Record the timeline"
           }
         },
         {
@@ -903,8 +1151,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Save all evidence.\nSuggested items to save:\n• screenshots of unusual transactions\n• screenshots showing account balance changes\n• login alerts or security notifications\n• verification code messages\n• email notifications\n• chat records\n• suspicious links or page screenshots\n• order records\n• the other party's account, number, email, or username\n• the time and outcome of your communication with the bank or platform"
+              "en": "Suggested items to save:\n• Screenshots of unusual transactions\n• Screenshots showing account balance changes\n• Login alerts or security notifications\n• Verification code messages\n• Email notifications\n• Chat records\n• Suspicious links or page screenshots\n• Order records\n• The other party's account, number, email, or username\n• The time and outcome of your communication with the bank or platform"
             }
+          },
+          "summary": {
+            "en": "Save all evidence"
           }
         },
         {
@@ -913,8 +1164,11 @@
           "content": {
             "type": "plain_text",
             "text": {
-              "en": "Continue reporting and handling the matter through official channels.\n• official bank customer service number\n• official bank app\n• payment platform help centre\n• account service provider's official security page\n• official scam reporting or police reporting channel"
+              "en": "Continue reporting and handling the matter through official channels.\n• Official bank customer service number\n• Official bank app\n• Payment platform help centre\n• Account service provider's official security page\n• Official scam reporting or police reporting channel"
             }
+          },
+          "summary": {
+            "en": "Use official reporting channels"
           }
         },
         {
@@ -925,6 +1179,9 @@
             "text": {
               "en": "Continue checking whether there is any further unusual activity."
             }
+          },
+          "summary": {
+            "en": "Keep monitoring the situation"
           }
         },
         {
@@ -935,6 +1192,9 @@
             "text": {
               "en": "If loss has already happened, do not continue doing more risky actions."
             }
+          },
+          "summary": {
+            "en": "Avoid further risky actions"
           }
         }
       ]
