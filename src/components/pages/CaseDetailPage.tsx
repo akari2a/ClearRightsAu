@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { CaseSectionMeta, SuccessCase } from "../../types/case";
+import type { AppLocale } from "../../i18n/config";
+import { getUiCopy } from "../../i18n/copy";
 import { InteractiveCardButton } from "../controls/InteractiveCardButton";
 import { CaseCategoryTag } from "../case/CaseCategoryTag";
 import { RiskSummaryCard } from "../risk/RiskSummaryCard";
@@ -7,6 +9,7 @@ import { StepDetailCard } from "../steps/StepDetailCard";
 import { DetailSectionHeader } from "../sections/DetailSectionHeader";
 
 type CaseDetailPageProps = {
+  locale?: AppLocale;
   caseData: SuccessCase;
   sections: CaseSectionMeta[];
   relatedCases: SuccessCase[];
@@ -21,38 +24,49 @@ function riskToneClass(tone: string): string {
   return "risk-badge--warning";
 }
 
-function getCaseRiskLevelLabel(tone: string): string {
-  if (tone === "low") return "Risk level 0";
-  if (tone === "caution") return "Risk level 1";
-  if (tone === "danger") return "Risk level 4";
-  return "Risk level 2";
+function getCaseRiskLevelLabel(tone: string, prefix: string): string {
+  if (tone === "low") return `${prefix} 0`;
+  if (tone === "caution") return `${prefix} 1`;
+  if (tone === "danger") return `${prefix} 4`;
+  return `${prefix} 2`;
 }
 
 function getOutcomeSummaryLabel(headline: string): string {
   return headline.split("—")[0]?.trim() || headline;
 }
 
-function getAssessmentSectionTitle(category: SuccessCase["category"]) {
-  return category === "scam" ? "How serious was this?" : "What this could mean";
+function getAssessmentSectionTitle(category: SuccessCase["category"], uiTitleNonScam: string) {
+  return category === "scam" ? "How serious was this?" : uiTitleNonScam;
 }
 
-function getAssessmentSectionEyebrow(category: SuccessCase["category"]) {
-  return category === "scam" ? "RISK ASSESSMENT" : "WHAT THIS COULD MEAN";
+function getAssessmentSectionEyebrow(category: SuccessCase["category"], uiEyebrowNonScam: string) {
+  return category === "scam" ? "RISK ASSESSMENT" : uiEyebrowNonScam;
 }
 
 export function CaseDetailPage({
+  locale = "en",
   caseData,
   sections,
   relatedCases,
   onRelatedGuideClick,
   onRelatedCaseClick
 }: CaseDetailPageProps) {
+  const uiCopy = getUiCopy(locale);
   const [activeSectionId, setActiveSectionId] = useState<string>(sections[0].id);
   const isScamCase = caseData.category === "scam";
-  const riskLevelLabel = useMemo(() => getCaseRiskLevelLabel(caseData.riskTone), [caseData.riskTone]);
+  const riskLevelLabel = useMemo(
+    () => getCaseRiskLevelLabel(caseData.riskTone, uiCopy.caseDetail.riskLevel),
+    [caseData.riskTone, uiCopy.caseDetail.riskLevel]
+  );
   const outcomeSummaryLabel = useMemo(() => getOutcomeSummaryLabel(caseData.outcome.headline), [caseData.outcome.headline]);
-  const assessmentSectionTitle = useMemo(() => getAssessmentSectionTitle(caseData.category), [caseData.category]);
-  const assessmentSectionEyebrow = useMemo(() => getAssessmentSectionEyebrow(caseData.category), [caseData.category]);
+  const assessmentSectionTitle = useMemo(
+    () => getAssessmentSectionTitle(caseData.category, uiCopy.caseDetail.assessmentTitleNonScam),
+    [caseData.category, uiCopy.caseDetail.assessmentTitleNonScam]
+  );
+  const assessmentSectionEyebrow = useMemo(
+    () => getAssessmentSectionEyebrow(caseData.category, uiCopy.caseDetail.assessmentEyebrowNonScam),
+    [caseData.category, uiCopy.caseDetail.assessmentEyebrowNonScam]
+  );
   const actionSteps = useMemo(
     () =>
       caseData.actionCards.map((card) => ({
@@ -115,7 +129,11 @@ export function CaseDetailPage({
           <div className="detail-page__hero">
             <div className="detail-page__intro">
               <div className="detail-page__title-group">
-                <CaseCategoryTag category={caseData.category} label={`${caseData.categoryLabel} case`} className="detail-page__eyebrow" />
+                <CaseCategoryTag
+                  category={caseData.category}
+                  label={locale === "zh-Hans" ? `${caseData.categoryLabel}案例` : `${caseData.categoryLabel} case`}
+                  className="detail-page__eyebrow"
+                />
                 <h1 className="detail-page__title">{caseData.title}</h1>
               </div>
               <p className="case-persona-tag">
@@ -124,17 +142,17 @@ export function CaseDetailPage({
 
               <div className="case-glance">
                 <div className="case-glance__item">
-                  <p className="case-glance__label">Category</p>
+                  <p className="case-glance__label">{uiCopy.caseDetail.category}</p>
                   <p className="case-glance__value">{caseData.categoryLabel}</p>
                 </div>
                 {isScamCase ? (
                   <div className="case-glance__item">
-                    <p className="case-glance__label">Risk level</p>
+                    <p className="case-glance__label">{uiCopy.caseDetail.riskLevel}</p>
                     <p className="case-glance__value">{riskLevelLabel}</p>
                   </div>
                 ) : null}
                 <div className="case-glance__item">
-                  <p className="case-glance__label">Outcome</p>
+                  <p className="case-glance__label">{uiCopy.caseDetail.outcome}</p>
                   <p className="case-glance__value">{outcomeSummaryLabel}</p>
                 </div>
               </div>
@@ -222,7 +240,7 @@ export function CaseDetailPage({
 
           {relatedCases.length > 0 ? (
             <div className="case-related">
-              <p className="case-related__title">Continue exploring cases</p>
+              <p className="case-related__title">{uiCopy.caseDetail.continueExploring}</p>
               <div className="case-related__grid">
                 {relatedCases.map((relCase) => (
                   <InteractiveCardButton
@@ -241,7 +259,7 @@ export function CaseDetailPage({
         </div>
 
         <aside className="detail-page__rail detail-page__rail--side">
-          <nav className="detail-page-nav" aria-label="On this page">
+          <nav className="detail-page-nav" aria-label={uiCopy.guide.onThisPage}>
             {sections.map((section) => (
               <InteractiveCardButton
                 key={section.id}

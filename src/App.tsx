@@ -14,21 +14,24 @@ import { CaseDetailPage } from "./components/pages/CaseDetailPage";
 import { AibotPage } from "./components/pages/AibotPage";
 import { HeroSection } from "./components/sections/HeroSection";
 import { ContentResourcesSection } from "./components/sections/ContentResourcesSection";
-import { DEFAULT_LOCALE } from "./i18n/config";
+import { DEFAULT_LOCALE, isAppLocale, type AppLocale } from "./i18n/config";
+import { getUiCopy } from "./i18n/copy";
 import type { GuideTab, LinkCard, TabKey } from "./types/home";
 import type { SuccessCase } from "./types/case";
 import type { QuickCheckAnswers, QuickCheckStage } from "./types/quickCheck";
 import type { GuideResult } from "./types/guide";
 
 function CaseDetailRoute({
+  locale,
   onRelatedGuideClick,
   onRelatedCaseClick
 }: {
+  locale: AppLocale;
   onRelatedGuideClick: (route: string) => void;
   onRelatedCaseClick: (caseData: SuccessCase) => void;
 }) {
   const { caseId } = useParams<{ caseId: string }>();
-  const casesContent = useMemo(() => getCasesPageContent(DEFAULT_LOCALE), []);
+  const casesContent = useMemo(() => getCasesPageContent(locale), [locale]);
   const caseData = caseId ? getCaseById(casesContent, caseId) : undefined;
 
   const relatedCases = useMemo(() => {
@@ -44,6 +47,7 @@ function CaseDetailRoute({
 
   return (
     <CaseDetailPage
+      locale={locale}
       caseData={caseData}
       sections={casesContent.sections}
       relatedCases={relatedCases}
@@ -62,9 +66,15 @@ const FONT_SCALE_MAP = {
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
-  const homePageContent = useMemo(() => getHomePageContent(DEFAULT_LOCALE), []);
-  const casesPageContent = useMemo(() => getCasesPageContent(DEFAULT_LOCALE), []);
-  const aibotPageContent = useMemo(() => getAibotPageContent(DEFAULT_LOCALE), []);
+  const [activeLanguage, setActiveLanguage] = useState<AppLocale>(() => {
+    if (typeof window === "undefined") return DEFAULT_LOCALE;
+    const stored = window.localStorage.getItem("app-locale");
+    return stored && isAppLocale(stored) ? stored : DEFAULT_LOCALE;
+  });
+  const uiCopy = useMemo(() => getUiCopy(activeLanguage), [activeLanguage]);
+  const homePageContent = useMemo(() => getHomePageContent(activeLanguage), [activeLanguage]);
+  const casesPageContent = useMemo(() => getCasesPageContent(activeLanguage), [activeLanguage]);
+  const aibotPageContent = useMemo(() => getAibotPageContent(activeLanguage), [activeLanguage]);
   const breadcrumbItems = useMemo<BreadcrumbItem[]>(() => {
     if (location.pathname === "/cases") {
       return [];
@@ -75,13 +85,13 @@ function App() {
       const caseData = getCaseById(casesPageContent, caseId);
 
       return [
-        { label: "Cases", to: "/cases" },
-        { label: caseData?.title ?? "Case details" }
+        { label: uiCopy.breadcrumbs.cases, to: "/cases" },
+        { label: caseData?.title ?? uiCopy.breadcrumbs.caseDetails }
       ];
     }
 
     return [];
-  }, [location.pathname, casesPageContent]);
+  }, [location.pathname, casesPageContent, uiCopy.breadcrumbs.cases, uiCopy.breadcrumbs.caseDetails]);
   const [activeTab, setActiveTab] = useState<TabKey>("scam");
   const [fontSize, setFontSize] = useState<"small" | "default" | "large">("default");
   const [aibotInitialQuestion, setAibotInitialQuestion] = useState<string | undefined>();
@@ -166,19 +176,19 @@ function App() {
       return;
     }
 
-    console.info("Navigation clicked", { destination });
   };
 
-  const SECONDARY_NAV_CATEGORY_MAP: Record<string, string> = {
-    "c-scam": "scam",
-    "c-products": "refund",
-    "c-tenancy": "tenancy"
+  const SECONDARY_NAV_GUIDE_ROUTE_MAP: Record<string, string> = {
+    "g-scam": "/scam-check",
+    "g-refund": "/refund-check",
+    "g-unsafe": "/unsafe-products-check"
   };
 
   const handleSecondaryNavigate = (destination: string) => {
-    const categoryId = SECONDARY_NAV_CATEGORY_MAP[destination];
-    if (categoryId) {
-      navigate(`/cases?filter=${categoryId}`);
+    const route = SECONDARY_NAV_GUIDE_ROUTE_MAP[destination];
+
+    if (route) {
+      navigate(route);
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
@@ -186,8 +196,10 @@ function App() {
     console.info("Secondary navigation clicked", { destination });
   };
 
-  const handleLanguageSelect = () => {
-    console.info("Language selector clicked");
+  const handleLanguageSelect = (languageId: string) => {
+    if (isAppLocale(languageId)) {
+      setActiveLanguage(languageId);
+    }
   };
 
   const HOMEPAGE_CASE_ROUTE_MAP: Record<string, string> = {
@@ -248,6 +260,11 @@ function App() {
     document.documentElement.style.setProperty("--font-scale-factor", String(FONT_SCALE_MAP[fontSize]));
   }, [fontSize]);
 
+  useEffect(() => {
+    window.localStorage.setItem("app-locale", activeLanguage);
+    document.documentElement.lang = activeLanguage === "zh-Hans" ? "zh-Hans" : "en";
+  }, [activeLanguage]);
+
   const activePrimaryNav: HeaderPrimaryNavKey = location.pathname === "/aibot"
     ? "aibot"
     : (location.pathname === "/scam-check" || location.pathname === "/refund-check" || location.pathname === "/unsafe-products-check")
@@ -264,6 +281,7 @@ function App() {
         <SiteHeader
           activePrimaryNav={activePrimaryNav}
           activeFontSize={fontSize}
+          activeLanguage={activeLanguage}
           onNavigate={handleNavigate}
           onSecondaryNavigate={handleSecondaryNavigate}
           onFontSizeChange={handleFontSizeChange}
@@ -278,6 +296,12 @@ function App() {
             element={
               <>
                 <HeroSection
+                  localeLabels={{
+                    quickGuideTopicsAria: uiCopy.nav.guide,
+                    suggestedQuestionsAria: uiCopy.aibot.suggestedQuestionsAria,
+                    chatbotInputAria: uiCopy.aibot.chatbotInputAria,
+                    askAi: uiCopy.aibot.askAi
+                  }}
                   brandName={homePageContent.siteCopy.brandName}
                   slogan={homePageContent.siteCopy.slogan}
                   guideDescription={homePageContent.siteCopy.quickCheckDescription}
@@ -317,6 +341,7 @@ function App() {
             path="/scam-check"
             element={
               <ScamCheckPage
+                locale={activeLanguage}
                 onQuestionnaireComplete={handleScamQuestionnaireComplete}
                 onSectionNavigate={handleScamSectionNavigate}
               />
@@ -326,6 +351,7 @@ function App() {
             path="/refund-check"
             element={
               <RefundCheckPage
+                locale={activeLanguage}
                 onQuestionnaireComplete={handleRefundQuestionnaireComplete}
                 onSectionNavigate={handleRefundSectionNavigate}
               />
@@ -335,6 +361,7 @@ function App() {
             path="/unsafe-products-check"
             element={
               <UnsafeProductsCheckPage
+                locale={activeLanguage}
                 onQuestionnaireComplete={handleUnsafeProductsQuestionnaireComplete}
                 onSectionNavigate={handleUnsafeProductsSectionNavigate}
               />
@@ -344,6 +371,7 @@ function App() {
             path="/cases"
             element={
               <CasesIndexPage
+                localeLabels={uiCopy.cases}
                 pageTitle={casesPageContent.pageTitle}
                 pageDescription={casesPageContent.pageDescription}
                 groups={casesPageContent.groups}
@@ -356,6 +384,7 @@ function App() {
             path="/cases/:caseId"
             element={
               <CaseDetailRoute
+                locale={activeLanguage}
                 onRelatedGuideClick={handleCaseRelatedGuideClick}
                 onRelatedCaseClick={handleCasesIndexCaseClick}
               />
@@ -366,6 +395,11 @@ function App() {
             element={
               <AibotPage
                 content={aibotPageContent}
+                uiLabels={{
+                  chatbotInputAria: uiCopy.aibot.chatbotInputAria,
+                  askAi: uiCopy.aibot.askAi,
+                  newConversation: uiCopy.aibot.newConversation
+                }}
                 initialQuestion={aibotInitialQuestion}
                 onFallbackNavigate={(route) => {
                   navigate(route);
@@ -377,7 +411,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
-        {isAibotPage ? null : <SiteFooter />}
+        {isAibotPage ? null : <SiteFooter locale={activeLanguage} />}
       </div>
     </main>
   );

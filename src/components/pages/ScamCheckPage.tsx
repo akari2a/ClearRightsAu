@@ -13,7 +13,8 @@ import {
   shouldDisplayActionItem,
   SCAM_QUESTIONNAIRE
 } from "../../content/quick-check/scam";
-import { DEFAULT_LOCALE } from "../../i18n/config";
+import { DEFAULT_LOCALE, type AppLocale } from "../../i18n/config";
+import { getUiCopy } from "../../i18n/copy";
 import type { QuickCheckActionPack, QuickCheckAnswers, QuickCheckStage } from "../../types/quickCheck";
 import { InteractiveCardButton } from "../controls/InteractiveCardButton";
 import { CaseCategoryTag } from "../case/CaseCategoryTag";
@@ -27,6 +28,7 @@ import {
 } from "./scam-check/useScamQuestionnaire";
 
 type ScamCheckPageProps = {
+  locale?: AppLocale;
   onQuestionnaireComplete?: (answers: QuickCheckAnswers, stage: QuickCheckStage | null) => void;
   onSectionNavigate?: (sectionId: string) => void;
 };
@@ -55,9 +57,13 @@ function getRiskLevelPresentation(riskLevel?: number) {
   return { label: "Risk level", tone: "warning" as const };
 }
 
-export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: ScamCheckPageProps) {
+export function ScamCheckPage({
+  locale = DEFAULT_LOCALE,
+  onQuestionnaireComplete,
+  onSectionNavigate
+}: ScamCheckPageProps) {
   const navigate = useNavigate();
-  const locale = DEFAULT_LOCALE;
+  const uiCopy = getUiCopy(locale);
   const questions = SCAM_QUESTIONNAIRE.questionFlow;
   const initialQuestionnaireUrlState = useMemo(
     () => parseQuestionnaireUrlState(window.location.search, questions),
@@ -220,10 +226,10 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
         <div className="detail-page__content">
           <div className="detail-page__hero">
             <div className="detail-page__intro">
-              <h1 className="detail-page__title">{isComplete ? "What to do next" : "Check your situation"}</h1>
+              <h1 className="detail-page__title">{isComplete ? uiCopy.guide.whatToDoNext : uiCopy.guide.checkYourSituation}</h1>
               {!isComplete && (
                 <p className="detail-page__summary">
-                  Answer a few questions about what happened. We will use the facts you know to guide the next steps.
+                  {uiCopy.guide.scamIntro}
                 </p>
               )}
             </div>
@@ -231,11 +237,11 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
 
           {!isComplete ? (
             <section className="detail-section" id="questionnaire">
-              <div className="questionnaire-progress-block" aria-label="Questionnaire progress">
+              <div className="questionnaire-progress-block" aria-label={uiCopy.guide.questionnaireProgress}>
                 <div className="questionnaire-progress-block__copy">
-                  <p className="questionnaire-progress-block__label">Questionnaire progress</p>
+                  <p className="questionnaire-progress-block__label">{uiCopy.guide.questionnaireProgress}</p>
                   <p className="questionnaire-progress-block__step">
-                    {`Step ${Math.min(currentQuestionIndex + 1, questions.length)} of ${questions.length}`}
+                    {uiCopy.guide.stepOf(Math.min(currentQuestionIndex + 1, questions.length), questions.length)}
                   </p>
                 </div>
                 <div className="questionnaire-progress-block__track" aria-hidden="true">
@@ -257,7 +263,7 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
                       <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor">
                         <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/>
                       </svg>
-                      Previous step
+                      {uiCopy.guide.previousStep}
                     </button>
                     {isMultiSelectQuestion ? (
                       <button
@@ -266,7 +272,7 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
                         onClick={handleContinue}
                         disabled={currentSelectionCount === 0}
                       >
-                        Continue
+                        {uiCopy.guide.continue}
                       </button>
                     ) : null}
                   </div>
@@ -296,14 +302,18 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
           ) : (
             <section className="detail-section" id="action-plan">
               <RiskSummaryCard
-                label={resultBadge.label}
+                label={
+                  resolvedStage?.riskLevel !== undefined
+                    ? `${uiCopy.guide.riskLevelPrefix} ${resolvedStage.riskLevel}`
+                    : resultBadge.label
+                }
                 tone={resultBadge.tone}
                 title={
                   resolvedStage
                     ? getLocalizedText(resolvedStage.label, locale)
                     : actionPack
                       ? getLocalizedText(actionPack.resultTitle, locale)
-                      : "Result"
+                      : uiCopy.guide.resultFallback
                 }
                 summary={actionPack ? getLocalizedText(actionPack.resultSummary, locale) : ""}
               />
@@ -319,7 +329,7 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
               {relatedCases.length > 0 ? (
                 <section className="detail-result-related">
                   <div className="detail-section__header detail-section__header--compact">
-                    <h2 className="detail-section__title">Related cases</h2>
+                    <h2 className="detail-section__title">{uiCopy.guide.relatedCases}</h2>
                   </div>
                   <div className="case-related__grid">
                     {relatedCases.map((caseItem) => (
@@ -350,7 +360,7 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
                       <path d="M480-80q-134 0-227-93T160-400q0-134 93-227t227-93q69 0 132 28.5T720-614v-106h80v280H520v-80h168q-32-56-87.5-88T480-640q-100 0-170 70t-70 170q0 100 70 170t170 70q68 0 124.5-34.5T692-288h90q-35 95-117 151.5T480-80Z"/>
                     </svg>
                   </span>
-                  <span className="detail-page__rail-action-label">Start again</span>
+                  <span className="detail-page__rail-action-label">{uiCopy.guide.startAgain}</span>
                 </button>
                 <button className="detail-page__rail-action" type="button" onClick={saveAsPdf}>
                   <span className="detail-page__rail-action-icon" aria-hidden="true">
@@ -358,10 +368,10 @@ export function ScamCheckPage({ onQuestionnaireComplete, onSectionNavigate }: Sc
                       <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/>
                     </svg>
                   </span>
-                  <span className="detail-page__rail-action-label">Save as PDF</span>
+                  <span className="detail-page__rail-action-label">{uiCopy.guide.saveAsPdf}</span>
                 </button>
               </div>
-              <nav className="detail-page-nav" aria-label="On this page">
+              <nav className="detail-page-nav" aria-label={uiCopy.guide.onThisPage}>
                 {resultNavItems.map((section, index) => (
                   <InteractiveCardButton
                     key={section.id}

@@ -5,6 +5,12 @@ import { ScamRecogniserDialog } from "./ScamRecogniserDialog";
 import type { GuideTab, TabKey } from "../../types/home";
 
 type HeroSectionProps = {
+  localeLabels?: {
+    quickGuideTopicsAria: string;
+    suggestedQuestionsAria: string;
+    chatbotInputAria: string;
+    askAi: string;
+  };
   brandName: string;
   slogan: string;
   guideDescription: string;
@@ -23,6 +29,7 @@ type HeroSectionProps = {
 };
 
 export function HeroSection({
+  localeLabels,
   brandName,
   slogan,
   guideDescription,
@@ -75,7 +82,7 @@ export function HeroSection({
           <p className="guide-intro__description">{guideDescription}</p>
         </div>
 
-        <div className="guide-tabs" role="tablist" aria-label="Quick guide topics">
+        <div className="guide-tabs" role="tablist" aria-label={localeLabels?.quickGuideTopicsAria ?? "Quick guide topics"}>
           {tabs.map((tab) => {
             const isActive = tab.key === activeTab.key;
 
@@ -118,7 +125,7 @@ export function HeroSection({
           <h2 className="hero-chatbot__title">{chatbotTitle}</h2>
         </div>
 
-        <div className="hero-common-questions" aria-label="Suggested questions">
+        <div className="hero-common-questions" aria-label={localeLabels?.suggestedQuestionsAria ?? "Suggested questions"}>
           <div className="popular-grid popular-grid--hero">
             {commonQuestions.map((item) => (
               <InteractiveCardButton
@@ -144,7 +151,7 @@ export function HeroSection({
               value={promptInput}
               onChange={(e) => setPromptInput(e.target.value)}
               onKeyDown={handlePromptKeyDown}
-              aria-label="Type your question for the AI chatbot"
+              aria-label={localeLabels?.chatbotInputAria ?? "Type your question for the AI chatbot"}
             />
           </div>
 
@@ -154,7 +161,7 @@ export function HeroSection({
             onClick={handlePromptSubmit}
           >
             <StarIcon />
-            <span>Ask AI</span>
+            <span>{localeLabels?.askAi ?? "Ask AI"}</span>
           </button>
         </div>
 

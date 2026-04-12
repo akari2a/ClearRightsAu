@@ -6,6 +6,11 @@ import type { AibotPageContent } from "../../types/aibot";
 
 type AibotPageProps = {
   content: AibotPageContent;
+  uiLabels?: {
+    chatbotInputAria: string;
+    askAi: string;
+    newConversation: string;
+  };
   initialQuestion?: string;
   onFallbackNavigate?: (route: string) => void;
 };
@@ -14,7 +19,7 @@ function formatTime(timestamp: number): string {
   return new Date(timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }
 
-export function AibotPage({ content, initialQuestion, onFallbackNavigate }: AibotPageProps) {
+export function AibotPage({ content, uiLabels, initialQuestion, onFallbackNavigate }: AibotPageProps) {
   const { messages, input, setInput, sendMessage, isThinking, isStreaming, status, error, clearMessages, stopGeneration, retryConnection } =
     useOllamaChat();
 
@@ -116,7 +121,7 @@ export function AibotPage({ content, initialQuestion, onFallbackNavigate }: Aibo
                 ref={inputRef}
                 className="prompt-input"
                 type="text"
-                aria-label="Ask about your consumer rights"
+                aria-label={uiLabels?.chatbotInputAria ?? "Ask about your consumer rights"}
                 placeholder={isOffline ? "Assistant is temporarily unavailable" : content.inputPlaceholder}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -133,7 +138,7 @@ export function AibotPage({ content, initialQuestion, onFallbackNavigate }: Aibo
               aria-label="Send message"
             >
               <StarIcon />
-              <span>Ask AI</span>
+              <span>{uiLabels?.askAi ?? "Ask AI"}</span>
             </button>
           </div>
 
@@ -222,7 +227,7 @@ export function AibotPage({ content, initialQuestion, onFallbackNavigate }: Aibo
                 <line x1="12" y1="5" x2="12" y2="19" />
                 <line x1="5" y1="12" x2="19" y2="12" />
               </svg>
-              <span>New conversation</span>
+              <span>{uiLabels?.newConversation ?? "New conversation"}</span>
             </button>
           </div>
 

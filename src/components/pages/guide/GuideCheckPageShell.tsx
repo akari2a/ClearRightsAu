@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCasesPageContent } from "../../../content/casesContent";
-import { DEFAULT_LOCALE } from "../../../i18n/config";
+import { DEFAULT_LOCALE, type AppLocale } from "../../../i18n/config";
+import { getUiCopy } from "../../../i18n/copy";
 import type { QuickCheckAnswers } from "../../../types/quickCheck";
 import type { GuideResult, GuideResultSection, GuideScenarioConfig } from "../../../types/guide";
 import { InteractiveCardButton } from "../../controls/InteractiveCardButton";
@@ -16,6 +17,7 @@ import {
 } from "../../../hooks/useGuideQuestionnaire";
 
 type GuideCheckPageShellProps = {
+  locale?: AppLocale;
   config: GuideScenarioConfig;
   onQuestionnaireComplete?: (answers: QuickCheckAnswers, result: GuideResult | null) => void;
   onSectionNavigate?: (sectionId: string) => void;
@@ -81,9 +83,14 @@ function getLocalizedText(text: Record<string, string>, locale: string = DEFAULT
   return text[locale] ?? text[DEFAULT_LOCALE] ?? Object.values(text)[0] ?? "";
 }
 
-export function GuideCheckPageShell({ config, onQuestionnaireComplete, onSectionNavigate }: GuideCheckPageShellProps) {
+export function GuideCheckPageShell({
+  locale = DEFAULT_LOCALE,
+  config,
+  onQuestionnaireComplete,
+  onSectionNavigate
+}: GuideCheckPageShellProps) {
   const navigate = useNavigate();
-  const locale = DEFAULT_LOCALE;
+  const uiCopy = getUiCopy(locale);
   const questions = useMemo(() => [...config.questions], [config.questions]);
   const initialQuestionnaireUrlState = useMemo(
     () => parseQuestionnaireUrlState(window.location.search, questions),
@@ -258,20 +265,18 @@ export function GuideCheckPageShell({ config, onQuestionnaireComplete, onSection
         <div className="detail-page__content">
           <div className="detail-page__hero">
             <div className="detail-page__intro">
-              <h1 className="detail-page__title">
-                {isComplete ? config.resultsTitle : config.pageTitle}
-              </h1>
-              {!isComplete && <p className="detail-page__summary">{config.pageIntro}</p>}
+              <h1 className="detail-page__title">{isComplete ? uiCopy.guide.whatToDoNext : uiCopy.guide.checkYourSituation}</h1>
+              {!isComplete && <p className="detail-page__summary">{config.scenarioId === "unsafe-products" ? uiCopy.guide.unsafeIntro : config.scenarioId === "refund" ? uiCopy.guide.refundIntro : uiCopy.guide.scamIntro}</p>}
             </div>
           </div>
 
           {!isComplete ? (
             <section className="detail-section" id="questionnaire">
-              <div className="questionnaire-progress-block" aria-label={config.questionnaireProgressLabel}>
+              <div className="questionnaire-progress-block" aria-label={uiCopy.guide.questionnaireProgress}>
                 <div className="questionnaire-progress-block__copy">
-                  <p className="questionnaire-progress-block__label">{config.questionnaireProgressLabel}</p>
+                  <p className="questionnaire-progress-block__label">{uiCopy.guide.questionnaireProgress}</p>
                   <p className="questionnaire-progress-block__step">
-                    {`Step ${Math.min(currentQuestionIndex + 1, questions.length)} of ${questions.length}`}
+                    {uiCopy.guide.stepOf(Math.min(currentQuestionIndex + 1, questions.length), questions.length)}
                   </p>
                 </div>
                 <div className="questionnaire-progress-block__track" aria-hidden="true">
@@ -293,7 +298,7 @@ export function GuideCheckPageShell({ config, onQuestionnaireComplete, onSection
                       <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor">
                         <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
                       </svg>
-                      Previous step
+                      {uiCopy.guide.previousStep}
                     </button>
                     {isMultiSelectQuestion ? (
                       <button
@@ -302,13 +307,13 @@ export function GuideCheckPageShell({ config, onQuestionnaireComplete, onSection
                         onClick={handleContinue}
                         disabled={currentSelectionCount === 0}
                       >
-                        Continue
+                        {uiCopy.guide.continue}
                       </button>
                     ) : null}
                   </div>
-                  <h3 className="questionnaire-panel__title">{getLocalizedText(currentQuestion.title)}</h3>
-                  {getLocalizedText(currentQuestion.description) ? (
-                    <p className="questionnaire-panel__description">{getLocalizedText(currentQuestion.description)}</p>
+                  <h3 className="questionnaire-panel__title">{getLocalizedText(currentQuestion.title, locale)}</h3>
+                  {getLocalizedText(currentQuestion.description, locale) ? (
+                    <p className="questionnaire-panel__description">{getLocalizedText(currentQuestion.description, locale)}</p>
                   ) : null}
                 </div>
 
@@ -321,7 +326,7 @@ export function GuideCheckPageShell({ config, onQuestionnaireComplete, onSection
                         className={`questionnaire-option${isSelected ? " questionnaire-option--active" : ""}`}
                         onClick={() => handleOptionSelect(option.id)}
                       >
-                        <span className="questionnaire-option__title">{getLocalizedText(option.label)}</span>
+                        <span className="questionnaire-option__title">{getLocalizedText(option.label, locale)}</span>
                       </InteractiveCardButton>
                     );
                   })}
@@ -331,9 +336,13 @@ export function GuideCheckPageShell({ config, onQuestionnaireComplete, onSection
           ) : (
             <section className="detail-section" id="action-plan">
               <RiskSummaryCard
-                label={resultBadge.label}
+                label={
+                  resolvedResult?.riskLevel !== undefined
+                    ? `${uiCopy.guide.riskLevelPrefix} ${resolvedResult.riskLevel}`
+                    : resultBadge.label
+                }
                 tone={resultBadge.tone}
-                title={resolvedResult?.primaryLabel ?? "Result"}
+                title={resolvedResult?.primaryLabel ?? uiCopy.guide.resultFallback}
                 summary={resolvedResult?.primarySummary ?? ""}
               />
 
@@ -352,7 +361,7 @@ export function GuideCheckPageShell({ config, onQuestionnaireComplete, onSection
 
               {mergedPrepare.length > 0 ? (
                 <div className="guide-result-block" id="guide-prepare">
-                  <h3 className="guide-result-block__title">What to prepare</h3>
+                  <h3 className="guide-result-block__title">{uiCopy.guide.whatToPrepare}</h3>
                   <ul className="detail-list">
                     {mergedPrepare.map((item) => (
                       <li key={item.id} className="detail-list__item">{item.text}</li>
@@ -363,7 +372,7 @@ export function GuideCheckPageShell({ config, onQuestionnaireComplete, onSection
 
               {mergedHelp.length > 0 ? (
                 <div className="guide-result-block" id="guide-help">
-                  <h3 className="guide-result-block__title">Where to get help</h3>
+                  <h3 className="guide-result-block__title">{uiCopy.guide.whereToGetHelp}</h3>
                   <ul className="detail-list">
                     {mergedHelp.map((item) => (
                       <li key={item.id} className="detail-list__item">{item.text}</li>
@@ -375,7 +384,7 @@ export function GuideCheckPageShell({ config, onQuestionnaireComplete, onSection
               {relatedCases.length > 0 ? (
                 <section className="detail-result-related">
                   <div className="detail-section__header detail-section__header--compact">
-                    <h2 className="detail-section__title">{config.relatedCasesTitle}</h2>
+                    <h2 className="detail-section__title">{uiCopy.guide.relatedCases}</h2>
                   </div>
                   <div className="case-related__grid">
                     {relatedCases.map((caseItem) => (
@@ -406,7 +415,7 @@ export function GuideCheckPageShell({ config, onQuestionnaireComplete, onSection
                       <path d="M480-80q-134 0-227-93T160-400q0-134 93-227t227-93q69 0 132 28.5T720-614v-106h80v280H520v-80h168q-32-56-87.5-88T480-640q-100 0-170 70t-70 170q0 100 70 170t170 70q68 0 124.5-34.5T692-288h90q-35 95-117 151.5T480-80Z" />
                     </svg>
                   </span>
-                  <span className="detail-page__rail-action-label">Start again</span>
+                  <span className="detail-page__rail-action-label">{uiCopy.guide.startAgain}</span>
                 </button>
                 <button className="detail-page__rail-action" type="button" onClick={() => window.print()}>
                   <span className="detail-page__rail-action-icon" aria-hidden="true">
@@ -414,10 +423,10 @@ export function GuideCheckPageShell({ config, onQuestionnaireComplete, onSection
                       <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z" />
                     </svg>
                   </span>
-                  <span className="detail-page__rail-action-label">Save as PDF</span>
+                  <span className="detail-page__rail-action-label">{uiCopy.guide.saveAsPdf}</span>
                 </button>
               </div>
-              <nav className="detail-page-nav" aria-label="On this page">
+              <nav className="detail-page-nav" aria-label={uiCopy.guide.onThisPage}>
                 {resultNavItems.map((s, index) => (
                   <InteractiveCardButton
                     key={s.id}

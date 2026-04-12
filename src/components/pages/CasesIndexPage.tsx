@@ -5,6 +5,14 @@ import { InteractiveCardButton } from "../controls/InteractiveCardButton";
 import { useCasesIndexState } from "./cases/useCasesIndexState";
 
 type CasesIndexPageProps = {
+  localeLabels?: {
+    searchPlaceholder: string;
+    searchButton: string;
+    allFilter: string;
+    filterAriaLabel: string;
+    emptyTitle: string;
+    emptyCopy: string;
+  };
   pageTitle: string;
   pageDescription: string;
   groups: CaseIndexGroup[];
@@ -13,6 +21,7 @@ type CasesIndexPageProps = {
 };
 
 export function CasesIndexPage({
+  localeLabels,
   pageTitle,
   pageDescription,
   groups,
@@ -59,24 +68,24 @@ export function CasesIndexPage({
               id="cases-search"
               type="search"
               className="cases-index__search-input"
-              placeholder="Search by topic, category, or situation"
+              placeholder={localeLabels?.searchPlaceholder ?? "Search by topic, category, or situation"}
               value={searchDraft}
               onChange={(event) => setSearchDraft(event.target.value)}
             />
           </div>
           <button type="submit" className="cases-index__search-button">
-            Search
+            {localeLabels?.searchButton ?? "Search"}
           </button>
         </form>
         
-        <div className="filter-chips-container" role="tablist" aria-label="Filter cases">
+        <div className="filter-chips-container" role="tablist" aria-label={localeLabels?.filterAriaLabel ?? "Filter cases"}>
           <button
             role="tab"
             aria-selected={activeFilter === "all"}
             className={`filter-chip ${activeFilter === "all" ? "filter-chip--active" : ""}`}
             onClick={() => handleFilterClick("all")}
           >
-            All
+            {localeLabels?.allFilter ?? "All"}
           </button>
           
           {groups.map((group) => (
@@ -135,9 +144,9 @@ export function CasesIndexPage({
               <path d="M20 20l-3.5-3.5" />
             </svg>
           </div>
-          <h2 className="cases-index__empty-title">No cases found</h2>
+          <h2 className="cases-index__empty-title">{localeLabels?.emptyTitle ?? "No cases found"}</h2>
           <p className="cases-index__empty-copy">
-            Try a different keyword or change the category filter.
+            {localeLabels?.emptyCopy ?? "Try a different keyword or change the category filter."}
           </p>
         </div>
       ) : null}

@@ -1,0 +1,151 @@
+{
+  "siteCopy": {
+    "brandName": "ClearRights",
+    "slogan": "为诈骗、退款、产品安全和租房纠纷提供清晰的下一步建议。",
+    "quickCheckDescription": "选择一个主题，查看常见信号和下一步做法。",
+    "chatbotTitle": "从一个问题开始"
+  },
+  "guideTabs": [
+    {
+      "key": "scam",
+      "label": "诈骗",
+      "bullets": [
+        {
+          "id": "scam-1",
+          "segments": [
+            { "text": "一条可疑短信要求你点击" },
+            { "text": "链接", "highlighted": true },
+            { "text": "、进行" },
+            { "text": "付款", "highlighted": true },
+            { "text": "，或提供" },
+            { "text": "个人信息", "highlighted": true },
+            { "text": "。" }
+          ]
+        },
+        {
+          "id": "scam-2",
+          "segments": [
+            { "text": "来电者施压让你立即" },
+            { "text": "采取行动", "highlighted": true },
+            { "text": "或" },
+            { "text": "付款", "highlighted": true },
+            { "text": "。" }
+          ]
+        },
+        {
+          "id": "scam-3",
+          "segments": [
+            { "text": "你在网上付款了，但卖家或商品看起来很" },
+            { "text": "可疑", "highlighted": true },
+            { "text": "。" }
+          ]
+        }
+      ],
+      "quickPills": ["帮我识别诈骗", "帮我识别诈骗"],
+      "prompt": "“我接到一个电话，说我的签证已经过期了”",
+      "actionLabel": "判断这是不是诈骗"
+    },
+    {
+      "key": "refund",
+      "label": "退款与更换",
+      "bullets": [
+        {
+          "id": "refund-1",
+          "segments": [
+            { "text": "你买到的商品有" },
+            { "text": "故障", "highlighted": true },
+            { "text": "、" },
+            { "text": "损坏", "highlighted": true },
+            { "text": "，或与描述不符。" }
+          ]
+        },
+        {
+          "id": "refund-2",
+          "segments": [
+            { "text": "卖家拒绝" },
+            { "text": "退款", "highlighted": true },
+            { "text": "，即使消费者保障可能适用。" }
+          ]
+        },
+        {
+          "id": "refund-3",
+          "segments": [
+            { "text": "你需要帮助判断该要求" },
+            { "text": "维修", "highlighted": true },
+            { "text": "、" },
+            { "text": "更换", "highlighted": true },
+            { "text": "还是退款。" }
+          ]
+        }
+      ],
+      "quickPills": ["商品到货就是坏的", "卖家拒绝退款"],
+      "prompt": "“我在网上买的耳机，两天后左边就没声音了”",
+      "actionLabel": "查看退款步骤"
+    },
+    {
+      "key": "unsafe",
+      "label": "不安全产品",
+      "bullets": [
+        {
+          "id": "unsafe-1",
+          "segments": [
+            { "text": "某个产品使用起来似乎" },
+            { "text": "不安全", "highlighted": true },
+            { "text": "，或缺少必要的安全信息。" }
+          ]
+        },
+        {
+          "id": "unsafe-2",
+          "segments": [
+            { "text": "你发现了一个可能导致受伤、起火或触电的" },
+            { "text": "缺陷", "highlighted": true },
+            { "text": "。" }
+          ]
+        },
+        {
+          "id": "unsafe-3",
+          "segments": [
+            { "text": "你想确认这个产品是否已经被" },
+            { "text": "召回", "highlighted": true },
+            { "text": "，或者是否应该举报。" }
+          ]
+        }
+      ],
+      "quickPills": ["这个充电器特别烫", "我觉得这个玩具不安全"],
+      "prompt": "“我买的充电器第二次使用时就开始过热”",
+      "actionLabel": "查看安全步骤"
+    }
+  ],
+  "commonQuestions": [
+    "我点开了快递链接，但没有输入任何信息",
+    "商家说这不算质量问题",
+    "我的充电器使用时很烫",
+    "房东扣了我一部分押金",
+    "我已经付款了，但一直没收到商品",
+    "投诉前我应该准备哪些证据？"
+  ],
+  "resources": {
+    "eyebrow": "探索",
+    "title": "成功案例",
+    "caseCards": [
+      {
+        "category": "scam",
+        "eyebrow": "诈骗",
+        "title": "我点开了快递短信链接，但没有输入任何信息",
+        "description": "看看网站应如何安抚用户、解释可能的风险，并给出后续观察建议。"
+      },
+      {
+        "category": "refund",
+        "eyebrow": "退款",
+        "title": "商店拒绝为有问题的电器退款",
+        "description": "一个关于如何区分店铺政策与消费者保障的实际案例。"
+      },
+      {
+        "category": "tenancy",
+        "eyebrow": "租房",
+        "title": "房东因清洁问题扣了我的押金",
+        "description": "一个聚焦证据、合理性和如何挑战扣款的租房案例。"
+      }
+    ]
+  }
+}

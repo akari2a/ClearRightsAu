@@ -1,0 +1,23 @@
+{
+  "welcomeHeading": "今天我们可以怎么帮你？",
+  "welcomeSubtext": "为澳大利亚的诈骗、退款、不安全产品和租房纠纷提供引导式帮助。",
+  "suggestedQuestions": [
+    { "text": "我接到一个电话，说我的签证已经过期了" },
+    { "text": "卖家拒绝给我退款" }
+  ],
+  "suggestedPills": ["诈骗判断", "退款帮助", "产品安全", "租房纠纷"],
+  "questionsDivider": "或试试一个常见情境",
+  "inputPlaceholder": "描述你的情况或直接提问……",
+  "inputDisclaimer": "仅提供一般信息，并非法律意见。请以官方来源为准。",
+  "offlineTitle": "AI 助手暂时不可用",
+  "offlineSubtext": "你仍然可以浏览我们的指南和案例，获得即时帮助。",
+  "offlineRetryLabel": "重试",
+  "offlineFallbackLinks": [
+    { "label": "浏览指南", "route": "/scam-check" },
+    { "label": "查看案例", "route": "/cases" }
+  ],
+  "trustBadges": [
+    "基于澳大利亚消费者法",
+    "并非法律意见，请以官方来源为准"
+  ]
+}

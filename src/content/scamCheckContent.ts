@@ -3,7 +3,8 @@ import scamCheckEn from "../locales/en/scam-check.json";
 import type { DetailSectionMeta, ScamActionCard, ScamJourney, ScamJourneyKey, ScamPageContent } from "../types/scam";
 
 const SCAM_PAGE_CONTENT_BY_LOCALE: Record<AppLocale, ScamPageContent> = {
-  en: scamCheckEn as ScamPageContent
+  en: scamCheckEn as ScamPageContent,
+  "zh-Hans": scamCheckEn as ScamPageContent
 };
 
 export function getScamPageContent(locale: AppLocale = DEFAULT_LOCALE): ScamPageContent {
