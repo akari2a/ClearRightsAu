@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowCircleIcon, StarIcon } from "../icons";
 import { InteractiveCardButton } from "../controls/InteractiveCardButton";
+import { ScamRecogniserDialog } from "./ScamRecogniserDialog";
 import type { GuideTab, TabKey } from "../../types/home";
 
 type HeroSectionProps = {
@@ -16,6 +17,9 @@ type HeroSectionProps = {
   onCommonQuestionClick: (question: string, tab: GuideTab) => void;
   onQuickGuideClick?: (tab: GuideTab) => void;
   onOpenChatbot?: (initialQuestion: string | undefined, tab: GuideTab) => void;
+  onNavigateToGuide?: (howHappened: string) => void;
+  initialScamType?: string;
+  onScamTypeConsumed?: () => void;
 };
 
 export function HeroSection({
@@ -30,10 +34,21 @@ export function HeroSection({
   onTabChange,
   onCommonQuestionClick,
   onQuickGuideClick,
-  onOpenChatbot
+  onOpenChatbot,
+  onNavigateToGuide,
+  initialScamType,
+  onScamTypeConsumed
 }: HeroSectionProps) {
   const activeTab = tabs.find((tab) => tab.key === activeTabKey) ?? tabs[0];
   const [promptInput, setPromptInput] = useState("");
+  const [isRecogniserOpen, setIsRecogniserOpen] = useState(false);
+
+  // Auto-open dialog when initialScamType is provided via URL
+  useEffect(() => {
+    if (initialScamType) {
+      setIsRecogniserOpen(true);
+    }
+  }, [initialScamType]);
 
   const handlePromptSubmit = () => {
     const trimmed = promptInput.trim();
@@ -142,7 +157,30 @@ export function HeroSection({
             <span>Ask AI</span>
           </button>
         </div>
+
+        <div className="scam-recogniser-entry">
+          <button
+            className="scam-recogniser-trigger"
+            type="button"
+            onClick={() => setIsRecogniserOpen(true)}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            <span>Check if it's a scam</span>
+          </button>
+        </div>
       </div>
+
+      <ScamRecogniserDialog
+        isOpen={isRecogniserOpen}
+        initialType={initialScamType}
+        onClose={() => {
+          setIsRecogniserOpen(false);
+          onScamTypeConsumed?.();
+        }}
+        onNavigateToGuide={(howHappened) => onNavigateToGuide?.(howHappened)}
+      />
     </section>
   );
 }

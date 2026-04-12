@@ -85,6 +85,10 @@ function App() {
   const [activeTab, setActiveTab] = useState<TabKey>("scam");
   const [fontSize, setFontSize] = useState<"small" | "default" | "large">("default");
   const [aibotInitialQuestion, setAibotInitialQuestion] = useState<string | undefined>();
+  const [initialScamType, setInitialScamType] = useState<string | undefined>(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("scam-type") ?? undefined;
+  });
   const selectedTab = useMemo(
     () => homePageContent.guideTabs.find((tab) => tab.key === activeTab) ?? homePageContent.guideTabs[0],
     [activeTab, homePageContent]
@@ -286,6 +290,18 @@ function App() {
                   onCommonQuestionClick={handlePopularHelpClick}
                   onQuickGuideClick={handleQuickGuideClick}
                   onOpenChatbot={handleOpenChatbot}
+                  onNavigateToGuide={(howHappened) => {
+                    navigate(`/scam-check?how_happened=${howHappened}&step=1`);
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  initialScamType={initialScamType}
+                  onScamTypeConsumed={() => {
+                    setInitialScamType(undefined);
+                    // Clean URL param without navigation
+                    const url = new URL(window.location.href);
+                    url.searchParams.delete("scam-type");
+                    window.history.replaceState({}, "", url.pathname + url.search);
+                  }}
                 />
 
                 <ContentResourcesSection

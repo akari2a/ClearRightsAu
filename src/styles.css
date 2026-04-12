@@ -3918,6 +3918,461 @@ button {
   }
 }
 
+/* ══════════════════════════════════════════════
+   Scam Recogniser Dialog
+   ══════════════════════════════════════════════ */
+
+/* ── Trigger Button ── */
+
+.scam-recogniser-entry {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.scam-recogniser-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 100px;
+  background: var(--color-brand-primary-500);
+  color: var(--color-surface-primary);
+  font-size: var(--font-size-label-lg);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.scam-recogniser-trigger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 24px rgba(0, 55, 187, 0.2);
+}
+
+.scam-recogniser-trigger:active {
+  transform: translateY(1px);
+  background: var(--color-brand-primary-600);
+}
+
+/* ── Backdrop ── */
+
+.scam-recogniser-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(12, 18, 34, 0.28);
+  animation: scam-backdrop-enter 0.22s ease forwards;
+}
+
+@keyframes scam-backdrop-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── Dialog ── */
+
+.scam-recogniser-dialog {
+  position: relative;
+  width: min(100%, 520px);
+  max-height: min(90vh, 680px);
+  overflow-y: auto;
+  border-radius: 28px;
+  padding: 32px;
+  background: var(--color-surface-primary);
+  box-shadow: 0 24px 80px rgba(0, 30, 113, 0.12);
+  animation: scam-dialog-enter 0.4s var(--transition-apple-ease) forwards;
+}
+
+@keyframes scam-dialog-enter {
+  from { opacity: 0; transform: scale(0.88) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Close Button ── */
+
+.scam-recogniser-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.scam-recogniser-close:hover {
+  background: var(--color-border-soft);
+  color: var(--color-text-primary);
+}
+
+/* ── Step Container ── */
+
+.scam-recogniser-step {
+  display: flex;
+  flex-direction: column;
+}
+
+.scam-recogniser-step--center {
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+}
+
+/* ── Header ── */
+
+.scam-recogniser-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.scam-recogniser-header__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(0, 55, 187, 0.08);
+  color: var(--color-brand-primary-500);
+  margin-bottom: 16px;
+}
+
+.scam-recogniser-title {
+  margin: 0;
+  font-size: calc(22px * var(--font-scale-factor));
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.scam-recogniser-subtitle {
+  margin: 6px 0 0;
+  font-size: var(--font-size-body-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ── Type Picker Grid ── */
+
+.scam-recogniser-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.scam-recogniser-type-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 16px;
+  border: 1px solid var(--color-border-soft);
+  border-radius: 16px;
+  background: var(--color-surface-primary);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.scam-recogniser-type-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-brand-primary-200);
+  box-shadow: 0 4px 16px rgba(0, 30, 113, 0.08);
+}
+
+.scam-recogniser-type-card:active {
+  transform: translateY(0);
+}
+
+.scam-recogniser-type-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(0, 55, 187, 0.06);
+  color: var(--color-brand-primary-500);
+}
+
+.scam-recogniser-type-card__label {
+  font-size: var(--font-size-label-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+/* ── Social Media Link ── */
+
+.scam-recogniser-social-link {
+  margin: 16px 0 0;
+  text-align: center;
+  font-size: var(--font-size-label-sm);
+  color: var(--color-text-secondary);
+}
+
+.scam-recogniser-text-link {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--color-brand-primary-500);
+  font-size: inherit;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+
+.scam-recogniser-text-link:hover {
+  color: var(--color-brand-primary-600);
+  text-decoration: underline;
+}
+
+/* ── Back Button ── */
+
+.scam-recogniser-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 16px;
+  border: none;
+  background: none;
+  padding: 4px 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-label-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+
+.scam-recogniser-back:hover {
+  color: var(--color-text-primary);
+}
+
+/* ── Form Fields ── */
+
+.scam-recogniser-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.scam-recogniser-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.scam-recogniser-label {
+  font-size: var(--font-size-label-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.scam-recogniser-input,
+.scam-recogniser-textarea {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: var(--font-size-body-sm);
+  color: var(--color-text-primary);
+  background: var(--color-surface-primary);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.scam-recogniser-input:focus,
+.scam-recogniser-textarea:focus {
+  outline: none;
+  border-color: var(--color-brand-primary-300);
+  box-shadow: 0 0 0 3px rgba(0, 55, 187, 0.1);
+}
+
+.scam-recogniser-input--error,
+.scam-recogniser-textarea--error {
+  border-color: var(--color-risk-danger-text);
+}
+
+.scam-recogniser-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.scam-recogniser-char-count {
+  font-size: calc(12px * var(--font-scale-factor));
+  color: var(--color-text-secondary);
+  text-align: right;
+}
+
+.scam-recogniser-char-count--over {
+  color: var(--color-risk-danger-text);
+}
+
+.scam-recogniser-field-error {
+  margin: 0;
+  font-size: calc(13px * var(--font-scale-factor));
+  color: var(--color-risk-danger-text);
+}
+
+/* ── Analyse Button ── */
+
+.scam-recogniser-analyse-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: var(--color-brand-primary-500);
+  color: var(--color-surface-primary);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.scam-recogniser-analyse-btn:hover {
+  background: var(--color-brand-primary-600);
+}
+
+.scam-recogniser-analyse-btn:active {
+  transform: translateY(1px);
+}
+
+/* ── Analysing State ── */
+
+.scam-recogniser-analysing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.scam-recogniser-analysing__icon {
+  display: flex;
+  color: var(--color-brand-primary-500);
+  animation: scam-analysing-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes scam-analysing-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+.scam-recogniser-analysing__text {
+  margin: 0;
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+/* ── Result Cards ── */
+
+.scam-recogniser-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 28px 24px;
+  border-radius: 20px;
+}
+
+.scam-recogniser-result--suspicious {
+  background: var(--color-risk-danger-surface);
+  border: 1px solid var(--color-risk-danger-border);
+}
+
+.scam-recogniser-result--suspicious .scam-recogniser-result__icon {
+  color: var(--color-risk-danger-text);
+}
+
+.scam-recogniser-result--clear {
+  background: var(--color-risk-low-surface);
+  border: 1px solid var(--color-risk-low-border);
+}
+
+.scam-recogniser-result--clear .scam-recogniser-result__icon {
+  color: var(--color-risk-low-text);
+}
+
+.scam-recogniser-result__icon {
+  display: flex;
+}
+
+.scam-recogniser-result__heading {
+  margin: 0;
+  font-size: calc(20px * var(--font-scale-factor));
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.scam-recogniser-result__body {
+  margin: 0;
+  font-size: var(--font-size-label-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  max-width: 380px;
+}
+
+.scam-recogniser-result__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* ── Result Buttons ── */
+
+.scam-recogniser-btn--primary {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: var(--color-brand-primary-500);
+  color: var(--color-surface-primary);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.scam-recogniser-btn--primary:hover {
+  background: var(--color-brand-primary-600);
+}
+
+.scam-recogniser-btn--primary:active {
+  transform: translateY(1px);
+}
+
+.scam-recogniser-btn--secondary {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--color-border-soft);
+  border-radius: 14px;
+  background: var(--color-surface-primary);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.scam-recogniser-btn--secondary:hover {
+  background: var(--color-border-soft);
+}
+
 @media (max-width: 900px) {
   .topbar {
     flex-wrap: wrap;
@@ -4047,5 +4502,25 @@ button {
   .aibot-question {
     padding: 12px 14px;
     font-size: calc(14px * var(--font-scale-factor));
+  }
+
+  /* ── Scam Recogniser Responsive ── */
+
+  .scam-recogniser-trigger {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .scam-recogniser-backdrop {
+    padding: 16px;
+  }
+
+  .scam-recogniser-dialog {
+    padding: 24px;
+    border-radius: 20px;
+  }
+
+  .scam-recogniser-grid {
+    grid-template-columns: 1fr;
   }
 }
