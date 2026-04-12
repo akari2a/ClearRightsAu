@@ -57,4 +57,22 @@
   --color-risk-danger-surface: #ffd8d6;
   --color-risk-danger-border: #f2a09b;
   --color-risk-danger-text: #8e1f17;
+
+  /* AI Chatbot — cool blue */
+  --color-aibot-bg: #eaf2fb;
+  --color-aibot-input-bg: #ffffff;
+  --color-aibot-input-border: rgba(0, 0, 0, 0.06);
+  --color-aibot-input-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --color-aibot-pill-bg: rgba(180, 210, 255, 0.28);
+  --color-aibot-pill-hover: rgba(180, 210, 255, 0.5);
+  --color-aibot-pill-text: #4a6a9a;
+  --color-aibot-user-bubble: var(--color-brand-primary-500);
+  --color-aibot-user-text: #ffffff;
+  --color-aibot-ai-bubble: #ffffff;
+  --color-aibot-ai-border: rgba(0, 0, 0, 0.06);
+  --color-aibot-send: var(--color-brand-accent-100);
+  --color-aibot-send-hover: var(--color-brand-accent-050);
+  --color-aibot-status-online: #4ade80;
+  --color-aibot-status-connecting: #fbbf24;
+  --color-aibot-status-offline: #f87171;
 }

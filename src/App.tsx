@@ -2,12 +2,14 @@ import { useEffect, useMemo, useState } from "react";
 import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from "react-router-dom";
 import { getHomePageContent } from "./content/homeContent";
 import { getCaseById, getCasesPageContent } from "./content/casesContent";
+import { getAibotPageContent } from "./content/aibotContent";
 import { SiteHeader, type HeaderPrimaryNavKey } from "./components/layout/SiteHeader";
 import { SiteFooter } from "./components/layout/SiteFooter";
 import { SiteBreadcrumbs, type BreadcrumbItem } from "./components/layout/SiteBreadcrumbs";
 import { ScamCheckPage } from "./components/pages/ScamCheckPage";
 import { CasesIndexPage } from "./components/pages/CasesIndexPage";
 import { CaseDetailPage } from "./components/pages/CaseDetailPage";
+import { AibotPage } from "./components/pages/AibotPage";
 import { HeroSection } from "./components/sections/HeroSection";
 import { ContentResourcesSection } from "./components/sections/ContentResourcesSection";
 import { DEFAULT_LOCALE } from "./i18n/config";
@@ -48,11 +50,18 @@ function CaseDetailRoute({
   );
 }
 
+const FONT_SCALE_MAP = {
+  small: 0.92,
+  default: 1,
+  large: 1.12
+} as const;
+
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const homePageContent = useMemo(() => getHomePageContent(DEFAULT_LOCALE), []);
   const casesPageContent = useMemo(() => getCasesPageContent(DEFAULT_LOCALE), []);
+  const aibotPageContent = useMemo(() => getAibotPageContent(DEFAULT_LOCALE), []);
   const breadcrumbItems = useMemo<BreadcrumbItem[]>(() => {
     if (location.pathname === "/cases") {
       return [];
@@ -72,6 +81,7 @@ function App() {
   }, [location.pathname, casesPageContent]);
   const [activeTab, setActiveTab] = useState<TabKey>("scam");
   const [fontSize, setFontSize] = useState<"small" | "default" | "large">("default");
+  const [aibotInitialQuestion, setAibotInitialQuestion] = useState<string | undefined>();
   const selectedTab = useMemo(
     () => homePageContent.guideTabs.find((tab) => tab.key === activeTab) ?? homePageContent.guideTabs[0],
     [activeTab, homePageContent]
@@ -83,12 +93,16 @@ function App() {
     setPromptPlaceholder(tab.prompt);
   };
 
-  const handlePopularHelpClick = (item: string, tab: GuideTab) => {
-    console.info("Suggested chatbot prompt clicked", { item, tab: tab.key });
+  const handlePopularHelpClick = (item: string, _tab: GuideTab) => {
+    setAibotInitialQuestion(item);
+    navigate("/aibot");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleOpenChatbot = (initialQuestion: string | undefined, tab: GuideTab) => {
-    console.info("Open chatbot clicked", { initialQuestion, tab: tab.key });
+    setAibotInitialQuestion(initialQuestion ?? tab.prompt);
+    navigate("/aibot");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleQuickGuideClick = (tab: GuideTab) => {
@@ -121,6 +135,13 @@ function App() {
 
     if (destination === "cases") {
       navigate("/cases");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (destination === "aibot") {
+      setAibotInitialQuestion(undefined);
+      navigate("/aibot");
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
@@ -187,25 +208,23 @@ function App() {
     setFontSize(size);
   };
 
-  const fontScaleMap = {
-    small: 0.92,
-    default: 1,
-    large: 1.12
-  } as const;
-
   useEffect(() => {
-    document.documentElement.style.setProperty("--font-scale-factor", String(fontScaleMap[fontSize]));
+    document.documentElement.style.setProperty("--font-scale-factor", String(FONT_SCALE_MAP[fontSize]));
   }, [fontSize]);
 
-  const activePrimaryNav: HeaderPrimaryNavKey = location.pathname === "/scam-check"
-    ? "guide"
-    : location.pathname.startsWith("/cases")
-      ? "cases"
-      : "home";
+  const activePrimaryNav: HeaderPrimaryNavKey = location.pathname === "/aibot"
+    ? "aibot"
+    : location.pathname === "/scam-check"
+      ? "guide"
+      : location.pathname.startsWith("/cases")
+        ? "cases"
+        : "home";
+
+  const isAibotPage = location.pathname === "/aibot";
 
   return (
-    <main className="page-shell">
-      <div className="page-frame">
+    <main className={`page-shell${isAibotPage ? " page-shell--aibot" : ""}`}>
+      <div className={`page-frame${isAibotPage ? " page-frame--full" : ""}`}>
         <SiteHeader
           activePrimaryNav={activePrimaryNav}
           activeFontSize={fontSize}
@@ -276,10 +295,23 @@ function App() {
               />
             }
           />
+          <Route
+            path="/aibot"
+            element={
+              <AibotPage
+                content={aibotPageContent}
+                initialQuestion={aibotInitialQuestion}
+                onFallbackNavigate={(route) => {
+                  navigate(route);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+              />
+            }
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
-        <SiteFooter />
+        {isAibotPage ? null : <SiteFooter />}
       </div>
     </main>
   );

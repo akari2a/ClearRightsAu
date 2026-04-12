@@ -1,0 +1,23 @@
+{
+  "welcomeHeading": "How can we help you today?",
+  "welcomeSubtext": "Get guided help for scams, refunds, unsafe products, and rental disputes in Australia.",
+  "suggestedQuestions": [
+    { "text": "I received a phone call saying my visa had expired" },
+    { "text": "The seller refused my refund" }
+  ],
+  "suggestedPills": ["Scam check", "Refund help", "Product safety", "Rental dispute"],
+  "questionsDivider": "or try a common scenario",
+  "inputPlaceholder": "Describe your situation or ask a question...",
+  "inputDisclaimer": "General information only — not legal advice. Verify with official sources.",
+  "offlineTitle": "AI assistant is temporarily unavailable",
+  "offlineSubtext": "You can still browse our guides and cases for immediate help.",
+  "offlineRetryLabel": "Try again",
+  "offlineFallbackLinks": [
+    { "label": "Browse Guides", "route": "/scam-check" },
+    { "label": "View Cases", "route": "/cases" }
+  ],
+  "trustBadges": [
+    "Based on Australian Consumer Law",
+    "Not legal advice — verify with official sources"
+  ]
+}
