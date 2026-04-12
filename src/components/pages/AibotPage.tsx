@@ -57,8 +57,8 @@ export function AibotPage({ content, initialQuestion, onFallbackNavigate }: Aibo
   }, [initialQuestion, status, sendMessage]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+    messagesEndRef.current?.scrollIntoView({ behavior: isStreaming ? "auto" : "smooth" });
+  }, [messages, isStreaming]);
 
   const handleSend = useCallback(() => {
     if (!input.trim() || isStreaming) return;

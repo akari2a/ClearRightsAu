@@ -3450,6 +3450,9 @@ button {
 
 .aibot-msg {
   display: flex;
+}
+
+.aibot-msg--user {
   animation: aibot-msg-in 0.2s ease;
 }
 
