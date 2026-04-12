@@ -102,8 +102,8 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleOpenChatbot = (initialQuestion: string | undefined, tab: GuideTab) => {
-    setAibotInitialQuestion(initialQuestion ?? tab.prompt);
+  const handleOpenChatbot = (initialQuestion: string | undefined, _tab: GuideTab) => {
+    setAibotInitialQuestion(initialQuestion);
     navigate("/aibot");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };

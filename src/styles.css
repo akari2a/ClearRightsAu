@@ -666,6 +666,14 @@ button {
   outline-offset: 2px;
 }
 
+.prompt-shell:focus-within {
+  border-color: var(--color-brand-accent-100);
+  box-shadow:
+    inset 0 0 0 1px var(--color-brand-accent-100),
+    0 0 0 3px rgba(188, 228, 255, 0.28),
+    var(--shadow-card-glow);
+}
+
 .hero-common-questions {
   margin-top: 0;
   margin-bottom: 14px;
@@ -693,6 +701,11 @@ button {
   line-height: var(--line-height-regular);
   color: var(--color-text-primary);
   caret-color: var(--color-brand-primary-500);
+}
+
+.prompt-input::placeholder {
+  color: var(--color-brand-accent-500);
+  opacity: 0.6;
 }
 
 .prompt-input::selection {
@@ -731,11 +744,13 @@ button {
   align-items: center;
   gap: 10px;
   padding: 8px 12px;
+  border: none;
   border-radius: 100px;
   background: var(--color-brand-accent-100);
   color: var(--color-brand-primary-500);
   cursor: pointer;
   transition: background 0.18s ease;
+  flex-shrink: 0;
 }
 
 .ask-ai-button img {
@@ -757,6 +772,45 @@ button {
 
 .ask-ai-button:active {
   background: var(--color-brand-accent-500);
+}
+
+.ask-ai-button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.ask-ai-button:focus-visible {
+  outline: 2px solid var(--color-brand-primary-500);
+  outline-offset: 2px;
+}
+
+.prompt-shell--aibot {
+  max-width: 720px;
+  box-shadow: var(--color-aibot-input-shadow);
+}
+
+.prompt-shell--disabled {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.prompt-stop-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-brand-accent-100);
+  color: var(--color-brand-primary-500);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.18s ease;
+}
+
+.prompt-stop-button:hover {
+  background: var(--color-brand-accent-050);
 }
 
 .resource-section {
@@ -3465,7 +3519,7 @@ button {
   gap: 8px;
 }
 
-.aibot-conversation__input .aibot-input-card {
+.aibot-conversation__input .prompt-shell {
   max-width: 780px;
 }
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ArrowCircleIcon, StarIcon } from "../icons";
 import { InteractiveCardButton } from "../controls/InteractiveCardButton";
 import type { GuideTab, TabKey } from "../../types/home";
@@ -32,6 +33,20 @@ export function HeroSection({
   onOpenChatbot
 }: HeroSectionProps) {
   const activeTab = tabs.find((tab) => tab.key === activeTabKey) ?? tabs[0];
+  const [promptInput, setPromptInput] = useState("");
+
+  const handlePromptSubmit = () => {
+    const trimmed = promptInput.trim();
+    onOpenChatbot?.(trimmed || undefined, activeTab);
+    setPromptInput("");
+  };
+
+  const handlePromptKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handlePromptSubmit();
+    }
+  };
 
   return (
     <section className="hero">
@@ -105,21 +120,28 @@ export function HeroSection({
           </div>
         </div>
 
-        <button
-          className="prompt-shell prompt-shell--button"
-          type="button"
-          aria-label="Open chatbot"
-          onClick={() => onOpenChatbot?.(undefined, activeTab)}
-        >
+        <div className="prompt-shell">
           <div className="prompt-field">
-            <span className="prompt-placeholder prompt-placeholder--static">{promptPlaceholder}</span>
+            <input
+              className="prompt-input"
+              type="text"
+              placeholder={promptPlaceholder}
+              value={promptInput}
+              onChange={(e) => setPromptInput(e.target.value)}
+              onKeyDown={handlePromptKeyDown}
+              aria-label="Type your question for the AI chatbot"
+            />
           </div>
 
-          <span className="ask-ai-button" aria-hidden="true">
+          <button
+            className="ask-ai-button"
+            type="button"
+            onClick={handlePromptSubmit}
+          >
             <StarIcon />
             <span>Ask AI</span>
-          </span>
-        </button>
+          </button>
+        </div>
       </div>
     </section>
   );
