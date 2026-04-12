@@ -26,6 +26,7 @@ export type QuickCheckStage = {
   label: QuickCheckLocalizedText;
   priority: number;
   riskLevel?: number;
+  stageLayer?: "primary" | "overlay";
   affectedBy: Record<string, string[]>;
 };
 
@@ -67,6 +68,8 @@ export type QuickCheckActionPack = {
   resultTitle: QuickCheckLocalizedText;
   resultSummary: QuickCheckLocalizedText;
   steps: QuickCheckActionItem[];
+  prepare?: QuickCheckActionItem[];
+  help?: QuickCheckActionItem[];
 };
 
 export type QuickCheckActionPackFile = {

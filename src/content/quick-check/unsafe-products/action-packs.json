@@ -1,0 +1,626 @@
+{
+  "scenarioId": "unsafe_products",
+  "actionPacks": [
+    {
+      "stageId": "P",
+      "resultTitle": { "en": "This product may be unsafe to use." },
+      "resultSummary": { "en": "The product seems dangerous, behaves unusually, or may cause harm." },
+      "steps": [
+        {
+          "id": "p_stop",
+          "kind": "step",
+          "summary": { "en": "Stop using the product immediately" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Stop using the product immediately." }
+          }
+        },
+        {
+          "id": "p_move",
+          "kind": "step",
+          "summary": { "en": "Move it away from children, bedding, or anything flammable if needed" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Move it away from children, bedding, or anything flammable if needed." }
+          }
+        },
+        {
+          "id": "p_test",
+          "kind": "step",
+          "summary": { "en": "Do not keep testing it repeatedly" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Do not keep testing it repeatedly." }
+          }
+        },
+        {
+          "id": "p_photo",
+          "kind": "step",
+          "summary": { "en": "Take photos or videos of the issue if it is safe to do so" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Take photos or videos of the issue if it is safe to do so." }
+          }
+        },
+        {
+          "id": "p_keep",
+          "kind": "step",
+          "summary": { "en": "Keep the receipt, packaging, and product details" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Keep the receipt, packaging, and product details." }
+          }
+        },
+        {
+          "id": "p_explain",
+          "kind": "step",
+          "summary": { "en": "Be ready to explain clearly what happened" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Be ready to explain clearly what happened." }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "p_prepare_1",
+          "kind": "step",
+          "summary": { "en": "Relevant evidence" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{evidence}" },
+            "arguments": {
+              "evidence": {
+                "default": { "en": "Gather the receipt or proof of purchase, packaging or label, photos or video of the issue, and a short note about when and how the problem happened." },
+                "fromQuestion": "what_seems_wrong",
+                "map": {
+                  "unsafe": { "en": "Gather the receipt or proof of purchase, packaging or label, photos or video of the issue, and a short note about when and how the problem happened." }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "help": [
+        {
+          "id": "p_help_1",
+          "kind": "step",
+          "summary": { "en": "Seller" },
+          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+        },
+        {
+          "id": "p_help_2",
+          "kind": "step",
+          "summary": { "en": "Refund, replacement, or complaint pathway" },
+          "content": { "type": "plain_text", "text": { "en": "Refund, replacement, or complaint pathway" } }
+        }
+      ]
+    },
+
+    {
+      "stageId": "Q",
+      "resultTitle": { "en": "This looks like a product quality or defect concern." },
+      "resultSummary": { "en": "The product may be faulty, poor quality, damaged, or not working as expected." },
+      "steps": [
+        {
+          "id": "q_identify",
+          "kind": "step",
+          "summary": { "en": "Work out exactly what seems wrong" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Work out exactly what seems wrong." }
+          }
+        },
+        {
+          "id": "q_stop",
+          "kind": "step",
+          "summary": { "en": "Stop using it first if there may be any risk" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Stop using it first if there may be any risk." }
+          }
+        },
+        {
+          "id": "q_gather",
+          "kind": "step",
+          "summary": { "en": "Gather your evidence before contacting the seller" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Gather your evidence before contacting the seller." }
+          }
+        },
+        {
+          "id": "q_note",
+          "kind": "step",
+          "summary": { "en": "Write down what happened in simple terms" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Write down what happened in simple terms." }
+          }
+        },
+        {
+          "id": "q_ask",
+          "kind": "step",
+          "summary": { "en": "Ask the seller clearly whether they can inspect, replace, or refund the product" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Ask the seller clearly whether they can inspect, replace, or refund the product." }
+          }
+        },
+        {
+          "id": "q_keep",
+          "kind": "step",
+          "summary": { "en": "Keep their reply if it is vague or dismissive" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Keep their reply if it is vague or dismissive." }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "q_prepare_1",
+          "kind": "step",
+          "summary": { "en": "Relevant evidence" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{evidence}" },
+            "arguments": {
+              "evidence": {
+                "default": { "en": "Gather the receipt, product photos, packaging or label details, and notes on what happened and when." },
+                "fromQuestion": "what_seems_wrong",
+                "map": {
+                  "quality_or_fault": { "en": "Gather the receipt, product photos, packaging or label details, and notes on what happened and when." }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "help": [
+        {
+          "id": "q_help_1",
+          "kind": "step",
+          "summary": { "en": "Seller" },
+          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+        },
+        {
+          "id": "q_help_2",
+          "kind": "step",
+          "summary": { "en": "Refund, replacement, or complaint pathway" },
+          "content": { "type": "plain_text", "text": { "en": "Refund, replacement, or complaint pathway" } }
+        }
+      ]
+    },
+
+    {
+      "stageId": "U",
+      "resultTitle": { "en": "You are not sure whether this is a safety issue or a quality problem." },
+      "resultSummary": { "en": "That is okay. Start by treating any possible risk seriously and gathering the facts." },
+      "steps": [
+        {
+          "id": "u_stop",
+          "kind": "step",
+          "summary": { "en": "If there may be any risk, stop using the product first" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "If there may be any risk, stop using the product first." }
+          }
+        },
+        {
+          "id": "u_gather",
+          "kind": "step",
+          "summary": { "en": "Gather your receipt, packaging, photos, videos, and notes" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Gather your receipt, packaging, photos, videos, and notes." }
+          }
+        },
+        {
+          "id": "u_write",
+          "kind": "step",
+          "summary": { "en": "Write down what feels wrong and when it happened" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Write down what feels wrong and when it happened." }
+          }
+        },
+        {
+          "id": "u_contact",
+          "kind": "step",
+          "summary": { "en": "Start by asking the seller clearly what they will do to inspect, replace, or refund it" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Start by asking the seller clearly what they will do to inspect, replace, or refund it." }
+          }
+        },
+        {
+          "id": "u_written",
+          "kind": "step",
+          "summary": { "en": "Keep everything in writing as much as possible" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Keep everything in writing as much as possible." }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "u_prepare_1",
+          "kind": "step",
+          "summary": { "en": "Relevant evidence" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{evidence}" },
+            "arguments": {
+              "evidence": {
+                "default": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have." },
+                "fromQuestion": "what_seems_wrong",
+                "map": {
+                  "uncertain_type": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have." },
+                  "not_sure": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have." }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "help": [
+        {
+          "id": "u_help_1",
+          "kind": "step",
+          "summary": { "en": "Seller" },
+          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+        },
+        {
+          "id": "u_help_2",
+          "kind": "step",
+          "summary": { "en": "Refund, replacement, or complaint pathway" },
+          "content": { "type": "plain_text", "text": { "en": "Refund, replacement, or complaint pathway" } }
+        }
+      ]
+    },
+
+    {
+      "stageId": "S",
+      "resultTitle": { "en": "Safety comes first." },
+      "resultSummary": { "en": "If the product may still be unsafe, deal with the safety risk before anything else." },
+      "steps": [
+        {
+          "id": "s_stop",
+          "kind": "step",
+          "summary": { "en": "Stop using the product immediately" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Stop using the product immediately." }
+          }
+        },
+        {
+          "id": "s_move",
+          "kind": "step",
+          "summary": { "en": "Move it away from anything flammable if needed" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Move it away from anything flammable if needed." }
+          }
+        },
+        {
+          "id": "s_test",
+          "kind": "step",
+          "summary": { "en": "Do not keep testing it" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Do not keep testing it." }
+          }
+        },
+        {
+          "id": "s_photo",
+          "kind": "step",
+          "summary": { "en": "Only take photos or videos if it is safe to do so" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Only take photos or videos if it is safe to do so." }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "s_prepare_1",
+          "kind": "step",
+          "summary": { "en": "Basic evidence of what happened" },
+          "content": { "type": "plain_text", "text": { "en": "Basic evidence of what happened" } }
+        }
+      ],
+      "help": [
+        {
+          "id": "s_help_1",
+          "kind": "step",
+          "summary": { "en": "Seller" },
+          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+        }
+      ]
+    },
+
+    {
+      "stageId": "E",
+      "resultTitle": { "en": "Save and organise your evidence now." },
+      "resultSummary": { "en": "Your photos, receipts, packaging, and notes may be important for the next step." },
+      "steps": [
+        {
+          "id": "e_put",
+          "kind": "step",
+          "summary": { "en": "Put your receipt, packaging, photos, videos, and notes in one place" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Put your receipt, packaging, photos, videos, and notes in one place." }
+          }
+        },
+        {
+          "id": "e_write",
+          "kind": "step",
+          "summary": { "en": "Write down when and how the problem happened" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Write down when and how the problem happened." }
+          }
+        },
+        {
+          "id": "e_save_reply",
+          "kind": "step",
+          "summary": { "en": "Save anything the seller has already said" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Save anything the seller has already said." }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "e_prepare_1",
+          "kind": "step",
+          "summary": { "en": "Relevant evidence" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{evidence}" },
+            "arguments": {
+              "evidence": {
+                "default": { "en": "Put your receipt, photos, packaging, and notes in one place." },
+                "fromQuestion": "what_seems_wrong",
+                "map": {
+                  "unsafe": { "en": "Gather the receipt or proof of purchase, packaging or label, photos or video of the issue, and a short note about when and how the problem happened." },
+                  "quality_or_fault": { "en": "Gather the receipt, product photos, packaging or label details, and notes on what happened and when." },
+                  "uncertain_type": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have." },
+                  "not_sure": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have." }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "help": [
+        {
+          "id": "e_help_1",
+          "kind": "step",
+          "summary": { "en": "Seller" },
+          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+        }
+      ]
+    },
+
+    {
+      "stageId": "W",
+      "resultTitle": { "en": "You may still need one clear follow-up." },
+      "resultSummary": { "en": "You have contacted the seller, but you still do not have a clear answer." },
+      "steps": [
+        {
+          "id": "w_ask",
+          "kind": "step",
+          "summary": { "en": "Ask for a clear written reply" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Ask for a clear written reply." }
+          }
+        },
+        {
+          "id": "w_state",
+          "kind": "step",
+          "summary": { "en": "State the problem clearly in simple words" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "State the problem clearly in simple words." }
+          }
+        },
+        {
+          "id": "w_request",
+          "kind": "step",
+          "summary": { "en": "Ask whether the seller will inspect, replace, or refund the product" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Ask whether the seller will inspect, replace, or refund the product." }
+          }
+        },
+        {
+          "id": "w_save",
+          "kind": "step",
+          "summary": { "en": "Save any vague or dismissive reply" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Save any vague or dismissive reply." }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "w_prepare_1",
+          "kind": "step",
+          "summary": { "en": "Chat history, emails, or message record" },
+          "content": { "type": "plain_text", "text": { "en": "Chat history, emails, or message record" } }
+        }
+      ],
+      "help": [
+        {
+          "id": "w_help_1",
+          "kind": "step",
+          "summary": { "en": "Seller" },
+          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+        },
+        {
+          "id": "w_help_2",
+          "kind": "step",
+          "summary": { "en": "Refund, replacement, or complaint pathway" },
+          "content": { "type": "plain_text", "text": { "en": "Refund, replacement, or complaint pathway" } }
+        }
+      ]
+    },
+
+    {
+      "stageId": "H",
+      "resultTitle": { "en": "This may need the next refund or complaint step." },
+      "resultSummary": { "en": "The seller has dismissed the issue or the problem still has not been resolved." },
+      "steps": [
+        {
+          "id": "h_stop",
+          "kind": "step",
+          "summary": { "en": "Do not keep repeating the same argument unless you have new evidence" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Do not keep repeating the same argument unless you have new evidence." }
+          }
+        },
+        {
+          "id": "h_save",
+          "kind": "step",
+          "summary": { "en": "Save the seller's response" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Save the seller's response." }
+          }
+        },
+        {
+          "id": "h_written",
+          "kind": "step",
+          "summary": { "en": "Ask for a clear written reply if needed" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Ask for a clear written reply if needed." }
+          }
+        },
+        {
+          "id": "h_prepare",
+          "kind": "step",
+          "summary": { "en": "Prepare your documents for the next refund, replacement, or complaint step" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Prepare your documents for the next refund, replacement, or complaint step." }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "h_prepare_1",
+          "kind": "step",
+          "summary": { "en": "All receipts, packaging, photos, notes, and seller replies" },
+          "content": { "type": "plain_text", "text": { "en": "All receipts, packaging, photos, notes, and seller replies" } }
+        }
+      ],
+      "help": [
+        {
+          "id": "h_help_1",
+          "kind": "step",
+          "summary": { "en": "Refund, replacement, or complaint pathway" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{help}" },
+            "arguments": {
+              "help": {
+                "default": { "en": "Refund, replacement, or complaint pathway" },
+                "fromQuestion": "what_seems_wrong",
+                "map": {
+                  "unsafe": { "en": "Refund, replacement, or complaint pathway" },
+                  "quality_or_fault": { "en": "Refund, replacement, or complaint pathway" },
+                  "uncertain_type": { "en": "Refund, replacement, or complaint pathway" },
+                  "not_sure": { "en": "Refund, replacement, or complaint pathway" }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "stageId": "C",
+      "resultTitle": { "en": "Start with one clear seller contact." },
+      "resultSummary": { "en": "You have stopped using the product, but you have not clearly contacted the seller yet." },
+      "steps": [
+        {
+          "id": "c_gather",
+          "kind": "step",
+          "summary": { "en": "Put your evidence together first" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{evidence}" },
+            "arguments": {
+              "evidence": {
+                "default": { "en": "Put your receipt, photos, packaging, and notes in one place." },
+                "fromQuestion": "what_seems_wrong",
+                "map": {
+                  "unsafe": { "en": "Gather the receipt or proof of purchase, packaging or label, photos or video of the issue, and a short note about when and how the problem happened." },
+                  "quality_or_fault": { "en": "Gather the receipt, product photos, packaging or label details, and notes on what happened and when." },
+                  "uncertain_type": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have." },
+                  "not_sure": { "en": "Gather any receipt, packaging, photos, videos, and notes you still have." }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "c_decide",
+          "kind": "step",
+          "summary": { "en": "Decide what you want to ask for before contacting the seller" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Decide what you want to ask for before contacting the seller." }
+          }
+        },
+        {
+          "id": "c_contact",
+          "kind": "step",
+          "summary": { "en": "Contact the seller clearly and explain what happened" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{contact}" },
+            "arguments": {
+              "contact": {
+                "default": { "en": "Contact the seller clearly and explain what happened." },
+                "fromQuestion": "what_seems_wrong",
+                "map": {
+                  "unsafe": { "en": "Contact the seller clearly, explain what happened, and say why you are worried the product may be unsafe." },
+                  "quality_or_fault": { "en": "Contact the seller clearly and ask whether they will inspect, replace, or refund the product." },
+                  "uncertain_type": { "en": "Contact the seller clearly, explain what feels wrong, and ask what they will do next." },
+                  "not_sure": { "en": "Contact the seller clearly, explain what feels wrong, and ask what they will do next." }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "c_prepare_1",
+          "kind": "step",
+          "summary": { "en": "Your main evidence" },
+          "content": { "type": "plain_text", "text": { "en": "Your main evidence" } }
+        }
+      ],
+      "help": [
+        {
+          "id": "c_help_1",
+          "kind": "step",
+          "summary": { "en": "Seller" },
+          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+        }
+      ]
+    }
+  ]
+}

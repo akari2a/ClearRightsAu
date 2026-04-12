@@ -1,0 +1,667 @@
+{
+  "scenarioId": "refund",
+  "actionPacks": [
+    {
+      "stageId": "M",
+      "resultTitle": { "en": "This looks like a misleading product information issue." },
+      "resultSummary": { "en": "The product or service may not match what was promised, shown, or labelled." },
+      "steps": [
+        {
+          "id": "m_compare",
+          "kind": "step",
+          "summary": { "en": "Compare what was shown or promised with what you actually received" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Compare what was shown or promised with what you actually received." }
+          }
+        },
+        {
+          "id": "m_photos",
+          "kind": "step",
+          "summary": { "en": "Take clear photos of the product and anything misleading" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Take clear photos of the product, label, packaging, and anything that seems misleading." }
+          }
+        },
+        {
+          "id": "m_receipt",
+          "kind": "step",
+          "summary": { "en": "Keep the receipt or order details" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Keep the receipt or order details." }
+          }
+        },
+        {
+          "id": "m_explain",
+          "kind": "step",
+          "summary": { "en": "Be ready to explain exactly what was misleading" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Be ready to explain exactly what was misleading." }
+          }
+        },
+        {
+          "id": "m_request",
+          "kind": "step",
+          "summary": { "en": "Decide whether you want a refund or replacement" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Decide whether you want a refund or replacement before contacting the seller." }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "m_prepare_1",
+          "kind": "step",
+          "summary": { "en": "Relevant evidence" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{evidence}" },
+            "arguments": {
+              "evidence": {
+                "default": { "en": "Gather the receipt, product photos, labels, packaging, and any shop sign or website description." },
+                "fromQuestion": "what_kind_of_problem",
+                "map": {
+                  "misleading_product": { "en": "Gather the receipt, product photos, labels, packaging, and any shop sign or website description." }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "help": [
+        {
+          "id": "m_help_1",
+          "kind": "step",
+          "summary": { "en": "Seller" },
+          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+        },
+        {
+          "id": "m_help_2",
+          "kind": "step",
+          "summary": { "en": "Consumer complaint service" },
+          "content": { "type": "plain_text", "text": { "en": "Consumer complaint service" } }
+        }
+      ]
+    },
+
+    {
+      "stageId": "S",
+      "resultTitle": { "en": "This looks like an unresolved seller dispute." },
+      "resultSummary": { "en": "You have already contacted the seller, but the issue is still not moving forward." },
+      "steps": [
+        {
+          "id": "s_stop_repeat",
+          "kind": "step",
+          "summary": { "en": "Do not keep repeating the same conversation" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Do not keep repeating the same conversation without new evidence or a clearer request." }
+          }
+        },
+        {
+          "id": "s_collect",
+          "kind": "step",
+          "summary": { "en": "Put all your documents and messages in one place" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Put all your documents and messages in one place." }
+          }
+        },
+        {
+          "id": "s_summary",
+          "kind": "step",
+          "summary": { "en": "Write one short summary of the problem" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Write one short summary of the problem." }
+          }
+        },
+        {
+          "id": "s_request",
+          "kind": "step",
+          "summary": { "en": "Decide exactly what you want before contacting the seller again" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Decide exactly what you want before contacting the seller again." }
+          }
+        },
+        {
+          "id": "s_save",
+          "kind": "step",
+          "summary": { "en": "Save every reply, refusal, or promise" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Save every reply, refusal, or promise." }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "s_prepare_1",
+          "kind": "step",
+          "summary": { "en": "Relevant evidence" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{evidence}" },
+            "arguments": {
+              "evidence": {
+                "default": { "en": "Gather the receipt, photos, chat history, emails, and a note of what the seller has already said." },
+                "fromQuestion": "what_kind_of_problem",
+                "map": {
+                  "seller_unresolved": { "en": "Gather the receipt, photos, chat history, emails, and a note of what the seller has already said." }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "help": [
+        {
+          "id": "s_help_1",
+          "kind": "step",
+          "summary": { "en": "Seller" },
+          "content": { "type": "plain_text", "text": { "en": "Seller" } }
+        },
+        {
+          "id": "s_help_2",
+          "kind": "step",
+          "summary": { "en": "Consumer complaint service" },
+          "content": { "type": "plain_text", "text": { "en": "Consumer complaint service" } }
+        }
+      ]
+    },
+
+    {
+      "stageId": "R",
+      "resultTitle": { "en": "This looks like a rental bond or cleaning fee dispute." },
+      "resultSummary": { "en": "Part of your bond may have been deducted for cleaning, damage, or property condition reasons." },
+      "steps": [
+        {
+          "id": "r_notice",
+          "kind": "step",
+          "summary": { "en": "Read the deduction notice carefully" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Read the deduction notice carefully." }
+          }
+        },
+        {
+          "id": "r_check",
+          "kind": "step",
+          "summary": { "en": "Check your tenancy agreement and move-out evidence" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Check your tenancy agreement and move-out evidence." }
+          }
+        },
+        {
+          "id": "r_compare",
+          "kind": "step",
+          "summary": { "en": "Compare the claim with your own photos, receipts, and messages" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Compare the claim with your own photos, cleaning receipts, and messages." }
+          }
+        },
+        {
+          "id": "r_write",
+          "kind": "step",
+          "summary": { "en": "Be ready to contact the landlord or agent in writing" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Be ready to contact the landlord or agent in writing." }
+          }
+        },
+        {
+          "id": "r_disagree",
+          "kind": "step",
+          "summary": { "en": "Be clear about which part of the deduction you disagree with" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Be clear about which part of the deduction you disagree with and why." }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "r_prepare_1",
+          "kind": "step",
+          "summary": { "en": "Relevant evidence" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{evidence}" },
+            "arguments": {
+              "evidence": {
+                "default": { "en": "Gather the tenancy agreement, move-out photos or videos, cleaning receipts, messages, and the bond deduction notice." },
+                "fromQuestion": "what_kind_of_problem",
+                "map": {
+                  "rental_bond": { "en": "Gather the tenancy agreement, move-out photos or videos, cleaning receipts, messages, and the bond deduction notice." }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "help": [
+        {
+          "id": "r_help_1",
+          "kind": "step",
+          "summary": { "en": "Landlord or agent" },
+          "content": { "type": "plain_text", "text": { "en": "Landlord or agent" } }
+        },
+        {
+          "id": "r_help_2",
+          "kind": "step",
+          "summary": { "en": "Tenancy complaint service" },
+          "content": { "type": "plain_text", "text": { "en": "Tenancy complaint service" } }
+        }
+      ]
+    },
+
+    {
+      "stageId": "U",
+      "resultTitle": { "en": "You are not sure which type of dispute this is." },
+      "resultSummary": { "en": "That is okay. Start by organising the facts and evidence first." },
+      "steps": [
+        {
+          "id": "u_collect",
+          "kind": "step",
+          "summary": { "en": "Gather your key documents, messages, receipts, and screenshots" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Gather your key documents, messages, receipts, and screenshots." }
+          }
+        },
+        {
+          "id": "u_summary",
+          "kind": "step",
+          "summary": { "en": "Write one short summary of what happened" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Write one short summary of what happened." }
+          }
+        },
+        {
+          "id": "u_identify",
+          "kind": "step",
+          "summary": { "en": "Try to work out which type of issue this is" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Try to work out whether this is about misleading information, an unresolved seller issue, or a rental bond deduction." }
+          }
+        },
+        {
+          "id": "u_written",
+          "kind": "step",
+          "summary": { "en": "Keep everything in writing as much as possible" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Keep everything in writing as much as possible." }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "u_prepare_1",
+          "kind": "step",
+          "summary": { "en": "Relevant evidence" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{evidence}" },
+            "arguments": {
+              "evidence": {
+                "default": { "en": "Gather any receipts, screenshots, messages, notices, photos, or contracts you still have." },
+                "fromQuestion": "what_kind_of_problem",
+                "map": {
+                  "not_sure": { "en": "Gather any receipts, screenshots, messages, notices, photos, or contracts you still have." }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "help": [
+        {
+          "id": "u_help_1",
+          "kind": "step",
+          "summary": { "en": "Relevant complaint service" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{help}" },
+            "arguments": {
+              "help": {
+                "default": { "en": "Relevant complaint service" },
+                "fromQuestion": "what_kind_of_problem",
+                "map": {
+                  "misleading_product": { "en": "Consumer complaint service" },
+                  "seller_unresolved": { "en": "Consumer complaint service" },
+                  "rental_bond": { "en": "Tenancy complaint service" },
+                  "not_sure": { "en": "Relevant complaint service" }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "stageId": "C",
+      "resultTitle": { "en": "Start with one clear request." },
+      "resultSummary": { "en": "You have not made a clear written request yet." },
+      "steps": [
+        {
+          "id": "c_gather",
+          "kind": "step",
+          "summary": { "en": "Put your evidence together first" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{evidence}" },
+            "arguments": {
+              "evidence": {
+                "default": { "en": "Put your key documents and screenshots in one place." },
+                "fromQuestion": "what_kind_of_problem",
+                "map": {
+                  "misleading_product": { "en": "Gather the receipt, product photos, labels, packaging, and any shop sign or website description." },
+                  "seller_unresolved": { "en": "Gather the receipt, photos, chat history, emails, and a note of what the seller has already said." },
+                  "rental_bond": { "en": "Gather the tenancy agreement, move-out photos or videos, cleaning receipts, messages, and the bond deduction notice." },
+                  "not_sure": { "en": "Gather any receipts, screenshots, messages, notices, photos, or contracts you still have." }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "c_decide",
+          "kind": "step",
+          "summary": { "en": "Decide exactly what you want before contacting them" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Decide exactly what you want before contacting them." }
+          }
+        },
+        {
+          "id": "c_contact",
+          "kind": "step",
+          "summary": { "en": "Make one clear written contact" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{contact}" },
+            "arguments": {
+              "contact": {
+                "default": { "en": "Make one clear written contact instead of starting with repeated back-and-forth discussion." },
+                "fromQuestion": "what_kind_of_problem",
+                "map": {
+                  "misleading_product": { "en": "Contact the seller clearly and explain what was misleading. Ask for a refund or replacement." },
+                  "seller_unresolved": { "en": "Send one clear follow-up message to the seller and state exactly what you want." },
+                  "rental_bond": { "en": "Contact the landlord or agent in writing and explain which part of the deduction you disagree with and why." },
+                  "not_sure": { "en": "Contact the other side in writing and explain the issue as clearly as you can." }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "c_prepare_1",
+          "kind": "step",
+          "summary": { "en": "Your main evidence" },
+          "content": { "type": "plain_text", "text": { "en": "Your main evidence" } }
+        }
+      ],
+      "help": [
+        {
+          "id": "c_help_1",
+          "kind": "step",
+          "summary": { "en": "Seller, landlord, or agent" },
+          "content": { "type": "plain_text", "text": { "en": "Seller, landlord, or agent" } }
+        }
+      ]
+    },
+
+    {
+      "stageId": "W",
+      "resultTitle": { "en": "You may still need one clear follow-up." },
+      "resultSummary": { "en": "You contacted them once, but you still do not have a clear answer." },
+      "steps": [
+        {
+          "id": "w_repeat",
+          "kind": "step",
+          "summary": { "en": "Do not keep repeating the same argument" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Do not keep repeating the same argument without changing anything." }
+          }
+        },
+        {
+          "id": "w_followup",
+          "kind": "step",
+          "summary": { "en": "Send one clear follow-up message" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Send one clear follow-up message and ask for a clear written response." }
+          }
+        },
+        {
+          "id": "w_save",
+          "kind": "step",
+          "summary": { "en": "Save any reply, refusal, or promise" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Save any reply, refusal, or promise." }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "w_prepare_1",
+          "kind": "step",
+          "summary": { "en": "Chat history, emails, or message record" },
+          "content": { "type": "plain_text", "text": { "en": "Chat history, emails, or message record" } }
+        }
+      ],
+      "help": [
+        {
+          "id": "w_help_1",
+          "kind": "step",
+          "summary": { "en": "Complaint service" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{help}" },
+            "arguments": {
+              "help": {
+                "default": { "en": "Consumer or tenancy complaint service" },
+                "fromQuestion": "what_kind_of_problem",
+                "map": {
+                  "misleading_product": { "en": "Consumer complaint service" },
+                  "seller_unresolved": { "en": "Consumer complaint service" },
+                  "rental_bond": { "en": "Tenancy complaint service" },
+                  "not_sure": { "en": "Relevant complaint service" }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "stageId": "H",
+      "resultTitle": { "en": "This may need the next formal complaint step." },
+      "resultSummary": { "en": "The issue appears to be repeating, unresolved, or clearly refused." },
+      "steps": [
+        {
+          "id": "h_stop",
+          "kind": "step",
+          "summary": { "en": "Stop repeating the same argument" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Stop repeating the same argument unless you have new evidence." }
+          }
+        },
+        {
+          "id": "h_written",
+          "kind": "step",
+          "summary": { "en": "Ask for a clear written reply" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Ask for a clear written reply if you do not already have one." }
+          }
+        },
+        {
+          "id": "h_prepare",
+          "kind": "step",
+          "summary": { "en": "Prepare your documents and timeline" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Prepare your documents and timeline for the next formal complaint step." }
+          }
+        },
+        {
+          "id": "h_help",
+          "kind": "step",
+          "summary": { "en": "Check the relevant complaint pathway" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "Check the relevant complaint pathway for your type of issue. {help}" },
+            "arguments": {
+              "help": {
+                "default": { "en": "" },
+                "fromQuestion": "what_kind_of_problem",
+                "map": {
+                  "misleading_product": { "en": "For consumer disputes, contact the consumer complaint service." },
+                  "seller_unresolved": { "en": "For consumer disputes, contact the consumer complaint service." },
+                  "rental_bond": { "en": "For tenancy disputes, contact the tenancy complaint service." },
+                  "not_sure": { "en": "" }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "h_prepare_1",
+          "kind": "step",
+          "summary": { "en": "A short timeline of what happened" },
+          "content": { "type": "plain_text", "text": { "en": "A short timeline of what happened" } }
+        },
+        {
+          "id": "h_prepare_2",
+          "kind": "step",
+          "summary": { "en": "All messages, receipts, notices, and supporting evidence" },
+          "content": { "type": "plain_text", "text": { "en": "All messages, receipts, notices, and supporting evidence" } }
+        }
+      ],
+      "help": [
+        {
+          "id": "h_help_1",
+          "kind": "step",
+          "summary": { "en": "Complaint service" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{help}" },
+            "arguments": {
+              "help": {
+                "default": { "en": "Relevant complaint service" },
+                "fromQuestion": "what_kind_of_problem",
+                "map": {
+                  "misleading_product": { "en": "Consumer complaint service" },
+                  "seller_unresolved": { "en": "Consumer complaint service" },
+                  "rental_bond": { "en": "Tenancy complaint service" },
+                  "not_sure": { "en": "Relevant complaint service" }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "stageId": "E",
+      "resultTitle": { "en": "Save and organise your evidence now." },
+      "resultSummary": { "en": "Some of your key records may still need to be gathered or protected." },
+      "steps": [
+        {
+          "id": "e_save",
+          "kind": "step",
+          "summary": { "en": "Save screenshots, receipts, notices, and messages" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Save screenshots, receipts, notices, and messages before anything is deleted or lost." }
+          }
+        },
+        {
+          "id": "e_put",
+          "kind": "step",
+          "summary": { "en": "Put everything in one place" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Put everything in one place." }
+          }
+        },
+        {
+          "id": "e_note",
+          "kind": "step",
+          "summary": { "en": "Write down the key dates and what happened" },
+          "content": {
+            "type": "plain_text",
+            "text": { "en": "Write down the key dates, what happened, and what the other side has already said." }
+          }
+        }
+      ],
+      "prepare": [
+        {
+          "id": "e_prepare_1",
+          "kind": "step",
+          "summary": { "en": "Relevant evidence" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{evidence}" },
+            "arguments": {
+              "evidence": {
+                "default": { "en": "Put your key documents and screenshots in one place." },
+                "fromQuestion": "what_kind_of_problem",
+                "map": {
+                  "misleading_product": { "en": "Gather the receipt, product photos, labels, packaging, and any shop sign or website description." },
+                  "seller_unresolved": { "en": "Gather the receipt, photos, chat history, emails, and a note of what the seller has already said." },
+                  "rental_bond": { "en": "Gather the tenancy agreement, move-out photos or videos, cleaning receipts, messages, and the bond deduction notice." },
+                  "not_sure": { "en": "Gather any receipts, screenshots, messages, notices, photos, or contracts you still have." }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "help": [
+        {
+          "id": "e_help_1",
+          "kind": "step",
+          "summary": { "en": "Complaint service" },
+          "content": {
+            "type": "format_text",
+            "template": { "en": "{help}" },
+            "arguments": {
+              "help": {
+                "default": { "en": "Relevant complaint service" },
+                "fromQuestion": "what_kind_of_problem",
+                "map": {
+                  "misleading_product": { "en": "Consumer complaint service" },
+                  "seller_unresolved": { "en": "Consumer complaint service" },
+                  "rental_bond": { "en": "Tenancy complaint service" },
+                  "not_sure": { "en": "Relevant complaint service" }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "scenarioId": "unsafe_products",
+  "questionFlow": [
+    {
+      "id": "what_seems_wrong",
+      "title": { "en": "What seems wrong with the product?" },
+      "description": { "en": "" },
+      "selectionMode": "single",
+      "options": [
+        {
+          "id": "unsafe",
+          "label": { "en": "It feels unsafe to use" }
+        },
+        {
+          "id": "quality_or_fault",
+          "label": { "en": "It seems faulty, poor quality, or not working properly" }
+        },
+        {
+          "id": "uncertain_type",
+          "label": { "en": "I'm not sure whether it is a quality problem or a safety problem" }
+        },
+        {
+          "id": "not_sure",
+          "label": { "en": "I'm not sure" }
+        }
+      ]
+    },
+    {
+      "id": "what_have_you_done_so_far",
+      "title": { "en": "What have you done so far?" },
+      "description": { "en": "" },
+      "selectionMode": "single",
+      "options": [
+        {
+          "id": "stopped_not_contacted",
+          "label": { "en": "I stopped using it, but I have not contacted the seller yet" }
+        },
+        {
+          "id": "collecting_evidence",
+          "label": { "en": "I have started collecting photos, receipts, or other evidence" }
+        },
+        {
+          "id": "contacted_once",
+          "label": { "en": "I contacted the seller once, but I did not get a clear answer" }
+        },
+        {
+          "id": "seller_says_normal",
+          "label": { "en": "The seller said the problem is normal or not serious" }
+        },
+        {
+          "id": "still_unresolved",
+          "label": { "en": "The issue is still not resolved" }
+        },
+        {
+          "id": "not_sure",
+          "label": { "en": "I'm not sure" }
+        }
+      ]
+    },
+    {
+      "id": "what_is_happening_now",
+      "title": { "en": "What is happening now?" },
+      "description": { "en": "" },
+      "selectionMode": "single",
+      "options": [
+        {
+          "id": "may_still_be_unsafe",
+          "label": { "en": "I think it may still be unsafe to use" }
+        },
+        {
+          "id": "need_to_organise_evidence",
+          "label": { "en": "I need to organise my evidence" }
+        },
+        {
+          "id": "waiting_for_clear_reply",
+          "label": { "en": "I am still waiting for a clear reply" }
+        },
+        {
+          "id": "seller_repeating_normal",
+          "label": { "en": "The seller keeps saying the problem is normal or not serious" }
+        },
+        {
+          "id": "still_unresolved_now",
+          "label": { "en": "The issue is still not resolved" }
+        },
+        {
+          "id": "not_sure",
+          "label": { "en": "I'm not sure" }
+        }
+      ]
+    }
+  ]
+}

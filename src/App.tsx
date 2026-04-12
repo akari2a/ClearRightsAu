@@ -7,6 +7,8 @@ import { SiteHeader, type HeaderPrimaryNavKey } from "./components/layout/SiteHe
 import { SiteFooter } from "./components/layout/SiteFooter";
 import { SiteBreadcrumbs, type BreadcrumbItem } from "./components/layout/SiteBreadcrumbs";
 import { ScamCheckPage } from "./components/pages/ScamCheckPage";
+import { RefundCheckPage } from "./components/pages/RefundCheckPage";
+import { UnsafeProductsCheckPage } from "./components/pages/UnsafeProductsCheckPage";
 import { CasesIndexPage } from "./components/pages/CasesIndexPage";
 import { CaseDetailPage } from "./components/pages/CaseDetailPage";
 import { AibotPage } from "./components/pages/AibotPage";
@@ -16,6 +18,7 @@ import { DEFAULT_LOCALE } from "./i18n/config";
 import type { GuideTab, LinkCard, TabKey } from "./types/home";
 import type { SuccessCase } from "./types/case";
 import type { QuickCheckAnswers, QuickCheckStage } from "./types/quickCheck";
+import type { GuideResult } from "./types/guide";
 
 function CaseDetailRoute({
   onRelatedGuideClick,
@@ -112,6 +115,18 @@ function App() {
       return;
     }
 
+    if (tab.key === "refund") {
+      navigate("/refund-check");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (tab.key === "unsafe") {
+      navigate("/unsafe-products-check");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
     console.info("Quick guide clicked", { tab: tab.key });
   };
 
@@ -123,8 +138,9 @@ function App() {
     }
 
     if (destination === "guide") {
-      if (window.location.pathname === "/scam-check") {
-        window.location.assign("/scam-check");
+      const guidePaths = ["/scam-check", "/refund-check", "/unsafe-products-check"];
+      if (guidePaths.includes(window.location.pathname)) {
+        window.location.assign(window.location.pathname);
         return;
       }
 
@@ -204,6 +220,22 @@ function App() {
     console.info("Scam section navigated", { sectionId });
   };
 
+  const handleRefundQuestionnaireComplete = (answers: QuickCheckAnswers, result: GuideResult | null) => {
+    console.info("Refund questionnaire completed", { answers, resultId: result?.primaryResultId ?? null });
+  };
+
+  const handleRefundSectionNavigate = (sectionId: string) => {
+    console.info("Refund section navigated", { sectionId });
+  };
+
+  const handleUnsafeProductsQuestionnaireComplete = (answers: QuickCheckAnswers, result: GuideResult | null) => {
+    console.info("Unsafe products questionnaire completed", { answers, resultId: result?.primaryResultId ?? null });
+  };
+
+  const handleUnsafeProductsSectionNavigate = (sectionId: string) => {
+    console.info("Unsafe products section navigated", { sectionId });
+  };
+
   const handleFontSizeChange = (size: "small" | "default" | "large") => {
     setFontSize(size);
   };
@@ -214,7 +246,7 @@ function App() {
 
   const activePrimaryNav: HeaderPrimaryNavKey = location.pathname === "/aibot"
     ? "aibot"
-    : location.pathname === "/scam-check"
+    : (location.pathname === "/scam-check" || location.pathname === "/refund-check" || location.pathname === "/unsafe-products-check")
       ? "guide"
       : location.pathname.startsWith("/cases")
         ? "cases"
@@ -271,6 +303,24 @@ function App() {
               <ScamCheckPage
                 onQuestionnaireComplete={handleScamQuestionnaireComplete}
                 onSectionNavigate={handleScamSectionNavigate}
+              />
+            }
+          />
+          <Route
+            path="/refund-check"
+            element={
+              <RefundCheckPage
+                onQuestionnaireComplete={handleRefundQuestionnaireComplete}
+                onSectionNavigate={handleRefundSectionNavigate}
+              />
+            }
+          />
+          <Route
+            path="/unsafe-products-check"
+            element={
+              <UnsafeProductsCheckPage
+                onQuestionnaireComplete={handleUnsafeProductsQuestionnaireComplete}
+                onSectionNavigate={handleUnsafeProductsSectionNavigate}
               />
             }
           />

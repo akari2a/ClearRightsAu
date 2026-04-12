@@ -1,0 +1,87 @@
+{
+  "scenarioId": "refund",
+  "stages": [
+    {
+      "id": "M",
+      "label": { "en": "Misleading product information" },
+      "priority": 20,
+      "riskLevel": 2,
+      "stageLayer": "primary",
+      "affectedBy": {
+        "what_kind_of_problem": ["misleading_product"]
+      }
+    },
+    {
+      "id": "S",
+      "label": { "en": "Unresolved seller dispute" },
+      "priority": 30,
+      "riskLevel": 3,
+      "stageLayer": "primary",
+      "affectedBy": {
+        "what_kind_of_problem": ["seller_unresolved"]
+      }
+    },
+    {
+      "id": "R",
+      "label": { "en": "Rental bond or cleaning fee dispute" },
+      "priority": 30,
+      "riskLevel": 3,
+      "stageLayer": "primary",
+      "affectedBy": {
+        "what_kind_of_problem": ["rental_bond"]
+      }
+    },
+    {
+      "id": "U",
+      "label": { "en": "Uncertain dispute type" },
+      "priority": 10,
+      "riskLevel": 2,
+      "stageLayer": "primary",
+      "affectedBy": {
+        "what_kind_of_problem": ["not_sure"]
+      }
+    },
+    {
+      "id": "C",
+      "label": { "en": "First clear contact needed" },
+      "priority": 10,
+      "riskLevel": 2,
+      "stageLayer": "overlay",
+      "affectedBy": {
+        "what_have_you_done_so_far": ["not_contacted_yet"]
+      }
+    },
+    {
+      "id": "W",
+      "label": { "en": "Waiting for a clear answer" },
+      "priority": 20,
+      "riskLevel": 3,
+      "stageLayer": "overlay",
+      "affectedBy": {
+        "what_have_you_done_so_far": ["contacted_once"],
+        "what_is_happening_now": ["no_clear_reply_yet"]
+      }
+    },
+    {
+      "id": "H",
+      "label": { "en": "Unresolved after follow-up or refusal" },
+      "priority": 40,
+      "riskLevel": 4,
+      "stageLayer": "overlay",
+      "affectedBy": {
+        "what_have_you_done_so_far": ["already_followed_up", "clear_refusal_or_deduction"],
+        "what_is_happening_now": ["same_argument_or_refusal"]
+      }
+    },
+    {
+      "id": "E",
+      "label": { "en": "Evidence needs to be organised or protected" },
+      "priority": 30,
+      "riskLevel": 3,
+      "stageLayer": "overlay",
+      "affectedBy": {
+        "what_is_happening_now": ["need_to_organise_evidence", "evidence_may_be_lost"]
+      }
+    }
+  ]
+}

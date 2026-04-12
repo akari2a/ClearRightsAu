@@ -1,0 +1,88 @@
+{
+  "scenarioId": "unsafe_products",
+  "stages": [
+    {
+      "id": "P",
+      "label": { "en": "Products that seem immediately unsafe" },
+      "priority": 30,
+      "riskLevel": 4,
+      "stageLayer": "primary",
+      "affectedBy": {
+        "what_seems_wrong": ["unsafe"]
+      }
+    },
+    {
+      "id": "Q",
+      "label": { "en": "Product safety or quality concerns" },
+      "priority": 20,
+      "riskLevel": 3,
+      "stageLayer": "primary",
+      "affectedBy": {
+        "what_seems_wrong": ["quality_or_fault"]
+      }
+    },
+    {
+      "id": "U",
+      "label": { "en": "Uncertain product issue" },
+      "priority": 10,
+      "riskLevel": 2,
+      "stageLayer": "primary",
+      "affectedBy": {
+        "what_seems_wrong": ["uncertain_type", "not_sure"]
+      }
+    },
+    {
+      "id": "S",
+      "label": { "en": "Safety first" },
+      "priority": 100,
+      "riskLevel": 5,
+      "stageLayer": "overlay",
+      "affectedBy": {
+        "what_is_happening_now": ["may_still_be_unsafe"]
+      }
+    },
+    {
+      "id": "E",
+      "label": { "en": "Evidence needs to be organised" },
+      "priority": 80,
+      "riskLevel": 3,
+      "stageLayer": "overlay",
+      "affectedBy": {
+        "what_have_you_done_so_far": ["collecting_evidence"],
+        "what_is_happening_now": ["need_to_organise_evidence"]
+      }
+    },
+    {
+      "id": "W",
+      "label": { "en": "Waiting for a clear seller response" },
+      "priority": 60,
+      "riskLevel": 3,
+      "stageLayer": "overlay",
+      "affectedBy": {
+        "what_have_you_done_so_far": ["contacted_once"],
+        "what_is_happening_now": ["waiting_for_clear_reply"]
+      }
+    },
+    {
+      "id": "H",
+      "label": { "en": "Seller dismissed the issue or it remains unresolved" },
+      "priority": 90,
+      "riskLevel": 4,
+      "stageLayer": "overlay",
+      "affectedBy": {
+        "what_have_you_done_so_far": ["seller_says_normal", "still_unresolved"],
+        "what_is_happening_now": ["seller_repeating_normal", "still_unresolved_now"]
+      }
+    },
+    {
+      "id": "C",
+      "label": { "en": "First clear seller contact needed" },
+      "priority": 50,
+      "riskLevel": 2,
+      "stageLayer": "overlay",
+      "affectedBy": {
+        "what_have_you_done_so_far": ["stopped_not_contacted"]
+      }
+    }
+  ]
+}
