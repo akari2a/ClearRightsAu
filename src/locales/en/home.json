@@ -43,7 +43,8 @@
       ],
       "quickPills": ["Help me recognize a scam", "Help me recognize a scam"],
       "prompt": "“I received a phone call telling me that my visa had expired”",
-      "actionLabel": "Check if this is a scam"
+      "actionLabel": "Check if this is a scam",
+      "recogniserActionLabel": "Recognise suspicious text"
     },
     {
       "key": "refund",

@@ -17,6 +17,7 @@ export type GuideTab = {
   quickPills: string[];
   prompt: string;
   actionLabel: string;
+  recogniserActionLabel?: string;
 };
 
 export type LinkCard = {

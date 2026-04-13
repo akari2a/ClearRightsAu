@@ -43,7 +43,8 @@
       ],
       "quickPills": ["帮我识别诈骗", "帮我识别诈骗"],
       "prompt": "“我接到一个电话，说我的签证已经过期了”",
-      "actionLabel": "判断这是不是诈骗"
+      "actionLabel": "判断这是不是诈骗",
+      "recogniserActionLabel": "识别可疑文本"
     },
     {
       "key": "refund",

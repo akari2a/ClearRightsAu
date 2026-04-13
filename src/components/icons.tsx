@@ -21,3 +21,15 @@ export function ArrowCircleIcon() {
     </span>
   );
 }
+
+export function SuspiciousTextIcon() {
+  return (
+    <span className="quick-guide-button__icon-badge" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="10.5" cy="10.5" r="5.5" />
+        <path d="M14.6 14.6 19 19" />
+        <path d="m8.6 10.5 1.2 1.2 2.7-2.9" />
+      </svg>
+    </span>
+  );
+}
