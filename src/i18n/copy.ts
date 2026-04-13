@@ -10,6 +10,10 @@ type UiCopy = {
     guideRefund: string;
     guideUnsafe: string;
     languageLabel: string;
+    localeSuggestionTitle: string;
+    localeSuggestionBody: string;
+    localeSuggestionSwitch: string;
+    localeSuggestionStay: string;
   };
   footer: {
     navigateTitle: string;
@@ -50,6 +54,8 @@ type UiCopy = {
     relatedCases: string;
     startAgain: string;
     saveAsPdf: string;
+    showEnglishComparison: string;
+    hideEnglishComparison: string;
     onThisPage: string;
     whatToPrepare: string;
     whereToGetHelp: string;
@@ -78,7 +84,11 @@ const UI_COPY_BY_LOCALE: Record<AppLocale, UiCopy> = {
       guideScam: "Scam",
       guideRefund: "Refund and replacement",
       guideUnsafe: "Unsafe products",
-      languageLabel: "Language"
+      languageLabel: "Language",
+      localeSuggestionTitle: "Prefer Simplified Chinese?",
+      localeSuggestionBody: "Your device language looks like Simplified Chinese. We can switch the site for you.",
+      localeSuggestionSwitch: "Switch to 简体中文",
+      localeSuggestionStay: "Stay in English"
     },
     footer: {
       navigateTitle: "Navigate",
@@ -119,6 +129,8 @@ const UI_COPY_BY_LOCALE: Record<AppLocale, UiCopy> = {
       relatedCases: "Related cases",
       startAgain: "Start again",
       saveAsPdf: "Save as PDF",
+      showEnglishComparison: "English comparison",
+      hideEnglishComparison: "English comparison",
       onThisPage: "On this page",
       whatToPrepare: "What to prepare",
       whereToGetHelp: "Where to get help",
@@ -145,7 +157,12 @@ const UI_COPY_BY_LOCALE: Record<AppLocale, UiCopy> = {
       guideScam: "诈骗",
       guideRefund: "退款与更换",
       guideUnsafe: "不安全产品",
-      languageLabel: "语言"
+      languageLabel: "语言",
+      localeSuggestionTitle: "要切换到简体中文吗？",
+      localeSuggestionBody:
+        "你的设备语言看起来是简体中文，我们可以帮你切换网站语言。请注意，翻译内容可能存在准确性问题。",
+      localeSuggestionSwitch: "切换到简体中文",
+      localeSuggestionStay: "Stay in English"
     },
     footer: {
       navigateTitle: "导航",
@@ -186,6 +203,8 @@ const UI_COPY_BY_LOCALE: Record<AppLocale, UiCopy> = {
       relatedCases: "相关案例",
       startAgain: "重新开始",
       saveAsPdf: "保存为 PDF",
+      showEnglishComparison: "英文对照",
+      hideEnglishComparison: "英文对照",
       onThisPage: "本页导航",
       whatToPrepare: "需要准备什么",
       whereToGetHelp: "去哪里寻求帮助",

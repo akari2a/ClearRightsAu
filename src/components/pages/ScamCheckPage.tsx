@@ -18,6 +18,7 @@ import { getUiCopy } from "../../i18n/copy";
 import type { QuickCheckActionPack, QuickCheckAnswers, QuickCheckStage } from "../../types/quickCheck";
 import { InteractiveCardButton } from "../controls/InteractiveCardButton";
 import { CaseCategoryTag } from "../case/CaseCategoryTag";
+import { ResultTextPair } from "../i18n/ResultTextPair";
 import { RiskSummaryCard } from "../risk/RiskSummaryCard";
 import { createStepPresentation, StepDetailCard } from "../steps/StepDetailCard";
 import { QuickCheckExitDialog } from "./scam-check/QuickCheckExitDialog";
@@ -64,6 +65,7 @@ export function ScamCheckPage({
 }: ScamCheckPageProps) {
   const navigate = useNavigate();
   const uiCopy = getUiCopy(locale);
+  const englishUiCopy = getUiCopy(DEFAULT_LOCALE);
   const questions = SCAM_QUESTIONNAIRE.questionFlow;
   const initialQuestionnaireUrlState = useMemo(
     () => parseQuestionnaireUrlState(window.location.search, questions),
@@ -74,6 +76,7 @@ export function ScamCheckPage({
   const [activeSectionId, setActiveSectionId] = useState<string>(
     initialQuestionnaireUrlState.resultView ? "action-plan" : "questionnaire"
   );
+  const [isEnglishComparisonEnabled, setIsEnglishComparisonEnabled] = useState(false);
   const {
     answers,
     currentQuestion,
@@ -115,6 +118,7 @@ export function ScamCheckPage({
     return configuredPack;
   }, [resolvedStage]);
   const resultBadge = useMemo(() => getRiskLevelPresentation(resolvedStage?.riskLevel), [resolvedStage]);
+  const englishRelatedCasesContent = useMemo(() => getCasesPageContent(DEFAULT_LOCALE), []);
   const flattenedSteps = useMemo(
     () =>
       (actionPack?.steps ?? [])
@@ -134,11 +138,49 @@ export function ScamCheckPage({
         }),
     [actionPack, answers, locale]
   );
+  const englishFlattenedSteps = useMemo(
+    () =>
+      (actionPack?.steps ?? [])
+        .filter((step) => shouldDisplayActionItem(step, answers))
+        .map((step) => {
+          const resolvedSummary = resolveActionItemSummary(step, DEFAULT_LOCALE);
+          const resolvedText = resolveActionItemText(step, answers, DEFAULT_LOCALE);
+          const presentation = createStepPresentation(resolvedSummary, resolvedText);
+
+          return {
+            id: `result-step-${step.id}`,
+            summary: presentation.summary,
+            text: presentation.paragraphs.join("\n"),
+            navLabel: presentation.summary
+          };
+        }),
+    [actionPack, answers]
+  );
   const resultNavItems = useMemo(() => flattenedSteps.map((step) => ({ id: step.id, title: step.navLabel })), [flattenedSteps]);
   const relatedCases = useMemo(
     () => casesContent.cases.filter((caseItem) => caseItem.category === "scam").slice(0, 3),
     [casesContent]
   );
+  const englishStepLookup = useMemo(
+    () =>
+      new Map(
+        englishFlattenedSteps.map((step) => [
+          step.id,
+          { summary: step.summary, text: step.text, navLabel: step.navLabel }
+        ])
+      ),
+    [englishFlattenedSteps]
+  );
+  const englishRelatedCaseLookup = useMemo(
+    () => new Map(englishRelatedCasesContent.cases.map((caseItem) => [caseItem.id, caseItem])),
+    [englishRelatedCasesContent]
+  );
+
+  useEffect(() => {
+    if (locale === DEFAULT_LOCALE) {
+      setIsEnglishComparisonEnabled(false);
+    }
+  }, [locale]);
 
   useEffect(() => {
     if (isComplete) {
@@ -226,7 +268,29 @@ export function ScamCheckPage({
         <div className="detail-page__content">
           <div className="detail-page__hero">
             <div className="detail-page__intro">
-              <h1 className="detail-page__title">{isComplete ? uiCopy.guide.whatToDoNext : uiCopy.guide.checkYourSituation}</h1>
+              <div className="detail-page__title-group">
+                <div className="detail-page__title-row">
+                  <h1 className="detail-page__title">{isComplete ? uiCopy.guide.whatToDoNext : uiCopy.guide.checkYourSituation}</h1>
+                  {isComplete && locale !== DEFAULT_LOCALE ? (
+                    <button
+                      className="detail-page__compare-toggle"
+                      type="button"
+                      role="switch"
+                      aria-checked={isEnglishComparisonEnabled}
+                      onClick={() => setIsEnglishComparisonEnabled((current) => !current)}
+                    >
+                      <span className="detail-page__compare-toggle-label">
+                        {isEnglishComparisonEnabled
+                          ? uiCopy.guide.hideEnglishComparison
+                          : uiCopy.guide.showEnglishComparison}
+                      </span>
+                      <span className={`detail-page__switch${isEnglishComparisonEnabled ? " detail-page__switch--checked" : ""}`} aria-hidden="true">
+                        <span className="detail-page__switch-thumb" />
+                      </span>
+                    </button>
+                  ) : null}
+                </div>
+              </div>
               {!isComplete && (
                 <p className="detail-page__summary">
                   {uiCopy.guide.scamIntro}
@@ -309,19 +373,44 @@ export function ScamCheckPage({
                 }
                 tone={resultBadge.tone}
                 title={
-                  resolvedStage
-                    ? getLocalizedText(resolvedStage.label, locale)
-                    : actionPack
-                      ? getLocalizedText(actionPack.resultTitle, locale)
-                      : uiCopy.guide.resultFallback
+                  <ResultTextPair
+                    primary={
+                      resolvedStage
+                        ? getLocalizedText(resolvedStage.label, locale)
+                        : actionPack
+                          ? getLocalizedText(actionPack.resultTitle, locale)
+                          : uiCopy.guide.resultFallback
+                    }
+                    secondary={
+                      resolvedStage
+                        ? getLocalizedText(resolvedStage.label, DEFAULT_LOCALE)
+                        : actionPack
+                          ? getLocalizedText(actionPack.resultTitle, DEFAULT_LOCALE)
+                          : englishUiCopy.guide.resultFallback
+                    }
+                    enabled={isEnglishComparisonEnabled}
+                  />
                 }
-                summary={actionPack ? getLocalizedText(actionPack.resultSummary, locale) : ""}
+                summary={
+                  <ResultTextPair
+                    primary={actionPack ? getLocalizedText(actionPack.resultSummary, locale) : ""}
+                    secondary={actionPack ? getLocalizedText(actionPack.resultSummary, DEFAULT_LOCALE) : ""}
+                    enabled={isEnglishComparisonEnabled}
+                  />
+                }
               />
 
               <div className="detail-step-list">
                 {flattenedSteps.map((step) => (
                   <section key={step.id} id={step.id}>
-                    <StepDetailCard number={step.number} summary={step.summary} text={step.text} />
+                    <StepDetailCard
+                      number={step.number}
+                      summary={step.summary}
+                      text={step.text}
+                      comparisonSummary={englishStepLookup.get(step.id)?.summary}
+                      comparisonText={englishStepLookup.get(step.id)?.text}
+                      comparisonEnabled={isEnglishComparisonEnabled}
+                    />
                   </section>
                 ))}
               </div>
@@ -329,7 +418,13 @@ export function ScamCheckPage({
               {relatedCases.length > 0 ? (
                 <section className="detail-result-related">
                   <div className="detail-section__header detail-section__header--compact">
-                    <h2 className="detail-section__title">{uiCopy.guide.relatedCases}</h2>
+                    <h2 className="detail-section__title">
+                      <ResultTextPair
+                        primary={uiCopy.guide.relatedCases}
+                        secondary={englishUiCopy.guide.relatedCases}
+                        enabled={isEnglishComparisonEnabled}
+                      />
+                    </h2>
                   </div>
                   <div className="case-related__grid">
                     {relatedCases.map((caseItem) => (
@@ -339,8 +434,20 @@ export function ScamCheckPage({
                         onClick={() => navigate(`/cases/${caseItem.id}`)}
                       >
                         <CaseCategoryTag category={caseItem.category} label={caseItem.categoryLabel} className="content-card__eyebrow" />
-                        <p className="content-card__title">{caseItem.title}</p>
-                        <p className="content-card__description">{caseItem.summary}</p>
+                        <p className="content-card__title">
+                          <ResultTextPair
+                            primary={caseItem.title}
+                            secondary={englishRelatedCaseLookup.get(caseItem.id)?.title}
+                            enabled={isEnglishComparisonEnabled}
+                          />
+                        </p>
+                        <p className="content-card__description">
+                          <ResultTextPair
+                            primary={caseItem.summary}
+                            secondary={englishRelatedCaseLookup.get(caseItem.id)?.summary}
+                            enabled={isEnglishComparisonEnabled}
+                          />
+                        </p>
                       </InteractiveCardButton>
                     ))}
                   </div>

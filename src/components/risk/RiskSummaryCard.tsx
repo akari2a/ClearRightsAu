@@ -1,10 +1,12 @@
+import type { ReactNode } from "react";
+
 type RiskSummaryTone = "low" | "caution" | "warning" | "high" | "danger";
 
 type RiskSummaryCardProps = {
-  label: string;
+  label: ReactNode;
   tone: RiskSummaryTone;
-  title: string;
-  summary: string;
+  title: ReactNode;
+  summary: ReactNode;
 };
 
 export function RiskSummaryCard({ label, tone, title, summary }: RiskSummaryCardProps) {

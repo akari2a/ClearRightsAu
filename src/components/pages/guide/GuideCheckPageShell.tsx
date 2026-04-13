@@ -7,6 +7,7 @@ import type { QuickCheckAnswers } from "../../../types/quickCheck";
 import type { GuideResult, GuideResultSection, GuideScenarioConfig } from "../../../types/guide";
 import { InteractiveCardButton } from "../../controls/InteractiveCardButton";
 import { CaseCategoryTag } from "../../case/CaseCategoryTag";
+import { ResultTextPair } from "../../i18n/ResultTextPair";
 import { RiskSummaryCard } from "../../risk/RiskSummaryCard";
 import { createStepPresentation, StepDetailCard } from "../../steps/StepDetailCard";
 import { QuickCheckExitDialog } from "../scam-check/QuickCheckExitDialog";
@@ -35,6 +36,13 @@ function getRiskLevelPresentation(riskLevel: number) {
 type FlattenedStep = {
   id: string;
   number: number;
+  summary: string;
+  text: string;
+  navLabel: string;
+  sectionTitle: string | null;
+};
+
+type FlattenedStepComparison = {
   summary: string;
   text: string;
   navLabel: string;
@@ -91,6 +99,7 @@ export function GuideCheckPageShell({
 }: GuideCheckPageShellProps) {
   const navigate = useNavigate();
   const uiCopy = getUiCopy(locale);
+  const englishUiCopy = getUiCopy(DEFAULT_LOCALE);
   const questions = useMemo(() => [...config.questions], [config.questions]);
   const initialQuestionnaireUrlState = useMemo(
     () => parseQuestionnaireUrlState(window.location.search, questions),
@@ -101,6 +110,7 @@ export function GuideCheckPageShell({
   const [activeSectionId, setActiveSectionId] = useState<string>(
     initialQuestionnaireUrlState.resultView ? "action-plan" : "questionnaire"
   );
+  const [isEnglishComparisonEnabled, setIsEnglishComparisonEnabled] = useState(false);
 
   const {
     answers,
@@ -131,13 +141,24 @@ export function GuideCheckPageShell({
   const currentAnswer = answers[currentQuestion.id];
 
   const resolvedResult = useMemo<GuideResult | null>(
-    () => (isComplete ? config.resolveResult(answers) : null),
-    [answers, isComplete, config]
+    () => (isComplete ? config.resolveResult(answers, locale) : null),
+    [answers, isComplete, config, locale]
+  );
+
+  const englishResult = useMemo<GuideResult | null>(
+    () =>
+      isComplete && locale !== DEFAULT_LOCALE ? config.resolveResult(answers, DEFAULT_LOCALE) : null,
+    [answers, isComplete, config, locale]
   );
 
   const resultSections = useMemo<readonly GuideResultSection[]>(
-    () => (resolvedResult ? config.getResultSections(resolvedResult, answers) : []),
-    [resolvedResult, answers, config]
+    () => (resolvedResult ? config.getResultSections(resolvedResult, answers, locale) : []),
+    [resolvedResult, answers, config, locale]
+  );
+
+  const englishResultSections = useMemo<readonly GuideResultSection[]>(
+    () => (englishResult ? config.getResultSections(englishResult, answers, DEFAULT_LOCALE) : []),
+    [englishResult, answers, config]
   );
 
   const resultBadge = useMemo(
@@ -150,6 +171,30 @@ export function GuideCheckPageShell({
     [resultSections, answers, config, locale]
   );
 
+  const englishFlattenedSteps = useMemo(
+    () =>
+      englishResultSections.length > 0
+        ? flattenAllSections(englishResultSections, answers, config, DEFAULT_LOCALE)
+        : [],
+    [englishResultSections, answers, config]
+  );
+
+  const englishStepLookup = useMemo(
+    () =>
+      new Map<string, FlattenedStepComparison>(
+        englishFlattenedSteps.map((step) => [
+          step.id,
+          {
+            summary: step.summary,
+            text: step.text,
+            navLabel: step.navLabel,
+            sectionTitle: step.sectionTitle
+          }
+        ])
+      ),
+    [englishFlattenedSteps]
+  );
+
   const resultNavItems = useMemo(
     () => flattenedSteps.map((step) => ({ id: step.id, title: step.navLabel })),
     [flattenedSteps]
@@ -158,6 +203,11 @@ export function GuideCheckPageShell({
   const relatedCases = useMemo(
     () => casesContent.cases.filter(config.relatedCasesFilter).slice(0, 3),
     [casesContent, config]
+  );
+  const englishCasesContent = useMemo(() => getCasesPageContent(DEFAULT_LOCALE), []);
+  const englishRelatedCaseLookup = useMemo(
+    () => new Map(englishCasesContent.cases.map((caseItem) => [caseItem.id, caseItem])),
+    [englishCasesContent]
   );
 
   const mergedPrepare = useMemo(() => {
@@ -179,6 +229,25 @@ export function GuideCheckPageShell({
     return items;
   }, [resultSections, answers, locale, config]);
 
+  const mergedPrepareEnglish = useMemo(() => {
+    const items: Array<{ id: string; text: string }> = [];
+    const seenIds = new Set<string>();
+
+    for (const section of englishResultSections) {
+      for (const item of section.prepare ?? []) {
+        if (!seenIds.has(item.id)) {
+          seenIds.add(item.id);
+          const text = config.resolveActionItemText(item, answers, DEFAULT_LOCALE);
+          if (text.length > 0) {
+            items.push({ id: item.id, text });
+          }
+        }
+      }
+    }
+
+    return items;
+  }, [englishResultSections, answers, config]);
+
   const mergedHelp = useMemo(() => {
     const items: Array<{ id: string; text: string }> = [];
     const seenTexts = new Set<string>();
@@ -195,6 +264,29 @@ export function GuideCheckPageShell({
 
     return items;
   }, [resultSections, answers, locale, config]);
+
+  const mergedHelpEnglish = useMemo(() => {
+    const items: Array<{ id: string; text: string }> = [];
+    const seenTexts = new Set<string>();
+
+    for (const section of englishResultSections) {
+      for (const item of section.help ?? []) {
+        const text = config.resolveActionItemText(item, answers, DEFAULT_LOCALE);
+        if (text.length > 0 && !seenTexts.has(text)) {
+          seenTexts.add(text);
+          items.push({ id: item.id, text });
+        }
+      }
+    }
+
+    return items;
+  }, [englishResultSections, answers, config]);
+
+  useEffect(() => {
+    if (locale === DEFAULT_LOCALE) {
+      setIsEnglishComparisonEnabled(false);
+    }
+  }, [locale]);
 
   useEffect(() => {
     if (isComplete && resolvedResult) {
@@ -265,7 +357,29 @@ export function GuideCheckPageShell({
         <div className="detail-page__content">
           <div className="detail-page__hero">
             <div className="detail-page__intro">
-              <h1 className="detail-page__title">{isComplete ? uiCopy.guide.whatToDoNext : uiCopy.guide.checkYourSituation}</h1>
+              <div className="detail-page__title-group">
+                <div className="detail-page__title-row">
+                  <h1 className="detail-page__title">{isComplete ? uiCopy.guide.whatToDoNext : uiCopy.guide.checkYourSituation}</h1>
+                  {isComplete && locale !== DEFAULT_LOCALE ? (
+                    <button
+                      className="detail-page__compare-toggle"
+                      type="button"
+                      role="switch"
+                      aria-checked={isEnglishComparisonEnabled}
+                      onClick={() => setIsEnglishComparisonEnabled((current) => !current)}
+                    >
+                      <span className="detail-page__compare-toggle-label">
+                        {isEnglishComparisonEnabled
+                          ? uiCopy.guide.hideEnglishComparison
+                          : uiCopy.guide.showEnglishComparison}
+                      </span>
+                      <span className={`detail-page__switch${isEnglishComparisonEnabled ? " detail-page__switch--checked" : ""}`} aria-hidden="true">
+                        <span className="detail-page__switch-thumb" />
+                      </span>
+                    </button>
+                  ) : null}
+                </div>
+              </div>
               {!isComplete && <p className="detail-page__summary">{config.scenarioId === "unsafe-products" ? uiCopy.guide.unsafeIntro : config.scenarioId === "refund" ? uiCopy.guide.refundIntro : uiCopy.guide.scamIntro}</p>}
             </div>
           </div>
@@ -342,8 +456,8 @@ export function GuideCheckPageShell({
                     : resultBadge.label
                 }
                 tone={resultBadge.tone}
-                title={resolvedResult?.primaryLabel ?? uiCopy.guide.resultFallback}
-                summary={resolvedResult?.primarySummary ?? ""}
+                title={<ResultTextPair primary={resolvedResult?.primaryLabel ?? uiCopy.guide.resultFallback} secondary={englishResult?.primaryLabel} enabled={isEnglishComparisonEnabled} />}
+                summary={<ResultTextPair primary={resolvedResult?.primarySummary ?? ""} secondary={englishResult?.primarySummary} enabled={isEnglishComparisonEnabled} />}
               />
 
               <div className="detail-step-list">
@@ -351,20 +465,45 @@ export function GuideCheckPageShell({
                   <section key={step.id} id={step.id}>
                     {step.sectionTitle ? (
                       <div className="guide-result-section-divider">
-                        <h3 className="guide-result-section-divider__title">{step.sectionTitle}</h3>
+                        <h3 className="guide-result-section-divider__title">
+                          <ResultTextPair
+                            primary={step.sectionTitle}
+                            secondary={englishStepLookup.get(step.id)?.sectionTitle}
+                            enabled={isEnglishComparisonEnabled}
+                          />
+                        </h3>
                       </div>
                     ) : null}
-                    <StepDetailCard number={step.number} summary={step.summary} text={step.text} />
+                    <StepDetailCard
+                      number={step.number}
+                      summary={step.summary}
+                      text={step.text}
+                      comparisonSummary={englishStepLookup.get(step.id)?.summary}
+                      comparisonText={englishStepLookup.get(step.id)?.text}
+                      comparisonEnabled={isEnglishComparisonEnabled}
+                    />
                   </section>
                 ))}
               </div>
 
               {mergedPrepare.length > 0 ? (
                 <div className="guide-result-block" id="guide-prepare">
-                  <h3 className="guide-result-block__title">{uiCopy.guide.whatToPrepare}</h3>
+                  <h3 className="guide-result-block__title">
+                    <ResultTextPair
+                      primary={uiCopy.guide.whatToPrepare}
+                      secondary={englishUiCopy.guide.whatToPrepare}
+                      enabled={isEnglishComparisonEnabled}
+                    />
+                  </h3>
                   <ul className="detail-list">
                     {mergedPrepare.map((item) => (
-                      <li key={item.id} className="detail-list__item">{item.text}</li>
+                      <li key={item.id} className="detail-list__item">
+                        <ResultTextPair
+                          primary={item.text}
+                          secondary={mergedPrepareEnglish.find((englishItem) => englishItem.id === item.id)?.text}
+                          enabled={isEnglishComparisonEnabled}
+                        />
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -372,10 +511,22 @@ export function GuideCheckPageShell({
 
               {mergedHelp.length > 0 ? (
                 <div className="guide-result-block" id="guide-help">
-                  <h3 className="guide-result-block__title">{uiCopy.guide.whereToGetHelp}</h3>
+                  <h3 className="guide-result-block__title">
+                    <ResultTextPair
+                      primary={uiCopy.guide.whereToGetHelp}
+                      secondary={englishUiCopy.guide.whereToGetHelp}
+                      enabled={isEnglishComparisonEnabled}
+                    />
+                  </h3>
                   <ul className="detail-list">
                     {mergedHelp.map((item) => (
-                      <li key={item.id} className="detail-list__item">{item.text}</li>
+                      <li key={item.id} className="detail-list__item">
+                        <ResultTextPair
+                          primary={item.text}
+                          secondary={mergedHelpEnglish.find((englishItem) => englishItem.id === item.id)?.text}
+                          enabled={isEnglishComparisonEnabled}
+                        />
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -384,7 +535,13 @@ export function GuideCheckPageShell({
               {relatedCases.length > 0 ? (
                 <section className="detail-result-related">
                   <div className="detail-section__header detail-section__header--compact">
-                    <h2 className="detail-section__title">{uiCopy.guide.relatedCases}</h2>
+                    <h2 className="detail-section__title">
+                      <ResultTextPair
+                        primary={uiCopy.guide.relatedCases}
+                        secondary={englishUiCopy.guide.relatedCases}
+                        enabled={isEnglishComparisonEnabled}
+                      />
+                    </h2>
                   </div>
                   <div className="case-related__grid">
                     {relatedCases.map((caseItem) => (
@@ -394,8 +551,20 @@ export function GuideCheckPageShell({
                         onClick={() => navigate(`/cases/${caseItem.id}`)}
                       >
                         <CaseCategoryTag category={caseItem.category} label={caseItem.categoryLabel} className="content-card__eyebrow" />
-                        <p className="content-card__title">{caseItem.title}</p>
-                        <p className="content-card__description">{caseItem.summary}</p>
+                        <p className="content-card__title">
+                          <ResultTextPair
+                            primary={caseItem.title}
+                            secondary={englishRelatedCaseLookup.get(caseItem.id)?.title}
+                            enabled={isEnglishComparisonEnabled}
+                          />
+                        </p>
+                        <p className="content-card__description">
+                          <ResultTextPair
+                            primary={caseItem.summary}
+                            secondary={englishRelatedCaseLookup.get(caseItem.id)?.summary}
+                            enabled={isEnglishComparisonEnabled}
+                          />
+                        </p>
                       </InteractiveCardButton>
                     ))}
                   </div>

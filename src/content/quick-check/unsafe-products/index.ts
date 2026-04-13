@@ -53,7 +53,10 @@ function resolveOverlayStages(answers: QuickCheckAnswers): QuickCheckStage[] {
   return resolveMatchingStages(answers).filter((s) => s.stageLayer === "overlay");
 }
 
-export function resolveUnsafeProductsResult(answers: QuickCheckAnswers): GuideResult | null {
+export function resolveUnsafeProductsResult(
+  answers: QuickCheckAnswers,
+  locale: AppLocale = DEFAULT_LOCALE
+): GuideResult | null {
   const primary = resolvePrimaryStage(answers);
 
   if (!primary) {
@@ -65,9 +68,9 @@ export function resolveUnsafeProductsResult(answers: QuickCheckAnswers): GuideRe
 
   return {
     primaryResultId: primary.id,
-    primaryLabel: getLocalizedText(primary.label),
+    primaryLabel: getLocalizedText(primary.label, locale),
     primarySummary: getActionPackForStage(primary.id)
-      ? getLocalizedText(getActionPackForStage(primary.id)!.resultSummary)
+      ? getLocalizedText(getActionPackForStage(primary.id)!.resultSummary, locale)
       : "",
     riskLevel: Math.min(4, Math.max(...allRiskLevels)),
     overlayIds: overlays.map((o) => o.id)
@@ -88,7 +91,8 @@ const OVERLAY_DISPLAY_ORDER: Record<string, { order: number; role: GuideResultSe
 
 export function getUnsafeProductsResultSections(
   result: GuideResult,
-  _answers: QuickCheckAnswers
+  _answers: QuickCheckAnswers,
+  locale: AppLocale = DEFAULT_LOCALE
 ): GuideResultSection[] {
   const sections: Array<GuideResultSection & { displayOrder: number }> = [];
 
@@ -104,8 +108,8 @@ export function getUnsafeProductsResultSections(
     sections.push({
       sectionId: `overlay-${overlayId}`,
       role: config.role,
-      title: getLocalizedText(pack.resultTitle),
-      summary: getLocalizedText(pack.resultSummary),
+      title: getLocalizedText(pack.resultTitle, locale),
+      summary: getLocalizedText(pack.resultSummary, locale),
       steps: pack.steps,
       prepare: pack.prepare,
       help: pack.help,
@@ -119,8 +123,8 @@ export function getUnsafeProductsResultSections(
     sections.push({
       sectionId: `primary-${result.primaryResultId}`,
       role: "primary",
-      title: getLocalizedText(primaryPack.resultTitle),
-      summary: getLocalizedText(primaryPack.resultSummary),
+      title: getLocalizedText(primaryPack.resultTitle, locale),
+      summary: getLocalizedText(primaryPack.resultSummary, locale),
       steps: primaryPack.steps,
       prepare: primaryPack.prepare,
       help: primaryPack.help,

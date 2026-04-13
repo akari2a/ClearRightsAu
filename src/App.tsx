@@ -21,6 +21,15 @@ import type { SuccessCase } from "./types/case";
 import type { QuickCheckAnswers, QuickCheckStage } from "./types/quickCheck";
 import type { GuideResult } from "./types/guide";
 
+const LOCALE_DISMISS_KEY = "locale-suggestion-dismissed";
+const LOCALE_USER_SET_KEY = "app-locale-user-set";
+
+function devicePrefersSimplifiedChinese(): boolean {
+  if (typeof navigator === "undefined") return false;
+  const candidates = [...(navigator.languages ?? []), navigator.language].filter(Boolean);
+  return candidates.some((value) => value.toLowerCase().startsWith("zh"));
+}
+
 function CaseDetailRoute({
   locale,
   onRelatedGuideClick,
@@ -71,7 +80,9 @@ function App() {
     const stored = window.localStorage.getItem("app-locale");
     return stored && isAppLocale(stored) ? stored : DEFAULT_LOCALE;
   });
+  const [showLocaleSuggestion, setShowLocaleSuggestion] = useState(false);
   const uiCopy = useMemo(() => getUiCopy(activeLanguage), [activeLanguage]);
+  const zhUiCopy = useMemo(() => getUiCopy("zh-Hans"), []);
   const homePageContent = useMemo(() => getHomePageContent(activeLanguage), [activeLanguage]);
   const casesPageContent = useMemo(() => getCasesPageContent(activeLanguage), [activeLanguage]);
   const aibotPageContent = useMemo(() => getAibotPageContent(activeLanguage), [activeLanguage]);
@@ -199,6 +210,9 @@ function App() {
   const handleLanguageSelect = (languageId: string) => {
     if (isAppLocale(languageId)) {
       setActiveLanguage(languageId);
+      window.localStorage.setItem(LOCALE_USER_SET_KEY, "true");
+      window.localStorage.setItem(LOCALE_DISMISS_KEY, "true");
+      setShowLocaleSuggestion(false);
     }
   };
 
@@ -265,6 +279,20 @@ function App() {
     document.documentElement.lang = activeLanguage === "zh-Hans" ? "zh-Hans" : "en";
   }, [activeLanguage]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const hasUserSetLocale = window.localStorage.getItem(LOCALE_USER_SET_KEY) === "true";
+    const hasDismissedSuggestion = window.localStorage.getItem(LOCALE_DISMISS_KEY) === "true";
+    const shouldSuggest =
+      activeLanguage === "en" &&
+      !hasUserSetLocale &&
+      !hasDismissedSuggestion &&
+      devicePrefersSimplifiedChinese();
+
+    setShowLocaleSuggestion(shouldSuggest);
+  }, [activeLanguage]);
+
   const activePrimaryNav: HeaderPrimaryNavKey = location.pathname === "/aibot"
     ? "aibot"
     : (location.pathname === "/scam-check" || location.pathname === "/refund-check" || location.pathname === "/unsafe-products-check")
@@ -274,6 +302,7 @@ function App() {
         : "home";
 
   const isAibotPage = location.pathname === "/aibot";
+  const localeSuggestionCopy = showLocaleSuggestion && activeLanguage === "en" ? zhUiCopy.nav : uiCopy.nav;
 
   return (
     <main className={`page-shell${isAibotPage ? " page-shell--aibot" : ""}`}>
@@ -287,6 +316,34 @@ function App() {
           onFontSizeChange={handleFontSizeChange}
           onLanguageSelect={handleLanguageSelect}
         />
+
+        {showLocaleSuggestion ? (
+          <div className="locale-suggestion-banner" role="status" aria-live="polite">
+            <div className="locale-suggestion-banner__content">
+              <p className="locale-suggestion-banner__title">{localeSuggestionCopy.localeSuggestionTitle}</p>
+              <p className="locale-suggestion-banner__body">{localeSuggestionCopy.localeSuggestionBody}</p>
+            </div>
+            <div className="locale-suggestion-banner__actions">
+              <button
+                type="button"
+                className="locale-suggestion-banner__button locale-suggestion-banner__button--primary"
+                onClick={() => handleLanguageSelect("zh-Hans")}
+              >
+                {localeSuggestionCopy.localeSuggestionSwitch}
+              </button>
+              <button
+                type="button"
+                className="locale-suggestion-banner__button locale-suggestion-banner__button--secondary"
+                onClick={() => {
+                  window.localStorage.setItem(LOCALE_DISMISS_KEY, "true");
+                  setShowLocaleSuggestion(false);
+                }}
+              >
+                {localeSuggestionCopy.localeSuggestionStay}
+              </button>
+            </div>
+          </div>
+        ) : null}
 
         {location.pathname !== "/" && breadcrumbItems.length > 0 ? <SiteBreadcrumbs items={breadcrumbItems} /> : null}
 

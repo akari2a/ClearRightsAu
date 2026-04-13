@@ -29,8 +29,12 @@ export type GuideScenarioConfig = {
   readonly relatedCasesTitle: string;
   readonly questionnaireProgressLabel: string;
   readonly questions: readonly QuickCheckQuestion[];
-  readonly resolveResult: (answers: QuickCheckAnswers) => GuideResult | null;
-  readonly getResultSections: (result: GuideResult, answers: QuickCheckAnswers) => readonly GuideResultSection[];
+  readonly resolveResult: (answers: QuickCheckAnswers, locale?: AppLocale) => GuideResult | null;
+  readonly getResultSections: (
+    result: GuideResult,
+    answers: QuickCheckAnswers,
+    locale?: AppLocale
+  ) => readonly GuideResultSection[];
   readonly relatedCasesFilter: (caseItem: SuccessCase) => boolean;
   readonly resolveActionItemText: (item: QuickCheckActionItem, answers: QuickCheckAnswers, locale?: AppLocale) => string;
   readonly resolveActionItemSummary: (item: QuickCheckActionItem, locale?: AppLocale) => string;
