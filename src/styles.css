@@ -699,9 +699,10 @@ button {
 }
 
 .quick-guide-actions {
+  --quick-guide-actions-overlap: 38px;
   position: absolute;
   right: 16px;
-  bottom: -30px;
+  top: calc(100% - var(--quick-guide-actions-overlap));
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -805,6 +806,10 @@ button {
 .hero-chatbot {
   margin-top: 44px;
 }
+
+  .hero-chatbot--with-secondary-actions {
+    margin-top: 132px;
+  }
 
 .hero-chatbot__header {
   display: flex;
@@ -4347,7 +4352,9 @@ button {
 
   .quick-guide-actions {
     right: 20px;
-    bottom: -30px;
+    left: auto;
+    top: calc(100% - var(--quick-guide-actions-overlap));
+    bottom: auto;
     max-width: calc(100% - 40px);
   }
 
@@ -4864,6 +4871,8 @@ button {
   .quick-guide-actions {
     left: auto;
     right: 20px;
+    top: calc(100% - var(--quick-guide-actions-overlap));
+    bottom: auto;
     transform: none;
     justify-content: flex-end;
   }
@@ -5031,7 +5040,8 @@ button {
     position: absolute;
     left: 50%;
     right: auto;
-    bottom: -30px;
+    top: calc(100% - var(--quick-guide-actions-overlap));
+    bottom: auto;
     transform: translateX(-50%);
     display: flex;
     width: calc(100% - 40px);
@@ -5045,5 +5055,9 @@ button {
   .quick-guide-actions .quick-guide-button {
     width: 100%;
     justify-content: center;
+  }
+
+  .hero-chatbot--with-secondary-actions {
+    margin-top: 176px;
   }
 }

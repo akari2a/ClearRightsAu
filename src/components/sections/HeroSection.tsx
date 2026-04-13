@@ -47,6 +47,7 @@ export function HeroSection({
   onScamTypeConsumed
 }: HeroSectionProps) {
   const activeTab = tabs.find((tab) => tab.key === activeTabKey) ?? tabs[0];
+  const hasSecondaryGuideAction = activeTab.key === "scam" && Boolean(activeTab.recogniserActionLabel);
   const [promptInput, setPromptInput] = useState("");
   const [isRecogniserOpen, setIsRecogniserOpen] = useState(false);
 
@@ -115,7 +116,7 @@ export function HeroSection({
         </ul>
 
         <div className="quick-guide-actions">
-          {activeTab.key === "scam" && activeTab.recogniserActionLabel ? (
+          {hasSecondaryGuideAction ? (
             <button
               className="quick-guide-button quick-guide-button--secondary"
               type="button"
@@ -132,7 +133,7 @@ export function HeroSection({
         </div>
       </div>
 
-      <div className="hero-chatbot">
+      <div className={`hero-chatbot${hasSecondaryGuideAction ? " hero-chatbot--with-secondary-actions" : ""}`}>
         <div className="hero-chatbot__header">
           <h2 className="hero-chatbot__title">{chatbotTitle}</h2>
         </div>
