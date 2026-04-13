@@ -144,43 +144,45 @@ export function SiteHeader({
       onMouseLeave={() => setHoveredPrimaryNav(null)}
     >
       <div className="topbar">
-        <nav className="nav-menu" aria-label="Primary">
-          <HeaderNavButton
-            label={uiCopy.nav.home}
-            isActive={activePrimaryNav === "home"}
-            onMouseEnter={() => setHoveredPrimaryNav(null)}
-            onFocus={() => setHoveredPrimaryNav(null)}
-            onClick={() => onNavigate?.("home")}
-          />
-          <HeaderDropdownNavItem
-            label={uiCopy.nav.guide}
-            isActive={activePrimaryNav === "guide"}
-            isOpen={hoveredPrimaryNav === "guide"}
-            items={guideItems}
-            onOpen={() => setHoveredPrimaryNav("guide")}
-            onPrimaryClick={() => onNavigate?.("guide")}
-            onSecondaryClick={onSecondaryNavigate}
-          />
-          <HeaderNavButton
-            label={uiCopy.nav.cases}
-            isActive={activePrimaryNav === "cases"}
-            onMouseEnter={() => setHoveredPrimaryNav(null)}
-            onFocus={() => setHoveredPrimaryNav(null)}
-            onClick={() => onNavigate?.("cases")}
-          />
-          <HeaderNavButton
-            label={uiCopy.nav.aibot}
-            isActive={activePrimaryNav === "aibot"}
-            onMouseEnter={() => setHoveredPrimaryNav(null)}
-            onFocus={() => setHoveredPrimaryNav(null)}
-            onClick={() => onNavigate?.("aibot")}
-            children={
-              <span className="nav-item__aibot">
-                <span>AIBot</span>
-              </span>
-            }
-          />
-        </nav>
+        <div className={`nav-menu-scroll${hoveredPrimaryNav ? " nav-menu-scroll--dropdown-open" : ""}`}>
+          <nav className="nav-menu" aria-label="Primary">
+            <HeaderNavButton
+              label={uiCopy.nav.home}
+              isActive={activePrimaryNav === "home"}
+              onMouseEnter={() => setHoveredPrimaryNav(null)}
+              onFocus={() => setHoveredPrimaryNav(null)}
+              onClick={() => onNavigate?.("home")}
+            />
+            <HeaderDropdownNavItem
+              label={uiCopy.nav.guide}
+              isActive={activePrimaryNav === "guide"}
+              isOpen={hoveredPrimaryNav === "guide"}
+              items={guideItems}
+              onOpen={() => setHoveredPrimaryNav("guide")}
+              onPrimaryClick={() => onNavigate?.("guide")}
+              onSecondaryClick={onSecondaryNavigate}
+            />
+            <HeaderNavButton
+              label={uiCopy.nav.cases}
+              isActive={activePrimaryNav === "cases"}
+              onMouseEnter={() => setHoveredPrimaryNav(null)}
+              onFocus={() => setHoveredPrimaryNav(null)}
+              onClick={() => onNavigate?.("cases")}
+            />
+            <HeaderNavButton
+              label={uiCopy.nav.aibot}
+              isActive={activePrimaryNav === "aibot"}
+              onMouseEnter={() => setHoveredPrimaryNav(null)}
+              onFocus={() => setHoveredPrimaryNav(null)}
+              onClick={() => onNavigate?.("aibot")}
+              children={
+                <span className="nav-item__aibot">
+                  <span>AIBot</span>
+                </span>
+              }
+            />
+          </nav>
+        </div>
 
         <div className="header-utilities">
           <HeaderFontSizeControl activeFontSize={activeFontSize} onFontSizeChange={onFontSizeChange} />

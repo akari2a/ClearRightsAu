@@ -237,11 +237,7 @@ button {
   gap: 12px;
 }
 
-.nav-menu {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 6px;
+.nav-menu-scroll {
   position: relative;
   margin-left: -18px;
   overflow-x: auto;
@@ -250,8 +246,22 @@ button {
   scrollbar-width: none;
 }
 
-.nav-menu::-webkit-scrollbar {
+.nav-menu-scroll--dropdown-open {
+  overflow: visible;
+}
+
+.nav-menu-scroll::-webkit-scrollbar {
   display: none;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 6px;
+  position: relative;
+  width: max-content;
+  min-width: 100%;
 }
 
 .nav-item {
@@ -4834,9 +4844,13 @@ button {
   }
 
   .nav-menu {
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .nav-menu-scroll {
     order: 2;
     width: 100%;
-    justify-content: flex-start;
   }
 
   .brand-block {
