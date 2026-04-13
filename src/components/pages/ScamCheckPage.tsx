@@ -77,6 +77,7 @@ export function ScamCheckPage({
     initialQuestionnaireUrlState.resultView ? "action-plan" : "questionnaire"
   );
   const [isEnglishComparisonEnabled, setIsEnglishComparisonEnabled] = useState(false);
+  const [isMobileRailExpanded, setIsMobileRailExpanded] = useState(false);
   const {
     answers,
     currentQuestion,
@@ -262,6 +263,60 @@ export function ScamCheckPage({
     window.print();
   };
 
+  const railContent = isComplete ? (
+    <>
+      <div className="detail-page__rail-actions">
+        <button className="detail-page__rail-action" type="button" onClick={restartQuestionnaire}>
+          <span className="detail-page__rail-action-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor">
+              <path d="M480-80q-134 0-227-93T160-400q0-134 93-227t227-93q69 0 132 28.5T720-614v-106h80v280H520v-80h168q-32-56-87.5-88T480-640q-100 0-170 70t-70 170q0 100 70 170t170 70q68 0 124.5-34.5T692-288h90q-35 95-117 151.5T480-80Z"/>
+            </svg>
+          </span>
+          <span className="detail-page__rail-action-label">{uiCopy.guide.startAgain}</span>
+        </button>
+        <button className="detail-page__rail-action" type="button" onClick={saveAsPdf}>
+          <span className="detail-page__rail-action-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor">
+              <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/>
+            </svg>
+          </span>
+          <span className="detail-page__rail-action-label">{uiCopy.guide.saveAsPdf}</span>
+        </button>
+      </div>
+      <button
+        className="detail-page__rail-toggle"
+        type="button"
+        aria-expanded={isMobileRailExpanded}
+        onClick={() => setIsMobileRailExpanded((current) => !current)}
+      >
+        <span>{uiCopy.guide.onThisPage}</span>
+        <span
+          className={`detail-page__rail-toggle-chevron${isMobileRailExpanded ? " detail-page__rail-toggle-chevron--expanded" : ""}`}
+          aria-hidden="true"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor">
+            <path d="M480-378 288-570l56-56 136 136 136-136 56 56-192 192Z"/>
+          </svg>
+        </span>
+      </button>
+      <nav
+        className={`detail-page-nav detail-page-nav--mobile-collapsible${isMobileRailExpanded ? " detail-page-nav--mobile-open" : ""}`}
+        aria-label={uiCopy.guide.onThisPage}
+      >
+        {resultNavItems.map((section, index) => (
+          <InteractiveCardButton
+            key={section.id}
+            className={`detail-page-nav__item${activeSectionId === section.id ? " detail-page-nav__item--active" : ""}`}
+            onClick={() => handleSectionNavigate(section.id)}
+          >
+            <span className="detail-page-nav__number">{index + 1}</span>
+            <span className="detail-page-nav__label">{section.title}</span>
+          </InteractiveCardButton>
+        ))}
+      </nav>
+    </>
+  ) : null;
+
   return (
     <section className="detail-page">
       <div className="detail-page__layout">
@@ -297,6 +352,7 @@ export function ScamCheckPage({
                 </p>
               )}
             </div>
+            {railContent ? <div className="detail-page__rail detail-page__rail--mobile">{railContent}</div> : null}
           </div>
 
           {!isComplete ? (
@@ -457,44 +513,7 @@ export function ScamCheckPage({
           )}
         </div>
 
-        <aside className="detail-page__rail detail-page__rail--side">
-          {isComplete ? (
-            <>
-              <div className="detail-page__rail-actions">
-                <button className="detail-page__rail-action" type="button" onClick={restartQuestionnaire}>
-                  <span className="detail-page__rail-action-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor">
-                      <path d="M480-80q-134 0-227-93T160-400q0-134 93-227t227-93q69 0 132 28.5T720-614v-106h80v280H520v-80h168q-32-56-87.5-88T480-640q-100 0-170 70t-70 170q0 100 70 170t170 70q68 0 124.5-34.5T692-288h90q-35 95-117 151.5T480-80Z"/>
-                    </svg>
-                  </span>
-                  <span className="detail-page__rail-action-label">{uiCopy.guide.startAgain}</span>
-                </button>
-                <button className="detail-page__rail-action" type="button" onClick={saveAsPdf}>
-                  <span className="detail-page__rail-action-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor">
-                      <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/>
-                    </svg>
-                  </span>
-                  <span className="detail-page__rail-action-label">{uiCopy.guide.saveAsPdf}</span>
-                </button>
-              </div>
-              <nav className="detail-page-nav" aria-label={uiCopy.guide.onThisPage}>
-                {resultNavItems.map((section, index) => (
-                  <InteractiveCardButton
-                    key={section.id}
-                    className={`detail-page-nav__item${activeSectionId === section.id ? " detail-page-nav__item--active" : ""}`}
-                    onClick={() => handleSectionNavigate(section.id)}
-                  >
-                    <span className="detail-page-nav__number">{index + 1}</span>
-                    <span className="detail-page-nav__label">{section.title}</span>
-                  </InteractiveCardButton>
-                ))}
-              </nav>
-            </>
-          ) : (
-            <div className="detail-page__rail-placeholder" aria-hidden="true" />
-          )}
-        </aside>
+        {railContent ? <aside className="detail-page__rail detail-page__rail--side">{railContent}</aside> : null}
       </div>
 
       <QuickCheckExitDialog isOpen={isExitDialogOpen} onStay={handleStayInQuestionnaire} onLeave={handleLeaveQuestionnaire} />

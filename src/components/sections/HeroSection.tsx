@@ -114,10 +114,12 @@ export function HeroSection({
           ))}
         </ul>
 
-        <button className="quick-guide-button" type="button" onClick={() => onQuickGuideClick?.(activeTab)}>
-          <span>{activeTab.actionLabel}</span>
-          <ArrowCircleIcon />
-        </button>
+        <div className="quick-guide-actions">
+          <button className="quick-guide-button" type="button" onClick={() => onQuickGuideClick?.(activeTab)}>
+            <span>{activeTab.actionLabel}</span>
+            <ArrowCircleIcon />
+          </button>
+        </div>
       </div>
 
       <div className="hero-chatbot">

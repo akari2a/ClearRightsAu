@@ -17,11 +17,12 @@ type UiCopy = {
   };
   footer: {
     navigateTitle: string;
-    navigateLinks: string[];
-    topicsTitle: string;
-    topicsLinks: string[];
-    accessibilityTitle: string;
-    accessibilityLinks: string[];
+    navigateLinks: {
+      home: string;
+      guide: string;
+      cases: string;
+      aibot: string;
+    };
     brandCopy: string;
     meta: string;
   };
@@ -92,11 +93,12 @@ const UI_COPY_BY_LOCALE: Record<AppLocale, UiCopy> = {
     },
     footer: {
       navigateTitle: "Navigate",
-      navigateLinks: ["Home", "Guide", "Cases", "AIBot"],
-      topicsTitle: "Popular topics",
-      topicsLinks: ["Scams", "Refunds", "Unsafe products", "Rental bonds"],
-      accessibilityTitle: "Accessibility",
-      accessibilityLinks: ["Text size", "Language support", "Simple explanations"],
+      navigateLinks: {
+        home: "Home",
+        guide: "Guide",
+        cases: "Cases",
+        aibot: "AIBot"
+      },
       brandCopy: "Clear, practical help for consumer problems, from first questions to next steps.",
       meta: "Designed to make consumer rights information easier to understand and act on."
     },
@@ -166,11 +168,12 @@ const UI_COPY_BY_LOCALE: Record<AppLocale, UiCopy> = {
     },
     footer: {
       navigateTitle: "导航",
-      navigateLinks: ["首页", "指南", "案例", "AI 助手"],
-      topicsTitle: "常见主题",
-      topicsLinks: ["诈骗", "退款", "不安全产品", "租房押金"],
-      accessibilityTitle: "无障碍",
-      accessibilityLinks: ["文字大小", "语言支持", "简明说明"],
+      navigateLinks: {
+        home: "首页",
+        guide: "指南",
+        cases: "案例",
+        aibot: "AI 助手"
+      },
       brandCopy: "为消费问题提供清晰、实用的帮助，从初步判断到下一步行动。",
       meta: "帮助用户更容易理解消费者权益信息，并采取行动。"
     },

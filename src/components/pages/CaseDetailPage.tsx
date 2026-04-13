@@ -53,6 +53,7 @@ export function CaseDetailPage({
 }: CaseDetailPageProps) {
   const uiCopy = getUiCopy(locale);
   const [activeSectionId, setActiveSectionId] = useState<string>(sections[0].id);
+  const [isMobileRailExpanded, setIsMobileRailExpanded] = useState(false);
   const isScamCase = caseData.category === "scam";
   const riskLevelLabel = useMemo(
     () => getCaseRiskLevelLabel(caseData.riskTone, uiCopy.caseDetail.riskLevel),
@@ -122,6 +123,42 @@ export function CaseDetailPage({
     window.scrollTo({ top, behavior: "smooth" });
   };
 
+  const railContent = (
+    <>
+      <button
+        className="detail-page__rail-toggle"
+        type="button"
+        aria-expanded={isMobileRailExpanded}
+        onClick={() => setIsMobileRailExpanded((current) => !current)}
+      >
+        <span>{uiCopy.guide.onThisPage}</span>
+        <span
+          className={`detail-page__rail-toggle-chevron${isMobileRailExpanded ? " detail-page__rail-toggle-chevron--expanded" : ""}`}
+          aria-hidden="true"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor">
+            <path d="M480-378 288-570l56-56 136 136 136-136 56 56-192 192Z" />
+          </svg>
+        </span>
+      </button>
+      <nav
+        className={`detail-page-nav detail-page-nav--mobile-collapsible${isMobileRailExpanded ? " detail-page-nav--mobile-open" : ""}`}
+        aria-label={uiCopy.guide.onThisPage}
+      >
+        {sections.map((section) => (
+          <InteractiveCardButton
+            key={section.id}
+            className={`detail-page-nav__item${activeSectionId === section.id ? " detail-page-nav__item--active" : ""}`}
+            onClick={() => handleSectionNavigate(section.id)}
+          >
+            <span className="detail-page-nav__number">{section.number}</span>
+            <span className="detail-page-nav__label">{sectionTitles[section.id]}</span>
+          </InteractiveCardButton>
+        ))}
+      </nav>
+    </>
+  );
+
   return (
     <section className="detail-page case-detail-page">
       <div className="detail-page__layout">
@@ -157,6 +194,7 @@ export function CaseDetailPage({
                 </div>
               </div>
             </div>
+            <div className="detail-page__rail detail-page__rail--mobile">{railContent}</div>
 
             <section className="detail-section" id="situation">
               <DetailSectionHeader eyebrow={`1. ${sections[0].eyebrow}`} title={sections[0].title} />
@@ -258,20 +296,7 @@ export function CaseDetailPage({
           ) : null}
         </div>
 
-        <aside className="detail-page__rail detail-page__rail--side">
-          <nav className="detail-page-nav" aria-label={uiCopy.guide.onThisPage}>
-            {sections.map((section) => (
-              <InteractiveCardButton
-                key={section.id}
-                className={`detail-page-nav__item${activeSectionId === section.id ? " detail-page-nav__item--active" : ""}`}
-                onClick={() => handleSectionNavigate(section.id)}
-              >
-                <span className="detail-page-nav__number">{section.number}</span>
-                <span className="detail-page-nav__label">{sectionTitles[section.id]}</span>
-              </InteractiveCardButton>
-            ))}
-          </nav>
-        </aside>
+        <aside className="detail-page__rail detail-page__rail--side">{railContent}</aside>
       </div>
     </section>
   );

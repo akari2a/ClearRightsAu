@@ -1,25 +1,52 @@
 import { FooterLinkGroup } from "./footer/FooterLinkGroup";
 import { getUiCopy } from "../../i18n/copy";
 import type { AppLocale } from "../../i18n/config";
+import { useNavigate } from "react-router-dom";
 
 type SiteFooterProps = {
   locale?: AppLocale;
 };
 
 export function SiteFooter({ locale = "en" }: SiteFooterProps) {
+  const navigate = useNavigate();
   const uiCopy = getUiCopy(locale);
   const footerGroups = [
     {
       title: uiCopy.footer.navigateTitle,
-      links: uiCopy.footer.navigateLinks
-    },
-    {
-      title: uiCopy.footer.topicsTitle,
-      links: uiCopy.footer.topicsLinks
-    },
-    {
-      title: uiCopy.footer.accessibilityTitle,
-      links: uiCopy.footer.accessibilityLinks
+      links: [
+        {
+          id: "home",
+          label: uiCopy.footer.navigateLinks.home,
+          onClick: () => {
+            navigate("/");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        },
+        {
+          id: "guide",
+          label: uiCopy.footer.navigateLinks.guide,
+          onClick: () => {
+            navigate("/scam-check");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        },
+        {
+          id: "cases",
+          label: uiCopy.footer.navigateLinks.cases,
+          onClick: () => {
+            navigate("/cases");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        },
+        {
+          id: "aibot",
+          label: uiCopy.footer.navigateLinks.aibot,
+          onClick: () => {
+            navigate("/aibot");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        }
+      ]
     }
   ];
 
