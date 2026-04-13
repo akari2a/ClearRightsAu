@@ -3,8 +3,10 @@ import { ArrowCircleIcon, StarIcon, SuspiciousTextIcon } from "../icons";
 import { InteractiveCardButton } from "../controls/InteractiveCardButton";
 import { ScamRecogniserDialog } from "./ScamRecogniserDialog";
 import type { GuideTab, TabKey } from "../../types/home";
+import type { AppLocale } from "../../i18n/config";
 
 type HeroSectionProps = {
+  locale: AppLocale;
   localeLabels?: {
     quickGuideTopicsAria: string;
     suggestedQuestionsAria: string;
@@ -29,6 +31,7 @@ type HeroSectionProps = {
 };
 
 export function HeroSection({
+  locale,
   localeLabels,
   brandName,
   slogan,
@@ -180,6 +183,7 @@ export function HeroSection({
       </div>
 
       <ScamRecogniserDialog
+        locale={locale}
         isOpen={isRecogniserOpen}
         initialType={initialScamType}
         onClose={() => {

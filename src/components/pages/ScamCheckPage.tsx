@@ -21,6 +21,8 @@ import { CaseCategoryTag } from "../case/CaseCategoryTag";
 import { ResultTextPair } from "../i18n/ResultTextPair";
 import { RiskSummaryCard } from "../risk/RiskSummaryCard";
 import { createStepPresentation, StepDetailCard } from "../steps/StepDetailCard";
+import { SuspiciousTextIcon } from "../icons";
+import { ScamRecogniserDialog } from "../sections/ScamRecogniserDialog";
 import { QuickCheckExitDialog } from "./scam-check/QuickCheckExitDialog";
 import {
   isOptionSelected,
@@ -78,6 +80,7 @@ export function ScamCheckPage({
   );
   const [isEnglishComparisonEnabled, setIsEnglishComparisonEnabled] = useState(false);
   const [isMobileRailExpanded, setIsMobileRailExpanded] = useState(false);
+  const [isRecogniserOpen, setIsRecogniserOpen] = useState(false);
   const {
     answers,
     currentQuestion,
@@ -176,6 +179,10 @@ export function ScamCheckPage({
     () => new Map(englishRelatedCasesContent.cases.map((caseItem) => [caseItem.id, caseItem])),
     [englishRelatedCasesContent]
   );
+  const recogniserInitialType = useMemo(() => {
+    const howHappened = typeof answers.how_happened === "string" ? answers.how_happened : undefined;
+    return howHappened && ["text", "email", "phone", "website"].includes(howHappened) ? howHappened : undefined;
+  }, [answers.how_happened]);
 
   useEffect(() => {
     if (locale === DEFAULT_LOCALE) {
@@ -261,6 +268,12 @@ export function ScamCheckPage({
 
   const saveAsPdf = () => {
     window.print();
+  };
+
+  const handleRecogniserNavigate = (howHappened: string) => {
+    setIsRecogniserOpen(false);
+    navigate(`/scam-check?how_happened=${howHappened}&step=1`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const railContent = isComplete ? (
@@ -456,6 +469,20 @@ export function ScamCheckPage({
                 }
               />
 
+              <InteractiveCardButton
+                className="detail-recogniser-card"
+                onClick={() => setIsRecogniserOpen(true)}
+              >
+                <div className="detail-recogniser-card__icon" aria-hidden="true">
+                  <SuspiciousTextIcon />
+                </div>
+                <div className="detail-recogniser-card__copy">
+                  <p className="detail-recogniser-card__title">{uiCopy.guide.recogniserEntryTitle}</p>
+                  <p className="detail-recogniser-card__body">{uiCopy.guide.recogniserEntryBody}</p>
+                  <span className="detail-recogniser-card__action">{uiCopy.guide.recogniserEntryAction}</span>
+                </div>
+              </InteractiveCardButton>
+
               <div className="detail-step-list">
                 {flattenedSteps.map((step) => (
                   <section key={step.id} id={step.id}>
@@ -516,6 +543,13 @@ export function ScamCheckPage({
         {railContent ? <aside className="detail-page__rail detail-page__rail--side">{railContent}</aside> : null}
       </div>
 
+      <ScamRecogniserDialog
+        locale={locale}
+        isOpen={isRecogniserOpen}
+        initialType={recogniserInitialType}
+        onClose={() => setIsRecogniserOpen(false)}
+        onNavigateToGuide={handleRecogniserNavigate}
+      />
       <QuickCheckExitDialog isOpen={isExitDialogOpen} onStay={handleStayInQuestionnaire} onLeave={handleLeaveQuestionnaire} />
     </section>
   );

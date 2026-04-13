@@ -62,6 +62,9 @@ type UiCopy = {
     whereToGetHelp: string;
     riskLevelPrefix: string;
     resultFallback: string;
+    recogniserEntryTitle: string;
+    recogniserEntryBody: string;
+    recogniserEntryAction: string;
     stepOf: (current: number, total: number) => string;
     scamIntro: string;
     refundIntro: string;
@@ -72,6 +75,49 @@ type UiCopy = {
     newConversation: string;
     chatbotInputAria: string;
     suggestedQuestionsAria: string;
+  };
+  scamRecogniser: {
+    close: string;
+    title: string;
+    pickType: string;
+    socialLead: string;
+    socialAction: string;
+    back: string;
+    provideDetails: string;
+    analyse: string;
+    analysing: string;
+    suspiciousHeading: string;
+    suspiciousBody: string;
+    clearHeading: string;
+    clearBody: string;
+    getHelp: string;
+    checkAnother: string;
+    stillNotSure: string;
+    required: string;
+    tooLong: (max: number) => string;
+    invalidUrl: string;
+    types: {
+      text: string;
+      email: string;
+      phone: string;
+      website: string;
+    };
+    fields: {
+      textSender: string;
+      textSenderPlaceholder: string;
+      textContent: string;
+      textContentPlaceholder: string;
+      emailSender: string;
+      emailSenderPlaceholder: string;
+      emailContent: string;
+      emailContentPlaceholder: string;
+      phoneNumber: string;
+      phoneNumberPlaceholder: string;
+      phoneDescription: string;
+      phoneDescriptionPlaceholder: string;
+      websiteUrl: string;
+      websiteUrlPlaceholder: string;
+    };
   };
 };
 
@@ -138,6 +184,9 @@ const UI_COPY_BY_LOCALE: Record<AppLocale, UiCopy> = {
       whereToGetHelp: "Where to get help",
       riskLevelPrefix: "Risk level",
       resultFallback: "Result",
+      recogniserEntryTitle: "Need help checking a message?",
+      recogniserEntryBody: "Paste the text, email, call details, or website you received and we can help you recognise suspicious scam patterns before you act.",
+      recogniserEntryAction: "Recognise suspicious text",
       stepOf: (current, total) => `Step ${current} of ${total}`,
       scamIntro: "Answer a few questions about what happened. We will use the facts you know to guide the next steps.",
       refundIntro: "Answer a few questions about what happened. We will use the facts you know to guide the next steps.",
@@ -148,6 +197,49 @@ const UI_COPY_BY_LOCALE: Record<AppLocale, UiCopy> = {
       newConversation: "New conversation",
       chatbotInputAria: "Ask about your consumer rights",
       suggestedQuestionsAria: "Suggested questions"
+    },
+    scamRecogniser: {
+      close: "Close",
+      title: "Check if it's a scam",
+      pickType: "Select the type of message or contact you received",
+      socialLead: "Received something on social media?",
+      socialAction: "Start guided check →",
+      back: "Back",
+      provideDetails: "Provide the details below for analysis",
+      analyse: "Analyse",
+      analysing: "Analysing your content...",
+      suspiciousHeading: "This looks suspicious",
+      suspiciousBody: "We detected patterns commonly associated with scams. This doesn't confirm it's a scam, but we recommend caution.",
+      clearHeading: "No obvious scam indicators detected",
+      clearBody: "We didn't find common scam patterns, but this doesn't guarantee it's safe. Stay cautious with any unexpected contact.",
+      getHelp: "Get step-by-step help",
+      checkAnother: "Check another",
+      stillNotSure: "Still not sure? Start guided check →",
+      required: "This field is required",
+      tooLong: (max) => `Content is too long (max ${max.toLocaleString()} characters)`,
+      invalidUrl: "Enter a valid URL starting with http:// or https://",
+      types: {
+        text: "Text / SMS",
+        email: "Email",
+        phone: "Phone call",
+        website: "Website"
+      },
+      fields: {
+        textSender: "Sender number",
+        textSenderPlaceholder: "e.g. +61 400 000 000 or a short code",
+        textContent: "Message content",
+        textContentPlaceholder: "Paste or type the full message here...",
+        emailSender: "Sender address",
+        emailSenderPlaceholder: "e.g. noreply@example.com",
+        emailContent: "Email content",
+        emailContentPlaceholder: "Paste the email body here...",
+        phoneNumber: "Phone number",
+        phoneNumberPlaceholder: "e.g. +61 2 0000 0000",
+        phoneDescription: "Describe the call",
+        phoneDescriptionPlaceholder: "What did the caller say? What did they ask for?",
+        websiteUrl: "Website URL",
+        websiteUrlPlaceholder: "e.g. https://example.com"
+      }
     }
   },
   "zh-Hans": {
@@ -213,6 +305,9 @@ const UI_COPY_BY_LOCALE: Record<AppLocale, UiCopy> = {
       whereToGetHelp: "去哪里寻求帮助",
       riskLevelPrefix: "风险等级",
       resultFallback: "结果",
+      recogniserEntryTitle: "还想再判断一段可疑内容吗？",
+      recogniserEntryBody: "粘贴你收到的短信、邮件、通话内容或网站链接，我们可以在你采取下一步行动前，帮你识别常见诈骗迹象。",
+      recogniserEntryAction: "识别诈骗文本",
       stepOf: (current, total) => `第 ${current} 步，共 ${total} 步`,
       scamIntro: "回答几个关于发生了什么的问题。我们会根据你已知的事实，给出下一步建议。",
       refundIntro: "回答几个关于发生了什么的问题。我们会根据你已知的事实，给出下一步建议。",
@@ -223,6 +318,49 @@ const UI_COPY_BY_LOCALE: Record<AppLocale, UiCopy> = {
       newConversation: "新建对话",
       chatbotInputAria: "询问你的消费者权益问题",
       suggestedQuestionsAria: "推荐问题"
+    },
+    scamRecogniser: {
+      close: "关闭",
+      title: "判断这是不是诈骗",
+      pickType: "选择你收到的信息或联系类型",
+      socialLead: "是在社交媒体上收到的吗？",
+      socialAction: "开始引导式判断 →",
+      back: "返回",
+      provideDetails: "请填写下面的信息以进行分析",
+      analyse: "开始分析",
+      analysing: "正在分析你的内容……",
+      suspiciousHeading: "这看起来有可疑之处",
+      suspiciousBody: "我们检测到了一些常见诈骗特征。这并不能完全确认它就是诈骗，但建议你保持警惕。",
+      clearHeading: "未发现明显诈骗特征",
+      clearBody: "我们没有发现常见诈骗模式，但这并不代表它一定安全。对于任何意外联系仍然要保持谨慎。",
+      getHelp: "查看分步骤帮助",
+      checkAnother: "再检查一条",
+      stillNotSure: "仍不确定？开始引导式判断 →",
+      required: "此字段为必填项",
+      tooLong: (max) => `内容过长（最多 ${max.toLocaleString()} 个字符）`,
+      invalidUrl: "请输入以 http:// 或 https:// 开头的有效网址",
+      types: {
+        text: "短信 / 文本",
+        email: "电子邮件",
+        phone: "电话来电",
+        website: "网站"
+      },
+      fields: {
+        textSender: "发送号码",
+        textSenderPlaceholder: "例如 +61 400 000 000 或短号码",
+        textContent: "短信内容",
+        textContentPlaceholder: "请粘贴或输入完整短信内容……",
+        emailSender: "发件人地址",
+        emailSenderPlaceholder: "例如 noreply@example.com",
+        emailContent: "邮件内容",
+        emailContentPlaceholder: "请粘贴邮件正文……",
+        phoneNumber: "来电号码",
+        phoneNumberPlaceholder: "例如 +61 2 0000 0000",
+        phoneDescription: "描述通话内容",
+        phoneDescriptionPlaceholder: "对方说了什么？要求你做什么？",
+        websiteUrl: "网站链接",
+        websiteUrlPlaceholder: "例如 https://example.com"
+      }
     }
   }
 };

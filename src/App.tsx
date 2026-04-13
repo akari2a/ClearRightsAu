@@ -353,6 +353,7 @@ function App() {
             element={
               <>
                 <HeroSection
+                  locale={activeLanguage}
                   localeLabels={{
                     quickGuideTopicsAria: uiCopy.nav.guide,
                     suggestedQuestionsAria: uiCopy.aibot.suggestedQuestionsAria,

@@ -1,10 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { getUiCopy } from "../../i18n/copy";
+import type { AppLocale } from "../../i18n/config";
 
 type Step = "type-picker" | "input-form" | "analysing" | "result";
 type ScamType = "text" | "email" | "phone" | "website";
 type Verdict = "suspicious" | "no-indicators";
 
 type ScamRecogniserDialogProps = {
+  locale: AppLocale;
   isOpen: boolean;
   initialType?: string;
   onClose: () => void;
@@ -49,39 +52,43 @@ function analyse(fields: Record<string, string>, type: ScamType): Verdict {
   return hits >= 2 ? "suspicious" : "no-indicators";
 }
 
-const TYPE_CONFIG: Record<ScamType, { label: string; icon: string; fields: { key: string; label: string; type: "input" | "textarea"; placeholder: string }[] }> = {
-  text: {
-    label: "Text / SMS",
-    icon: "message",
-    fields: [
-      { key: "text.sender", label: "Sender number", type: "input", placeholder: "e.g. +61 400 000 000 or a short code" },
-      { key: "text.content", label: "Message content", type: "textarea", placeholder: "Paste or type the full message here..." }
-    ]
-  },
-  email: {
-    label: "Email",
-    icon: "mail",
-    fields: [
-      { key: "email.sender", label: "Sender address", type: "input", placeholder: "e.g. noreply@example.com" },
-      { key: "email.content", label: "Email content", type: "textarea", placeholder: "Paste the email body here..." }
-    ]
-  },
-  phone: {
-    label: "Phone call",
-    icon: "phone",
-    fields: [
-      { key: "phone.number", label: "Phone number", type: "input", placeholder: "e.g. +61 2 0000 0000" },
-      { key: "phone.description", label: "Describe the call", type: "textarea", placeholder: "What did the caller say? What did they ask for?" }
-    ]
-  },
-  website: {
-    label: "Website",
-    icon: "globe",
-    fields: [
-      { key: "website.url", label: "Website URL", type: "input", placeholder: "e.g. https://example.com" }
-    ]
-  }
-};
+function getTypeConfig(locale: AppLocale): Record<ScamType, { label: string; icon: string; fields: { key: string; label: string; type: "input" | "textarea"; placeholder: string }[] }> {
+  const copy = getUiCopy(locale).scamRecogniser;
+
+  return {
+    text: {
+      label: copy.types.text,
+      icon: "message",
+      fields: [
+        { key: "text.sender", label: copy.fields.textSender, type: "input", placeholder: copy.fields.textSenderPlaceholder },
+        { key: "text.content", label: copy.fields.textContent, type: "textarea", placeholder: copy.fields.textContentPlaceholder }
+      ]
+    },
+    email: {
+      label: copy.types.email,
+      icon: "mail",
+      fields: [
+        { key: "email.sender", label: copy.fields.emailSender, type: "input", placeholder: copy.fields.emailSenderPlaceholder },
+        { key: "email.content", label: copy.fields.emailContent, type: "textarea", placeholder: copy.fields.emailContentPlaceholder }
+      ]
+    },
+    phone: {
+      label: copy.types.phone,
+      icon: "phone",
+      fields: [
+        { key: "phone.number", label: copy.fields.phoneNumber, type: "input", placeholder: copy.fields.phoneNumberPlaceholder },
+        { key: "phone.description", label: copy.fields.phoneDescription, type: "textarea", placeholder: copy.fields.phoneDescriptionPlaceholder }
+      ]
+    },
+    website: {
+      label: copy.types.website,
+      icon: "globe",
+      fields: [
+        { key: "website.url", label: copy.fields.websiteUrl, type: "input", placeholder: copy.fields.websiteUrlPlaceholder }
+      ]
+    }
+  };
+}
 
 function TypeIcon({ type }: { type: string }) {
   if (type === "message") {
@@ -119,7 +126,9 @@ const MAX_CHARS = 2000;
 
 const VALID_SCAM_TYPES: readonly string[] = ["text", "email", "phone", "website"];
 
-export function ScamRecogniserDialog({ isOpen, initialType, onClose, onNavigateToGuide }: ScamRecogniserDialogProps) {
+export function ScamRecogniserDialog({ locale, isOpen, initialType, onClose, onNavigateToGuide }: ScamRecogniserDialogProps) {
+  const uiCopy = getUiCopy(locale).scamRecogniser;
+  const TYPE_CONFIG = useMemo(() => getTypeConfig(locale), [locale]);
   const [step, setStep] = useState<Step>("type-picker");
   const [selectedType, setSelectedType] = useState<ScamType | null>(null);
   const [formData, setFormData] = useState<Record<string, string>>({});
@@ -211,17 +220,17 @@ export function ScamRecogniserDialog({ isOpen, initialType, onClose, onNavigateT
     for (const field of config.fields) {
       const value = (formData[field.key] ?? "").trim();
       if (!value) {
-        errors[field.key] = "This field is required";
+        errors[field.key] = uiCopy.required;
       } else if (field.type === "textarea" && value.length > MAX_CHARS) {
-        errors[field.key] = `Content is too long (max ${MAX_CHARS.toLocaleString()} characters)`;
+        errors[field.key] = uiCopy.tooLong(MAX_CHARS);
       } else if (field.key === "website.url") {
         try {
           const parsed = new URL(value);
           if (!parsed.protocol.startsWith("http")) {
-            errors[field.key] = "Enter a valid URL starting with http:// or https://";
+            errors[field.key] = uiCopy.invalidUrl;
           }
         } catch {
-          errors[field.key] = "Enter a valid URL starting with http:// or https://";
+          errors[field.key] = uiCopy.invalidUrl;
         }
       }
     }
@@ -278,7 +287,7 @@ export function ScamRecogniserDialog({ isOpen, initialType, onClose, onNavigateT
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button */}
-        <button className="scam-recogniser-close" type="button" onClick={handleClose} aria-label="Close">
+        <button className="scam-recogniser-close" type="button" onClick={handleClose} aria-label={uiCopy.close}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
@@ -294,8 +303,8 @@ export function ScamRecogniserDialog({ isOpen, initialType, onClose, onNavigateT
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
               </div>
-              <h2 id="scam-recogniser-title" className="scam-recogniser-title">Check if it's a scam</h2>
-              <p className="scam-recogniser-subtitle">Select the type of message or contact you received</p>
+              <h2 id="scam-recogniser-title" className="scam-recogniser-title">{uiCopy.title}</h2>
+              <p className="scam-recogniser-subtitle">{uiCopy.pickType}</p>
             </div>
 
             <div className="scam-recogniser-grid">
@@ -315,9 +324,9 @@ export function ScamRecogniserDialog({ isOpen, initialType, onClose, onNavigateT
             </div>
 
             <p className="scam-recogniser-social-link">
-              Received something on social media?{" "}
+              {uiCopy.socialLead}{" "}
               <button type="button" className="scam-recogniser-text-link" onClick={handleSocialMediaLink}>
-                Start guided check &rarr;
+                {uiCopy.socialAction}
               </button>
             </p>
           </div>
@@ -330,12 +339,12 @@ export function ScamRecogniserDialog({ isOpen, initialType, onClose, onNavigateT
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="15 18 9 12 15 6" />
               </svg>
-              <span>Back</span>
+              <span>{uiCopy.back}</span>
             </button>
 
             <div className="scam-recogniser-header">
               <h2 id="scam-recogniser-title" className="scam-recogniser-title">{TYPE_CONFIG[selectedType].label}</h2>
-              <p className="scam-recogniser-subtitle">Provide the details below for analysis</p>
+              <p className="scam-recogniser-subtitle">{uiCopy.provideDetails}</p>
             </div>
 
             <div className="scam-recogniser-form">
@@ -379,7 +388,7 @@ export function ScamRecogniserDialog({ isOpen, initialType, onClose, onNavigateT
             </div>
 
             <button className="scam-recogniser-analyse-btn" type="button" onClick={handleSubmit}>
-              Analyse
+              {uiCopy.analyse}
             </button>
           </div>
         ) : null}
@@ -393,7 +402,7 @@ export function ScamRecogniserDialog({ isOpen, initialType, onClose, onNavigateT
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
               </div>
-              <p className="scam-recogniser-analysing__text">Analysing your content...</p>
+              <p className="scam-recogniser-analysing__text">{uiCopy.analysing}</p>
             </div>
           </div>
         ) : null}
@@ -418,32 +427,32 @@ export function ScamRecogniserDialog({ isOpen, initialType, onClose, onNavigateT
               </div>
 
               <h2 className="scam-recogniser-result__heading">
-                {verdict === "suspicious" ? "This looks suspicious" : "No obvious scam indicators detected"}
+                {verdict === "suspicious" ? uiCopy.suspiciousHeading : uiCopy.clearHeading}
               </h2>
 
               <p className="scam-recogniser-result__body">
                 {verdict === "suspicious"
-                  ? "We detected patterns commonly associated with scams. This doesn't confirm it's a scam, but we recommend caution."
-                  : "We didn't find common scam patterns, but this doesn't guarantee it's safe. Stay cautious with any unexpected contact."}
+                  ? uiCopy.suspiciousBody
+                  : uiCopy.clearBody}
               </p>
 
               <div className="scam-recogniser-result__actions">
                 {verdict === "suspicious" ? (
                   <>
                     <button className="scam-recogniser-btn--primary" type="button" onClick={handleGetHelp}>
-                      Get step-by-step help
+                      {uiCopy.getHelp}
                     </button>
                     <button className="scam-recogniser-btn--secondary" type="button" onClick={handleCheckAnother}>
-                      Check another
+                      {uiCopy.checkAnother}
                     </button>
                   </>
                 ) : (
                   <>
                     <button className="scam-recogniser-btn--primary" type="button" onClick={handleCheckAnother}>
-                      Check another
+                      {uiCopy.checkAnother}
                     </button>
                     <button type="button" className="scam-recogniser-text-link" onClick={handleGetHelp}>
-                      Still not sure? Start guided check &rarr;
+                      {uiCopy.stillNotSure}
                     </button>
                   </>
                 )}
