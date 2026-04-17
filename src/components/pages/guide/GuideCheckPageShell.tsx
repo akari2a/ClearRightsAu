@@ -166,6 +166,7 @@ export function GuideCheckPageShell({
     () => getRiskLevelPresentation(resolvedResult?.riskLevel ?? 2),
     [resolvedResult]
   );
+  const showResultSummaryCard = config.showResultSummaryCard ?? true;
 
   const flattenedSteps = useMemo(
     () => (resultSections.length > 0 ? flattenAllSections(resultSections, answers, config, locale) : []),
@@ -505,16 +506,30 @@ export function GuideCheckPageShell({
             </section>
           ) : (
             <section className="detail-section" id="action-plan">
-              <RiskSummaryCard
-                label={
-                  resolvedResult?.riskLevel !== undefined
-                    ? `${uiCopy.guide.riskLevelPrefix} ${resolvedResult.riskLevel}`
-                    : resultBadge.label
-                }
-                tone={resultBadge.tone}
-                title={<ResultTextPair primary={resolvedResult?.primaryLabel ?? uiCopy.guide.resultFallback} secondary={englishResult?.primaryLabel} enabled={isEnglishComparisonEnabled} />}
-                summary={<ResultTextPair primary={resolvedResult?.primarySummary ?? ""} secondary={englishResult?.primarySummary} enabled={isEnglishComparisonEnabled} />}
-              />
+              {showResultSummaryCard ? (
+                <RiskSummaryCard
+                  label={
+                    resolvedResult?.riskLevel !== undefined
+                      ? `${uiCopy.guide.riskLevelPrefix} ${resolvedResult.riskLevel}`
+                      : resultBadge.label
+                  }
+                  tone={resultBadge.tone}
+                  title={
+                    <ResultTextPair
+                      primary={resolvedResult?.primaryLabel ?? uiCopy.guide.resultFallback}
+                      secondary={englishResult?.primaryLabel}
+                      enabled={isEnglishComparisonEnabled}
+                    />
+                  }
+                  summary={
+                    <ResultTextPair
+                      primary={resolvedResult?.primarySummary ?? ""}
+                      secondary={englishResult?.primarySummary}
+                      enabled={isEnglishComparisonEnabled}
+                    />
+                  }
+                />
+              ) : null}
 
               <div className="detail-step-list">
                 {flattenedSteps.map((step) => (

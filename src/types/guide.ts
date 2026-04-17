@@ -28,6 +28,7 @@ export type GuideScenarioConfig = {
   readonly resultsTitle: string;
   readonly relatedCasesTitle: string;
   readonly questionnaireProgressLabel: string;
+  readonly showResultSummaryCard?: boolean;
   readonly questions: readonly QuickCheckQuestion[];
   readonly resolveResult: (answers: QuickCheckAnswers, locale?: AppLocale) => GuideResult | null;
   readonly getResultSections: (

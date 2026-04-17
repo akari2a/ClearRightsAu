@@ -17,6 +17,7 @@ export const unsafeProductsScenarioConfig: GuideScenarioConfig = {
   resultsTitle: "What to do next",
   relatedCasesTitle: "Related cases",
   questionnaireProgressLabel: "Questionnaire progress",
+  showResultSummaryCard: false,
   questions: UNSAFE_PRODUCTS_QUESTIONNAIRE.questionFlow,
   resolveResult: resolveUnsafeProductsResult,
   getResultSections: getUnsafeProductsResultSections,

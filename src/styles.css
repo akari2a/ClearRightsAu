@@ -2847,10 +2847,11 @@ button {
 
 .guide-result-block__title {
   margin: 0 0 16px;
-  font-size: calc(15px * var(--font-scale-factor));
+  font-size: var(--font-size-body-md);
   font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-tight);
-  color: var(--color-text-primary);
+  line-height: 1.18;
+  letter-spacing: 0.06em;
+  color: var(--color-brand-primary-600);
 }
 
 .result-text-pair {
@@ -2894,6 +2895,36 @@ button {
 .detail-card__step-paragraph .result-text-pair,
 .detail-card__step-bullet-copy .result-text-pair {
   gap: 2px;
+}
+
+.guide-result-block__title .result-text-pair {
+  gap: 3px;
+}
+
+.guide-result-block__title .result-text-pair__secondary {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: var(--color-text-secondary);
+}
+
+.guide-result-block .detail-list__item .result-text-pair {
+  gap: 2px;
+}
+
+.guide-result-block .detail-list__item .result-text-pair__primary {
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-loose);
+  color: var(--color-text-secondary);
+}
+
+.guide-result-block .detail-list__item .result-text-pair__secondary {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  color: var(--color-text-tertiary);
 }
 
 .site-footer {

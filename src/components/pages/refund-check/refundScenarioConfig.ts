@@ -17,6 +17,7 @@ export const refundScenarioConfig: GuideScenarioConfig = {
   resultsTitle: "What to do next",
   relatedCasesTitle: "Related cases",
   questionnaireProgressLabel: "Questionnaire progress",
+  showResultSummaryCard: false,
   questions: REFUND_QUESTIONNAIRE.questionFlow,
   resolveResult: resolveRefundResult,
   getResultSections: getRefundResultSections,
