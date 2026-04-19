@@ -810,9 +810,9 @@ button {
   margin-top: 68px;
 }
 
-  .hero-chatbot--with-secondary-actions {
-    margin-top: 132px;
-  }
+.hero-chatbot--with-secondary-actions {
+  margin-top: 68px;
+}
 
 .hero-chatbot__header {
   display: flex;
@@ -1047,10 +1047,19 @@ button {
 
 .section-heading__action {
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   margin-top: 4px;
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-semibold);
   line-height: 1.25;
+  white-space: nowrap;
+}
+
+.section-heading__action-arrow {
+  font-size: var(--font-size-body-md);
+  line-height: 1;
 }
 
 .section-eyebrow {
@@ -5236,7 +5245,7 @@ button {
   }
 
   .hero-chatbot--with-secondary-actions {
-    margin-top: 176px;
+    margin-top: 128px;
   }
 
   .detail-recogniser-card {

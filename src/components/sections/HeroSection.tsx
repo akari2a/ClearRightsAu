@@ -80,6 +80,10 @@ export function HeroSection({
   const sanitizePromptSeed = (value: string) => value.replace(/^["“”']+|["“”']+$/gu, "").trim();
 
   const handlePromptOpen = () => {
+    onOpenChatbot?.(undefined, activeTab);
+  };
+
+  const handleAskAi = () => {
     const seed = sanitizePromptSeed(activePlaceholder);
     onOpenChatbot?.(seed || undefined, activeTab);
   };
@@ -171,7 +175,7 @@ export function HeroSection({
           <button
             className="ask-ai-button"
             type="button"
-            onClick={handlePromptOpen}
+            onClick={handleAskAi}
           >
             <StarIcon />
             <span>{localeLabels?.askAi ?? "Ask AI"}</span>

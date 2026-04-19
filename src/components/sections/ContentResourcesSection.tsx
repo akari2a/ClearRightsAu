@@ -30,6 +30,7 @@ export function ContentResourcesSection({
         {actionLabel ? (
           <TextActionLink className="section-heading__action" to="/cases">
             {actionLabel}
+            <span className="section-heading__action-arrow" aria-hidden="true">→</span>
           </TextActionLink>
         ) : null}
       </div>
