@@ -65,6 +65,10 @@ type UiCopy = {
     recogniserEntryTitle: string;
     recogniserEntryBody: string;
     recogniserEntryAction: string;
+    exitDialogTitle: string;
+    exitDialogBody: string;
+    exitDialogStay: string;
+    exitDialogLeave: string;
     stepOf: (current: number, total: number) => string;
     scamIntro: string;
     refundIntro: string;
@@ -187,6 +191,10 @@ const UI_COPY_BY_LOCALE: Record<AppLocale, UiCopy> = {
       recogniserEntryTitle: "Need help checking a message?",
       recogniserEntryBody: "Paste the text, email, call details, or website you received and we can help you recognise suspicious scam patterns before you act.",
       recogniserEntryAction: "Recognise suspicious text",
+      exitDialogTitle: "Leave this questionnaire?",
+      exitDialogBody: "Your current answers will be lost if you leave now.",
+      exitDialogStay: "Stay here",
+      exitDialogLeave: "Leave page",
       stepOf: (current, total) => `Step ${current} of ${total}`,
       scamIntro: "Answer a few questions about what happened. We will use the facts you know to guide the next steps.",
       refundIntro: "Answer a few questions about what happened. We will use the facts you know to guide the next steps.",
@@ -308,6 +316,10 @@ const UI_COPY_BY_LOCALE: Record<AppLocale, UiCopy> = {
       recogniserEntryTitle: "还想再判断一段可疑内容吗？",
       recogniserEntryBody: "粘贴你收到的短信、邮件、通话内容或网站链接，我们可以在你采取下一步行动前，帮你识别常见诈骗迹象。",
       recogniserEntryAction: "识别诈骗文本",
+      exitDialogTitle: "要离开这份问卷吗？",
+      exitDialogBody: "如果现在离开，你当前填写的答案将会丢失。",
+      exitDialogStay: "继续留在这里",
+      exitDialogLeave: "离开页面",
       stepOf: (current, total) => `第 ${current} 步，共 ${total} 步`,
       scamIntro: "回答几个关于发生了什么的问题。我们会根据你已知的事实，给出下一步建议。",
       refundIntro: "回答几个关于发生了什么的问题。我们会根据你已知的事实，给出下一步建议。",

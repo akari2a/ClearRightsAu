@@ -166,7 +166,6 @@ export function GuideCheckPageShell({
     () => getRiskLevelPresentation(resolvedResult?.riskLevel ?? 2),
     [resolvedResult]
   );
-  const showResultSummaryCard = config.showResultSummaryCard ?? true;
 
   const flattenedSteps = useMemo(
     () => (resultSections.length > 0 ? flattenAllSections(resultSections, answers, config, locale) : []),
@@ -407,6 +406,8 @@ export function GuideCheckPageShell({
     </>
   ) : null;
 
+  const showSectionDividers = config.scenarioId === "scam";
+
   return (
     <section className="detail-page">
       <div className="detail-page__layout">
@@ -506,35 +507,72 @@ export function GuideCheckPageShell({
             </section>
           ) : (
             <section className="detail-section" id="action-plan">
-              {showResultSummaryCard ? (
-                <RiskSummaryCard
-                  label={
-                    resolvedResult?.riskLevel !== undefined
-                      ? `${uiCopy.guide.riskLevelPrefix} ${resolvedResult.riskLevel}`
-                      : resultBadge.label
-                  }
-                  tone={resultBadge.tone}
-                  title={
-                    <ResultTextPair
-                      primary={resolvedResult?.primaryLabel ?? uiCopy.guide.resultFallback}
-                      secondary={englishResult?.primaryLabel}
-                      enabled={isEnglishComparisonEnabled}
-                    />
-                  }
-                  summary={
-                    <ResultTextPair
-                      primary={resolvedResult?.primarySummary ?? ""}
-                      secondary={englishResult?.primarySummary}
-                      enabled={isEnglishComparisonEnabled}
-                    />
-                  }
-                />
-              ) : null}
+              {(() => {
+                const usesRiskLevelCard = config.scenarioId === "scam";
+                return (
+                  <RiskSummaryCard
+                    label={usesRiskLevelCard && resolvedResult?.riskLevel !== undefined ? `${uiCopy.guide.riskLevelPrefix} ${resolvedResult.riskLevel}` : usesRiskLevelCard ? resultBadge.label : undefined}
+                    tone={usesRiskLevelCard ? resultBadge.tone : "accent"}
+                    title={<ResultTextPair primary={resolvedResult?.primaryLabel ?? uiCopy.guide.resultFallback} secondary={englishResult?.primaryLabel} enabled={isEnglishComparisonEnabled} />}
+                    summary={<ResultTextPair primary={resolvedResult?.primarySummary ?? ""} secondary={englishResult?.primarySummary} enabled={isEnglishComparisonEnabled} />}
+                  >
+                    {!usesRiskLevelCard && (mergedPrepare.length > 0 || mergedHelp.length > 0) ? (
+                      <div className="detail-result-intro__sections">
+                        {mergedPrepare.length > 0 ? (
+                          <section id="guide-prepare" className="detail-result-intro__section">
+                            <h3 className="detail-result-intro__section-title">
+                              <ResultTextPair
+                                primary={uiCopy.guide.whatToPrepare}
+                                secondary={englishUiCopy.guide.whatToPrepare}
+                                enabled={isEnglishComparisonEnabled}
+                              />
+                            </h3>
+                            <ul className="detail-list detail-result-intro__list">
+                              {mergedPrepare.map((item, index) => (
+                                <li key={`prepare-${index}-${item.text}`} className="detail-list__item">
+                                  <ResultTextPair
+                                    primary={item.text}
+                                    secondary={mergedPrepareEnglish[index]?.text}
+                                    enabled={isEnglishComparisonEnabled}
+                                  />
+                                </li>
+                              ))}
+                            </ul>
+                          </section>
+                        ) : null}
+
+                        {mergedHelp.length > 0 ? (
+                          <section id="guide-help" className="detail-result-intro__section">
+                            <h3 className="detail-result-intro__section-title">
+                              <ResultTextPair
+                                primary={uiCopy.guide.whereToGetHelp}
+                                secondary={englishUiCopy.guide.whereToGetHelp}
+                                enabled={isEnglishComparisonEnabled}
+                              />
+                            </h3>
+                            <ul className="detail-list detail-result-intro__list">
+                              {mergedHelp.map((item, index) => (
+                                <li key={`help-${index}-${item.text}`} className="detail-list__item">
+                                  <ResultTextPair
+                                    primary={item.text}
+                                    secondary={mergedHelpEnglish[index]?.text}
+                                    enabled={isEnglishComparisonEnabled}
+                                  />
+                                </li>
+                              ))}
+                            </ul>
+                          </section>
+                        ) : null}
+                      </div>
+                    ) : null}
+                  </RiskSummaryCard>
+                );
+              })()}
 
               <div className="detail-step-list">
                 {flattenedSteps.map((step) => (
                   <section key={step.id} id={step.id}>
-                    {step.sectionTitle ? (
+                    {showSectionDividers && step.sectionTitle ? (
                       <div className="guide-result-section-divider">
                         <h3 className="guide-result-section-divider__title">
                           <ResultTextPair
@@ -557,50 +595,30 @@ export function GuideCheckPageShell({
                 ))}
               </div>
 
-              {mergedPrepare.length > 0 ? (
-                <div className="guide-result-block" id="guide-prepare">
-                  <h3 className="guide-result-block__title">
-                    <ResultTextPair
-                      primary={uiCopy.guide.whatToPrepare}
-                      secondary={englishUiCopy.guide.whatToPrepare}
-                      enabled={isEnglishComparisonEnabled}
-                    />
-                  </h3>
-                  <ul className="detail-list">
-                    {mergedPrepare.map((item) => (
-                      <li key={item.id} className="detail-list__item">
-                        <ResultTextPair
-                          primary={item.text}
-                          secondary={mergedPrepareEnglish.find((englishItem) => englishItem.id === item.id)?.text}
-                          enabled={isEnglishComparisonEnabled}
-                        />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              {config.scenarioId === "scam" && mergedPrepare.length > 0 ? (
+                <section id="guide-prepare">
+                  <StepDetailCard
+                    summary={uiCopy.guide.whatToPrepare}
+                    text={mergedPrepare.map((item) => `• ${item.text}`).join("\n")}
+                    comparisonSummary={englishUiCopy.guide.whatToPrepare}
+                    comparisonText={mergedPrepareEnglish.map((item) => `• ${item.text}`).join("\n")}
+                    comparisonEnabled={isEnglishComparisonEnabled}
+                    showNumber={false}
+                  />
+                </section>
               ) : null}
 
-              {mergedHelp.length > 0 ? (
-                <div className="guide-result-block" id="guide-help">
-                  <h3 className="guide-result-block__title">
-                    <ResultTextPair
-                      primary={uiCopy.guide.whereToGetHelp}
-                      secondary={englishUiCopy.guide.whereToGetHelp}
-                      enabled={isEnglishComparisonEnabled}
-                    />
-                  </h3>
-                  <ul className="detail-list">
-                    {mergedHelp.map((item) => (
-                      <li key={item.id} className="detail-list__item">
-                        <ResultTextPair
-                          primary={item.text}
-                          secondary={mergedHelpEnglish.find((englishItem) => englishItem.id === item.id)?.text}
-                          enabled={isEnglishComparisonEnabled}
-                        />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              {config.scenarioId === "scam" && mergedHelp.length > 0 ? (
+                <section id="guide-help">
+                  <StepDetailCard
+                    summary={uiCopy.guide.whereToGetHelp}
+                    text={mergedHelp.map((item) => `• ${item.text}`).join("\n")}
+                    comparisonSummary={englishUiCopy.guide.whereToGetHelp}
+                    comparisonText={mergedHelpEnglish.map((item) => `• ${item.text}`).join("\n")}
+                    comparisonEnabled={isEnglishComparisonEnabled}
+                    showNumber={false}
+                  />
+                </section>
               ) : null}
 
               {relatedCases.length > 0 ? (
@@ -648,7 +666,15 @@ export function GuideCheckPageShell({
         {railContent ? <aside className="detail-page__rail detail-page__rail--side">{railContent}</aside> : null}
       </div>
 
-      <QuickCheckExitDialog isOpen={isExitDialogOpen} onStay={handleStayInQuestionnaire} onLeave={handleLeaveQuestionnaire} />
+      <QuickCheckExitDialog
+        isOpen={isExitDialogOpen}
+        title={uiCopy.guide.exitDialogTitle}
+        description={uiCopy.guide.exitDialogBody}
+        stayLabel={uiCopy.guide.exitDialogStay}
+        leaveLabel={uiCopy.guide.exitDialogLeave}
+        onStay={handleStayInQuestionnaire}
+        onLeave={handleLeaveQuestionnaire}
+      />
     </section>
   );
 }

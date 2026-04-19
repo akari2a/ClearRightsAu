@@ -37,6 +37,7 @@ export type HomeSiteCopy = {
 export type HomeResourcesCopy = {
   eyebrow: string;
   title: string;
+  actionLabel?: string;
   caseCards: LinkCard[];
 };
 

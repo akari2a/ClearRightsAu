@@ -197,6 +197,7 @@ export function useGuideQuestionnaire({
   const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
   const isCollapsingHistoryRef = useRef(false);
   const isLeavingQuestionnaireRef = useRef(false);
+  const pendingQuestionBackRef = useRef<number | null>(null);
   const quickCheckSessionIdRef = useRef(`quick-check-${Date.now()}`);
   const questionnaireExitFallbackRef = useRef("/");
   const completionTimeoutRef = useRef<number | null>(null);
@@ -246,7 +247,7 @@ export function useGuideQuestionnaire({
             ...currentState,
             quickCheckQuestionIndex: currentQuestionIndex,
             quickCheckResultView: false,
-            quickCheckEntryType: currentState.quickCheckEntryType === "base" ? "base" : "question"
+            quickCheckEntryType: "question"
           }
         : createQuickCheckHistoryState(quickCheckSessionIdRef.current, currentQuestionIndex);
 
@@ -316,6 +317,22 @@ export function useGuideQuestionnaire({
       }
 
       if (state.quickCheckSessionId !== quickCheckSessionIdRef.current) {
+        return;
+      }
+
+      if (pendingQuestionBackRef.current !== null) {
+        const nextQuestionIndex = pendingQuestionBackRef.current;
+        pendingQuestionBackRef.current = null;
+        setIsExitDialogOpen(false);
+        setAnswers((currentAnswers) => {
+          const nextAnswers = clearAnswersFromQuestionIndex(currentAnswers, questions, nextQuestionIndex);
+          navigate(buildQuestionnaireUrl(nextAnswers, questions, { questionIndex: nextQuestionIndex }), {
+            replace: true,
+            state: createQuickCheckHistoryState(quickCheckSessionIdRef.current, nextQuestionIndex)
+          });
+          return nextAnswers;
+        });
+        setCurrentQuestionIndex(nextQuestionIndex);
         return;
       }
 
@@ -470,7 +487,18 @@ export function useGuideQuestionnaire({
       return;
     }
 
-    window.history.back();
+    const nextQuestionIndex = currentQuestionIndex - 1;
+    pendingQuestionBackRef.current = nextQuestionIndex;
+
+    setAnswers((currentAnswers) => {
+      const nextAnswers = clearAnswersFromQuestionIndex(currentAnswers, questions, nextQuestionIndex);
+      navigate(buildQuestionnaireUrl(nextAnswers, questions, { questionIndex: nextQuestionIndex }), {
+        replace: true,
+        state: createQuickCheckHistoryState(quickCheckSessionIdRef.current, nextQuestionIndex)
+      });
+      return nextAnswers;
+    });
+    setCurrentQuestionIndex(nextQuestionIndex);
   };
 
   const handleRestart = () => {

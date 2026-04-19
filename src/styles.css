@@ -300,26 +300,6 @@ button {
   color: var(--color-brand-primary-500);
 }
 
-.nav-item__aibot {
-  display: inline-flex;
-  align-items: center;
-}
-
-.nav-item__aibot span {
-  background-image: var(--gradient-placeholder-text);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.nav-item:hover .nav-item__aibot span {
-  filter: saturate(1.08) brightness(1.02);
-}
-
-.nav-item:active .nav-item__aibot span {
-  filter: saturate(0.95) brightness(0.95);
-}
-
 .nav-dropdown-anchor {
   position: relative;
 }
@@ -457,17 +437,19 @@ button {
   gap: 10px;
   height: 56px;
   padding: 16px;
-  border: 0.5px solid var(--color-border-soft);
+  border: 0.5px solid var(--color-brand-accent-100);
   border-radius: 100px;
   background: var(--color-surface-primary);
   cursor: pointer;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.language-pill img {
+.language-pill svg {
   width: 24px;
   height: 24px;
   display: block;
+  flex: 0 0 auto;
+  color: var(--color-brand-primary-500);
 }
 
 .language-pill span {
@@ -478,6 +460,7 @@ button {
 
 .language-pill:hover,
 .language-pill--open {
+  border-color: var(--color-brand-accent-100);
   box-shadow: none;
 }
 
@@ -630,9 +613,9 @@ button {
 
 .guide-tab__underline {
   width: 100%;
-  height: 5px;
+  height: 4px;
   margin-top: auto;
-  background: var(--color-surface-primary);
+  background: var(--color-brand-primary-500);
 }
 
 .guide-list {
@@ -751,26 +734,34 @@ button {
   width: 36px;
   height: 36px;
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.quick-guide-icon__img {
+.quick-guide-icon__circle,
+.quick-guide-icon__arrow {
   position: absolute;
   inset: 0;
   width: 36px;
   height: 36px;
   display: block;
-  opacity: 0;
-  transition: opacity 0.18s ease;
+  transition:
+    color 0.18s ease,
+    transform 0.18s ease;
 }
 
-.quick-guide-icon__img--default {
-  opacity: 1;
+.quick-guide-icon__circle {
+  color: var(--color-surface-primary);
+}
+
+.quick-guide-icon__arrow {
+  color: var(--color-brand-primary-500);
 }
 
 .quick-guide-button:hover {
   color: var(--color-brand-highlight);
-  text-decoration: underline;
-  text-decoration-thickness: 10.5%;
+  text-decoration: none;
   box-shadow: 0 4px 24px rgba(0, 55, 187, 0.2);
 }
 
@@ -781,19 +772,22 @@ button {
   box-shadow: 0 4px 24px rgba(113, 195, 255, 0.24);
 }
 
-.quick-guide-button:hover .quick-guide-icon__img--default {
-  opacity: 0;
+.quick-guide-button:hover .quick-guide-icon__circle {
+  color: var(--color-brand-highlight);
 }
 
-.quick-guide-button:hover .quick-guide-icon__img--hover {
-  opacity: 1;
+.quick-guide-button:hover .quick-guide-icon__arrow {
+  color: var(--color-brand-primary-500);
+}
+
+.quick-guide-button:focus-visible .quick-guide-icon__arrow {
+  color: var(--color-brand-highlight);
 }
 
 .quick-guide-button:active {
   background: var(--color-brand-primary-600);
   color: var(--color-brand-highlight);
-  text-decoration: underline;
-  text-decoration-thickness: 10%;
+  text-decoration: none;
   box-shadow: var(--shadow-card-glow);
 }
 
@@ -804,17 +798,16 @@ button {
   box-shadow: var(--shadow-surface-soft);
 }
 
-.quick-guide-button:active .quick-guide-icon__img--hover,
-.quick-guide-button:active .quick-guide-icon__img--default {
-  opacity: 0;
+.quick-guide-button:active .quick-guide-icon__circle {
+  color: var(--color-brand-highlight);
 }
 
-.quick-guide-button:active .quick-guide-icon__img--pressed {
-  opacity: 1;
+.quick-guide-button:active .quick-guide-icon__arrow {
+  color: var(--color-brand-primary-500);
 }
 
 .hero-chatbot {
-  margin-top: 44px;
+  margin-top: 68px;
 }
 
   .hero-chatbot--with-secondary-actions {
@@ -891,11 +884,6 @@ button {
     var(--shadow-card-glow);
 }
 
-.hero-common-questions {
-  margin-top: 0;
-  margin-bottom: 14px;
-}
-
 .prompt-field {
   position: relative;
   flex: 1;
@@ -904,6 +892,7 @@ button {
   align-items: center;
   padding: 0 16px;
   min-height: 40px;
+  cursor: pointer;
 }
 
 .prompt-input {
@@ -918,6 +907,10 @@ button {
   line-height: var(--line-height-regular);
   color: var(--color-text-primary);
   caret-color: var(--color-brand-primary-500);
+}
+
+.prompt-input--launcher {
+  cursor: pointer;
 }
 
 .prompt-input::placeholder {
@@ -942,7 +935,7 @@ button {
   pointer-events: none;
   font-size: var(--font-size-body-md);
   font-weight: var(--font-weight-medium);
-  line-height: normal;
+  line-height: var(--line-height-regular);
   background-image: var(--gradient-placeholder-text);
   -webkit-background-clip: text;
   background-clip: text;
@@ -970,10 +963,11 @@ button {
   flex-shrink: 0;
 }
 
-.ask-ai-button img {
+.ask-ai-button svg {
   width: 28px;
   height: 28px;
   display: block;
+  flex: 0 0 auto;
 }
 
 .ask-ai-button span {
@@ -1051,6 +1045,14 @@ button {
   align-items: flex-start;
 }
 
+.section-heading__action {
+  flex: 0 0 auto;
+  margin-top: 4px;
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.25;
+}
+
 .section-eyebrow {
   margin: 0 0 8px;
   font-size: var(--font-size-label-sm);
@@ -1058,7 +1060,7 @@ button {
   line-height: normal;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-brand-accent-500);
+  color: var(--color-brand-primary-500);
 }
 
 .section-title {
@@ -2250,6 +2252,14 @@ button {
   overflow: visible;
 }
 
+.detail-card--step-no-number {
+  --detail-step-content-offset: 0;
+}
+
+.detail-card--step-no-number .detail-card__eyebrow {
+  margin-top: 0;
+}
+
 .detail-card__floating-index {
   position: absolute;
   top: 26px;
@@ -2456,6 +2466,11 @@ button {
   border-color: var(--color-risk-danger-border);
 }
 
+.detail-result-intro--accent {
+  background: var(--color-brand-accent-050);
+  border-color: var(--color-brand-accent-100);
+}
+
 .detail-result-intro__title {
   margin: 0;
   font-size: var(--font-size-title-section);
@@ -2482,6 +2497,10 @@ button {
 
 .detail-result-intro--danger .detail-result-intro__title {
   color: var(--color-risk-danger-text);
+}
+
+.detail-result-intro--accent .detail-result-intro__title {
+  color: var(--color-brand-primary-600);
 }
 
 .detail-result-intro__summary {
@@ -2511,6 +2530,35 @@ button {
 
 .detail-result-intro--danger .detail-result-intro__summary {
   color: #4a1e1a;
+}
+
+.detail-result-intro--accent .detail-result-intro__summary {
+  color: var(--color-text-secondary);
+}
+
+.detail-result-intro__sections {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 8px;
+}
+
+.detail-result-intro__section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detail-result-intro__section-title {
+  margin: 0;
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.3;
+  color: var(--color-text-primary);
+}
+
+.detail-result-intro__list {
+  gap: 10px;
 }
 
 .detail-result-intro--low .risk-badge {
@@ -2835,23 +2883,6 @@ button {
   line-height: var(--line-height-tight);
   color: var(--color-text-primary);
   letter-spacing: 0.01em;
-}
-
-.guide-result-block {
-  margin-top: 32px;
-  padding: 24px;
-  background: var(--color-surface-primary);
-  border: 1px solid var(--color-border-soft);
-  border-radius: 16px;
-}
-
-.guide-result-block__title {
-  margin: 0 0 16px;
-  font-size: var(--font-size-body-md);
-  font-weight: var(--font-weight-semibold);
-  line-height: 1.18;
-  letter-spacing: 0.06em;
-  color: var(--color-brand-primary-600);
 }
 
 .result-text-pair {
@@ -4658,7 +4689,7 @@ button {
 .scam-recogniser-type-card:hover {
   transform: translateY(-2px);
   background: var(--color-brand-accent-050);
-  border-color: var(--color-brand-primary-200);
+  border-color: var(--color-brand-accent-500);
   box-shadow: 0 4px 16px rgba(57, 106, 255, 0.08);
 }
 
@@ -4853,23 +4884,22 @@ button {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 12px;
-  padding: 28px 24px;
-  border-radius: 20px;
+  gap: 14px;
+  padding: 8px 8px 0;
 }
 
 .scam-recogniser-result--suspicious {
-  background: var(--color-brand-accent-100);
-  border: 1px solid var(--color-brand-primary-200);
+  background: transparent;
+  border: 0;
 }
 
 .scam-recogniser-result--suspicious .scam-recogniser-result__icon {
-  color: var(--color-brand-primary-500);
+  color: var(--color-risk-danger-text);
 }
 
 .scam-recogniser-result--clear {
-  background: var(--color-brand-accent-050);
-  border: 1px solid var(--color-brand-accent-100);
+  background: transparent;
+  border: 0;
 }
 
 .scam-recogniser-result--clear .scam-recogniser-result__icon {
@@ -4899,50 +4929,59 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 /* ── Result Buttons ── */
 
 .scam-recogniser-btn--primary {
   width: 100%;
-  padding: 14px;
+  min-height: 56px;
+  padding: 14px 24px;
+  border: 1px solid var(--color-brand-primary-500);
+  border-radius: 999px;
+  background: var(--color-brand-primary-500);
+  color: var(--color-surface-primary);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.scam-recogniser-btn--primary:hover {
+  background: var(--color-brand-primary-600);
+  border-color: var(--color-brand-primary-600);
+  box-shadow: 0 10px 24px rgba(26, 69, 199, 0.18);
+}
+
+.scam-recogniser-btn--primary:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.scam-recogniser-btn--secondary {
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 24px;
   border: 1px solid var(--color-brand-accent-100);
-  border-radius: 14px;
-  background: var(--color-brand-accent-100);
+  border-radius: 999px;
+  background: var(--color-surface-primary);
   color: var(--color-brand-primary-600);
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-body-md);
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
   transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
 }
 
-.scam-recogniser-btn--primary:hover {
-  background: var(--color-brand-accent-200, #bce4ff);
-  border-color: var(--color-brand-primary-200);
-}
-
-.scam-recogniser-btn--primary:active {
-  transform: translateY(1px);
-}
-
-.scam-recogniser-btn--secondary {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid var(--color-brand-accent-100);
-  border-radius: 14px;
-  background: var(--color-surface-primary);
-  color: var(--color-brand-primary-600);
-  font-size: var(--font-size-body-sm);
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
-  transition: background 0.18s ease, border-color 0.18s ease;
-}
-
 .scam-recogniser-btn--secondary:hover {
   background: var(--color-brand-accent-050);
+  border-color: var(--color-brand-primary-100);
+}
+
+.scam-recogniser-btn--secondary:active {
+  transform: translateY(1px);
 }
 
 @media (max-width: 760px) {
@@ -5020,6 +5059,10 @@ button {
 
   .resource-section {
     margin-top: 72px;
+  }
+
+  .section-heading--compact {
+    gap: 16px;
   }
 
   .site-footer__top,
@@ -5164,6 +5207,11 @@ button {
     width: 100%;
     justify-content: flex-start;
     flex-wrap: wrap;
+  }
+
+  .section-heading--compact {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .quick-guide-actions {

@@ -175,11 +175,6 @@ export function SiteHeader({
               onMouseEnter={() => setHoveredPrimaryNav(null)}
               onFocus={() => setHoveredPrimaryNav(null)}
               onClick={() => onNavigate?.("aibot")}
-              children={
-                <span className="nav-item__aibot">
-                  <span>AIBot</span>
-                </span>
-              }
             />
           </nav>
         </div>

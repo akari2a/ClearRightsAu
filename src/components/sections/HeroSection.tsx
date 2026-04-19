@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { ArrowCircleIcon, StarIcon, SuspiciousTextIcon } from "../icons";
-import { InteractiveCardButton } from "../controls/InteractiveCardButton";
 import { ScamRecogniserDialog } from "./ScamRecogniserDialog";
 import type { GuideTab, TabKey } from "../../types/home";
 import type { AppLocale } from "../../i18n/config";
@@ -38,11 +37,9 @@ export function HeroSection({
   guideDescription,
   chatbotTitle,
   tabs,
-  commonQuestions,
   activeTabKey,
   promptPlaceholder,
   onTabChange,
-  onCommonQuestionClick,
   onQuickGuideClick,
   onOpenChatbot,
   onNavigateToGuide,
@@ -51,8 +48,9 @@ export function HeroSection({
 }: HeroSectionProps) {
   const activeTab = tabs.find((tab) => tab.key === activeTabKey) ?? tabs[0];
   const hasSecondaryGuideAction = activeTab.key === "scam" && Boolean(activeTab.recogniserActionLabel);
-  const [promptInput, setPromptInput] = useState("");
   const [isRecogniserOpen, setIsRecogniserOpen] = useState(false);
+  const promptPlaceholderOptions = activeTab.quickPills.length > 0 ? activeTab.quickPills : [promptPlaceholder];
+  const [placeholderIndex, setPlaceholderIndex] = useState(0);
 
   // Auto-open dialog when initialScamType is provided via URL
   useEffect(() => {
@@ -61,17 +59,29 @@ export function HeroSection({
     }
   }, [initialScamType]);
 
-  const handlePromptSubmit = () => {
-    const trimmed = promptInput.trim();
-    onOpenChatbot?.(trimmed || undefined, activeTab);
-    setPromptInput("");
-  };
+  useEffect(() => {
+    setPlaceholderIndex(0);
+  }, [activeTab.key]);
 
-  const handlePromptKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handlePromptSubmit();
+  useEffect(() => {
+    if (promptPlaceholderOptions.length <= 1) {
+      return;
     }
+
+    const interval = window.setInterval(() => {
+      setPlaceholderIndex((current) => (current + 1) % promptPlaceholderOptions.length);
+    }, 5000);
+
+    return () => window.clearInterval(interval);
+  }, [promptPlaceholderOptions]);
+
+  const activePlaceholder = promptPlaceholderOptions[placeholderIndex] ?? promptPlaceholder;
+
+  const sanitizePromptSeed = (value: string) => value.replace(/^["“”']+|["“”']+$/gu, "").trim();
+
+  const handlePromptOpen = () => {
+    const seed = sanitizePromptSeed(activePlaceholder);
+    onOpenChatbot?.(seed || undefined, activeTab);
   };
 
   return (
@@ -141,32 +151,19 @@ export function HeroSection({
           <h2 className="hero-chatbot__title">{chatbotTitle}</h2>
         </div>
 
-        <div className="hero-common-questions" aria-label={localeLabels?.suggestedQuestionsAria ?? "Suggested questions"}>
-          <div className="popular-grid popular-grid--hero">
-            {commonQuestions.map((item) => (
-              <InteractiveCardButton
-                key={item}
-                className="popular-link popular-link--prompt"
-                onClick={() => onCommonQuestionClick(item, activeTab)}
-              >
-                <span className="popular-link__quote" aria-hidden="true">
-                  “
-                </span>
-                <span>{item}</span>
-              </InteractiveCardButton>
-            ))}
-          </div>
-        </div>
-
-        <div className="prompt-shell">
-          <div className="prompt-field">
+        <div className="prompt-shell prompt-shell--button">
+          <div className="prompt-field" onClick={handlePromptOpen}>
+            <span className="prompt-placeholder" aria-hidden="true">
+              “{activePlaceholder}”
+            </span>
             <input
-              className="prompt-input"
+              className="prompt-input prompt-input--launcher"
               type="text"
-              placeholder={promptPlaceholder}
-              value={promptInput}
-              onChange={(e) => setPromptInput(e.target.value)}
-              onKeyDown={handlePromptKeyDown}
+              placeholder=""
+              value=""
+              readOnly
+              onFocus={handlePromptOpen}
+              onClick={handlePromptOpen}
               aria-label={localeLabels?.chatbotInputAria ?? "Type your question for the AI chatbot"}
             />
           </div>
@@ -174,7 +171,7 @@ export function HeroSection({
           <button
             className="ask-ai-button"
             type="button"
-            onClick={handlePromptSubmit}
+            onClick={handlePromptOpen}
           >
             <StarIcon />
             <span>{localeLabels?.askAi ?? "Ask AI"}</span>

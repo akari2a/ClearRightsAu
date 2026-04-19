@@ -1,23 +1,59 @@
-const LANGUAGE_ICON_URL = "https://www.figma.com/api/mcp/asset/b4ffa90b-2f74-4931-8d3d-7972e6d964f8";
-export const ASK_AI_ICON_URL = "https://www.figma.com/api/mcp/asset/e8772297-4b68-4480-b08e-1d22935e4323";
-const QUICK_GUIDE_ARROW_DEFAULT_URL = "https://www.figma.com/api/mcp/asset/ba468f45-7d56-42a7-be2b-99386de150b9";
-const QUICK_GUIDE_ARROW_HOVER_URL = "https://www.figma.com/api/mcp/asset/a53fe59f-b767-4bfe-923c-eb12fa12f803";
-const QUICK_GUIDE_ARROW_PRESSED_URL = "https://www.figma.com/api/mcp/asset/4c856ea4-3dbd-4367-a585-cae19262c0da";
-
 export function GlobeIcon() {
-  return <img src={LANGUAGE_ICON_URL} alt="" />;
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 -960 960 960"
+      fill="currentColor"
+    >
+      <path d="M325-111.5q-73-31.5-127.5-86t-86-127.5Q80-398 80-480.5t31.5-155q31.5-72.5 86-127t127.5-86Q398-880 480.5-880t155 31.5q72.5 31.5 127 86t86 127Q880-563 880-480.5T848.5-325q-31.5 73-86 127.5t-127 86Q563-80 480.5-80T325-111.5ZM480-162q26-36 45-75t31-83H404q12 44 31 83t45 75Zm-104-16q-18-33-31.5-68.5T322-320H204q29 50 72.5 87t99.5 55Zm208 0q56-18 99.5-55t72.5-87H638q-9 38-22.5 73.5T584-178ZM170-400h136q-3-20-4.5-39.5T300-480q0-21 1.5-40.5T306-560H170q-5 20-7.5 39.5T160-480q0 21 2.5 40.5T170-400Zm216 0h188q3-20 4.5-39.5T580-480q0-21-1.5-40.5T574-560H386q-3 20-4.5 39.5T380-480q0 21 1.5 40.5T386-400Zm268 0h136q5-20 7.5-39.5T800-480q0-21-2.5-40.5T790-560H654q3 20 4.5 39.5T660-480q0 21-1.5 40.5T654-400Zm-16-240h118q-29-50-72.5-87T584-782q18 33 31.5 68.5T638-640Zm-234 0h152q-12-44-31-83t-45-75q-26 36-45 75t-31 83Zm-200 0h118q9-38 22.5-73.5T376-782q-56 18-99.5 55T204-640Z" />
+    </svg>
+  );
 }
 
 export function StarIcon() {
-  return <img src={ASK_AI_ICON_URL} alt="" />;
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 -960 960 960"
+      fill="currentColor"
+    >
+      <path d="M852-212 732-332l56-56 120 120-56 56ZM708-692l-56-56 120-120 56 56-120 120Zm-456 0L132-812l56-56 120 120-56 56ZM108-212l-56-56 120-120 56 56-120 120Zm246-75 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-361Z" />
+    </svg>
+  );
 }
 
 export function ArrowCircleIcon() {
   return (
     <span className="quick-guide-icon" aria-hidden="true">
-      <img className="quick-guide-icon__img quick-guide-icon__img--default" src={QUICK_GUIDE_ARROW_DEFAULT_URL} alt="" />
-      <img className="quick-guide-icon__img quick-guide-icon__img--hover" src={QUICK_GUIDE_ARROW_HOVER_URL} alt="" />
-      <img className="quick-guide-icon__img quick-guide-icon__img--pressed" src={QUICK_GUIDE_ARROW_PRESSED_URL} alt="" />
+      <svg
+        className="quick-guide-icon__circle"
+        viewBox="0 0 36 36"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="18" cy="18" r="18" fill="currentColor" />
+      </svg>
+      <svg
+        className="quick-guide-icon__arrow"
+        viewBox="0 0 36 36"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8 18H26"
+          stroke="currentColor"
+          strokeWidth="3.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M19 11L26 18L19 25"
+          stroke="currentColor"
+          strokeWidth="3.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
     </span>
   );
 }

@@ -1,10 +1,12 @@
 import type { LinkCard } from "../../types/home";
 import { InteractiveCardButton } from "../controls/InteractiveCardButton";
 import { CaseCategoryTag } from "../case/CaseCategoryTag";
+import { TextActionLink } from "../controls/TextActionLink";
 
 type ContentResourcesSectionProps = {
   eyebrow: string;
   title: string;
+  actionLabel?: string;
   caseCards: LinkCard[];
   onCaseClick?: (card: LinkCard) => void;
 };
@@ -12,6 +14,7 @@ type ContentResourcesSectionProps = {
 export function ContentResourcesSection({
   eyebrow,
   title,
+  actionLabel,
   caseCards,
   onCaseClick
 }: ContentResourcesSectionProps) {
@@ -24,6 +27,11 @@ export function ContentResourcesSection({
             {title}
           </h2>
         </div>
+        {actionLabel ? (
+          <TextActionLink className="section-heading__action" to="/cases">
+            {actionLabel}
+          </TextActionLink>
+        ) : null}
       </div>
 
       <div className="content-card-list">

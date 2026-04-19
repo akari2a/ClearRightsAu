@@ -550,7 +550,15 @@ export function ScamCheckPage({
         onClose={() => setIsRecogniserOpen(false)}
         onNavigateToGuide={handleRecogniserNavigate}
       />
-      <QuickCheckExitDialog isOpen={isExitDialogOpen} onStay={handleStayInQuestionnaire} onLeave={handleLeaveQuestionnaire} />
+      <QuickCheckExitDialog
+        isOpen={isExitDialogOpen}
+        title={uiCopy.guide.exitDialogTitle}
+        description={uiCopy.guide.exitDialogBody}
+        stayLabel={uiCopy.guide.exitDialogStay}
+        leaveLabel={uiCopy.guide.exitDialogLeave}
+        onStay={handleStayInQuestionnaire}
+        onLeave={handleLeaveQuestionnaire}
+      />
     </section>
   );
 }

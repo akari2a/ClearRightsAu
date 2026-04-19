@@ -3,7 +3,7 @@
     "brandName": "ClearRights",
     "slogan": "Clear next steps for scams, refunds, product safety, and rental disputes.",
     "quickCheckDescription": "Pick a topic to see the signs and next steps.",
-    "chatbotTitle": "Start with a question"
+    "chatbotTitle": "Start with AIBot"
   },
   "guideTabs": [
     {
@@ -128,6 +128,7 @@
   "resources": {
     "eyebrow": "Explore",
     "title": "Successful cases",
+    "actionLabel": "Explore more",
     "caseCards": [
       {
         "category": "scam",

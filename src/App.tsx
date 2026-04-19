@@ -389,6 +389,7 @@ function App() {
                 <ContentResourcesSection
                   eyebrow={homePageContent.resources.eyebrow}
                   title={homePageContent.resources.title}
+                  actionLabel={homePageContent.resources.actionLabel}
                   caseCards={homePageContent.resources.caseCards}
                   onCaseClick={handleCaseClick}
                 />

@@ -3,7 +3,7 @@
     "brandName": "ClearRights",
     "slogan": "为诈骗、退款、产品安全和租房纠纷提供清晰的下一步建议。",
     "quickCheckDescription": "选择一个主题，查看常见信号和下一步做法。",
-    "chatbotTitle": "从一个问题开始"
+    "chatbotTitle": "从 AIBot 开始"
   },
   "guideTabs": [
     {
@@ -128,6 +128,7 @@
   "resources": {
     "eyebrow": "探索",
     "title": "成功案例",
+    "actionLabel": "探索更多",
     "caseCards": [
       {
         "category": "scam",

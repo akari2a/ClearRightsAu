@@ -64,8 +64,8 @@
         "zh-Hans": "你做了什么？"
       },
       "description": {
-        "en": "Select everything that happened.",
-        "zh-Hans": "请选择所有实际发生过的情况。"
+        "en": "Multiple choice: select all that happened.",
+        "zh-Hans": "这是多选题：请选择所有实际发生过的情况。"
       },
       "selectionMode": "multiple",
       "exclusiveOptionIds": ["saw_only", "not_sure"],
@@ -135,8 +135,8 @@
         "zh-Hans": "现在发生了什么？"
       },
       "description": {
-        "en": "Select everything that is happening now.",
-        "zh-Hans": "请选择现在正在发生的所有情况。"
+        "en": "Multiple choice: select all that are happening now.",
+        "zh-Hans": "这是多选题：请选择现在正在发生的所有情况。"
       },
       "selectionMode": "multiple",
       "exclusiveOptionIds": ["nothing_unusual", "not_sure"],

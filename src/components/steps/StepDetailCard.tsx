@@ -31,12 +31,13 @@ export function createStepPresentation(summary: string, text: string) {
 }
 
 type StepDetailCardProps = {
-  number: number | string;
+  number?: number | string;
   summary: string;
   text: string;
   comparisonSummary?: string;
   comparisonText?: string;
   comparisonEnabled?: boolean;
+  showNumber?: boolean;
 };
 
 export function StepDetailCard({
@@ -45,7 +46,8 @@ export function StepDetailCard({
   text,
   comparisonSummary,
   comparisonText,
-  comparisonEnabled = false
+  comparisonEnabled = false,
+  showNumber = true
 }: StepDetailCardProps) {
   const { summary: displaySummary, paragraphs } = deriveStepPresentation(summary, text);
   const comparisonPresentation =
@@ -54,10 +56,12 @@ export function StepDetailCard({
       : null;
 
   return (
-    <section className="detail-card detail-card--step">
-      <span className="detail-card__floating-index" aria-hidden="true">
-        {number}
-      </span>
+    <section className={`detail-card detail-card--step${showNumber ? "" : " detail-card--step-no-number"}`}>
+      {showNumber ? (
+        <span className="detail-card__floating-index" aria-hidden="true">
+          {number}
+        </span>
+      ) : null}
       <p className="detail-card__eyebrow">
         <ResultTextPair
           primary={displaySummary}

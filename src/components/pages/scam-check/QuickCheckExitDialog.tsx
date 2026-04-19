@@ -1,10 +1,22 @@
 type QuickCheckExitDialogProps = {
   isOpen: boolean;
+  title: string;
+  description: string;
+  stayLabel: string;
+  leaveLabel: string;
   onStay: () => void;
   onLeave: () => void;
 };
 
-export function QuickCheckExitDialog({ isOpen, onStay, onLeave }: QuickCheckExitDialogProps) {
+export function QuickCheckExitDialog({
+  isOpen,
+  title,
+  description,
+  stayLabel,
+  leaveLabel,
+  onStay,
+  onLeave
+}: QuickCheckExitDialogProps) {
   if (!isOpen) {
     return null;
   }
@@ -25,17 +37,17 @@ export function QuickCheckExitDialog({ isOpen, onStay, onLeave }: QuickCheckExit
           </svg>
         </div>
         <h2 className="quick-check-dialog__title" id="quick-check-exit-title">
-          Leave this questionnaire?
+          {title}
         </h2>
         <p className="quick-check-dialog__description" id="quick-check-exit-description">
-          Your current answers will be lost if you leave now.
+          {description}
         </p>
         <div className="quick-check-dialog__actions">
           <button className="quick-check-dialog__button quick-check-dialog__button--secondary" type="button" onClick={onStay}>
-            Stay here
+            {stayLabel}
           </button>
           <button className="quick-check-dialog__button quick-check-dialog__button--primary" type="button" onClick={onLeave}>
-            Leave page
+            {leaveLabel}
           </button>
         </div>
       </div>
